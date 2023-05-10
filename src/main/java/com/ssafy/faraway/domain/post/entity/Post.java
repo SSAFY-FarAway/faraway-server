@@ -3,7 +3,6 @@ package com.ssafy.faraway.domain.post.entity;
 import com.ssafy.faraway.common.domain.BaseEntity;
 import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -41,10 +40,9 @@ public class Post extends BaseEntity {
         this.category = category;
     }
 
-    public void update(String title, String content, Category category) {
+    public void update(String title, String content) {
         this.title = title;
         this.content = content;
-        this.category = category;
     }
 
     public void updateHit() {
