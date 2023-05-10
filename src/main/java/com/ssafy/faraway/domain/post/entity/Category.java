@@ -1,10 +1,7 @@
 package com.ssafy.faraway.domain.post.entity;
 
 import com.ssafy.faraway.common.domain.BaseEntity;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,4 +19,10 @@ public class Category extends BaseEntity {
     private Long id;
     @Column(nullable = false, unique = true, length = 30)
     private String categoryName;
+
+    @Builder
+    public Category(Long id, String categoryName) {
+        this.id = id;
+        this.categoryName = categoryName;
+    }
 }
