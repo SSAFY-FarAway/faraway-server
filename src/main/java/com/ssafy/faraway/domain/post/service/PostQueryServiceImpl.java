@@ -20,6 +20,7 @@ public class PostQueryServiceImpl implements PostQueryService {
     @Override
     public PostResponse searchById(Long postId) {
         Post post = postQueryRepository.searchById(postId);
+        post.updateHit();
         List<PostCommentResponse> commentResponses = getCommentResponses(post);
         return PostResponse.builder()
                 .id(post.getId())
