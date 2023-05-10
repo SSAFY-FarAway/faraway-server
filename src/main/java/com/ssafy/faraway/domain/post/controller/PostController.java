@@ -1,6 +1,11 @@
 package com.ssafy.faraway.domain.post.controller;
 
-import com.ssafy.faraway.domain.post.dto.*;
+import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
+import com.ssafy.faraway.domain.post.dto.req.SavePostRequest;
+import com.ssafy.faraway.domain.post.dto.req.UpdatePostRequest;
+import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
+import com.ssafy.faraway.domain.post.dto.res.PostResponse;
+import com.ssafy.faraway.domain.post.service.PostQueryService;
 import com.ssafy.faraway.domain.post.service.PostService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
@@ -11,10 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @Slf4j
@@ -23,7 +25,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Api(tags = "post")
 public class PostController {
     private final PostService postService;
-    @RequestMapping(value = "/", method = POST)
+    private final PostQueryService postQueryService;
+    @PostMapping
     public Long postSave(@Valid @RequestBody SavePostRequest savePostRequest) {
         // TODO: 최영환 2023-05-10 회원 구현되면 변경해야함
         Long memberId = 1L;
@@ -32,19 +35,19 @@ public class PostController {
         return postId;
     }
 
-    @RequestMapping(value = "/{postId}", method = GET)
+    @GetMapping("/{postId}")
     public PostResponse searchPost(@PathVariable Long postId) {
-        PostResponse response = postService.searchById(postId);
+        PostResponse response = postQueryService.searchById(postId);
         log.debug("response {}", response);
         return response;
     }
 
-    @RequestMapping(value = "/{postId}", method = PUT)
+    @PutMapping("/{postId}")
     public Long updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
         return postService.update(postId, request);
     }
 
-    @RequestMapping(value = "", method = GET)
+    @GetMapping
     public ResultPage<List<ListPostResponse>> searchPost(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
@@ -55,7 +58,7 @@ public class PostController {
                 .content(content)
                 .build();
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
-        List<ListPostResponse> responses = postService.searchByCondition(condition, pageRequest);
+        List<ListPostResponse> responses = postQueryService.searchByCondition(condition, pageRequest);
         log.debug("responses: {}", responses);
         for (ListPostResponse response : responses) {
             log.debug("response: {}", response);

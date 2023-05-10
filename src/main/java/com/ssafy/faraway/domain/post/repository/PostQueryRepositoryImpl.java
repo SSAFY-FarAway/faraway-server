@@ -3,11 +3,12 @@ package com.ssafy.faraway.domain.post.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.post.dto.ListPostResponse;
-import com.ssafy.faraway.domain.post.dto.PostSearchCondition;
+import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
+import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
 import com.ssafy.faraway.domain.post.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -19,8 +20,9 @@ import static com.ssafy.faraway.domain.post.entity.QPost.post;
 import static org.springframework.util.StringUtils.hasText;
 
 
+@Repository
 @RequiredArgsConstructor
-public class PostCustomRepositoryImpl implements PostCustomRepository {
+public class PostQueryRepositoryImpl implements PostQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override

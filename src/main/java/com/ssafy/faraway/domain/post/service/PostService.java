@@ -1,13 +1,12 @@
 package com.ssafy.faraway.domain.post.service;
 
-import com.ssafy.faraway.domain.post.dto.*;
-import org.springframework.data.domain.Pageable;
+import com.ssafy.faraway.domain.post.dto.req.SavePostRequest;
+import com.ssafy.faraway.domain.post.dto.req.UpdatePostRequest;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
+@Transactional
 public interface PostService {
     Long save(SavePostRequest request, Long memberId);
-    PostResponse searchById(Long postId);
+
     Long update(Long postId, UpdatePostRequest request);
-    List<ListPostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable);
 }

@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.post.dto;
+package com.ssafy.faraway.domain.post.dto.res;
 
 import lombok.Builder;
 import lombok.Data;
