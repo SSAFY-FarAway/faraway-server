@@ -1,6 +1,5 @@
 package com.ssafy.faraway.domain.post.dto.req;
 
-import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -14,11 +13,4 @@ public class SavePostRequest {
     private String content;
     @NotNull
     private Long categoryId;
-
-    @Builder
-    public SavePostRequest(String title, String content, Long categoryId) {
-        this.title = title;
-        this.content = content;
-        this.categoryId = categoryId;
-    }
 }

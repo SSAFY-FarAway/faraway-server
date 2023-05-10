@@ -1,10 +1,12 @@
 package com.ssafy.faraway.domain.post.controller;
 
 import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
+import com.ssafy.faraway.domain.post.dto.req.SavePostCommentRequest;
 import com.ssafy.faraway.domain.post.dto.req.SavePostRequest;
 import com.ssafy.faraway.domain.post.dto.req.UpdatePostRequest;
 import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
 import com.ssafy.faraway.domain.post.dto.res.PostResponse;
+import com.ssafy.faraway.domain.post.service.PostCommentService;
 import com.ssafy.faraway.domain.post.service.PostQueryService;
 import com.ssafy.faraway.domain.post.service.PostService;
 import io.swagger.annotations.Api;
@@ -26,6 +28,7 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
     private final PostQueryService postQueryService;
+    private final PostCommentService postCommentService;
     @PostMapping
     public Long postSave(@Valid @RequestBody SavePostRequest savePostRequest) {
         // TODO: 최영환 2023-05-10 회원 구현되면 변경해야함
@@ -64,6 +67,15 @@ public class PostController {
             log.debug("response: {}", response);
         }
         return new ResultPage<>(responses, pageNumber, 10);
+    }
+    
+    @PostMapping("/{postId}/comment")
+    public Long savePostComment(@PathVariable Long postId, @Valid @RequestBody SavePostCommentRequest request) {
+        // TODO: 최영환 2023-05-11 회원 구현되면 변경해야함
+        Long memberId = 1L;
+        Long postCommentId = postCommentService.save(postId, memberId, request);
+        log.debug("postCommentId: {}", postCommentId);
+        return postCommentId;
     }
 
     @Data

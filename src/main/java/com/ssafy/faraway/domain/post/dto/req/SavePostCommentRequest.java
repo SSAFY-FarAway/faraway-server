@@ -5,9 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class UpdatePostRequest {
-    @NotBlank
-    private String title;
+public class SavePostCommentRequest {
     @NotBlank
     private String content;
 }
