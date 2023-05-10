@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.post.service;
+package com.ssafy.faraway.domain.post.service.impl;
 
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.post.dto.req.SavePostRequest;
@@ -6,6 +6,7 @@ import com.ssafy.faraway.domain.post.dto.req.UpdatePostRequest;
 import com.ssafy.faraway.domain.post.entity.Category;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.repository.PostRepository;
+import com.ssafy.faraway.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

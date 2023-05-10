@@ -1,10 +1,11 @@
-package com.ssafy.faraway.domain.post.service;
+package com.ssafy.faraway.domain.post.service.impl;
 
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.post.dto.req.SavePostCommentRequest;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.entity.PostComment;
 import com.ssafy.faraway.domain.post.repository.PostCommentRepository;
+import com.ssafy.faraway.domain.post.service.PostCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

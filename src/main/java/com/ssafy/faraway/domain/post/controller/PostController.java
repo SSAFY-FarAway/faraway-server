@@ -69,7 +69,7 @@ public class PostController {
         return new ResultPage<>(responses, pageNumber, 10);
     }
     
-    @PostMapping("/{postId}/comment")
+    @PostMapping("/{postId}")
     public Long savePostComment(@PathVariable Long postId, @Valid @RequestBody SavePostCommentRequest request) {
         // TODO: 최영환 2023-05-11 회원 구현되면 변경해야함
         Long memberId = 1L;

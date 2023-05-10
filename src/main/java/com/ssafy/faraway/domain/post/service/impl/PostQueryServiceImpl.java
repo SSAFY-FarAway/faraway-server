@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.post.service;
+package com.ssafy.faraway.domain.post.service.impl;
 
 import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
 import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
@@ -6,6 +6,7 @@ import com.ssafy.faraway.domain.post.dto.res.PostCommentResponse;
 import com.ssafy.faraway.domain.post.dto.res.PostResponse;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.repository.PostQueryRepository;
+import com.ssafy.faraway.domain.post.service.PostQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
