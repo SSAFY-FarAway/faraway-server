@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.post.service;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.post.dto.PostResponse;
 import com.ssafy.faraway.domain.post.dto.SavePostRequest;
+import com.ssafy.faraway.domain.post.dto.UpdatePostRequest;
 import com.ssafy.faraway.domain.post.entity.Category;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.repository.PostRepository;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +46,13 @@ public class PostServiceImpl implements PostService {
                 .hit(post.getHit())
                 .createdDate(post.getCreatedDate())
                 .build();
+    }
+
+    @Transactional
+    @Override
+    public Long update(Long postId, UpdatePostRequest request) {
+        Post post = postRepository.findById(postId).orElseThrow(NoSuchElementException::new);
+        post.update(request.getTitle(), request.getContent());
+        return postId;
     }
 }

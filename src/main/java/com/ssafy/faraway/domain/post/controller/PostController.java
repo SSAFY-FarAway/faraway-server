@@ -2,6 +2,7 @@ package com.ssafy.faraway.domain.post.controller;
 
 import com.ssafy.faraway.domain.post.dto.PostResponse;
 import com.ssafy.faraway.domain.post.dto.SavePostRequest;
+import com.ssafy.faraway.domain.post.dto.UpdatePostRequest;
 import com.ssafy.faraway.domain.post.service.PostService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @Slf4j
@@ -37,5 +37,10 @@ public class PostController {
         PostResponse response = postService.searchById(postId);
         log.debug("response {}", response);
         return response;
+    }
+
+    @RequestMapping(value = "/{postId}", method = PUT)
+    public Long updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
+        return postService.update(postId, request);
     }
 }
