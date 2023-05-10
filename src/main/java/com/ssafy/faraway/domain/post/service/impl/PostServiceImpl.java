@@ -20,7 +20,6 @@ import java.util.NoSuchElementException;
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
-    @Transactional
     @Override
     public Long save(SavePostRequest request, Long memberId) {
         Post post = Post.builder()
@@ -32,7 +31,6 @@ public class PostServiceImpl implements PostService {
         return postRepository.save(post).getId();
     }
 
-    @Transactional
     @Override
     public Long update(Long postId, UpdatePostRequest request) {
         Post post = postRepository.findById(postId).orElseThrow(NoSuchElementException::new);
