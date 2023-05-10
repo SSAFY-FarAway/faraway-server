@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class PostResponse {
@@ -15,9 +16,10 @@ public class PostResponse {
     private String content;
     private int hit;
     private LocalDateTime createdDate;
+    private List<PostCommentResponse> postCommentResponses;
 
     @Builder
-    public PostResponse(Long id, Long memberId, String loginId, String categoryName, String title, String content, int hit, LocalDateTime createdDate) {
+    public PostResponse(Long id, Long memberId, String loginId, String categoryName, String title, String content, int hit, LocalDateTime createdDate, List<PostCommentResponse> postCommentResponses) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
@@ -26,5 +28,6 @@ public class PostResponse {
         this.content = content;
         this.hit = hit;
         this.createdDate = createdDate;
+        this.postCommentResponses = postCommentResponses;
     }
 }

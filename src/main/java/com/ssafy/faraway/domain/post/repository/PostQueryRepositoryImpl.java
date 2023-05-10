@@ -3,8 +3,8 @@ package com.ssafy.faraway.domain.post.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
 import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
+import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
 import com.ssafy.faraway.domain.post.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -63,7 +63,7 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
                         post.title,
                         post.hit,
                         post.createdDate
-                        ))
+                ))
                 .from(post)
                 .join(post.member, member)
                 .join(post.category, category)

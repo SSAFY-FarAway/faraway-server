@@ -5,6 +5,8 @@ import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,6 +24,8 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private int hit;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<PostComment> postComments = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -47,5 +51,9 @@ public class Post extends BaseEntity {
 
     public void updateHit() {
         this.hit++;
+    }
+
+    public List<PostComment> getPostComments() {
+        return this.postComments;
     }
 }
