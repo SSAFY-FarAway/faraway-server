@@ -1,18 +1,18 @@
 package com.ssafy.faraway.domain.post.controller;
 
-import com.ssafy.faraway.domain.post.dto.PostResponse;
-import com.ssafy.faraway.domain.post.dto.SavePostRequest;
-import com.ssafy.faraway.domain.post.dto.UpdatePostRequest;
+import com.ssafy.faraway.domain.post.dto.*;
 import com.ssafy.faraway.domain.post.service.PostService;
 import io.swagger.annotations.Api;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -42,5 +42,32 @@ public class PostController {
     @RequestMapping(value = "/{postId}", method = PUT)
     public Long updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
         return postService.update(postId, request);
+    }
+
+    @RequestMapping(value = "", method = GET)
+    public ResultPage<List<ListPostResponse>> searchPost(
+            @RequestParam(defaultValue = "") String title,
+            @RequestParam(defaultValue = "") String content,
+            @RequestParam(defaultValue = "1") Integer pageNumber
+    ) {
+        PostSearchCondition condition =PostSearchCondition.builder()
+                .title(title)
+                .content(content)
+                .build();
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
+        List<ListPostResponse> responses = postService.searchByCondition(condition, pageRequest);
+        log.debug("responses: {}", responses);
+        for (ListPostResponse response : responses) {
+            log.debug("response: {}", response);
+        }
+        return new ResultPage<>(responses, pageNumber, 10);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class ResultPage<T> {
+        private T data;
+        private int pageNumber;
+        private int pageSize;
     }
 }

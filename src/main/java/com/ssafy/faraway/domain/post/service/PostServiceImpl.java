@@ -1,17 +1,17 @@
 package com.ssafy.faraway.domain.post.service;
 
 import com.ssafy.faraway.domain.member.entity.Member;
-import com.ssafy.faraway.domain.post.dto.PostResponse;
-import com.ssafy.faraway.domain.post.dto.SavePostRequest;
-import com.ssafy.faraway.domain.post.dto.UpdatePostRequest;
+import com.ssafy.faraway.domain.post.dto.*;
 import com.ssafy.faraway.domain.post.entity.Category;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -54,5 +54,11 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findById(postId).orElseThrow(NoSuchElementException::new);
         post.update(request.getTitle(), request.getContent());
         return postId;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<ListPostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable) {
+        return postRepository.searchByCondition(condition, pageable);
     }
 }
