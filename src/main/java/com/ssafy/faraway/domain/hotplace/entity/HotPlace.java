@@ -52,7 +52,8 @@ public class HotPlace extends BaseEntity {
         this.content = content;
         this.address = address;
         this.rating = rating;
-        this.hotPlaceImages = hotPlaceImages;
+        this.hotPlaceImages.clear();
+        this.hotPlaceImages.addAll(hotPlaceImages);
     }
 
     public void updateHit() {
