@@ -9,5 +9,6 @@ public interface PostService {
     Long save(SavePostRequest request, Long memberId);
 
     Long update(Long postId, UpdatePostRequest request);
+
     Long delete(Long postId);
 }

@@ -11,5 +11,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface PostQueryService {
     PostResponse searchById(Long postId);
+
     List<ListPostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable);
 }
