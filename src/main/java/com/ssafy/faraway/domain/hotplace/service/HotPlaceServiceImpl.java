@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,15 +30,7 @@ public class HotPlaceServiceImpl implements HotPlaceService {
                 .subAddress(request.getSubAddress())
                 .build();
 
-        List<HotPlaceImage> hotPlaceImages = new ArrayList<>();
-        if (!uploadFiles.isEmpty()) {
-            for (UploadFile uploadFile : uploadFiles) {
-                HotPlaceImage hotPlaceImage = HotPlaceImage.builder()
-                        .uploadFile(uploadFile)
-                        .build();
-                hotPlaceImages.add(hotPlaceImage);
-            }
-        }
+        List<HotPlaceImage> hotPlaceImages = getImageList(uploadFiles);
 
         HotPlace saveHotPlace = HotPlace.builder()
                 .title(request.getTitle())
@@ -52,14 +45,16 @@ public class HotPlaceServiceImpl implements HotPlaceService {
     }
 
     @Override
-    public Long update(Long hotPlaceId, UpdateHotPlaceRequest request) {
+    public Long update(Long hotPlaceId, UpdateHotPlaceRequest request, List<UploadFile> uploadFiles) {
         HotPlace hotplace = hotPlaceRepository.findById(hotPlaceId).orElseThrow(NoSuchElementException::new);
+        hotplace.getHotPlaceComments().clear();
         Address address = Address.builder()
                 .zipcode(request.getZipcode())
                 .mainAddress(request.getMainAddress())
                 .subAddress(request.getSubAddress())
                 .build();
-        hotplace.update(request.getTitle(), request.getContent(), address, request.getRating());
+        List<HotPlaceImage> hotPlaceImages = getImageList(uploadFiles);
+        hotplace.update(request.getTitle(), request.getContent(), address, request.getRating(), hotPlaceImages);
         return hotPlaceId;
     }
 
@@ -68,5 +63,15 @@ public class HotPlaceServiceImpl implements HotPlaceService {
         HotPlace hotplace = hotPlaceRepository.findById(hotPlaceId).orElseThrow(NoSuchElementException::new);
         hotPlaceRepository.delete(hotplace);
         return hotPlaceId;
+    }
+
+    private static List<HotPlaceImage> getImageList(List<UploadFile> uploadFiles) {
+        if (uploadFiles.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return uploadFiles.stream()
+                .map(uploadFile -> HotPlaceImage.builder()
+                        .uploadFile(uploadFile)
+                        .build()).collect(Collectors.toList());
     }
 }

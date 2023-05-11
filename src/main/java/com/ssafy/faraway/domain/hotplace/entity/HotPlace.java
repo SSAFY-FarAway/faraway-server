@@ -47,7 +47,7 @@ public class HotPlace extends BaseEntity {
         this.hotPlaceImages = hotPlaceImages;
     }
 
-    public void update(String title, String content, Address address, int rating) {
+    public void update(String title, String content, Address address, int rating, List<HotPlaceImage> hotPlaceImages) {
         this.title = title;
         this.content = content;
         this.address = address;

@@ -12,7 +12,7 @@ import java.util.List;
 public interface HotPlaceService {
     Long save(Long memberId, SaveHotPlaceRequest request, List<UploadFile> uploadFiles) throws IOException;
 
-    Long update(Long hotPlaceId, UpdateHotPlaceRequest request);
+    Long update(Long hotPlaceId, UpdateHotPlaceRequest request, List<UploadFile> uploadFiles);
 
     Long delete(Long hotPlaceId);
 }
