@@ -62,4 +62,11 @@ public class HotPlaceServiceImpl implements HotPlaceService {
         hotplace.update(request.getTitle(), request.getContent(), address, request.getRating());
         return hotPlaceId;
     }
+
+    @Override
+    public Long delete(Long hotPlaceId) {
+        HotPlace hotplace = hotPlaceRepository.findById(hotPlaceId).orElseThrow(NoSuchElementException::new);
+        hotPlaceRepository.delete(hotplace);
+        return hotPlaceId;
+    }
 }

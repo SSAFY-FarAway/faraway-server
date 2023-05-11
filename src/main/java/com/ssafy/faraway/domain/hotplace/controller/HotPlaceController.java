@@ -80,6 +80,11 @@ public class HotPlaceController {
         return hotPlaceService.update(hotPlaceId, request);
     }
 
+    @DeleteMapping("/{hotPlaceId}")
+    public Long updateHotPlace(@PathVariable Long hotPlaceId) {
+        return hotPlaceService.delete(hotPlaceId);
+    }
+
     @PostMapping("{hotPlaceId}/comment")
     public Long saveHotPlaceComment(@PathVariable Long hotPlaceId, @Valid @RequestBody SaveHotPlaceCommentRequest request){
         // TODO: 2023-05-11 로그인 구현 시 수정
