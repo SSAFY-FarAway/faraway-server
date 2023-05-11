@@ -1,12 +1,16 @@
 package com.ssafy.faraway.domain.member.service.impl;
 
+import com.ssafy.faraway.domain.member.dto.req.LoginEncMember;
+import com.ssafy.faraway.domain.member.dto.req.LoginMemberRequest;
 import com.ssafy.faraway.domain.member.dto.req.SaveEncMember;
 import com.ssafy.faraway.domain.member.dto.req.SaveMemberRequest;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
+import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.member.entity.Name;
 import com.ssafy.faraway.domain.member.entity.Role;
+import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.repository.MemberRepository;
 import com.ssafy.faraway.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +24,8 @@ import java.util.Base64;
 
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl implements MemberService {
-
+public class MemberServiceImpl implements MemberService{
+    private final MemberQueryRepository memberQueryRepository;
     private final MemberRepository memberRepository;
 
     @Override
@@ -31,6 +35,21 @@ public class MemberServiceImpl implements MemberService {
 //        System.out.println(member);
         Member saveMember = memberRepository.save(member);
         return saveMember.getId();
+    }
+
+    @Override
+    public LoginMemberResponse login(LoginMemberRequest request) {
+        Long id = memberQueryRepository.SearchIdByLoginId(request.getLoginId());
+        String salt = memberQueryRepository.SearchSaltById(id);
+        String encLoginPwd = encrypt(request.getLoginPwd(), salt);
+        System.out.println(salt);
+
+
+        LoginEncMember dto = LoginEncMember.builder()
+                .loginId(request.getLoginId())
+                .loginPwd(encLoginPwd)
+                .build();
+        return memberQueryRepository.login(dto);
     }
 
 

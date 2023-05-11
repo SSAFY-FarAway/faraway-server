@@ -4,6 +4,8 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.entity.Member;
+import com.ssafy.faraway.domain.member.dto.req.LoginEncMember;
+import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,22 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository{
                 .select(member)
                 .from(member)
                 .where(member.id.eq(memberId))
+                .fetchOne();
+    }
+
+    public LoginMemberResponse login(LoginEncMember dto) {
+        return queryFactory
+                .select(Projections.fields(LoginMemberResponse.class,
+                        member.id,
+                        member.loginId,
+                        member.name.lastName,
+                        member.name.firstName,
+                        member.mileage,
+                        member.role
+                ))
+                .from(member)
+                .where(member.loginId.eq(dto.getLoginId())
+                .and(member.loginPwd.eq(dto.getLoginPwd())))
                 .fetchOne();
     }
 
@@ -61,4 +79,20 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository{
     }
 
 
+    public Long SearchIdByLoginId(String loginId) {
+        return queryFactory
+                .select(member.id)
+                .from(member)
+                .where(member.loginId.eq(loginId))
+                .fetchOne();
+    }
+
+    @Override
+    public String SearchSaltById(Long id) {
+        return queryFactory
+                .select(member.salt)
+                .from(member)
+                .where(member.id.eq(id))
+                .fetchOne();
+    }
 }
