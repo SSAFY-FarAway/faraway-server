@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class HotPlaceResponse {
@@ -18,9 +19,10 @@ public class HotPlaceResponse {
     private String subAddress;
     private int rating;
     private LocalDateTime createdDate;
+    private List<HotPlaceCommentResponse> commentResponses;
 
     @Builder
-    public HotPlaceResponse(Long id, Long memberId, String loginId, String title, String content, int hit, String mainAddress, String subAddress, int rating, LocalDateTime createdDate) {
+    public HotPlaceResponse(Long id, Long memberId, String loginId, String title, String content, int hit, String mainAddress, String subAddress, int rating, LocalDateTime createdDate, List<HotPlaceCommentResponse> commentResponses) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
@@ -31,5 +33,6 @@ public class HotPlaceResponse {
         this.subAddress = subAddress;
         this.rating = rating;
         this.createdDate = createdDate;
+        this.commentResponses = commentResponses;
     }
 }

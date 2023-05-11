@@ -1,6 +1,8 @@
 package com.ssafy.faraway.common.util;
 
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
+import com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment;
+import com.ssafy.faraway.domain.hotplace.repository.HotPlaceCommentRepository;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository;
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
@@ -28,6 +30,7 @@ public class TestDataInit {
     private final PostCommentRepository postCommentRepository;
     private final CategoryRepository categoryRepository;
     private final HotPlaceRepository hotPlaceRepository;
+    private final HotPlaceCommentRepository hotPlaceCommentRepository;
 
     @PostConstruct
     public void init() {
@@ -102,6 +105,7 @@ public class TestDataInit {
 
     private void initHotPlace(Long memberId) {
         ArrayList<HotPlace> hotPlaces = new ArrayList<>();
+        ArrayList<HotPlaceComment> hotPlaceComments = new ArrayList<>();
         for (int i = 1; i <= 50; i++) {
             String title = String.format("HotPlace Test Title %d", i);
             String content = String.format("HotPlace Test Content %d", i);
@@ -123,5 +127,18 @@ public class TestDataInit {
             hotPlaces.add(hotPlace);
         }
         hotPlaceRepository.saveAll(hotPlaces);
+
+        for (HotPlace hotPlace : hotPlaces) {
+            for (int j = 1; j <= 5; j++) {
+                String content = String.format("Comment Test Content %d", j);
+                HotPlaceComment hotPlaceComment = HotPlaceComment.builder()
+                        .content(content)
+                        .member(Member.builder().id(memberId).build())
+                        .hotPlace(HotPlace.builder().id(hotPlace.getId()).build())
+                        .build();
+                hotPlaceComments.add(hotPlaceComment);
+            }
+            hotPlaceCommentRepository.saveAll(hotPlaceComments);
+        }
     }
 }
