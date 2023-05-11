@@ -25,7 +25,7 @@ public class Post extends BaseEntity {
     private int hit;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostComment> postComments = new ArrayList<>();
+    private List<PostComment> postComments;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
