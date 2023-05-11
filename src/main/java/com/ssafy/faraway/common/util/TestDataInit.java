@@ -1,5 +1,9 @@
 package com.ssafy.faraway.common.util;
 
+import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
+import com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment;
+import com.ssafy.faraway.domain.hotplace.repository.HotPlaceCommentRepository;
+import com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository;
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.member.entity.Name;
@@ -16,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
@@ -24,19 +29,19 @@ public class TestDataInit {
     private final PostRepository postRepository;
     private final PostCommentRepository postCommentRepository;
     private final CategoryRepository categoryRepository;
+    private final HotPlaceRepository hotPlaceRepository;
+    private final HotPlaceCommentRepository hotPlaceCommentRepository;
 
     @PostConstruct
     public void init() {
-        Member member = createMember();
-        Long memberId = memberRepository.save(member).getId();
-        Category category = Category.builder()
-                .categoryName("Notice")
-                .build();
-        Long categoryId = categoryRepository.save(category).getId();
+        Long memberId = createMember();
+        Long categoryId = createCategory();
+
         initPost(memberId, categoryId);
+        initHotPlace(memberId);
     }
 
-    private Member createMember() {
+    private Long createMember() {
         Name memberName = Name.builder()
                 .lastName("김")
                 .firstName("싸피")
@@ -48,7 +53,7 @@ public class TestDataInit {
                 .subAddress("1526")
                 .build();
 
-        return Member.builder()
+        Member member = Member.builder()
                 .loginId("ssafy")
                 .loginPwd("1234")
                 .name(memberName)
@@ -58,6 +63,14 @@ public class TestDataInit {
                 .salt("salt")
                 .role(Role.GUEST)
                 .build();
+        return memberRepository.save(member).getId();
+    }
+
+    private Long createCategory() {
+        Category category = Category.builder()
+                .categoryName("Notice")
+                .build();
+        return categoryRepository.save(category).getId();
     }
 
     private void initPost(Long memberId, Long categoryId) {
@@ -76,7 +89,7 @@ public class TestDataInit {
         }
         postRepository.saveAll(posts);
 
-        for (Post post: posts) {
+        for (Post post : posts) {
             for (int j = 1; j <= 5; j++) {
                 String content = String.format("Comment Test Content %d", j);
                 PostComment postComment = PostComment.builder()
@@ -88,5 +101,44 @@ public class TestDataInit {
             }
         }
         postCommentRepository.saveAll(postComments);
+    }
+
+    private void initHotPlace(Long memberId) {
+        ArrayList<HotPlace> hotPlaces = new ArrayList<>();
+        ArrayList<HotPlaceComment> hotPlaceComments = new ArrayList<>();
+        for (int i = 1; i <= 50; i++) {
+            String title = String.format("HotPlace Test Title %d", i);
+            String content = String.format("HotPlace Test Content %d", i);
+            Random random = new Random();
+            int rating = random.nextInt(6);
+            com.ssafy.faraway.domain.hotplace.entity.Address address = com.ssafy.faraway.domain.hotplace.entity.Address.builder()
+                    .zipcode("11111")
+                    .mainAddress("광주광역시 수완동")
+                    .subAddress("1526")
+                    .build();
+
+            HotPlace hotPlace = HotPlace.builder()
+                    .title(title)
+                    .content(content)
+                    .address(address)
+                    .member(Member.builder().id(memberId).build())
+                    .rating(rating)
+                    .build();
+            hotPlaces.add(hotPlace);
+        }
+        hotPlaceRepository.saveAll(hotPlaces);
+
+        for (HotPlace hotPlace : hotPlaces) {
+            for (int j = 1; j <= 5; j++) {
+                String content = String.format("Comment Test Content %d", j);
+                HotPlaceComment hotPlaceComment = HotPlaceComment.builder()
+                        .content(content)
+                        .member(Member.builder().id(memberId).build())
+                        .hotPlace(HotPlace.builder().id(hotPlace.getId()).build())
+                        .build();
+                hotPlaceComments.add(hotPlaceComment);
+            }
+            hotPlaceCommentRepository.saveAll(hotPlaceComments);
+        }
     }
 }
