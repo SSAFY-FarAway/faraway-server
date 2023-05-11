@@ -31,4 +31,8 @@ public class HotPlaceComment extends BaseEntity {
         this.member = member;
         this.hotPlace = hotPlace;
     }
+
+    public void update(String content) {
+        this.content = content;
+    }
 }

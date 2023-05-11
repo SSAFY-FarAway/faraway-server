@@ -3,10 +3,7 @@ package com.ssafy.faraway.domain.hotplace.controller;
 import com.ssafy.faraway.common.FileStore;
 import com.ssafy.faraway.common.domain.UploadFile;
 import com.ssafy.faraway.common.util.FileExtChecker;
-import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSearchCondition;
-import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceCommentRequest;
-import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceRequest;
-import com.ssafy.faraway.domain.hotplace.dto.req.UpdateHotPlaceRequest;
+import com.ssafy.faraway.domain.hotplace.dto.req.*;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.dto.res.ListHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
@@ -90,6 +87,11 @@ public class HotPlaceController {
         // TODO: 2023-05-11 로그인 구현 시 수정
         Long memberId = 1L;
         return hotPlaceCommentService.save(hotPlaceId, memberId, request);
+    }
+
+    @PutMapping("/comment/{commentId}")
+    public Long updateHotPlaceComment(@PathVariable Long commentId, @Valid @RequestBody UpdateHotPlaceCommentRequest request) {
+        return hotPlaceCommentService.update(commentId, request);
     }
 
     @Data
