@@ -9,6 +9,7 @@ import com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,11 +19,12 @@ import java.util.stream.Collectors;
 public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
     private final HotPlaceQueryRepository hotPlaceQueryRepository;
 
+    @Transactional
     @Override
     public HotPlaceResponse searchById(Long hotPlaceId) {
         HotPlace hotPlace = hotPlaceQueryRepository.searchById(hotPlaceId);
         List<HotPlaceCommentResponse> commentResponses = getCommentResponses(hotPlace);
-
+        hotPlace.updateHit();
         return HotPlaceResponse.builder()
                 .id(hotPlace.getId())
                 .memberId(hotPlace.getMember().getId())
