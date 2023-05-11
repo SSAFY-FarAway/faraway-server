@@ -4,9 +4,11 @@ import com.ssafy.faraway.common.FileStore;
 import com.ssafy.faraway.common.domain.UploadFile;
 import com.ssafy.faraway.common.util.FileExtChecker;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSearchCondition;
+import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceCommentRequest;
 import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceRequest;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.dto.res.ListHotPlaceResponse;
+import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceService;
 import io.swagger.annotations.Api;
@@ -31,6 +33,7 @@ import java.util.List;
 public class HotPlaceController {
     private final HotPlaceService hotPlaceService;
     private final HotPlaceQueryService hotPlaceQueryService;
+    private final HotPlaceCommentService hotPlaceCommentService;
     private final FileStore fileStore;
     private final FileExtChecker fileExtChecker;
 
@@ -69,6 +72,13 @@ public class HotPlaceController {
     @GetMapping("/{hotPlaceId}")
     public HotPlaceResponse searchHotPlace(@PathVariable Long hotPlaceId) {
         return hotPlaceQueryService.searchById(hotPlaceId);
+    }
+
+    @PostMapping("{hotPlaceId}/comment")
+    public Long saveHotPlaceComment(@PathVariable Long hotPlaceId, @Valid @RequestBody SaveHotPlaceCommentRequest request){
+        // TODO: 2023-05-11 로그인 구현 시 수정
+        Long memberId = 1L;
+        return hotPlaceCommentService.save(hotPlaceId, memberId, request);
     }
 
     @Data
