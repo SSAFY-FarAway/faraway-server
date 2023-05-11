@@ -3,9 +3,10 @@ package com.ssafy.faraway.domain.post.entity;
 import com.ssafy.faraway.common.domain.BaseEntity;
 import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,9 +22,10 @@ public class Post extends BaseEntity {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
     @Column(nullable = false)
-    @ColumnDefault("0")
-    private Long hit;
+    private int hit;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<PostComment> postComments = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -33,7 +35,7 @@ public class Post extends BaseEntity {
     private Category category;
 
     @Builder
-    public Post(Long id, String title, String content, Long hit, Member member, Category category) {
+    public Post(Long id, String title, String content, int hit, Member member, Category category) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -42,13 +44,16 @@ public class Post extends BaseEntity {
         this.category = category;
     }
 
-    public void update(String title, String content, Category category) {
+    public void update(String title, String content) {
         this.title = title;
         this.content = content;
-        this.category = category;
     }
 
     public void updateHit() {
         this.hit++;
+    }
+
+    public List<PostComment> getPostComments() {
+        return this.postComments;
     }
 }
