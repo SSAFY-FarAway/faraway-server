@@ -1,16 +1,11 @@
 package com.ssafy.faraway.domain.member.dto.req;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-@Getter
-@NoArgsConstructor
-@ToString
+@Data
 public class SaveMemberRequest {
     @NotEmpty(message = "loginId ust not be empty")
     @Size(min = 6, max = 20)
@@ -39,32 +34,32 @@ public class SaveMemberRequest {
     private String subAddress;
     private String salt;
 
-    @Builder
-    public SaveMemberRequest(String loginId, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress, String salt) {
-        this.loginId = loginId;
-        this.loginPwd = loginPwd;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.birth = birth;
-        this.email = email;
-        this.zipcode = zipcode;
-        this.mainAddress = mainAddress;
-        this.subAddress = subAddress;
-        this.salt = salt;
-    }
+//    @Builder
+//    public SaveMemberRequest(String loginId, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress, String salt) {
+//        this.loginId = loginId;
+//        this.loginPwd = loginPwd;
+//        this.lastName = lastName;
+//        this.firstName = firstName;
+//        this.birth = birth;
+//        this.email = email;
+//        this.zipcode = zipcode;
+//        this.mainAddress = mainAddress;
+//        this.subAddress = subAddress;
+//        this.salt = salt;
+//    }
 
-    public SaveMemberRequest toDto(SaveMemberRequest memberSaveRequestDto, String encodedPwd, String salt) {
-        return SaveMemberRequest.builder()
-                .loginId(memberSaveRequestDto.getLoginId())
-                .loginPwd(encodedPwd)
-                .lastName(memberSaveRequestDto.getLastName())
-                .firstName(memberSaveRequestDto.getFirstName())
-                .birth(memberSaveRequestDto.getBirth())
-                .email(memberSaveRequestDto.getEmail())
-                .zipcode(memberSaveRequestDto.getZipcode())
-                .mainAddress(memberSaveRequestDto.getMainAddress())
-                .subAddress(memberSaveRequestDto.getSubAddress())
-                .salt(salt)
-                .build();
-    }
+//    public SaveMemberRequest toDto(SaveMemberRequest memberSaveRequestDto, String encodedPwd, String salt) {
+//        return SaveMemberRequest.builder()
+//                .loginId(memberSaveRequestDto.getLoginId())
+//                .loginPwd(encodedPwd)
+//                .lastName(memberSaveRequestDto.getLastName())
+//                .firstName(memberSaveRequestDto.getFirstName())
+//                .birth(memberSaveRequestDto.getBirth())
+//                .email(memberSaveRequestDto.getEmail())
+//                .zipcode(memberSaveRequestDto.getZipcode())
+//                .mainAddress(memberSaveRequestDto.getMainAddress())
+//                .subAddress(memberSaveRequestDto.getSubAddress())
+//                .salt(salt)
+//                .build();
+//    }
 }
