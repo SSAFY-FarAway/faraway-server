@@ -1,9 +1,10 @@
-package com.ssafy.faraway.domain.member.service;
+package com.ssafy.faraway.domain.member.service.impl;
 
 import com.ssafy.faraway.domain.member.dto.req.LoginEncMember;
 import com.ssafy.faraway.domain.member.dto.req.LoginMemberRequest;
 import com.ssafy.faraway.domain.member.dto.req.SaveEncMember;
 import com.ssafy.faraway.domain.member.dto.req.SaveMemberRequest;
+import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
@@ -11,6 +12,7 @@ import com.ssafy.faraway.domain.member.entity.Name;
 import com.ssafy.faraway.domain.member.entity.Role;
 import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.repository.MemberRepository;
+import com.ssafy.faraway.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
