@@ -94,6 +94,11 @@ public class HotPlaceController {
         return hotPlaceCommentService.update(commentId, request);
     }
 
+    @DeleteMapping("/comment/{commentId}")
+    public Long deleteHotPlaceComment(@PathVariable Long commentId) {
+        return hotPlaceCommentService.delete(commentId);
+    }
+
     @Data
     @AllArgsConstructor
     static class ResultPage<T> {

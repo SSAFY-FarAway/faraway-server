@@ -33,4 +33,11 @@ public class HotPlaceCommentServiceImpl implements HotPlaceCommentService {
         hotPlaceComment.update(request.getContent());
         return commentId;
     }
+
+    @Override
+    public Long delete(Long commentId) {
+        HotPlaceComment hotPlaceComment = hotPlaceCommentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
+        hotPlaceCommentRepository.delete(hotPlaceComment);
+        return commentId;
+    }
 }
