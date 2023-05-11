@@ -5,6 +5,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.res.ListHotPlaceResponse;
+import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,16 @@ import static org.springframework.util.StringUtils.hasText;
 @RequiredArgsConstructor
 public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository{
     private final JPAQueryFactory queryFactory;
+
+    @Override
+    public HotPlace searchById(Long hotPlaceId) {
+        return queryFactory
+                .select(hotPlace)
+                .from(hotPlace)
+                .join(hotPlace.member, member).fetchJoin()
+                .where(hotPlace.id.eq(hotPlaceId))
+                .fetchOne();
+    }
 
     @Override
     public List<ListHotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
@@ -47,10 +58,8 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository{
                         hotPlace.member.id.as("memberId"),
                         hotPlace.member.loginId,
                         hotPlace.title,
-                        hotPlace.content,
                         hotPlace.hit,
                         hotPlace.address.mainAddress,
-                        hotPlace.address.subAddress,
                         hotPlace.rating,
                         hotPlace.createdDate))
                 .from(hotPlace)

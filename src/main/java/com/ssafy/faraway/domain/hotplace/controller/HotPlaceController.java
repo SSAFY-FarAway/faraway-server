@@ -5,6 +5,7 @@ import com.ssafy.faraway.common.domain.UploadFile;
 import com.ssafy.faraway.common.util.FileExtChecker;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceRequest;
+import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.dto.res.ListHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceService;
@@ -63,6 +64,11 @@ public class HotPlaceController {
         PageRequest pageRequest = PageRequest.of(pageNumber -1 , 10);
         List<ListHotPlaceResponse> responses = hotPlaceQueryService.searchByCondition(condition, pageRequest);
         return new ResultPage<>(responses, pageNumber, 10);
+    }
+
+    @GetMapping("/{hotPlaceId}")
+    public HotPlaceResponse searchHotPlace(@PathVariable Long hotPlaceId) {
+        return hotPlaceQueryService.searchById(hotPlaceId);
     }
 
     @Data
