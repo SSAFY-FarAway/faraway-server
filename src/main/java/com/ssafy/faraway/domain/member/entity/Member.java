@@ -2,7 +2,6 @@ package com.ssafy.faraway.domain.member.entity;
 
 import com.ssafy.faraway.common.domain.BaseEntity;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -12,7 +11,7 @@ import javax.persistence.*;
 @ToString
 public class Member extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
     @Column(nullable = false, unique = true, length = 20)

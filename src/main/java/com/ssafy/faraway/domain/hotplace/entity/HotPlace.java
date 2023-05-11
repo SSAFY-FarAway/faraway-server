@@ -14,7 +14,7 @@ import javax.persistence.*;
 @ToString
 public class HotPlace extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hot_place_id")
     private Long id;
     @Column(name = "title", nullable = false, length = 30)

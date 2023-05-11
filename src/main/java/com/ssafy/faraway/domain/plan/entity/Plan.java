@@ -13,7 +13,7 @@ import javax.persistence.*;
 @ToString
 public class Plan extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "plan_id")
     private Long id;
     @Column(name = "title", nullable = false, length = 30)

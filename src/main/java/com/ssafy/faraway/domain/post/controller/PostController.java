@@ -69,7 +69,14 @@ public class PostController {
         }
         return new ResultPage<>(responses, pageNumber, 10);
     }
-    
+
+    @DeleteMapping("/{postId}")
+    public Long deletePost(@PathVariable Long postId) {
+        Long deleteId = postService.delete(postId);
+        log.debug("deletedId: {}", deleteId);
+        return deleteId;
+    }
+
     @PostMapping("/{postId}/comment")
     public Long savePostComment(@PathVariable Long postId, @Valid @RequestBody SavePostCommentRequest request) {
         // TODO: 최영환 2023-05-11 회원 구현되면 변경해야함
@@ -77,13 +84,6 @@ public class PostController {
         Long postCommentId = postCommentService.save(postId, memberId, request);
         log.debug("postCommentId: {}", postCommentId);
         return postCommentId;
-    }
-
-    @DeleteMapping("/{postId}")
-    public Long deletePost(@PathVariable Long postId) {
-        Long deleteId = postService.delete(postId);
-        log.debug("deletedId: {}", deleteId);
-        return deleteId;
     }
 
     @PutMapping("/comment/{commentId}")

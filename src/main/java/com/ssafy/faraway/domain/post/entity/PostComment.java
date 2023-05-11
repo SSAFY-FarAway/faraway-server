@@ -12,7 +12,7 @@ import javax.persistence.*;
 @ToString
 public class PostComment extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_comment_id")
     private Long id;
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")

@@ -3,10 +3,7 @@ package com.ssafy.faraway.domain.post.entity;
 import com.ssafy.faraway.common.domain.BaseEntity;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -14,7 +11,7 @@ import javax.persistence.Id;
 @ToString
 public class Category extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long id;
     @Column(nullable = false, unique = true, length = 30)
