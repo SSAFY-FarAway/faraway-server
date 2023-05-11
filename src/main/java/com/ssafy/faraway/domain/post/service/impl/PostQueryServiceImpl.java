@@ -10,6 +10,7 @@ import com.ssafy.faraway.domain.post.service.PostQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PostQueryServiceImpl implements PostQueryService {
     private final PostQueryRepository postQueryRepository;
+    @Transactional
     @Override
     public PostResponse searchById(Long postId) {
         Post post = postQueryRepository.searchById(postId);
