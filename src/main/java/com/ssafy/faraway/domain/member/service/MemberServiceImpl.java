@@ -1,7 +1,7 @@
 package com.ssafy.faraway.domain.member.service;
 
-import com.ssafy.faraway.domain.member.dto.SaveEncMember;
-import com.ssafy.faraway.domain.member.dto.SaveMemberRequest;
+import com.ssafy.faraway.domain.member.dto.req.SaveEncMember;
+import com.ssafy.faraway.domain.member.dto.req.SaveMemberRequest;
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.member.entity.Name;

@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.member.dto;
+package com.ssafy.faraway.domain.member.dto.req;
 
 import com.ssafy.faraway.domain.member.entity.Name;
 import com.ssafy.faraway.domain.member.entity.Address;

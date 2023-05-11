@@ -1,7 +1,6 @@
 package com.ssafy.faraway.domain.member.service;
 
-import com.ssafy.faraway.domain.member.dto.SaveMemberRequest;
-import org.springframework.stereotype.Service;
+import com.ssafy.faraway.domain.member.dto.req.SaveMemberRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
