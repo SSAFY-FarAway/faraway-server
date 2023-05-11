@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.post.controller;
 
+import com.ssafy.faraway.domain.post.dto.req.UpdatePostCommentRequest;
 import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.SavePostCommentRequest;
 import com.ssafy.faraway.domain.post.dto.req.SavePostRequest;
@@ -69,7 +70,7 @@ public class PostController {
         return new ResultPage<>(responses, pageNumber, 10);
     }
     
-    @PostMapping("/{postId}")
+    @PostMapping("/{postId}/comment")
     public Long savePostComment(@PathVariable Long postId, @Valid @RequestBody SavePostCommentRequest request) {
         // TODO: 최영환 2023-05-11 회원 구현되면 변경해야함
         Long memberId = 1L;
@@ -83,6 +84,11 @@ public class PostController {
         Long deleteId = postService.delete(postId);
         log.debug("deletedId: {}", deleteId);
         return deleteId;
+    }
+
+    @PutMapping("/comment/{commentId}")
+    public Long updatePostComment(@PathVariable Long commentId, @Valid @RequestBody UpdatePostCommentRequest request) {
+        return postCommentService.update(commentId, request);
     }
 
     @Data
