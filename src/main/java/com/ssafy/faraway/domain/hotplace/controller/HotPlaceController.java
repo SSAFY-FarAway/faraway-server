@@ -6,6 +6,7 @@ import com.ssafy.faraway.common.util.FileExtChecker;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceCommentRequest;
 import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceRequest;
+import com.ssafy.faraway.domain.hotplace.dto.req.UpdateHotPlaceRequest;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.dto.res.ListHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
@@ -72,6 +73,11 @@ public class HotPlaceController {
     @GetMapping("/{hotPlaceId}")
     public HotPlaceResponse searchHotPlace(@PathVariable Long hotPlaceId) {
         return hotPlaceQueryService.searchById(hotPlaceId);
+    }
+
+    @PutMapping("/{hotPlaceId}")
+    public Long updateHotPlace(@PathVariable Long hotPlaceId, @Valid @RequestBody UpdateHotPlaceRequest request) {
+        return hotPlaceService.update(hotPlaceId, request);
     }
 
     @PostMapping("{hotPlaceId}/comment")

@@ -2,6 +2,7 @@ package com.ssafy.faraway.domain.hotplace.service;
 
 import com.ssafy.faraway.common.domain.UploadFile;
 import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceRequest;
+import com.ssafy.faraway.domain.hotplace.dto.req.UpdateHotPlaceRequest;
 import com.ssafy.faraway.domain.hotplace.entity.Address;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage;
@@ -13,11 +14,13 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
 public class HotPlaceServiceImpl implements HotPlaceService {
     private final HotPlaceRepository hotPlaceRepository;
+
     @Override
     public Long save(Long memberId, SaveHotPlaceRequest request, List<UploadFile> uploadFiles) throws IOException {
         Address address = Address.builder()
@@ -46,5 +49,17 @@ public class HotPlaceServiceImpl implements HotPlaceService {
                 .build();
 
         return hotPlaceRepository.save(saveHotPlace).getId();
+    }
+
+    @Override
+    public Long update(Long hotPlaceId, UpdateHotPlaceRequest request) {
+        HotPlace hotplace = hotPlaceRepository.findById(hotPlaceId).orElseThrow(NoSuchElementException::new);
+        Address address = Address.builder()
+                .zipcode(request.getZipcode())
+                .mainAddress(request.getMainAddress())
+                .subAddress(request.getSubAddress())
+                .build();
+        hotplace.update(request.getTitle(), request.getContent(), address, request.getRating());
+        return hotPlaceId;
     }
 }

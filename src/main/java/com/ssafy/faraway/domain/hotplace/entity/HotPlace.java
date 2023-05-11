@@ -1,10 +1,8 @@
 package com.ssafy.faraway.domain.hotplace.entity;
 
 import com.ssafy.faraway.common.domain.BaseEntity;
-import com.ssafy.faraway.domain.hotplace.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.List;
@@ -49,7 +47,7 @@ public class HotPlace extends BaseEntity {
         this.hotPlaceImages = hotPlaceImages;
     }
 
-    public void update(String title, String content, Address address, int rating, List<HotPlaceImage> hotPlaceImages) {
+    public void update(String title, String content, Address address, int rating) {
         this.title = title;
         this.content = content;
         this.address = address;
