@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PostQueryServiceImpl implements PostQueryService {
     private final PostQueryRepository postQueryRepository;
+
     @Transactional
     @Override
     public PostResponse searchById(Long postId) {
