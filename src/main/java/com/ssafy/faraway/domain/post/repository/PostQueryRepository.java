@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface PostQueryRepository {
     Post searchById(Long postId);
+
     List<ListPostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable);
 }

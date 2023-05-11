@@ -30,20 +30,17 @@ public class PostController {
     private final PostService postService;
     private final PostQueryService postQueryService;
     private final PostCommentService postCommentService;
+
     @PostMapping
-    public Long postSave(@Valid @RequestBody SavePostRequest savePostRequest) {
+    public Long savePost(@Valid @RequestBody SavePostRequest savePostRequest) {
         // TODO: 최영환 2023-05-10 회원 구현되면 변경해야함
         Long memberId = 1L;
-        Long postId = postService.save(savePostRequest, memberId);
-        log.debug("postId {}", postId);
-        return postId;
+        return postService.save(savePostRequest, memberId);
     }
 
     @GetMapping("/{postId}")
     public PostResponse searchPost(@PathVariable Long postId) {
-        PostResponse response = postQueryService.searchById(postId);
-        log.debug("response {}", response);
-        return response;
+        return postQueryService.searchById(postId);
     }
 
     @PutMapping("/{postId}")
@@ -52,38 +49,30 @@ public class PostController {
     }
 
     @GetMapping
-    public ResultPage<List<ListPostResponse>> searchPost(
+    public ResultPage<List<ListPostResponse>> searchPosts(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
             @RequestParam(defaultValue = "1") Integer pageNumber
     ) {
-        PostSearchCondition condition =PostSearchCondition.builder()
+        PostSearchCondition condition = PostSearchCondition.builder()
                 .title(title)
                 .content(content)
                 .build();
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
         List<ListPostResponse> responses = postQueryService.searchByCondition(condition, pageRequest);
-        log.debug("responses: {}", responses);
-        for (ListPostResponse response : responses) {
-            log.debug("response: {}", response);
-        }
         return new ResultPage<>(responses, pageNumber, 10);
     }
 
     @DeleteMapping("/{postId}")
     public Long deletePost(@PathVariable Long postId) {
-        Long deleteId = postService.delete(postId);
-        log.debug("deletedId: {}", deleteId);
-        return deleteId;
+        return postService.delete(postId);
     }
 
     @PostMapping("/{postId}/comment")
     public Long savePostComment(@PathVariable Long postId, @Valid @RequestBody SavePostCommentRequest request) {
         // TODO: 최영환 2023-05-11 회원 구현되면 변경해야함
         Long memberId = 1L;
-        Long postCommentId = postCommentService.save(postId, memberId, request);
-        log.debug("postCommentId: {}", postCommentId);
-        return postCommentId;
+        return postCommentService.save(postId, memberId, request);
     }
 
     @PutMapping("/comment/{commentId}")
@@ -93,9 +82,7 @@ public class PostController {
 
     @DeleteMapping("/comment/{commentId}")
     public Long deletePostComment(@PathVariable Long commentId) {
-        Long deleteId = postCommentService.delete(commentId);
-        log.debug("deletedId: {}", deleteId);
-        return deleteId;
+        return postCommentService.delete(commentId);
     }
 
     @Data
