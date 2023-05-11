@@ -30,17 +30,15 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 45)
     private String salt;
     @Column(nullable = false)
-    @ColumnDefault("0")
-    private Long mileage;
+    private int mileage;
     @Column(nullable = false)
-    @ColumnDefault("1")
+    @Enumerated(EnumType.STRING)
     private Role role;
     @Column(nullable = false)
-    @ColumnDefault("0")
     private int certified;
 
     @Builder
-    public Member(Long id, String loginId, String loginPwd, Name name, String birth, String email, Address address, String salt, Long mileage, Role role, int certified) {
+    public Member(Long id, String loginId, String loginPwd, Name name, String birth, String email, Address address, String salt, int mileage, Role role, int certified) {
         this.id = id;
         this.loginId = loginId;
         this.loginPwd = loginPwd;
