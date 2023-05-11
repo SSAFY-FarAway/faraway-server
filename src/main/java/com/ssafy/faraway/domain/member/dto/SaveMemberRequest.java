@@ -17,7 +17,7 @@ public class SaveMemberRequest {
     private String loginId;
     @NotEmpty(message = "loginPwd must not be empty")
     @Size(min=8)
-    private String loginPwd;
+    private String loginPwd; // 암호화 x
     @NotEmpty(message = "lastName must not be empty")
     @Size(max=20)
     private String lastName;
