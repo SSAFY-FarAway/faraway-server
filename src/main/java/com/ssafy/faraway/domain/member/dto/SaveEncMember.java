@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class SaveMemberDto {
+public class SaveEncMember {
     private String loginId;
     private String loginPwd; // 암호화된 pwd
     private Name name;
@@ -16,7 +16,7 @@ public class SaveMemberDto {
     private String salt;
 
     @Builder
-    public SaveMemberDto(String loginId, String loginPwd, Name name, String birth, String email, Address address, String salt) {
+    public SaveEncMember(String loginId, String loginPwd, Name name, String birth, String email, Address address, String salt) {
         this.loginId = loginId;
         this.loginPwd = loginPwd;
         this.name = name;

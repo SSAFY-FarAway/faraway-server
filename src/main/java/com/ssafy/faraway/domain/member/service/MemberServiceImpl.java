@@ -1,6 +1,6 @@
 package com.ssafy.faraway.domain.member.service;
 
-import com.ssafy.faraway.domain.member.dto.SaveMemberDto;
+import com.ssafy.faraway.domain.member.dto.SaveEncMember;
 import com.ssafy.faraway.domain.member.dto.SaveMemberRequest;
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Long saveMember(SaveMemberRequest request) {
-        SaveMemberDto dto = createSaveMemberDto(request);
+        SaveEncMember dto = createSaveMemberDto(request);
         Member member = createMember(dto);
 //        System.out.println(member);
         Member saveMember = memberRepository.save(member);
@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     // 암호화한 비밀번호를 가진 DTO create
-    private SaveMemberDto createSaveMemberDto(SaveMemberRequest request){
+    private SaveEncMember createSaveMemberDto(SaveMemberRequest request){
         // encrypt password
         String salt = getSalt();
         String encodedLoginPwd = encrypt(request.getLoginPwd(), salt);
@@ -79,7 +79,7 @@ public class MemberServiceImpl implements MemberService{
                 .subAddress(request.getSubAddress())
                 .build();
 
-        return SaveMemberDto.builder()
+        return SaveEncMember.builder()
                 .loginId(request.getLoginId())
                 .loginPwd(encodedLoginPwd)
                 .name(memberName)
@@ -90,7 +90,7 @@ public class MemberServiceImpl implements MemberService{
                 .build();
     }
 
-    private Member createMember(SaveMemberDto dto) {
+    private Member createMember(SaveEncMember dto) {
         return Member.builder()
                 .loginId(dto.getLoginId())
                 .loginPwd(dto.getLoginPwd())
