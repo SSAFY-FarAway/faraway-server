@@ -1,9 +1,11 @@
 package com.ssafy.faraway.domain.hotplace.dto.req;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 public class SaveHotPlaceRequest {
