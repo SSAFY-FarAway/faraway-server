@@ -78,6 +78,13 @@ public class PostController {
         return postCommentId;
     }
 
+    @DeleteMapping("/{postId}")
+    public Long deletePost(@PathVariable Long postId) {
+        Long deleteId = postService.delete(postId);
+        log.debug("deletedId: {}", deleteId);
+        return deleteId;
+    }
+
     @Data
     @AllArgsConstructor
     static class ResultPage<T> {

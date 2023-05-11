@@ -37,4 +37,11 @@ public class PostServiceImpl implements PostService {
         post.update(request.getTitle(), request.getContent());
         return postId;
     }
+
+    @Override
+    public Long delete(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(NoSuchElementException::new);
+        postRepository.delete(post);
+        return postId;
+    }
 }
