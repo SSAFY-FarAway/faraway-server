@@ -1,12 +1,13 @@
 package com.ssafy.faraway.domain.hotplace.entity;
 
 import com.ssafy.faraway.common.domain.BaseEntity;
-import com.ssafy.faraway.domain.member.entity.Address;
+import com.ssafy.faraway.domain.hotplace.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,17 +23,19 @@ public class HotPlace extends BaseEntity {
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
     @Column(name = "hit", nullable = false)
-    @ColumnDefault("0")
-    private Long hit;
+    private int hit;
     @Embedded
     private Address address;
     @Column(name = "rating")
-    private Integer rating;
+    private int rating;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+    @OneToMany(mappedBy = "hotPlace", cascade = CascadeType.ALL)
+    List<HotPlaceComment> hotPlaceComments;
 
-    public HotPlace(Long id, String title, String content, Long hit, Address address, Integer rating, Member member) {
+    @Builder
+    public HotPlace(Long id, String title, String content, int hit, Address address, int rating, Member member, List<HotPlaceComment> hotPlaceComments) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -40,5 +43,21 @@ public class HotPlace extends BaseEntity {
         this.address = address;
         this.rating = rating;
         this.member = member;
+        this.hotPlaceComments = hotPlaceComments;
+    }
+
+    public void update(String title, String content, Address address, int rating) {
+        this.title = title;
+        this.content = content;
+        this.address = address;
+        this.rating = rating;
+    }
+
+    public void updateHit() {
+        this.hit++;
+    }
+
+    public List<HotPlaceComment> getHotPlaceComments() {
+        return this.hotPlaceComments;
     }
 }
