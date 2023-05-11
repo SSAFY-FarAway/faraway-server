@@ -8,4 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface PostCommentService {
     Long save(Long postId, Long memberId, SavePostCommentRequest request);
     Long update(Long commentId, UpdatePostCommentRequest request);
+
+    Long delete(Long commentId);
 }

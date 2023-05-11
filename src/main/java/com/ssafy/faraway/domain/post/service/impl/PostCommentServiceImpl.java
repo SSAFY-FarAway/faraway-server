@@ -33,4 +33,11 @@ public class PostCommentServiceImpl implements PostCommentService {
         postComment.update(request.getContent());
         return commentId;
     }
+
+    @Override
+    public Long delete(Long commentId) {
+        PostComment postComment = postCommentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
+        postCommentRepository.delete(postComment);
+        return commentId;
+    }
 }

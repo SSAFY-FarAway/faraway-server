@@ -91,6 +91,13 @@ public class PostController {
         return postCommentService.update(commentId, request);
     }
 
+    @DeleteMapping("/comment/{commentId}")
+    public Long deletePostComment(@PathVariable Long commentId) {
+        Long deleteId = postCommentService.delete(commentId);
+        log.debug("deletedId: {}", deleteId);
+        return deleteId;
+    }
+
     @Data
     @AllArgsConstructor
     static class ResultPage<T> {
