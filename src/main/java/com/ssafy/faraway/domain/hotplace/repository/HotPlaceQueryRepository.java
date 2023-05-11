@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface HotPlaceQueryRepository {
     HotPlace searchById(Long hotPlaceId);
+
     List<ListHotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable);
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @Transactional
 public interface HotPlaceService {
     Long save(Long memberId, SaveHotPlaceRequest request, List<UploadFile> uploadFiles) throws IOException;
+
     Long update(Long hotPlaceId, UpdateHotPlaceRequest request);
 
     Long delete(Long hotPlaceId);

@@ -11,5 +11,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface HotPlaceQueryService {
     HotPlaceResponse searchById(Long hotPlaceId);
+
     List<ListHotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable);
 }

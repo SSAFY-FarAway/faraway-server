@@ -21,7 +21,7 @@ import static org.springframework.util.StringUtils.hasText;
 
 @Repository
 @RequiredArgsConstructor
-public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository{
+public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override

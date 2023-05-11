@@ -2,7 +2,6 @@ package com.ssafy.faraway.domain.hotplace.service;
 
 import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceCommentRequest;
 import com.ssafy.faraway.domain.hotplace.dto.req.UpdateHotPlaceCommentRequest;
-import com.ssafy.faraway.domain.hotplace.dto.req.UpdateHotPlaceRequest;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceCommentRepository;

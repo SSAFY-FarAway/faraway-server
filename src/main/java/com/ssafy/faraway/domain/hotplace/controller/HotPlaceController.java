@@ -47,9 +47,7 @@ public class HotPlaceController {
             uploadFiles = fileStore.storeFiles(files);
         }
 
-        Long saveId = hotPlaceService.save(memberId, request, uploadFiles);
-        log.debug("saveHotPlaceId: {}", saveId);
-        return saveId;
+        return hotPlaceService.save(memberId, request, uploadFiles);
     }
 
     @GetMapping
@@ -62,7 +60,7 @@ public class HotPlaceController {
                 .title(title)
                 .content(content)
                 .build();
-        PageRequest pageRequest = PageRequest.of(pageNumber -1 , 10);
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
         List<ListHotPlaceResponse> responses = hotPlaceQueryService.searchByCondition(condition, pageRequest);
         return new ResultPage<>(responses, pageNumber, 10);
     }
@@ -83,7 +81,7 @@ public class HotPlaceController {
     }
 
     @PostMapping("{hotPlaceId}/comment")
-    public Long saveHotPlaceComment(@PathVariable Long hotPlaceId, @Valid @RequestBody SaveHotPlaceCommentRequest request){
+    public Long saveHotPlaceComment(@PathVariable Long hotPlaceId, @Valid @RequestBody SaveHotPlaceCommentRequest request) {
         // TODO: 2023-05-11 로그인 구현 시 수정
         Long memberId = 1L;
         return hotPlaceCommentService.save(hotPlaceId, memberId, request);
