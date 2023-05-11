@@ -1,12 +1,14 @@
-package com.ssafy.faraway.domain.member.service;
+package com.ssafy.faraway.domain.member.service.impl;
 
 import com.ssafy.faraway.domain.member.dto.req.SaveEncMember;
 import com.ssafy.faraway.domain.member.dto.req.SaveMemberRequest;
+import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.member.entity.Name;
 import com.ssafy.faraway.domain.member.entity.Role;
 import com.ssafy.faraway.domain.member.repository.MemberRepository;
+import com.ssafy.faraway.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ import java.util.Base64;
 
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
 
