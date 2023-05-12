@@ -2,7 +2,7 @@ package com.ssafy.faraway.domain.hotplace.controller;
 
 import com.ssafy.faraway.common.FileStore;
 import com.ssafy.faraway.common.domain.UploadFile;
-import com.ssafy.faraway.common.util.FileExtChecker;
+import com.ssafy.faraway.common.util.FileExtFilter;
 import com.ssafy.faraway.domain.hotplace.dto.req.*;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.dto.res.ListHotPlaceResponse;
@@ -33,7 +33,7 @@ public class HotPlaceController {
     private final HotPlaceQueryService hotPlaceQueryService;
     private final HotPlaceCommentService hotPlaceCommentService;
     private final FileStore fileStore;
-    private final FileExtChecker fileExtChecker;
+    private final FileExtFilter fileExtFilter;
 
     @PostMapping
     public Long saveHotPlace(@Valid @RequestPart(value = "request") SaveHotPlaceRequest request,
@@ -43,7 +43,7 @@ public class HotPlaceController {
         List<UploadFile> uploadFiles = new ArrayList<>();
 
         if (files != null && !files.isEmpty()) {
-            fileExtChecker.checkExtension(files);
+            fileExtFilter.imageFilter(files);
             uploadFiles = fileStore.storeFiles(files);
         }
 
@@ -77,7 +77,7 @@ public class HotPlaceController {
         List<UploadFile> uploadFiles = new ArrayList<>();
 
         if (files != null && !files.isEmpty()) {
-            fileExtChecker.checkExtension(files);
+            fileExtFilter.imageFilter(files);
             uploadFiles = fileStore.storeFiles(files);
         }
         return hotPlaceService.update(hotPlaceId, request, uploadFiles);

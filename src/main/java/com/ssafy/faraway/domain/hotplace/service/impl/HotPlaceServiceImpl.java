@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.hotplace.service;
+package com.ssafy.faraway.domain.hotplace.service.impl;
 
 import com.ssafy.faraway.common.domain.UploadFile;
 import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceRequest;
@@ -8,6 +8,7 @@ import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceImageRepository;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository;
+import com.ssafy.faraway.domain.hotplace.service.HotPlaceService;
 import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

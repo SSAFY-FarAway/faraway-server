@@ -19,9 +19,10 @@ public class HotPlaceResponse {
     private int rating;
     private LocalDateTime createdDate;
     private List<HotPlaceCommentResponse> commentResponses;
+    private List<HotPlaceImageResponse> imageResponses;
 
     @Builder
-    public HotPlaceResponse(Long id, Long memberId, String loginId, String title, String content, int hit, String mainAddress, String subAddress, int rating, LocalDateTime createdDate, List<HotPlaceCommentResponse> commentResponses) {
+    public HotPlaceResponse(Long id, Long memberId, String loginId, String title, String content, int hit, String mainAddress, String subAddress, int rating, LocalDateTime createdDate, List<HotPlaceCommentResponse> commentResponses, List<HotPlaceImageResponse> imageResponses) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
@@ -33,5 +34,6 @@ public class HotPlaceResponse {
         this.rating = rating;
         this.createdDate = createdDate;
         this.commentResponses = commentResponses;
+        this.imageResponses = imageResponses;
     }
 }
