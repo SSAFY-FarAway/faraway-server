@@ -41,21 +41,22 @@ public class PostServiceImpl implements PostService {
         return saveId;
     }
 
-    private List<Attachment> getAttachments(Long saveId, List<UploadFile> uploadFiles) {
+    private List<Attachment> getAttachments(Long postId, List<UploadFile> uploadFiles) {
         if (uploadFiles.isEmpty()) {
             return new ArrayList<>();
         }
         return uploadFiles.stream()
                 .map(uploadFile -> Attachment.builder()
-                        .post(Post.builder().id(saveId).build())
+                        .post(Post.builder().id(postId).build())
                         .uploadFile(uploadFile).build()
                 ).collect(Collectors.toList());
     }
 
     @Override
-    public Long update(Long postId, UpdatePostRequest request) {
+    public Long update(Long postId, UpdatePostRequest request, List<UploadFile> uploadFiles) {
         Post post = postRepository.findById(postId).orElseThrow(NoSuchElementException::new);
-        post.update(request.getTitle(), request.getContent());
+        List<Attachment> attachments = getAttachments(postId, uploadFiles);
+        post.update(request.getTitle(), request.getContent(), attachments);
         return postId;
     }
 
