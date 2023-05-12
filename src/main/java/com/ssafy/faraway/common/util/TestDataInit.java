@@ -35,9 +35,10 @@ public class TestDataInit {
     @PostConstruct
     public void init() {
         Long memberId = createMember();
-        Long categoryId = createCategory();
+        createCategory();
 
-        initPost(memberId, categoryId);
+        initNotice(memberId, 1L);
+        initPost(memberId, 2L);
         initHotPlace(memberId);
     }
 
@@ -66,19 +67,54 @@ public class TestDataInit {
         return memberRepository.save(member).getId();
     }
 
-    private Long createCategory() {
-        Category category = Category.builder()
+    private void createCategory() {
+        Category notice = Category.builder()
                 .categoryName("Notice")
                 .build();
-        return categoryRepository.save(category).getId();
+        categoryRepository.save(notice);
+
+        Category free = Category.builder()
+                .categoryName("Free")
+                .build();
+        categoryRepository.save(free);
     }
 
-    private void initPost(Long memberId, Long categoryId) {
+    private void initNotice(Long memberId, Long categoryId) {
         ArrayList<Post> posts = new ArrayList<>();
         ArrayList<PostComment> postComments = new ArrayList<>();
         for (int i = 1; i <= 50; i++) {
-            String title = String.format("Post Test Title %d", i);
-            String content = String.format("Post Test Content %d", i);
+            String title = String.format("Notice Test Title %d", i);
+            String content = String.format("Notice Test Content %d", i);
+            Post post = Post.builder()
+                    .title(title)
+                    .content(content)
+                    .member(Member.builder().id(memberId).build())
+                    .category(Category.builder().id(categoryId).build())
+                    .build();
+            posts.add(post);
+        }
+        postRepository.saveAll(posts);
+
+        for (Post post : posts) {
+            for (int j = 1; j <= 5; j++) {
+                String content = String.format("Comment Test Content %d", j);
+                PostComment postComment = PostComment.builder()
+                        .content(content)
+                        .member(Member.builder().id(memberId).build())
+                        .post(Post.builder().id(post.getId()).build())
+                        .build();
+                postComments.add(postComment);
+            }
+        }
+        postCommentRepository.saveAll(postComments);
+    }
+
+    public void initPost(Long memberId, Long categoryId) {
+        ArrayList<Post> posts = new ArrayList<>();
+        ArrayList<PostComment> postComments = new ArrayList<>();
+        for (int i = 1; i <= 50; i++) {
+            String title = String.format("Notice Test Title %d", i);
+            String content = String.format("Notice Test Content %d", i);
             Post post = Post.builder()
                     .title(title)
                     .content(content)
