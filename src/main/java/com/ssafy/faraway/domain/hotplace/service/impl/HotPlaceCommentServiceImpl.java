@@ -1,10 +1,11 @@
-package com.ssafy.faraway.domain.hotplace.service;
+package com.ssafy.faraway.domain.hotplace.service.impl;
 
 import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceCommentRequest;
 import com.ssafy.faraway.domain.hotplace.dto.req.UpdateHotPlaceCommentRequest;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceCommentRepository;
+import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
 import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
