@@ -1,7 +1,10 @@
 package com.ssafy.faraway.domain.member.controller;
 
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.member.dto.req.LoginMemberRequest;
 import com.ssafy.faraway.domain.member.dto.req.SaveMemberRequest;
+import com.ssafy.faraway.domain.member.dto.req.UpdateLoginPwdRequest;
 import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
@@ -35,7 +38,7 @@ public class MemberRestController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid LoginMemberRequest request, HttpSession session) {
         try {
-            LoginMemberResponse response = memberService.login(request);
+            LoginMemberResponse response = memberQueryService.login(request);
             if(response != null){
                 session.setAttribute("loginMember", response);
                 return new ResponseEntity<>(response, HttpStatus.OK);
@@ -100,6 +103,15 @@ public class MemberRestController {
         }
         session.invalidate();
         return new ResponseEntity<>("로그아웃 성공.", HttpStatus.OK);
+    }
+
+    @PutMapping("/password")
+    public ResponseEntity<?> updateLoginPwd(@RequestBody @Valid UpdateLoginPwdRequest request) {
+        if(memberService.updateLoginPwd(request) == -1){
+//                throw new CustomException(ErrorCode.BAD_REQUEST);
+            return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Data

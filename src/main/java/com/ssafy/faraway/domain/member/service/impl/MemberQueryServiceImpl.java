@@ -1,14 +1,24 @@
 package com.ssafy.faraway.domain.member.service.impl;
 
+import com.ssafy.faraway.domain.member.dto.req.*;
 import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
+import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
+import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
+import com.ssafy.faraway.domain.member.entity.Name;
+import com.ssafy.faraway.domain.member.entity.Role;
 import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.service.MemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -38,5 +48,34 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     public List<ListMemberResponse> searchAll(Pageable pageable) {
         // TODO : 관리자 계정 여부 확인 필요.
         return memberQueryRepository.searchAll(pageable);
+    }
+    @Override
+    public LoginMemberResponse login(LoginMemberRequest request) {
+        Long id = memberQueryRepository.SearchIdByLoginId(request.getLoginId());
+        String salt = memberQueryRepository.SearchSaltById(id);
+        String encLoginPwd = encrypt(request.getLoginPwd(), salt);
+        System.out.println(salt);
+
+
+        LoginEncMember dto = LoginEncMember.builder()
+                .loginId(request.getLoginId())
+                .loginPwd(encLoginPwd)
+                .build();
+        return memberQueryRepository.login(dto);
+    }
+
+    public String encrypt(String loginPwd, String hash) {
+        String salt = hash+loginPwd;
+        String hex = null;
+
+        try {
+            MessageDigest msg = MessageDigest.getInstance("SHA-512");
+            msg.update(salt.getBytes());
+            hex = String.format("%128x", new BigInteger(1, msg.digest()));
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return hex;
     }
 }
