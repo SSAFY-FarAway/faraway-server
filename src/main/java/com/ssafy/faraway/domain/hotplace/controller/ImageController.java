@@ -4,18 +4,17 @@ import com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.NoSuchElementException;
@@ -41,19 +40,6 @@ public class ImageController {
         setFileHeader(response, hotPlaceImage);
 
         fileCopy(response, saveFilePath);
-    }
-
-    @GetMapping("/display/{id}")
-    public Resource display(@PathVariable Long id, HttpServletResponse response) throws IOException {
-        HotPlaceImage hotPlaceImage = hotPlaceImageRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        String fullPath = fileDir + hotPlaceImage.getUploadFile().getStoreFileName();
-        Resource resource = new FileSystemResource(fullPath);
-        if (!resource.exists()) {
-            throw new RuntimeException("File Not Found");
-        }
-        Path imagePath = Paths.get(fullPath);
-        response.setHeader("Content-Type", Files.probeContentType(imagePath));
-        return resource;
     }
 
     private void setFileHeader(HttpServletResponse response, HotPlaceImage hotPlaceImage) throws UnsupportedEncodingException {

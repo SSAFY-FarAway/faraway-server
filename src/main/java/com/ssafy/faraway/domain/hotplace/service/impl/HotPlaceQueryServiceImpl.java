@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.hotplace.service.impl;
 
+import com.ssafy.faraway.common.FileStore;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceCommentResponse;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceImageResponse;
@@ -20,13 +21,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
     private final HotPlaceQueryRepository hotPlaceQueryRepository;
+    private final FileStore fileStore;
 
     @Transactional
     @Override
     public HotPlaceResponse searchById(Long hotPlaceId) {
         HotPlace hotPlace = hotPlaceQueryRepository.searchById(hotPlaceId);
         List<HotPlaceCommentResponse> commentResponses = getCommentResponses(hotPlace);
-    List<HotPlaceImageResponse> imageResponses = getImageResponses(hotPlace);
+        List<HotPlaceImageResponse> imageResponses = getImageResponses(hotPlace);
         hotPlace.updateHit();
         return HotPlaceResponse.builder()
                 .id(hotPlace.getId())
@@ -47,7 +49,8 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
     private List<HotPlaceImageResponse> getImageResponses(HotPlace hotPlace) {
         return hotPlace.getHotPlaceImages().stream().map(hotPlaceImage -> HotPlaceImageResponse.builder()
                 .id(hotPlaceImage.getId())
-                .fileName(hotPlaceImage.getUploadFile().getUploadFileName())
+                .uploadFileName(fileStore.getFullPath(hotPlaceImage.getUploadFile().getUploadFileName()))
+                .storeFileName(fileStore.getFullPath(hotPlaceImage.getUploadFile().getStoreFileName()))
                 .createdDate(hotPlaceImage.getCreatedDate())
                 .build()).collect(Collectors.toList());
     }

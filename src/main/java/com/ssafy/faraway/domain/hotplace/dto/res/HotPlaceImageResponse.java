@@ -10,13 +10,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class HotPlaceImageResponse {
     private Long id;
-    private String fileName;
+    private String uploadFileName;
+    private String storeFileName;
     private LocalDateTime createdDate;
 
     @Builder
-    public HotPlaceImageResponse(Long id, String fileName, LocalDateTime createdDate) {
+    public HotPlaceImageResponse(Long id, String uploadFileName, String storeFileName, LocalDateTime createdDate) {
         this.id = id;
-        this.fileName = fileName;
+        this.uploadFileName = uploadFileName;
+        this.storeFileName = storeFileName;
         this.createdDate = createdDate;
     }
 }
