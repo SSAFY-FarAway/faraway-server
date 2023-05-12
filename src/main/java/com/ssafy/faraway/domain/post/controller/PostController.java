@@ -40,7 +40,7 @@ public class PostController {
     private final FileExtFilter fileExtFilter;
 
     @PostMapping
-    public Long savePost(@Valid @RequestPart SavePostRequest savePostRequest,
+    public Long savePost(@Valid @RequestPart(name = "request") SavePostRequest savePostRequest,
                          @RequestPart(name = "files") List<MultipartFile> files) throws IOException {
         // TODO: 최영환 2023-05-10 회원 구현되면 변경해야함
         Long memberId = 1L;
@@ -60,8 +60,14 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public Long updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
-        return postService.update(postId, request);
+    public Long updatePost(@PathVariable Long postId, @RequestPart(name = "request") UpdatePostRequest request,
+                           @RequestPart(name = "files") List<MultipartFile> files) throws IOException {
+        List<UploadFile> uploadFiles = new ArrayList<>();
+        if (files != null && !files.isEmpty()) {
+            fileExtFilter.badFileFilter(files);
+            uploadFiles = fileStore.storeFiles(files);
+        }
+        return postService.update(postId, request, uploadFiles);
     }
 
     @GetMapping

@@ -11,7 +11,7 @@ import java.util.List;
 public interface PostService {
     Long save(SavePostRequest request, Long memberId, List<UploadFile>uploadFiles);
 
-    Long update(Long postId, UpdatePostRequest request);
+    Long update(Long postId, UpdatePostRequest request, List<UploadFile> uploadFiles);
 
     Long delete(Long postId);
 }

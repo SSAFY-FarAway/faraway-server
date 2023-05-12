@@ -48,9 +48,11 @@ public class Post extends BaseEntity {
         this.category = category;
     }
 
-    public void update(String title, String content) {
+    public void update(String title, String content, List<Attachment> attachments) {
         this.title = title;
         this.content = content;
+        this.attachments.clear();
+        this.attachments.addAll(attachments);
     }
 
     public void updateHit() {
