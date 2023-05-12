@@ -1,9 +1,11 @@
 package com.ssafy.faraway.domain.post.service.impl;
 
 import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
+import com.ssafy.faraway.domain.post.dto.res.AttachmentResponse;
 import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
 import com.ssafy.faraway.domain.post.dto.res.PostCommentResponse;
 import com.ssafy.faraway.domain.post.dto.res.PostResponse;
+import com.ssafy.faraway.domain.post.entity.Attachment;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.repository.PostQueryRepository;
 import com.ssafy.faraway.domain.post.service.PostQueryService;
@@ -26,6 +28,7 @@ public class PostQueryServiceImpl implements PostQueryService {
         Post post = postQueryRepository.searchById(postId);
         post.updateHit();
         List<PostCommentResponse> commentResponses = getCommentResponses(post);
+        List<AttachmentResponse> attachmentResponses = getAttachmentResponses(post);
         return PostResponse.builder()
                 .id(post.getId())
                 .memberId(post.getMember().getId())
@@ -35,6 +38,7 @@ public class PostQueryServiceImpl implements PostQueryService {
                 .content(post.getContent())
                 .hit(post.getHit())
                 .postCommentResponses(commentResponses)
+                .attachmentResponses(attachmentResponses)
                 .createdDate(post.getCreatedDate())
                 .build();
     }
@@ -44,7 +48,7 @@ public class PostQueryServiceImpl implements PostQueryService {
         return postQueryRepository.searchByCondition(condition, pageable);
     }
 
-    private static List<PostCommentResponse> getCommentResponses(Post post) {
+    private List<PostCommentResponse> getCommentResponses(Post post) {
         return post.getPostComments().stream().map(postComment -> PostCommentResponse.builder()
                 .id(postComment.getId())
                 .postId(postComment.getPost().getId())
@@ -53,5 +57,13 @@ public class PostQueryServiceImpl implements PostQueryService {
                 .content(postComment.getContent())
                 .createdDate(postComment.getCreatedDate())
                 .build()).collect(Collectors.toList());
+    }
+
+    private List<AttachmentResponse> getAttachmentResponses(Post post) {
+        return post.getAttachments().stream().map(attachment -> AttachmentResponse.builder()
+                .id(attachment.getId())
+                .fileName(attachment.getUploadFile().getUploadFileName())
+                .createdDate(attachment.getCreatedDate()).build()
+        ).collect(Collectors.toList());
     }
 }
