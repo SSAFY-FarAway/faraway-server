@@ -56,6 +56,15 @@ public class MemberRestController {
         return response;
     }
 
+    @GetMapping("/check/{loginId}") //countByLoginId
+    public ResponseEntity<?> checkLoginId(@PathVariable("loginId") String loginId) {
+        int cnt = 0;
+        if(memberService.checkLoginId(loginId)){
+            cnt = 1;
+        }
+        return new ResponseEntity<>(cnt + "", HttpStatus.OK);
+    }
+
     @GetMapping
     public ResultPage<List<ListMemberResponse>> searchMember(
             @RequestParam(defaultValue = "1") Integer pageNumber
@@ -70,7 +79,7 @@ public class MemberRestController {
     }
 
 
-    // 회원 가입
+    // 회원 가입x
     @PostMapping("/sign-up")
     public ResponseEntity<?> save(@RequestBody @Valid final SaveMemberRequest saveMemberRequest) {
         try {

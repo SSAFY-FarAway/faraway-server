@@ -21,6 +21,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -52,8 +53,15 @@ public class MemberServiceImpl implements MemberService{
         return memberQueryRepository.login(dto);
     }
 
+    @Override
+    public boolean checkLoginId(String loginId) {
+        Optional<Member> findMember = memberRepository.findByLoginId(loginId);
+        // 아이디가 있으면 true , 없으면 false
+        return findMember.isPresent();
+    }
 
-    public String getSalt() {
+
+    public String createSalt() {
         String salt="";
         try {
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
@@ -85,7 +93,7 @@ public class MemberServiceImpl implements MemberService{
     // 암호화한 비밀번호를 가진 DTO create
     private SaveEncMember createSaveMemberDto(SaveMemberRequest request){
         // encrypt password
-        String salt = getSalt();
+        String salt = createSalt();
         String encodedLoginPwd = encrypt(request.getLoginPwd(), salt);
 
         // make Name, Address class

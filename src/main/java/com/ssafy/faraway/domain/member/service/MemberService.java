@@ -10,4 +10,8 @@ public interface MemberService {
     Long saveMember(SaveMemberRequest dto);
 
     LoginMemberResponse login(LoginMemberRequest request);
+
+    boolean checkLoginId(String loginId);
+
+
 }
