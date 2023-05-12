@@ -91,6 +91,17 @@ public class MemberRestController {
         }
     }
 
+    //로그아웃
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(HttpSession session) {
+        LoginMemberResponse dto = (LoginMemberResponse)session.getAttribute("loginMember");
+        if(dto == null){
+            return new ResponseEntity<>("로그인 정보가 없습니다.", HttpStatus.BAD_REQUEST);
+        }
+        session.invalidate();
+        return new ResponseEntity<>("로그아웃 성공.", HttpStatus.OK);
+    }
+
     @Data
     @AllArgsConstructor
     static class ResultPage<T> {
