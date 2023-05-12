@@ -1,5 +1,7 @@
 package com.ssafy.faraway.domain.post.controller;
 
+import com.ssafy.faraway.common.FileStore;
+import com.ssafy.faraway.common.domain.UploadFile;
 import com.ssafy.faraway.domain.post.dto.req.UpdatePostCommentRequest;
 import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.SavePostCommentRequest;
@@ -17,8 +19,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,12 +34,15 @@ public class PostController {
     private final PostService postService;
     private final PostQueryService postQueryService;
     private final PostCommentService postCommentService;
+    private final FileStore fileStore;
 
     @PostMapping
-    public Long savePost(@Valid @RequestBody SavePostRequest savePostRequest) {
+    public Long savePost(@Valid @RequestPart SavePostRequest savePostRequest,
+                         @RequestPart(name = "files") List<MultipartFile> files) throws IOException {
         // TODO: 최영환 2023-05-10 회원 구현되면 변경해야함
         Long memberId = 1L;
-        return postService.save(savePostRequest, memberId);
+        List<UploadFile> uploadFiles = fileStore.storeFiles(files);
+        return postService.save(savePostRequest, memberId, uploadFiles);
     }
 
     @GetMapping("/{postId}")
