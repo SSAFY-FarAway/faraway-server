@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.member.service.impl;
 
+import com.ssafy.faraway.common.util.Encrypt;
 import com.ssafy.faraway.domain.member.dto.req.*;
 import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
@@ -53,7 +54,7 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     public LoginMemberResponse login(LoginMemberRequest request) {
         Long id = memberQueryRepository.SearchIdByLoginId(request.getLoginId());
         String salt = memberQueryRepository.SearchSaltById(id);
-        String encLoginPwd = encrypt(request.getLoginPwd(), salt);
+        String encLoginPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
         System.out.println(salt);
 
 
@@ -64,18 +65,10 @@ public class MemberQueryServiceImpl implements MemberQueryService {
         return memberQueryRepository.login(dto);
     }
 
-    public String encrypt(String loginPwd, String hash) {
-        String salt = hash+loginPwd;
-        String hex = null;
-
-        try {
-            MessageDigest msg = MessageDigest.getInstance("SHA-512");
-            msg.update(salt.getBytes());
-            hex = String.format("%128x", new BigInteger(1, msg.digest()));
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return hex;
+    @Override
+    public String searchLoginId(FindLoginIdRequest request) {
+        return memberQueryRepository.SearchLoginIdByEmailAndBirth(request);
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.member.service;
 
+import com.ssafy.faraway.domain.member.dto.req.FindLoginIdRequest;
 import com.ssafy.faraway.domain.member.dto.req.LoginMemberRequest;
 import com.ssafy.faraway.domain.member.dto.req.UpdateLoginPwdRequest;
 import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
@@ -13,4 +14,6 @@ public interface MemberQueryService {
     MemberResponse searchById(Long memberId);
     List<ListMemberResponse> searchAll(Pageable pageable);
     LoginMemberResponse login(LoginMemberRequest request);
+
+    String searchLoginId(FindLoginIdRequest request);
 }

@@ -3,10 +3,7 @@ package com.ssafy.faraway.domain.member.controller;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.exception.handler.GlobalExceptionHandler;
-import com.ssafy.faraway.domain.member.dto.req.LoginMemberRequest;
-import com.ssafy.faraway.domain.member.dto.req.SaveMemberRequest;
-import com.ssafy.faraway.domain.member.dto.req.UpdateLoginPwdRequest;
-import com.ssafy.faraway.domain.member.dto.req.UpdateMemberRequest;
+import com.ssafy.faraway.domain.member.dto.req.*;
 import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
@@ -127,6 +124,18 @@ public class MemberRestController {
             return new ResponseEntity<>("변경 실패",HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/login-id")
+    public ResponseEntity<?> searchLoginId(@RequestBody @Valid final FindLoginIdRequest request){
+        try {
+            String loginId = memberQueryService.searchLoginId(request);
+            return new ResponseEntity<>(loginId, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("정확한 정보를 입력해주세요",HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @Data
     @AllArgsConstructor

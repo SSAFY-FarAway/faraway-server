@@ -2,6 +2,7 @@ package com.ssafy.faraway.domain.member.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.ssafy.faraway.domain.member.dto.req.FindLoginIdRequest;
 import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.member.dto.req.LoginEncMember;
@@ -93,6 +94,16 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository{
                 .select(member.salt)
                 .from(member)
                 .where(member.id.eq(id))
+                .fetchOne();
+    }
+
+    @Override
+    public String SearchLoginIdByEmailAndBirth(FindLoginIdRequest request) {
+        return queryFactory
+                .select(member.loginId)
+                .from(member)
+                .where(member.birth.eq(request.getBirth())
+                        .and(member.email.eq(request.getEmail())))
                 .fetchOne();
     }
 
