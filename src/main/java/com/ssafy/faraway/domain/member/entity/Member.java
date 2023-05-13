@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.member.entity;
 import com.ssafy.faraway.common.domain.BaseEntity;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
+import com.ssafy.faraway.common.util.Encrypt;
 import com.ssafy.faraway.domain.member.dto.req.UpdateMemberRequest;
 import lombok.*;
 
@@ -76,5 +77,9 @@ public class Member extends BaseEntity {
         this.birth = request.getBirth();
         this.email = request.getEmail();
         this.address = updateAddress;
+    }
+
+    public void resetLoginPwd(){
+        this.loginPwd = Encrypt.encrypt("00000000", this.salt);
     }
 }

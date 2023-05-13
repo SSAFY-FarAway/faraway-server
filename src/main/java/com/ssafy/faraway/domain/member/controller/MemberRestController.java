@@ -136,6 +136,21 @@ public class MemberRestController {
         }
     }
 
+    //비밀번호 초기화
+    @PostMapping("/login-pwd")
+    public ResponseEntity<?> resetLoginPwd(@RequestBody @Valid final ResetLoginPwdRequest request){
+        try {
+            if(memberService.resetLoginPwd(request) == -1L){
+                return new ResponseEntity<>("정확한 정보를 입력해주세요",HttpStatus.BAD_REQUEST);
+            }else{
+                return new ResponseEntity<>("00000000", HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("정확한 정보를 입력해주세요",HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @Data
     @AllArgsConstructor

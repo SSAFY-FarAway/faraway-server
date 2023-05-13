@@ -71,6 +71,21 @@ public class MemberServiceImpl implements MemberService{
         return findMember.getId();
     }
 
+    @Override
+    public Long resetLoginPwd(ResetLoginPwdRequest request) {
+        Member findMember = memberRepository.findByLoginId(request.getLoginId())
+                .orElseThrow(NoSuchElementException::new);
+        if(!request.getBirth().equals(findMember.getBirth())){
+            return -1L;
+        }else if(!request.getLoginId().equals(findMember.getLoginId())){
+            return -1L;
+        }else if(!request.getEmail().equals(findMember.getEmail())){
+            return -1L;
+        }
+        findMember.resetLoginPwd();
+        return findMember.getId();
+    }
+
     // 암호화한 비밀번호를 가진 DTO create
     private SaveEncMember createSaveMemberDto(SaveMemberRequest request){
         // encrypt password
