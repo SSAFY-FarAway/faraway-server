@@ -14,4 +14,7 @@ public interface MemberQueryRepository {
     List<ListMemberResponse> searchAll(Pageable pageable);
     Long SearchIdByLoginId(String loginId);
     String SearchSaltById(Long id);
+
+    String SearchLoginPwdById(Long id);
+
 }

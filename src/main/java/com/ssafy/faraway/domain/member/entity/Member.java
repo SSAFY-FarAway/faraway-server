@@ -1,6 +1,8 @@
 package com.ssafy.faraway.domain.member.entity;
 
 import com.ssafy.faraway.common.domain.BaseEntity;
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import lombok.*;
 
 import javax.persistence.*;
@@ -49,5 +51,13 @@ public class Member extends BaseEntity {
         this.mileage = mileage;
         this.role = role;
         this.certified = certified;
+    }
+
+    // 비즈니스 로직
+    public void changeLoginPwd(String currentLoginPw, String newLoginPw){
+        if (!this.loginPwd.equals(currentLoginPw)) {
+            throw new CustomException(ErrorCode.BAD_REQUEST);
+        }
+        this.loginPwd = newLoginPw;
     }
 }

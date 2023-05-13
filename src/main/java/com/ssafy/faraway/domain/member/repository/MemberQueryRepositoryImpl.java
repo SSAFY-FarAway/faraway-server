@@ -95,4 +95,13 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository{
                 .where(member.id.eq(id))
                 .fetchOne();
     }
+
+    @Override
+    public String SearchLoginPwdById(Long id) {
+        return queryFactory
+                .select(member.loginPwd)
+                .from(member)
+                .where(member.id.eq(id))
+                .fetchOne();
+    }
 }

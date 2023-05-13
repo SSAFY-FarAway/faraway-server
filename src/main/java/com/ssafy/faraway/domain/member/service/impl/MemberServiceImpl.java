@@ -1,9 +1,7 @@
 package com.ssafy.faraway.domain.member.service.impl;
 
-import com.ssafy.faraway.domain.member.dto.req.LoginEncMember;
-import com.ssafy.faraway.domain.member.dto.req.LoginMemberRequest;
-import com.ssafy.faraway.domain.member.dto.req.SaveEncMember;
-import com.ssafy.faraway.domain.member.dto.req.SaveMemberRequest;
+import com.ssafy.faraway.common.util.Encrypt;
+import com.ssafy.faraway.domain.member.dto.req.*;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.entity.Address;
@@ -21,6 +19,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,55 +38,36 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public LoginMemberResponse login(LoginMemberRequest request) {
-        Long id = memberQueryRepository.SearchIdByLoginId(request.getLoginId());
-        String salt = memberQueryRepository.SearchSaltById(id);
-        String encLoginPwd = encrypt(request.getLoginPwd(), salt);
-        System.out.println(salt);
-
-
-        LoginEncMember dto = LoginEncMember.builder()
-                .loginId(request.getLoginId())
-                .loginPwd(encLoginPwd)
-                .build();
-        return memberQueryRepository.login(dto);
+    public boolean checkLoginId(String loginId) {
+        Optional<Member> findMember = memberRepository.findByLoginId(loginId);
+        // 아이디가 있으면 true , 없으면 false
+        return findMember.isPresent();
     }
 
-
-    public String getSalt() {
-        String salt="";
-        try {
-            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-            byte[] bytes = new byte[16];
-            random.nextBytes(bytes);
-            salt = new String(Base64.getEncoder().encode(bytes));
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+    @Override
+    public Long updateLoginPwd(UpdateLoginPwdRequest request) {
+        Member findMember = memberRepository.findById(request.getId())
+                .orElseThrow(NoSuchElementException::new);
+        // 기존 암호화된 비밀번호
+        String oldPwd = findMember.getLoginPwd();
+        // salt
+        String salt = findMember.getSalt();
+        //유저가 입력한 기존 암호화된 비밀번호
+        String inputPwd = Encrypt.encrypt(request.getCurrentLoginPwd(),salt);
+        // 비교
+        if(!oldPwd.equals(inputPwd)){
+            return -1L;
         }
-        return salt;
-    }
-
-    public String encrypt(String loginPwd, String hash) {
-        String salt = hash+loginPwd;
-        String hex = null;
-
-        try {
-            MessageDigest msg = MessageDigest.getInstance("SHA-512");
-            msg.update(salt.getBytes());
-            hex = String.format("%128x", new BigInteger(1, msg.digest()));
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return hex;
+        String newPwd = Encrypt.encrypt(request.getNewLoginPwd(), salt);
+        findMember.changeLoginPwd(inputPwd, newPwd);
+        return findMember.getId();
     }
 
     // 암호화한 비밀번호를 가진 DTO create
     private SaveEncMember createSaveMemberDto(SaveMemberRequest request){
         // encrypt password
-        String salt = getSalt();
-        String encodedLoginPwd = encrypt(request.getLoginPwd(), salt);
+        String salt = Encrypt.createSalt();
+        String encodedLoginPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
 
         // make Name, Address class
         Name memberName = Name.builder()
