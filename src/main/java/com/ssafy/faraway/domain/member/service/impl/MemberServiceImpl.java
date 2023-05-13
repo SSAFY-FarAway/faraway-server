@@ -63,6 +63,14 @@ public class MemberServiceImpl implements MemberService{
         return findMember.getId();
     }
 
+    @Override
+    public Long updateMember(UpdateMemberRequest request) {
+        Member findMember = memberRepository.findById(request.getId())
+                .orElseThrow(NoSuchElementException::new);
+        findMember.changeMember(request);
+        return findMember.getId();
+    }
+
     // 암호화한 비밀번호를 가진 DTO create
     private SaveEncMember createSaveMemberDto(SaveMemberRequest request){
         // encrypt password

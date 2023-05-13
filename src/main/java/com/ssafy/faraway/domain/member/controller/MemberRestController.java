@@ -2,9 +2,11 @@ package com.ssafy.faraway.domain.member.controller;
 
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
+import com.ssafy.faraway.common.exception.handler.GlobalExceptionHandler;
 import com.ssafy.faraway.domain.member.dto.req.LoginMemberRequest;
 import com.ssafy.faraway.domain.member.dto.req.SaveMemberRequest;
 import com.ssafy.faraway.domain.member.dto.req.UpdateLoginPwdRequest;
+import com.ssafy.faraway.domain.member.dto.req.UpdateMemberRequest;
 import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
@@ -112,6 +114,18 @@ public class MemberRestController {
             return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<?> update(@RequestBody @Valid UpdateMemberRequest request) {
+
+        try {
+            memberService.updateMember(request);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("변경 실패",HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Data
