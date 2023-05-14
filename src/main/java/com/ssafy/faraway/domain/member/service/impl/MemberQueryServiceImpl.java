@@ -70,5 +70,16 @@ public class MemberQueryServiceImpl implements MemberQueryService {
         return memberQueryRepository.SearchLoginIdByEmailAndBirth(request);
     }
 
+    @Override
+    public boolean checkLoginPwd(CheckLoginPwdRequest request) {
+        String loginPwd = memberQueryRepository.SearchLoginPwdById(request.getId());
+        String salt = memberQueryRepository.SearchSaltById(request.getId());
+        String inputPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
+        if(!loginPwd.equals(inputPwd)){
+            return false;
+        }
+        return true;
+    }
+
 
 }

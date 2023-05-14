@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Check;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,6 +59,7 @@ public class MemberRestController {
         return response;
     }
 
+    // 아이디 중복 검사
     @GetMapping("/check/{loginId}") //countByLoginId
     public ResponseEntity<?> checkLoginId(@PathVariable("loginId") String loginId) {
         int cnt = 0;
@@ -65,6 +67,16 @@ public class MemberRestController {
             cnt = 1;
         }
         return new ResponseEntity<>(cnt + "", HttpStatus.OK);
+    }
+
+    // 입력한 비밀번호가 맞는지 확인
+    @PostMapping("/check")
+    public ResponseEntity<?> checkLoginPwd(@RequestBody @Valid final CheckLoginPwdRequest request) {
+        if(memberQueryService.checkLoginPwd(request)){
+            return new ResponseEntity<>("비밀번호가 맞습니다", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("비밀번호가 틀립니다", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping
@@ -125,6 +137,7 @@ public class MemberRestController {
         }
     }
 
+    // 아이디 찾기
     @PostMapping("/login-id")
     public ResponseEntity<?> searchLoginId(@RequestBody @Valid final FindLoginIdRequest request){
         try {
