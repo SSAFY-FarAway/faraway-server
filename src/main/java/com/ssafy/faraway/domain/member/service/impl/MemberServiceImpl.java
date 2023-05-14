@@ -86,6 +86,19 @@ public class MemberServiceImpl implements MemberService{
         return findMember.getId();
     }
 
+    @Override
+    public Long deleteMember(DeleteMemberRequest request) {
+        Member findMember = memberRepository.findById(request.getId())
+                .orElseThrow(NoSuchElementException::new);
+        String salt = findMember.getSalt();
+        String inputPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
+        if(!inputPwd.equals(findMember.getLoginPwd())){
+            return -1L;
+        }
+        memberRepository.deleteById(request.getId());
+        return request.getId();
+    }
+
     // 암호화한 비밀번호를 가진 DTO create
     private SaveEncMember createSaveMemberDto(SaveMemberRequest request){
         // encrypt password

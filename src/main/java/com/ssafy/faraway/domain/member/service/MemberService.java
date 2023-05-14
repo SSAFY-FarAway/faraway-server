@@ -12,4 +12,5 @@ public interface MemberService {
     Long updateLoginPwd(UpdateLoginPwdRequest request);
     Long updateMember(UpdateMemberRequest request);
     Long resetLoginPwd(ResetLoginPwdRequest request);
+    Long deleteMember(DeleteMemberRequest request);
 }

@@ -164,6 +164,21 @@ public class MemberRestController {
         }
     }
 
+    //회원탈퇴
+    @DeleteMapping("/")
+    public ResponseEntity<?> delete(@RequestBody @Valid final DeleteMemberRequest request){
+        try {
+            if(memberService.deleteMember(request) == -1L){
+                return new ResponseEntity<>("비밀번호가 틀렸습니다.",HttpStatus.BAD_REQUEST);
+            }else{
+                return new ResponseEntity<>("회원탈퇴가 정상 처리 되었습니다", HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @Data
     @AllArgsConstructor
