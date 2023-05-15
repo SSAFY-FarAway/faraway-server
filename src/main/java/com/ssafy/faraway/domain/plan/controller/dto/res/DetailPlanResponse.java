@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,10 +18,10 @@ public class DetailPlanResponse {
     private String content;
     private int hit;
     private List<AttractionResponse> attractionResponses;
-    private List<AttractionResponse> shortestPath;
+    private List<AttractionResponse> shortestPath = new ArrayList<>();
 
     @Builder
-    public DetailPlanResponse(Long id, Long memberId, String loginId, String title, String content, int hit, List<AttractionResponse> attractionResponses, List<AttractionResponse> shortestPath) {
+    public DetailPlanResponse(Long id, Long memberId, String loginId, String title, String content, int hit, List<AttractionResponse> attractionResponses, int[] shortestPath) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
@@ -28,6 +29,8 @@ public class DetailPlanResponse {
         this.content = content;
         this.hit = hit;
         this.attractionResponses = attractionResponses;
-        this.shortestPath = shortestPath;
+        for (int index : shortestPath) {
+            this.shortestPath.add(attractionResponses.get(index));
+        }
     }
 }

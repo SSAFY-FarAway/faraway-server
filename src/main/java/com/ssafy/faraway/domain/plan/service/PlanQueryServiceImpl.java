@@ -35,8 +35,20 @@ public class PlanQueryServiceImpl implements PlanQueryService {
         Plan plan = planQueryRepository.searchById(planId);
         plan.updateHit();
         // 최단경로 계산
-        List<AttractionResponse> attractionResponses = attractionQueryRepository.searchAllByIds(getIds(plan));
-        getShortestPath(attractionResponses);
+        List<Integer> ids = getIds(plan);
+        List<AttractionResponse> list = attractionQueryRepository.searchAllByIds(ids);
+        List<AttractionResponse> attractionResponses = new ArrayList<>();
+        for (int id: ids) {
+            for (AttractionResponse response : list) {
+                if (id == response.getContentId()) {
+                    attractionResponses.add(response);
+                }
+            }
+        }
+        for (AttractionResponse response : attractionResponses) {
+            log.debug("response: {}", response);
+        }
+        int[] shortestPath = getShortestPath(attractionResponses);
 
         return DetailPlanResponse.builder()
                 .id(plan.getId())
@@ -46,6 +58,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
                 .content(plan.getContent())
                 .hit(plan.getHit())
                 .attractionResponses(attractionResponses)
+                .shortestPath(shortestPath)
                 .build();
     }
 
@@ -54,18 +67,15 @@ public class PlanQueryServiceImpl implements PlanQueryService {
         String[] tripPlan = plan.getTripPlan().split(",");
         for (String s : tripPlan) {
             ids.add(Integer.parseInt(s.trim()));
-            log.debug("id: {}", s.trim());
         }
         return ids;
     }
 
-    public void getShortestPath(List<AttractionResponse> responses) {
+    public int[] getShortestPath(List<AttractionResponse> responses) {
         double[][] map = makeMap(responses);
         ShortestPath sp = new ShortestPath(map);
         sp.findShortestPath();
-        for (AttractionResponse response : responses) {
-            log.debug("response: {}", response);
-        }
+        return sp.getResult();
     }
 
     private double[][] makeMap(List<AttractionResponse> responses) {
