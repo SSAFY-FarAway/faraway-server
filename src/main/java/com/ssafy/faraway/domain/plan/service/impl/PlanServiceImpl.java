@@ -21,7 +21,7 @@ public class PlanServiceImpl implements PlanService {
         Plan plan = Plan.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .travelPlan(dto.getTripPlan())
+                .travelPlan(dto.getTravelPlan())
                 .member(Member.builder().id(memberId).build())
                 .build();
         return planRepository.save(plan).getId();
@@ -31,7 +31,7 @@ public class PlanServiceImpl implements PlanService {
     public Long update(UpdatePlanRequest request, Long planId) {
         Plan plan = planRepository.findById(planId)
                 .orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
-        plan.update(request.getTitle(), request.getTitle(), request.getTripPlan());
+        plan.update(request.getTitle(), request.getTitle(), request.getTravelPlan());
         return planId;
     }
 }

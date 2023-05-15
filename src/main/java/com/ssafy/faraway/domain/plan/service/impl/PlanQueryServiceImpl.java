@@ -70,7 +70,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
 
     private static List<Integer> getIds(Plan plan) {
         List<Integer> ids = new ArrayList<>();
-        String[] travelPlan = plan.getTripPlan().split(",");
+        String[] travelPlan = plan.getTravelPlan().split(",");
         for (String s : travelPlan) {
             ids.add(Integer.parseInt(s.trim()));
         }

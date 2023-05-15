@@ -40,7 +40,7 @@ public class PlanController {
         SavePlanDto dto = SavePlanDto.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .travelPlan(request.getTripPlan())
+                .travelPlan(request.getTravelPlan())
                 .build();
         return planService.save(dto, memberId);
     }
