@@ -19,9 +19,10 @@ public class DetailPlanResponse {
     private int hit;
     private List<AttractionResponse> attractionResponses;
     private List<AttractionResponse> shortestPath = new ArrayList<>();
+    private List<PlanCommentResponse> commentResponses;
 
     @Builder
-    public DetailPlanResponse(Long id, Long memberId, String loginId, String title, String content, int hit, List<AttractionResponse> attractionResponses, int[] shortestPath) {
+    public DetailPlanResponse(Long id, Long memberId, String loginId, String title, String content, int hit, List<AttractionResponse> attractionResponses, int[] shortestPath, List<PlanCommentResponse> commentResponses) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
@@ -32,5 +33,6 @@ public class DetailPlanResponse {
         for (int index : shortestPath) {
             this.shortestPath.add(attractionResponses.get(index));
         }
+        this.commentResponses = commentResponses;
     }
 }

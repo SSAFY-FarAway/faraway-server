@@ -5,7 +5,9 @@ import com.ssafy.faraway.domain.attraction.dto.res.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository;
 import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.ListPlanResponse;
+import com.ssafy.faraway.domain.plan.controller.dto.res.PlanCommentResponse;
 import com.ssafy.faraway.domain.plan.entity.Plan;
+import com.ssafy.faraway.domain.plan.entity.PlanComment;
 import com.ssafy.faraway.domain.plan.repository.PlanQueryRepository;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +37,8 @@ public class PlanQueryServiceImpl implements PlanQueryService {
     public DetailPlanResponse searchById(Long planId) {
         Plan plan = planQueryRepository.searchById(planId);
         plan.updateHit();
+        List<PlanCommentResponse> commentResponses = getCommentResponses(plan);
+
         // 최단경로 계산
         List<Integer> ids = getIds(plan);
         List<AttractionResponse> list = attractionQueryRepository.searchAllByIds(ids);
@@ -59,6 +64,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
                 .hit(plan.getHit())
                 .attractionResponses(attractionResponses)
                 .shortestPath(shortestPath)
+                .commentResponses(commentResponses)
                 .build();
     }
 
@@ -94,5 +100,16 @@ public class PlanQueryServiceImpl implements PlanQueryService {
             }
         }
         return map;
+    }
+
+    private List<PlanCommentResponse> getCommentResponses(Plan plan) {
+        return plan.getPlanComments().stream().map(planComment -> PlanCommentResponse.builder()
+                .id(planComment.getId())
+                .planId(planComment.getPlan().getId())
+                .memberId(planComment.getMember().getId())
+                .loginId(planComment.getMember().getLoginId())
+                .content(planComment.getContent())
+                .createdDate(planComment.getCreatedDate())
+                .build()).collect(Collectors.toList());
     }
 }

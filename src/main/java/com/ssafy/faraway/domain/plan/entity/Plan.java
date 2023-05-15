@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,15 +29,18 @@ public class Plan extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    private List<PlanComment> planComments;
 
     @Builder
-    public Plan(Long id, String title, String content, int hit, String tripPlan, Member member) {
+    public Plan(Long id, String title, String content, int hit, String tripPlan, Member member, List<PlanComment> planComments) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.hit = hit;
         this.tripPlan = tripPlan;
         this.member = member;
+        this.planComments = planComments;
     }
 
     public void update(String title, String content, String tripPlan) {
