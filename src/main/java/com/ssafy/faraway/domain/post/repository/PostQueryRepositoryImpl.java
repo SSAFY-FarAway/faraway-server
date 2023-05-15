@@ -43,7 +43,8 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
                 .from(post)
                 .where(
                         isTitle(condition.getTitle()),
-                        isContent(condition.getContent())
+                        isContent(condition.getContent()),
+                        isCategory(condition.getCategoryId())
                 )
                 .orderBy(post.createdDate.desc())
                 .offset(pageable.getOffset())
@@ -78,5 +79,9 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
 
     private BooleanExpression isContent(String content) {
         return hasText(content) ? post.content.like("%" + content + "%") : null;
+    }
+
+    private BooleanExpression isCategory(Long categoryId) {
+        return category.id.eq(categoryId);
     }
 }
