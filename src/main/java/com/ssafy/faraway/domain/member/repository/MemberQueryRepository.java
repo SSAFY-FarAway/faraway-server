@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.member.repository;
 
+import com.ssafy.faraway.domain.member.dto.req.FindLoginIdRequest;
 import com.ssafy.faraway.domain.member.dto.req.LoginEncMember;
 import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
@@ -14,4 +15,7 @@ public interface MemberQueryRepository {
     List<ListMemberResponse> searchAll(Pageable pageable);
     Long SearchIdByLoginId(String loginId);
     String SearchSaltById(Long id);
+    String SearchLoginIdByEmailAndBirth(FindLoginIdRequest request);
+    String SearchLoginPwdById(Long id);
+
 }
