@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ import java.util.List;
 @RequestMapping("/plan")
 @RequiredArgsConstructor
 @Api(tags = "plan")
+@Slf4j
 public class PlanRestController {
     private final PlanService planService;
     private final PlanQueryService planQueryService;

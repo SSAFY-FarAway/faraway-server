@@ -1,8 +1,11 @@
 package com.ssafy.faraway.domain.plan.controller.dto.res;
 
+import com.ssafy.faraway.domain.attraction.dto.res.AttractionResponse;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -13,17 +16,18 @@ public class DetailPlanResponse {
     private String title;
     private String content;
     private int hit;
-//    private List<Attraction> attractionList;
-    private Integer[] shortestPathList;
+    private List<AttractionResponse> attractionResponses;
+    private List<AttractionResponse> shortestPath;
 
     @Builder
-    public DetailPlanResponse(Long id, Long memberId, String loginId, String title, String content, int hit, Integer[] shortestPathList) {
+    public DetailPlanResponse(Long id, Long memberId, String loginId, String title, String content, int hit, List<AttractionResponse> attractionResponses, List<AttractionResponse> shortestPath) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
         this.title = title;
         this.content = content;
         this.hit = hit;
-        this.shortestPathList = shortestPathList;
+        this.attractionResponses = attractionResponses;
+        this.shortestPath = shortestPath;
     }
 }
