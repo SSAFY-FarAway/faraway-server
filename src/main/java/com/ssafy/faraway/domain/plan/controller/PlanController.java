@@ -2,6 +2,7 @@ package com.ssafy.faraway.domain.plan.controller;
 
 import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanCommentRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanRequest;
+import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanCommentRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.ListPlanResponse;
@@ -80,6 +81,12 @@ public class PlanController {
                 .content(request.getContent())
                 .build();
         return planCommentService.save(planId, memberId, dto);
+    }
+
+    @PutMapping("/comment/{commentId}")
+    public Long updatePlanComment(@PathVariable Long commentId,
+                                  @Valid @RequestBody final UpdatePlanCommentRequest request) {
+        return planCommentService.update(commentId, request);
     }
 
     @Data
