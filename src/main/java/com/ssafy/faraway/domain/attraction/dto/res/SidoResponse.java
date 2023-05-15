@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class SidoResponse {
-    private int sidoCode;
+    private Integer sidoCode;
     private String sidoName;
 }
