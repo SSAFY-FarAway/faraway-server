@@ -5,7 +5,7 @@ import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanCommentRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
-import com.ssafy.faraway.domain.plan.controller.dto.res.ListPlanResponse;
+import com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
 import com.ssafy.faraway.domain.plan.service.PlanCommentService;
 import com.ssafy.faraway.domain.plan.service.PlanQueryService;
@@ -34,19 +34,19 @@ public class PlanController {
     private final PlanCommentService planCommentService;
 
     @PostMapping
-    public Long savePlan(@Valid @RequestBody SavePlanRequest request) {
+    public Long savePlan(@Valid @RequestBody final SavePlanRequest request) {
         // TODO: 최영환 2023-05-15 로그인 기능 처리 후 변경해야함
         Long memberId = 1L;
         SavePlanDto dto = SavePlanDto.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .tripPlan(request.getTripPlan())
+                .travelPlan(request.getTripPlan())
                 .build();
         return planService.save(dto, memberId);
     }
 
     @GetMapping
-    public ResultPage<List<ListPlanResponse>> searchPlans(
+    public ResultPage<List<PlanResponse>> searchPlans(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
             @RequestParam(defaultValue = "1") Integer pageNumber
@@ -57,7 +57,7 @@ public class PlanController {
                 .build();
 
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
-        List<ListPlanResponse> responses = planQueryService.searchByCondition(condition, pageRequest);
+        List<PlanResponse> responses = planQueryService.searchByCondition(condition, pageRequest);
         return new ResultPage<>(responses, pageNumber, 10);
     }
 
@@ -68,7 +68,7 @@ public class PlanController {
 
     @PutMapping("{planId}")
     public Long updatePlan(@PathVariable Long planId,
-                           @Valid @RequestBody UpdatePlanRequest request) {
+                           @Valid @RequestBody final UpdatePlanRequest request) {
         return planService.update(request, planId);
     }
 

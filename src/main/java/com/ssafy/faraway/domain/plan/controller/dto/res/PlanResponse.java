@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class ListPlanResponse {
+public class PlanResponse {
     private Long id;
     private Long memberId;
     private String loginId;
@@ -17,7 +17,7 @@ public class ListPlanResponse {
     private LocalDateTime createdDate;
 
     @Builder
-    public ListPlanResponse(Long id, Long memberId, String loginId, String title, int hit, LocalDateTime createdDate) {
+    public PlanResponse(Long id, Long memberId, String loginId, String title, int hit, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;

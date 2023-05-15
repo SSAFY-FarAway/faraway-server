@@ -8,12 +8,12 @@ import lombok.Data;
 public class SavePlanDto {
     private String title;
     private String content;
-    private String tripPlan;
+    private String travelPlan;
 
     @Builder
-    public SavePlanDto(String title, String content, String tripPlan) {
+    public SavePlanDto(String title, String content, String travelPlan) {
         this.title = title;
         this.content = content;
-        this.tripPlan = tripPlan;
+        this.travelPlan = travelPlan;
     }
 }

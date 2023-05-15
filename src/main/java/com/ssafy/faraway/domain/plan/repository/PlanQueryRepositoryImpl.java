@@ -3,7 +3,7 @@ package com.ssafy.faraway.domain.plan.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.plan.controller.dto.res.ListPlanResponse;
+import com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse;
 import com.ssafy.faraway.domain.plan.entity.Plan;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
 import lombok.RequiredArgsConstructor;
@@ -24,25 +24,15 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<ListPlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable) {
-        List<Long> ids = queryFactory
-                .select(plan.id)
-                .from(plan)
-                .where(
-                        isTitle(condition.getTitle()),
-                        isContent(condition.getContent())
-                )
-                .orderBy(plan.createdDate.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch();
+    public List<PlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable) {
+        List<Long> ids = getIds(condition, pageable);
 
         if (CollectionUtils.isEmpty(ids)) {
             return new ArrayList<>();
         }
 
         return queryFactory
-                .select(Projections.fields(ListPlanResponse.class,
+                .select(Projections.fields(PlanResponse.class,
                         plan.id,
                         plan.member.id.as("memberId"),
                         plan.member.loginId,
@@ -54,6 +44,20 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
                 .join(plan.member, member)
                 .where(plan.id.in(ids))
                 .orderBy(plan.createdDate.desc())
+                .fetch();
+    }
+
+    private List<Long> getIds(PlanSearchCondition condition, Pageable pageable) {
+        return queryFactory
+                .select(plan.id)
+                .from(plan)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                )
+                .orderBy(plan.createdDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
     }
 

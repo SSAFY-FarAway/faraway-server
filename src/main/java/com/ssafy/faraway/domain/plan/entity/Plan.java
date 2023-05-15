@@ -25,7 +25,7 @@ public class Plan extends BaseEntity {
     @ColumnDefault("0")
     private int hit;
     @Column(nullable = false)
-    private String tripPlan;
+    private String travelPlan;
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -33,20 +33,20 @@ public class Plan extends BaseEntity {
     private List<PlanComment> planComments;
 
     @Builder
-    public Plan(Long id, String title, String content, int hit, String tripPlan, Member member, List<PlanComment> planComments) {
+    public Plan(Long id, String title, String content, int hit, String travelPlan, Member member, List<PlanComment> planComments) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.hit = hit;
-        this.tripPlan = tripPlan;
+        this.travelPlan = travelPlan;
         this.member = member;
         this.planComments = planComments;
     }
 
-    public void update(String title, String content, String tripPlan) {
+    public void update(String title, String content, String travelPlan) {
         this.title = title;
         this.content = content;
-        this.tripPlan = tripPlan;
+        this.travelPlan = travelPlan;
     }
 
     public void updateHit() {

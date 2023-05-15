@@ -1,15 +1,15 @@
-package com.ssafy.faraway.domain.plan.service;
+package com.ssafy.faraway.domain.plan.service.impl;
 
 import com.ssafy.faraway.common.util.ShortestPath;
 import com.ssafy.faraway.domain.attraction.dto.res.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository;
 import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
-import com.ssafy.faraway.domain.plan.controller.dto.res.ListPlanResponse;
+import com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.PlanCommentResponse;
 import com.ssafy.faraway.domain.plan.entity.Plan;
-import com.ssafy.faraway.domain.plan.entity.PlanComment;
 import com.ssafy.faraway.domain.plan.repository.PlanQueryRepository;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
+import com.ssafy.faraway.domain.plan.service.PlanQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +28,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
     private final AttractionQueryRepository attractionQueryRepository;
 
     @Override
-    public List<ListPlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable) {
+    public List<PlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable) {
         return planQueryRepository.searchByCondition(condition, pageable);
     }
 
@@ -38,21 +38,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
         Plan plan = planQueryRepository.searchById(planId);
         plan.updateHit();
         List<PlanCommentResponse> commentResponses = getCommentResponses(plan);
-
-        // 최단경로 계산
-        List<Integer> ids = getIds(plan);
-        List<AttractionResponse> list = attractionQueryRepository.searchAllByIds(ids);
-        List<AttractionResponse> attractionResponses = new ArrayList<>();
-        for (int id: ids) {
-            for (AttractionResponse response : list) {
-                if (id == response.getContentId()) {
-                    attractionResponses.add(response);
-                }
-            }
-        }
-        for (AttractionResponse response : attractionResponses) {
-            log.debug("response: {}", response);
-        }
+        List<AttractionResponse> attractionResponses = rearrangeResponses(plan);
         int[] shortestPath = getShortestPath(attractionResponses);
 
         return DetailPlanResponse.builder()
@@ -68,10 +54,24 @@ public class PlanQueryServiceImpl implements PlanQueryService {
                 .build();
     }
 
+    private List<AttractionResponse> rearrangeResponses(Plan plan) {
+        List<Integer> ids = getIds(plan);
+        List<AttractionResponse> list = attractionQueryRepository.searchAllByIds(ids);
+        List<AttractionResponse> attractionResponses = new ArrayList<>();
+        for (int id: ids) {
+            for (AttractionResponse response : list) {
+                if (id == response.getContentId()) {
+                    attractionResponses.add(response);
+                }
+            }
+        }
+        return attractionResponses;
+    }
+
     private static List<Integer> getIds(Plan plan) {
         List<Integer> ids = new ArrayList<>();
-        String[] tripPlan = plan.getTripPlan().split(",");
-        for (String s : tripPlan) {
+        String[] travelPlan = plan.getTripPlan().split(",");
+        for (String s : travelPlan) {
             ids.add(Integer.parseInt(s.trim()));
         }
         return ids;

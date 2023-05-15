@@ -13,5 +13,5 @@ public class UpdatePlanRequest {
     @NotBlank
     private String content;
     @NotBlank
-    private String tripPlan;
+    private String travelPlan;
 }
