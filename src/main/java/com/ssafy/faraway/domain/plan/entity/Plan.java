@@ -39,10 +39,10 @@ public class Plan extends BaseEntity {
         this.member = member;
     }
 
-    public void update(String title, String content, String plan) {
+    public void update(String title, String content, String tripPlan) {
         this.title = title;
         this.content = content;
-        this.tripPlan = plan;
+        this.tripPlan = tripPlan;
     }
 
     public void updateHit() {

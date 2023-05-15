@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.plan.controller;
 
 import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanRequest;
+import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.ListPlanResponse;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
@@ -56,6 +57,12 @@ public class PlanRestController {
     @GetMapping("/{planId}")
     public DetailPlanResponse searchPlan(@PathVariable Long planId) {
         return planQueryService.searchById(planId);
+    }
+
+    @PutMapping("{planId}")
+    public Long updatePlan(@PathVariable Long planId,
+                           @Valid @RequestBody UpdatePlanRequest request) {
+        return planService.update(request, planId);
     }
 
     @Data
