@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.plan.controller;
 
 import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanRequest;
+import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.ListPlanResponse;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
 import com.ssafy.faraway.domain.plan.service.PlanQueryService;
@@ -50,6 +51,11 @@ public class PlanRestController {
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
         List<ListPlanResponse> responses = planQueryService.searchByCondition(condition, pageRequest);
         return new ResultPage<>(responses, pageNumber, 10);
+    }
+
+    @GetMapping("/{planId}")
+    public DetailPlanResponse searchPlan(@PathVariable Long planId) {
+        return planQueryService.searchById(planId);
     }
 
     @Data

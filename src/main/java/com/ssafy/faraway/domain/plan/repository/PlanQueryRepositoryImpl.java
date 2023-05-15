@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.faraway.domain.plan.controller.dto.res.ListPlanResponse;
+import com.ssafy.faraway.domain.plan.entity.Plan;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -54,6 +55,16 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
                 .where(plan.id.in(ids))
                 .orderBy(plan.createdDate.desc())
                 .fetch();
+    }
+
+    @Override
+    public Plan searchById(Long planId) {
+        return queryFactory
+                .select(plan)
+                .from(plan)
+                .join(plan.member, member).fetchJoin()
+                .where(plan.id.eq(planId))
+                .fetchOne();
     }
 
     private BooleanExpression isTitle(String title) {
