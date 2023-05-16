@@ -18,12 +18,13 @@ public class MemberResponse {
     private String zipcode;
     private String mainAddress;
     private String subAddress;
+    private String email;
     private int mileage;
     private Role role;
     private int certified;
 
     @Builder
-    public MemberResponse(Long id, String loginId, String lastName, String firstName, String birth, String zipcode, String mainAddress, String subAddress, int mileage, Role role, int certified) {
+    public MemberResponse(Long id, String loginId, String lastName, String firstName, String birth, String zipcode, String mainAddress, String subAddress, String email, int mileage, Role role, int certified) {
         this.id = id;
         this.loginId = loginId;
         this.lastName = lastName;
@@ -31,6 +32,7 @@ public class MemberResponse {
         this.birth = birth;
         this.zipcode = zipcode;
         this.mainAddress = mainAddress;
+        this.email = email;
         this.subAddress = subAddress;
         this.mileage = mileage;
         this.role = role;

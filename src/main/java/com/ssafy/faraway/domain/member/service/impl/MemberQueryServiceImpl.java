@@ -38,6 +38,7 @@ public class MemberQueryServiceImpl implements MemberQueryService {
                 .birth(member.getBirth())
                 .zipcode(member.getAddress().getZipcode())
                 .mainAddress(member.getAddress().getMainAddress())
+                .email(member.getEmail())
                 .subAddress(member.getAddress().getSubAddress())
                 .mileage(member.getMileage())
                 .role(member.getRole())
