@@ -26,6 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/plan")
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "*")
 @Api(tags = "plan")
 @Slf4j
 public class PlanController {
@@ -40,7 +41,7 @@ public class PlanController {
         SavePlanDto dto = SavePlanDto.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .travelPlan(request.getTripPlan())
+                .travelPlan(request.getTravelPlan())
                 .build();
         return planService.save(dto, memberId);
     }
