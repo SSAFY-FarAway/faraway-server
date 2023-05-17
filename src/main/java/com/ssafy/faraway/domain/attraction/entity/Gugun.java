@@ -12,12 +12,10 @@ import java.util.List;
 @ToString
 public class Gugun {
     @Id
-    @Column(name = "gugun_code")
     private int gugunCode;
-    @Column(name = "gugun_name")
     private String gugunName;
     @ManyToOne
-    @JoinColumn(name = "sido_code", insertable = false, updatable = false)
+    @JoinColumn(name = "sido_code")
     private Sido sido;
 
     @Builder

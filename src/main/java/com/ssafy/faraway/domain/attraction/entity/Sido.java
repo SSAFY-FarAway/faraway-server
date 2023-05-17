@@ -12,9 +12,7 @@ import java.util.List;
 @ToString
 public class Sido {
     @Id
-    @Column(name = "sido_code")
     private Integer sidoCode;
-    @Column(name = "sido_name")
     private String sidoName;
 
     @Builder

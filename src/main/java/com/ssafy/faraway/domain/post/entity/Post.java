@@ -25,7 +25,9 @@ public class Post extends BaseEntity {
     private int hit;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostComment> postComments = new ArrayList<>();
+    private List<PostComment> postComments;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Attachment> attachments;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -35,25 +37,25 @@ public class Post extends BaseEntity {
     private Category category;
 
     @Builder
-    public Post(Long id, String title, String content, int hit, Member member, Category category) {
+    public Post(Long id, String title, String content, int hit, List<PostComment> postComments, List<Attachment> attachments, Member member, Category category) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.hit = hit;
+        this.postComments = postComments;
+        this.attachments = attachments;
         this.member = member;
         this.category = category;
     }
 
-    public void update(String title, String content) {
+    public void update(String title, String content, List<Attachment> attachments) {
         this.title = title;
         this.content = content;
+        this.attachments.clear();
+        this.attachments.addAll(attachments);
     }
 
     public void updateHit() {
         this.hit++;
-    }
-
-    public List<PostComment> getPostComments() {
-        return this.postComments;
     }
 }

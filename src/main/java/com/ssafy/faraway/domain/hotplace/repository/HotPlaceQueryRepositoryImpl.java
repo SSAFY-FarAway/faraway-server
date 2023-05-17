@@ -61,9 +61,11 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
                         hotPlace.hit,
                         hotPlace.address.mainAddress,
                         hotPlace.rating,
-                        hotPlace.createdDate))
+                        hotPlace.createdDate
+                ))
                 .from(hotPlace)
                 .join(hotPlace.member, member)
+                .where(hotPlace.id.in(ids))
                 .orderBy(hotPlace.createdDate.desc())
                 .fetch();
     }

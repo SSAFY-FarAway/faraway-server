@@ -59,8 +59,4 @@ public class HotPlace extends BaseEntity {
     public void updateHit() {
         this.hit++;
     }
-
-    public List<HotPlaceComment> getHotPlaceComments() {
-        return this.hotPlaceComments;
-    }
 }
