@@ -1,4 +1,7 @@
 package com.ssafy.faraway.domain.post.repository;
 
-public interface PostRepository {
+import com.ssafy.faraway.domain.post.entity.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PostRepository extends JpaRepository<Post, Long> {
 }

@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -13,36 +14,39 @@ import javax.persistence.*;
 @ToString
 public class Plan extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "plan_id")
     private Long id;
-    @Column(name = "title", nullable = false, length = 30)
+    @Column(nullable = false, length = 30)
     private String title;
-    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
-    @Column(name = "hit", nullable = false)
+    @Column(nullable = false)
     @ColumnDefault("0")
-    private Long hit;
-    @Column(name = "plan", nullable = false)
-    private String plan;
+    private int hit;
+    @Column(nullable = false)
+    private String travelPlan;
     @ManyToOne
-    @JoinColumn(name = "member_id", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "member_id")
     private Member member;
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    private List<PlanComment> planComments;
 
     @Builder
-    public Plan(Long id, String title, String content, Long hit, String plan, Member member) {
+    public Plan(Long id, String title, String content, int hit, String travelPlan, Member member, List<PlanComment> planComments) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.hit = hit;
-        this.plan = plan;
+        this.travelPlan = travelPlan;
         this.member = member;
+        this.planComments = planComments;
     }
 
-    public void update(String title, String content, String plan) {
+    public void update(String title, String content, String travelPlan) {
         this.title = title;
         this.content = content;
-        this.plan = plan;
+        this.travelPlan = travelPlan;
     }
 
     public void updateHit() {

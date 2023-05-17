@@ -10,37 +10,32 @@ import javax.persistence.*;
 @ToString
 public class AttractionInfo {
     @Id
-    @Column(name = "content_id")
     private int contentId;
-    @Column(name = "content_type_id", nullable = false)
+    @Column(nullable = false)
     private int contentTypeId;
-    @Column(name = "title", length = 100)
+    @Column(length = 100)
     private String title;
-    @Column(name = "addr1", length = 100)
+    @Column(length = 100)
     private String addr1;
-    @Column(name = "addr2", length = 50)
+    @Column(length = 50)
     private String addr2;
-    @Column(name = "zipcode", length = 50)
+    @Column(length = 50)
     private String zipcode;
-    @Column(name = "tel", length = 50)
+    @Column(length = 50)
     private String tel;
-    @Column(name = "first_image", length = 200)
+    @Column(length = 200)
     private String firstImage;
     @Column(name = "first_image2", length = 200)
     private String firstImage2;
-    @Column(name = "readcount")
     private int readCount;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sido_code", insertable = false, updatable = false)
+    @JoinColumn(name = "sido_code")
     private Sido sido;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "gugun_code", insertable = false, updatable = false)
+    @JoinColumn(name = "gugun_code")
     private Gugun gugun;
-    @Column(name = "latitude")
     private double latitude;
-    @Column(name = "longitude")
     private double longitude;
-    @Column(name = "mlevel")
     private String mLevel;
 
     @Builder

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @ToString
 public class HotPlaceLike extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hot_place_like_id")
     private Long id;
     @ManyToOne

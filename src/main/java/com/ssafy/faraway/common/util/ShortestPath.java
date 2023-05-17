@@ -1,5 +1,8 @@
 package com.ssafy.faraway.common.util;
 
+import lombok.Getter;
+
+@Getter
 public class ShortestPath {
     private int[] result;
     private double min;
@@ -24,32 +27,32 @@ public class ShortestPath {
 
     public void findShortestPath() {
         init();
-        dfs(0,1, visited, map, path, 0);
+        dfs(0, 1, visited, map, path, 0);
     }
 
-    private void dfs(int node, int cnt, boolean[] visited, double[][] map, int[] paht, double sum) {
-        if(cnt == map.length) {
-            if(node != map.length-1) return;
-            for(int i =0 ;i < map.length; i++) {
-                if(!visited[i]) return;
+    private void dfs(int node, int cnt, boolean[] visited, double[][] map, int[] path, double sum) {
+        if (cnt == map.length) {
+            if (node != map.length - 1) {
+                return;
             }
-            if(min > sum) {
+            for (int i = 0; i < map.length; i++) {
+                if (!visited[i]) {
+                    return;
+                }
+            }
+            if (min > sum) {
                 min = sum;
                 result = path.clone();
             }
             return;
         }
 
-        for(int j = 0 ; j < map[node].length; j++) {
-            if(visited[j] || map[node][j] == 0.0) continue;
+        for (int j = 0; j < map[node].length; j++) {
+            if (visited[j] || map[node][j] == 0.0) continue;
             visited[j] = true;
             path[cnt] = j;
-            dfs(j, cnt+1, visited, map, path, sum+map[node][j]);
+            dfs(j, cnt + 1, visited, map, path, sum + map[node][j]);
             visited[j] = false;
         }
-    }
-
-    public int[] getResult() {
-        return result;
     }
 }

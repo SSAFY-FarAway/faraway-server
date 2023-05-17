@@ -12,7 +12,7 @@ import javax.persistence.*;
 @ToString
 public class PlanComment extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "plan_comment_id")
     private Long id;
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
@@ -30,5 +30,9 @@ public class PlanComment extends BaseEntity {
         this.content = content;
         this.member = member;
         this.plan = plan;
+    }
+
+    public void update(String content) {
+        this.content = content;
     }
 }

@@ -1,8 +1,11 @@
 package com.ssafy.faraway.domain.member.entity;
 
 import com.ssafy.faraway.common.domain.BaseEntity;
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
+import com.ssafy.faraway.common.util.Encrypt;
+import com.ssafy.faraway.domain.member.dto.req.UpdateMemberRequest;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -12,7 +15,7 @@ import javax.persistence.*;
 @ToString
 public class Member extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
     @Column(nullable = false, unique = true, length = 20)
@@ -30,17 +33,15 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 45)
     private String salt;
     @Column(nullable = false)
-    @ColumnDefault("0")
-    private Long mileage;
+    private int mileage;
     @Column(nullable = false)
-    @ColumnDefault("1")
+    @Enumerated(EnumType.STRING)
     private Role role;
     @Column(nullable = false)
-    @ColumnDefault("0")
     private int certified;
 
     @Builder
-    public Member(Long id, String loginId, String loginPwd, Name name, String birth, String email, Address address, String salt, Long mileage, Role role, int certified) {
+    public Member(Long id, String loginId, String loginPwd, Name name, String birth, String email, Address address, String salt, int mileage, Role role, int certified) {
         this.id = id;
         this.loginId = loginId;
         this.loginPwd = loginPwd;
@@ -52,5 +53,33 @@ public class Member extends BaseEntity {
         this.mileage = mileage;
         this.role = role;
         this.certified = certified;
+    }
+
+    // 비즈니스 로직
+    public void changeLoginPwd(String currentLoginPw, String newLoginPw){
+        if (!this.loginPwd.equals(currentLoginPw)) {
+            throw new CustomException(ErrorCode.BAD_REQUEST);
+        }
+        this.loginPwd = newLoginPw;
+    }
+
+    public void changeMember(UpdateMemberRequest request){
+        Name updateName = Name.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .build();
+        Address updateAddress = Address.builder()
+                .mainAddress(request.getMainAddress())
+                .subAddress(request.getSubAddress())
+                .zipcode(request.getZipcode())
+                .build();
+        this.name = updateName;
+        this.birth = request.getBirth();
+        this.email = request.getEmail();
+        this.address = updateAddress;
+    }
+
+    public void resetLoginPwd(){
+        this.loginPwd = Encrypt.encrypt("00000000", this.salt);
     }
 }

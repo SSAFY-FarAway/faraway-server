@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -42,6 +41,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException(final Exception e) {
         log.error("handleException: {}", e.getMessage());
+        e.printStackTrace();
         return ResponseEntity
                 .status(ErrorCode.INTERNAL_SERVER_ERROR.getStatus().value())
                 .body(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR));
