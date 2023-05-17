@@ -31,6 +31,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/post")
+@CrossOrigin(originPatterns = "*")
 @Api(tags = "post")
 public class PostController {
     private final PostService postService;
@@ -41,7 +42,7 @@ public class PostController {
 
     @PostMapping
     public Long savePost(@Valid @RequestPart(name = "request") SavePostRequest savePostRequest,
-                         @RequestPart(name = "files") List<MultipartFile> files) throws IOException {
+                         @RequestPart(name = "files", required = false) List<MultipartFile> files) throws IOException {
         // TODO: 최영환 2023-05-10 회원 구현되면 변경해야함
         Long memberId = 1L;
         List<UploadFile> uploadFiles = new ArrayList<>();
@@ -61,7 +62,7 @@ public class PostController {
 
     @PutMapping("/{postId}")
     public Long updatePost(@PathVariable Long postId, @RequestPart(name = "request") UpdatePostRequest request,
-                           @RequestPart(name = "files") List<MultipartFile> files) throws IOException {
+                           @RequestPart(name = "files", required = false) List<MultipartFile> files) throws IOException {
         List<UploadFile> uploadFiles = new ArrayList<>();
         if (files != null && !files.isEmpty()) {
             fileExtFilter.badFileFilter(files);
