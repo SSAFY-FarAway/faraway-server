@@ -59,10 +59,10 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
         return hotPlace.getHotPlaceComments().stream().map(hotPlaceComment -> HotPlaceCommentResponse.builder()
                 .id(hotPlaceComment.getId())
                 .hotPlaceId(hotPlaceComment.getHotPlace().getId())
-                .loginId(hotPlace.getMember().getLoginId())
+                .loginId(hotPlaceComment.getMember().getLoginId())
                 .memberId(hotPlaceComment.getMember().getId())
-                .content(hotPlace.getContent())
-                .createdDate(hotPlace.getCreatedDate())
+                .content(hotPlaceComment.getContent())
+                .createdDate(hotPlaceComment.getCreatedDate())
                 .build()).collect(Collectors.toList());
     }
 
