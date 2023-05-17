@@ -11,8 +11,6 @@ public class SaveHotPlaceRequest {
     private String title;
     @NotBlank
     private String content;
-    @NotNull
-    private Long memberId;
     @NotBlank
     private String zipcode;
     @NotBlank

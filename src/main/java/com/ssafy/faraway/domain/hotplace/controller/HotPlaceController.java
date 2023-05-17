@@ -26,6 +26,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/hotplace")
+@CrossOrigin(originPatterns = "*")
 @Slf4j
 @Api(tags = "hotPlace")
 public class HotPlaceController {
