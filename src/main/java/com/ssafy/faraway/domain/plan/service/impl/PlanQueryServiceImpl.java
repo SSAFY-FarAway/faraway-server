@@ -1,7 +1,7 @@
 package com.ssafy.faraway.domain.plan.service.impl;
 
 import com.ssafy.faraway.common.util.ShortestPath;
-import com.ssafy.faraway.domain.attraction.dto.res.AttractionResponse;
+import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository;
 import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse;

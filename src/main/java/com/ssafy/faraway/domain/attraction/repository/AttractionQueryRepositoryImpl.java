@@ -3,12 +3,9 @@ package com.ssafy.faraway.domain.attraction.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.attraction.dto.req.AttractionSearchCondition;
-import com.ssafy.faraway.domain.attraction.dto.res.AttractionResponse;
-import com.ssafy.faraway.domain.attraction.dto.res.GugunResponse;
-import com.ssafy.faraway.domain.attraction.dto.res.SidoResponse;
-import com.ssafy.faraway.domain.attraction.entity.Sido;
-import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
+import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
+import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
+import com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.attraction.dto.req;
+package com.ssafy.faraway.domain.attraction.repository.dto;
 
 import lombok.Data;
 
