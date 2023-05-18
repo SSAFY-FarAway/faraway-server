@@ -1,11 +1,11 @@
 package com.ssafy.faraway.domain.hotplace.service.impl;
 
-import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceCommentRequest;
-import com.ssafy.faraway.domain.hotplace.dto.req.UpdateHotPlaceCommentRequest;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceCommentRepository;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
+import com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceCommentDto;
+import com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceCommentDto;
 import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,9 +18,9 @@ public class HotPlaceCommentServiceImpl implements HotPlaceCommentService {
     private final HotPlaceCommentRepository hotPlaceCommentRepository;
 
     @Override
-    public Long save(Long hotPlaceId, Long memberId, SaveHotPlaceCommentRequest request) {
+    public Long save(Long hotPlaceId, Long memberId, SaveHotPlaceCommentDto dto) {
         HotPlaceComment hotPlaceComment = HotPlaceComment.builder()
-                .content(request.getContent())
+                .content(dto.getContent())
                 .member(Member.builder().id(memberId).build())
                 .hotPlace(HotPlace.builder().id(hotPlaceId).build())
                 .build();
@@ -28,9 +28,9 @@ public class HotPlaceCommentServiceImpl implements HotPlaceCommentService {
     }
 
     @Override
-    public Long update(Long commentId, UpdateHotPlaceCommentRequest request) {
+    public Long update(Long commentId, UpdateHotPlaceCommentDto dto) {
         HotPlaceComment hotPlaceComment = hotPlaceCommentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
-        hotPlaceComment.update(request.getContent());
+        hotPlaceComment.update(dto.getContent());
         return commentId;
     }
 

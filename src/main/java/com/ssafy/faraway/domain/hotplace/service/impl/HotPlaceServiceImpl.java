@@ -1,14 +1,16 @@
 package com.ssafy.faraway.domain.hotplace.service.impl;
 
 import com.ssafy.faraway.common.domain.UploadFile;
-import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceRequest;
-import com.ssafy.faraway.domain.hotplace.dto.req.UpdateHotPlaceRequest;
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.hotplace.entity.Address;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceImageRepository;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceService;
+import com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceDto;
+import com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceDto;
 import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,19 +27,19 @@ public class HotPlaceServiceImpl implements HotPlaceService {
     private final HotPlaceImageRepository hotPlaceImageRepository;
 
     @Override
-    public Long save(Long memberId, SaveHotPlaceRequest request, List<UploadFile> uploadFiles) throws IOException {
+    public Long save(Long memberId, SaveHotPlaceDto dto, List<UploadFile> uploadFiles) throws IOException {
         Address address = Address.builder()
-                .zipcode(request.getZipcode())
-                .mainAddress(request.getMainAddress())
-                .subAddress(request.getSubAddress())
+                .zipcode(dto.getZipcode())
+                .mainAddress(dto.getMainAddress())
+                .subAddress(dto.getSubAddress())
                 .build();
 
 
         HotPlace saveHotPlace = HotPlace.builder()
-                .title(request.getTitle())
-                .content(request.getContent())
+                .title(dto.getTitle())
+                .content(dto.getContent())
                 .address(address)
-                .rating(request.getRating())
+                .rating(dto.getRating())
                 .member(Member.builder().id(memberId).build())
                 .build();
 
@@ -50,21 +51,23 @@ public class HotPlaceServiceImpl implements HotPlaceService {
     }
 
     @Override
-    public Long update(Long hotPlaceId, UpdateHotPlaceRequest request, List<UploadFile> uploadFiles) {
-        HotPlace hotplace = hotPlaceRepository.findById(hotPlaceId).orElseThrow(NoSuchElementException::new);
+    public Long update(Long hotPlaceId, UpdateHotPlaceDto dto, List<UploadFile> uploadFiles) {
+        HotPlace hotplace = hotPlaceRepository.findById(hotPlaceId)
+                .orElseThrow(() -> new CustomException(ErrorCode.HOT_PLACE_NOT_FOUND));
         Address address = Address.builder()
-                .zipcode(request.getZipcode())
-                .mainAddress(request.getMainAddress())
-                .subAddress(request.getSubAddress())
+                .zipcode(dto.getZipcode())
+                .mainAddress(dto.getMainAddress())
+                .subAddress(dto.getSubAddress())
                 .build();
         List<HotPlaceImage> hotPlaceImages = getImageList(hotPlaceId, uploadFiles);
-        hotplace.update(request.getTitle(), request.getContent(), address, request.getRating(), hotPlaceImages);
+        hotplace.update(dto.getTitle(), dto.getContent(), address, dto.getRating(), hotPlaceImages);
         return hotPlaceId;
     }
 
     @Override
     public Long delete(Long hotPlaceId) {
-        HotPlace hotplace = hotPlaceRepository.findById(hotPlaceId).orElseThrow(NoSuchElementException::new);
+        HotPlace hotplace = hotPlaceRepository.findById(hotPlaceId)
+                .orElseThrow(() -> new CustomException(ErrorCode.HOT_PLACE_NOT_FOUND));
         hotPlaceRepository.delete(hotplace);
         return hotPlaceId;
     }

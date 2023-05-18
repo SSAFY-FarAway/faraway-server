@@ -1,27 +1,27 @@
 package com.ssafy.faraway.domain.hotplace.controller;
 
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/image")
+@CrossOrigin(originPatterns = "*")
 public class ImageController {
     private final HotPlaceImageRepository hotPlaceImageRepository;
 
@@ -30,11 +30,12 @@ public class ImageController {
 
     @GetMapping("/download/{id}")
     public void download(HttpServletResponse response, @PathVariable Long id) throws IOException {
-        HotPlaceImage hotPlaceImage = hotPlaceImageRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        HotPlaceImage hotPlaceImage = hotPlaceImageRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.IMAGE_NOT_FOUND));
         Path saveFilePath = Paths.get(fileDir + hotPlaceImage.getUploadFile().getStoreFileName());
 
         if (!saveFilePath.toFile().exists()) {
-            throw new RuntimeException("File Not Found");
+            throw new FileNotFoundException();
         }
 
         setFileHeader(response, hotPlaceImage);
