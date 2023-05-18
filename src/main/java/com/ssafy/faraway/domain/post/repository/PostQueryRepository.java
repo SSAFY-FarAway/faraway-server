@@ -1,7 +1,7 @@
 package com.ssafy.faraway.domain.post.repository;
 
-import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
-import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
+import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
+import com.ssafy.faraway.domain.post.controller.dto.res.ListPostResponse;
 import com.ssafy.faraway.domain.post.entity.Post;
 import org.springframework.data.domain.Pageable;
 
@@ -11,4 +11,5 @@ public interface PostQueryRepository {
     Post searchById(Long postId);
 
     List<ListPostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable);
+    int getPageTotalCnt(PostSearchCondition condition);
 }
