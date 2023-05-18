@@ -1,11 +1,11 @@
 package com.ssafy.faraway.domain.hotplace.service.impl;
 
 import com.ssafy.faraway.common.FileStore;
-import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSearchCondition;
-import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceCommentResponse;
-import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceImageResponse;
-import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponse;
-import com.ssafy.faraway.domain.hotplace.dto.res.ListHotPlaceResponse;
+import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceCommentResponse;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceImageResponse;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.ListHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService;
@@ -44,6 +44,11 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
                 .commentResponses(commentResponses)
                 .imageResponses(imageResponses)
                 .build();
+    }
+
+    @Override
+    public int getPageTotalCnt(HotPlaceSearchCondition condition) {
+        return hotPlaceQueryRepository.getPageTotalCnt(condition);
     }
 
     private List<HotPlaceImageResponse> getImageResponses(HotPlace hotPlace) {

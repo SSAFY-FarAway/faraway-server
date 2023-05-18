@@ -1,10 +1,11 @@
-package com.ssafy.faraway.domain.hotplace.repository;
+package com.ssafy.faraway.domain.hotplace.repository.impl;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSearchCondition;
-import com.ssafy.faraway.domain.hotplace.dto.res.ListHotPlaceResponse;
+import com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository;
+import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.ListHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -36,17 +37,7 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
 
     @Override
     public List<ListHotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
-        List<Long> ids = queryFactory
-                .select(hotPlace.id)
-                .from(hotPlace)
-                .where(
-                        isTitle(condition.getTitle()),
-                        isContent(condition.getContent())
-                )
-                .orderBy(hotPlace.createdDate.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch();
+        List<Long> ids = getIds(condition, pageable);
 
         if (CollectionUtils.isEmpty(ids)) {
             return new ArrayList<>();
@@ -67,6 +58,32 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
                 .join(hotPlace.member, member)
                 .where(hotPlace.id.in(ids))
                 .orderBy(hotPlace.createdDate.desc())
+                .fetch();
+    }
+
+    @Override
+    public int getPageTotalCnt(HotPlaceSearchCondition condition) {
+        return queryFactory
+                .select(hotPlace.count())
+                .from(hotPlace)
+                .join(hotPlace.member, member)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                ).fetchFirst().intValue();
+    }
+
+    private List<Long> getIds(HotPlaceSearchCondition condition, Pageable pageable) {
+        return queryFactory
+                .select(hotPlace.id)
+                .from(hotPlace)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                )
+                .orderBy(hotPlace.createdDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
     }
 

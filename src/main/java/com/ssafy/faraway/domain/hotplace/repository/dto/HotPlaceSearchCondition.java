@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.hotplace.dto.req;
+package com.ssafy.faraway.domain.hotplace.repository.dto;
 
 import lombok.Builder;
 import lombok.Data;

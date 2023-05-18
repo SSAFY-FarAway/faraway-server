@@ -19,6 +19,16 @@ public enum ErrorCode {
     POSTS_NOT_FOUND(HttpStatus.NOT_FOUND, "게시글 정보를 찾을 수 없습니다."),
 
     /*
+     * 404 NOT_FOUND: 리소스를 찾을 수 없음
+     */
+    HOT_PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, "게시글 정보를 찾을 수 없습니다."),
+
+    /*
+     * 404 NOT_FOUND: 리소스를 찾을 수 없음
+     */
+    IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "이미지를 찾을 수 없습니다."),
+
+    /*
      * 405 METHOD_NOT_ALLOWED: 허용되지 않은 Request Method 호출
      */
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "허용되지 않은 메서드입니다."),
