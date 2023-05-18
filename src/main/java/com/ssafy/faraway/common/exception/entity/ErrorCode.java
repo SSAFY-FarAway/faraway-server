@@ -26,6 +26,11 @@ public enum ErrorCode {
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
      */
+    PLAN_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 글입니다."),
+
+    /*
+     * 404 NOT_FOUND: 리소스를 찾을 수 없음
+     */
     IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "이미지를 찾을 수 없습니다."),
 
     /*

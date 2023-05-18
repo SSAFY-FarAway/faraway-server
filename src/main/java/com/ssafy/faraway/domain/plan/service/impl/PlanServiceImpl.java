@@ -30,8 +30,16 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public Long update(UpdatePlanRequest request, Long planId) {
         Plan plan = planRepository.findById(planId)
-                .orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+                .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
         plan.update(request.getTitle(), request.getTitle(), request.getTravelPlan());
+        return planId;
+    }
+
+    @Override
+    public Long delete(Long planId) {
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
+        planRepository.delete(plan);
         return planId;
     }
 }

@@ -6,10 +6,9 @@ import com.ssafy.faraway.common.domain.UploadFile;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.util.FileExtFilter;
-import com.ssafy.faraway.common.util.SizeConstants;
 import com.ssafy.faraway.domain.hotplace.controller.dto.req.*;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse;
-import com.ssafy.faraway.domain.hotplace.controller.dto.res.ListHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService;
@@ -19,8 +18,6 @@ import com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceDto;
 import com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceCommentDto;
 import com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceDto;
 import io.swagger.annotations.Api;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -72,7 +69,7 @@ public class HotPlaceController {
     }
 
     @GetMapping
-    public ResultPage<List<ListHotPlaceResponse>> searchHotPlace(
+    public ResultPage<List<HotPlaceResponse>> searchHotPlace(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
             @RequestParam(defaultValue = "1") Integer pageNumber
@@ -82,13 +79,13 @@ public class HotPlaceController {
                 .content(content)
                 .build();
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
-        List<ListHotPlaceResponse> responses = hotPlaceQueryService.searchByCondition(condition, pageRequest);
+        List<HotPlaceResponse> responses = hotPlaceQueryService.searchByCondition(condition, pageRequest);
         return new ResultPage<>(responses, pageNumber, PAGE_SIZE, hotPlaceQueryService.getPageTotalCnt(condition));
     }
 
     @GetMapping("/{hotPlaceId}")
-    public HotPlaceResponse searchHotPlace(@PathVariable Long hotPlaceId) {
-        HotPlaceResponse response = hotPlaceQueryService.searchById(hotPlaceId);
+    public DetailHotPlaceResponse searchHotPlace(@PathVariable Long hotPlaceId) {
+        DetailHotPlaceResponse response = hotPlaceQueryService.searchById(hotPlaceId);
         if (response == null) {
             throw new CustomException(ErrorCode.HOT_PLACE_NOT_FOUND);
         }

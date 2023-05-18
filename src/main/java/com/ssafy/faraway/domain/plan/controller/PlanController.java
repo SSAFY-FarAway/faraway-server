@@ -1,5 +1,7 @@
 package com.ssafy.faraway.domain.plan.controller;
 
+import com.ssafy.faraway.common.domain.ResultPage;
+import com.ssafy.faraway.common.util.SizeConstants;
 import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanCommentRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanCommentRequest;
@@ -23,13 +25,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
+
 @RestController
 @RequestMapping("/plan")
 @RequiredArgsConstructor
 @CrossOrigin(originPatterns = "*")
 @Api(tags = "plan")
-@Slf4j
-@CrossOrigin(originPatterns = "*")
 public class PlanController {
     private final PlanService planService;
     private final PlanQueryService planQueryService;
@@ -58,9 +60,9 @@ public class PlanController {
                 .content(content)
                 .build();
 
-        PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);
         List<PlanResponse> responses = planQueryService.searchByCondition(condition, pageRequest);
-        return new ResultPage<>(responses, pageNumber, 10);
+        return new ResultPage<>(responses, pageNumber, PAGE_SIZE, planQueryService.getPageTotalCnt(condition));
     }
 
     @GetMapping("/{planId}")
@@ -68,10 +70,15 @@ public class PlanController {
         return planQueryService.searchById(planId);
     }
 
-    @PutMapping("{planId}")
+    @PutMapping("/{planId}")
     public Long updatePlan(@PathVariable Long planId,
                            @Valid @RequestBody final UpdatePlanRequest request) {
         return planService.update(request, planId);
+    }
+
+    @DeleteMapping("/{planId}")
+    public Long deletePlan(@PathVariable Long planId) {
+        return planService.delete(planId);
     }
 
     @PostMapping("/{planId}/comment")
@@ -89,13 +96,5 @@ public class PlanController {
     public Long updatePlanComment(@PathVariable Long commentId,
                                   @Valid @RequestBody final UpdatePlanCommentRequest request) {
         return planCommentService.update(commentId, request);
-    }
-
-    @Data
-    @AllArgsConstructor
-    static class ResultPage<T> {
-        private T data;
-        private int pageNumber;
-        private int pageSize;
     }
 }
