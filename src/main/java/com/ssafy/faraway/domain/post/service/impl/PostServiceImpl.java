@@ -1,7 +1,8 @@
 package com.ssafy.faraway.domain.post.service.impl;
 
 import com.ssafy.faraway.common.domain.UploadFile;
-import com.ssafy.faraway.common.exception.entity.PostNotFoundException;
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.post.entity.Attachment;
 import com.ssafy.faraway.domain.post.entity.Category;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,7 +55,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Long update(Long postId, UpdatePostDto dto, List<UploadFile> uploadFiles) {
-        Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         List<Attachment> attachments = getAttachments(postId, uploadFiles);
         post.update(dto.getTitle(), dto.getContent(), attachments);
         return postId;
@@ -63,7 +64,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Long delete(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         postRepository.delete(post);
         return postId;
     }
