@@ -36,6 +36,9 @@ public class FileStore {
             return null;
         }
 
+        File uploadDir = new File(fileDir);
+        uploadDir.mkdirs();
+
         String originalFilename = multipartFile.getOriginalFilename();
         String storeFileName = createStoreFileName(originalFilename);
         multipartFile.transferTo(new File(getFullPath(storeFileName)));

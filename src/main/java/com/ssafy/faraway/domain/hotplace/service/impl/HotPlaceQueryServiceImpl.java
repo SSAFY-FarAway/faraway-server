@@ -1,11 +1,11 @@
 package com.ssafy.faraway.domain.hotplace.service.impl;
 
 import com.ssafy.faraway.common.FileStore;
-import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSearchCondition;
-import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceCommentResponse;
-import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceImageResponse;
-import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponse;
-import com.ssafy.faraway.domain.hotplace.dto.res.ListHotPlaceResponse;
+import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceCommentResponse;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceImageResponse;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.ListHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService;
@@ -46,6 +46,11 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
                 .build();
     }
 
+    @Override
+    public int getPageTotalCnt(HotPlaceSearchCondition condition) {
+        return hotPlaceQueryRepository.getPageTotalCnt(condition);
+    }
+
     private List<HotPlaceImageResponse> getImageResponses(HotPlace hotPlace) {
         return hotPlace.getHotPlaceImages().stream().map(hotPlaceImage -> HotPlaceImageResponse.builder()
                 .id(hotPlaceImage.getId())
@@ -59,10 +64,10 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
         return hotPlace.getHotPlaceComments().stream().map(hotPlaceComment -> HotPlaceCommentResponse.builder()
                 .id(hotPlaceComment.getId())
                 .hotPlaceId(hotPlaceComment.getHotPlace().getId())
-                .loginId(hotPlace.getMember().getLoginId())
+                .loginId(hotPlaceComment.getMember().getLoginId())
                 .memberId(hotPlaceComment.getMember().getId())
-                .content(hotPlace.getContent())
-                .createdDate(hotPlace.getCreatedDate())
+                .content(hotPlaceComment.getContent())
+                .createdDate(hotPlaceComment.getCreatedDate())
                 .build()).collect(Collectors.toList());
     }
 

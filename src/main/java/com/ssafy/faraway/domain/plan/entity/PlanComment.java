@@ -31,4 +31,8 @@ public class PlanComment extends BaseEntity {
         this.member = member;
         this.plan = plan;
     }
+
+    public void update(String content) {
+        this.content = content;
+    }
 }

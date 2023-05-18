@@ -1,22 +1,23 @@
 package com.ssafy.faraway.domain.post.service.impl;
 
 import com.ssafy.faraway.common.domain.UploadFile;
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.member.entity.Member;
-import com.ssafy.faraway.domain.post.dto.req.SavePostRequest;
-import com.ssafy.faraway.domain.post.dto.req.UpdatePostRequest;
 import com.ssafy.faraway.domain.post.entity.Attachment;
 import com.ssafy.faraway.domain.post.entity.Category;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.repository.AttachmentRepository;
 import com.ssafy.faraway.domain.post.repository.PostRepository;
 import com.ssafy.faraway.domain.post.service.PostService;
+import com.ssafy.faraway.domain.post.service.dto.SavePostDto;
+import com.ssafy.faraway.domain.post.service.dto.UpdatePostDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,11 +28,11 @@ public class PostServiceImpl implements PostService {
     private final AttachmentRepository attachmentRepository;
 
     @Override
-    public Long save(SavePostRequest request, Long memberId, List<UploadFile> uploadFiles) {
+    public Long save(SavePostDto dto, Long memberId, List<UploadFile> uploadFiles) {
         Post post = Post.builder()
-                .title(request.getTitle())
-                .content(request.getContent())
-                .category(Category.builder().id(request.getCategoryId()).build())
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .category(Category.builder().id(dto.getCategoryId()).build())
                 .member(Member.builder().id(memberId).build())
                 .build();
         Long saveId = postRepository.save(post).getId();
@@ -53,16 +54,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Long update(Long postId, UpdatePostRequest request, List<UploadFile> uploadFiles) {
-        Post post = postRepository.findById(postId).orElseThrow(NoSuchElementException::new);
+    public Long update(Long postId, UpdatePostDto dto, List<UploadFile> uploadFiles) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         List<Attachment> attachments = getAttachments(postId, uploadFiles);
-        post.update(request.getTitle(), request.getContent(), attachments);
+        post.update(dto.getTitle(), dto.getContent(), attachments);
         return postId;
     }
 
     @Override
     public Long delete(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow(NoSuchElementException::new);
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         postRepository.delete(post);
         return postId;
     }
