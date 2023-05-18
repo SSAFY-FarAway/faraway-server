@@ -3,7 +3,8 @@ package com.ssafy.faraway.domain.post.controller;
 import com.ssafy.faraway.common.FileStore;
 import com.ssafy.faraway.common.domain.ResultPage;
 import com.ssafy.faraway.common.domain.UploadFile;
-import com.ssafy.faraway.common.exception.entity.PostNotFoundException;
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.util.FileExtFilter;
 import com.ssafy.faraway.domain.post.controller.dto.req.UpdatePostCommentRequest;
 import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
@@ -19,8 +20,6 @@ import com.ssafy.faraway.domain.post.service.dto.SavePostDto;
 import com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto;
 import com.ssafy.faraway.domain.post.service.dto.UpdatePostDto;
 import io.swagger.annotations.Api;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -72,7 +71,7 @@ public class PostController {
     public PostResponse searchPost(@PathVariable Long postId) {
         PostResponse response = postQueryService.searchById(postId);
         if (response == null) {
-            throw new PostNotFoundException();
+            throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
         }
         return response;
     }
