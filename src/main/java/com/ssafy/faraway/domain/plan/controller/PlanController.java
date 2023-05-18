@@ -29,6 +29,7 @@ import java.util.List;
 @CrossOrigin(originPatterns = "*")
 @Api(tags = "plan")
 @Slf4j
+@CrossOrigin(originPatterns = "*")
 public class PlanController {
     private final PlanService planService;
     private final PlanQueryService planQueryService;

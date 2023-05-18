@@ -22,7 +22,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Random;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 public class TestDataInit {
     private final MemberRepository memberRepository;

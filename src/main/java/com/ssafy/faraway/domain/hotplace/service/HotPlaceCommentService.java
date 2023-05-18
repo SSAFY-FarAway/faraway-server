@@ -1,14 +1,14 @@
 package com.ssafy.faraway.domain.hotplace.service;
 
-import com.ssafy.faraway.domain.hotplace.dto.req.SaveHotPlaceCommentRequest;
-import com.ssafy.faraway.domain.hotplace.dto.req.UpdateHotPlaceCommentRequest;
+import com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceCommentDto;
+import com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceCommentDto;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface HotPlaceCommentService {
-    Long save(Long hotPlaceId, Long memberId, SaveHotPlaceCommentRequest request);
+    Long save(Long hotPlaceId, Long memberId, SaveHotPlaceCommentDto dto);
 
-    Long update(Long commentId, UpdateHotPlaceCommentRequest request);
+    Long update(Long commentId, UpdateHotPlaceCommentDto dto);
 
     Long delete(Long commentId);
 }

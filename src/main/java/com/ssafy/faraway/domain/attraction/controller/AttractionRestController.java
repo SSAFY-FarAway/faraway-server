@@ -23,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/attraction")
 @Api(tags = "attraction")
+@CrossOrigin(originPatterns = "*")
 public class AttractionRestController {
     private final AttractionService attractionService;
     private final AttractionQueryService attractionQueryService;
@@ -48,7 +49,7 @@ public class AttractionRestController {
     }
 
     @GetMapping("")
-    public List<AttractionResponse> searchByCondition(@RequestBody AttractionSearchCondition condition) throws IOException{
+    public List<AttractionResponse> searchByCondition(AttractionSearchCondition condition) throws IOException{
         List<AttractionResponse> list = null;
         list = attractionQueryService.searchByCondition(condition);
         if(list == null || list.size() == 0) {

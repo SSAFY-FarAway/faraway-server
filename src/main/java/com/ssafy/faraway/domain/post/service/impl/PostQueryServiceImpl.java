@@ -1,11 +1,10 @@
 package com.ssafy.faraway.domain.post.service.impl;
 
-import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
-import com.ssafy.faraway.domain.post.dto.res.AttachmentResponse;
-import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
-import com.ssafy.faraway.domain.post.dto.res.PostCommentResponse;
-import com.ssafy.faraway.domain.post.dto.res.PostResponse;
-import com.ssafy.faraway.domain.post.entity.Attachment;
+import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
+import com.ssafy.faraway.domain.post.controller.dto.res.AttachmentResponse;
+import com.ssafy.faraway.domain.post.controller.dto.res.ListPostResponse;
+import com.ssafy.faraway.domain.post.controller.dto.res.PostCommentResponse;
+import com.ssafy.faraway.domain.post.controller.dto.res.PostResponse;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.repository.PostQueryRepository;
 import com.ssafy.faraway.domain.post.service.PostQueryService;
@@ -16,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
 
 @Service
 @RequiredArgsConstructor
@@ -46,6 +47,11 @@ public class PostQueryServiceImpl implements PostQueryService {
     @Override
     public List<ListPostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable) {
         return postQueryRepository.searchByCondition(condition, pageable);
+    }
+
+    @Override
+    public int getPageTotalCnt(PostSearchCondition condition) {
+        return postQueryRepository.getPageTotalCnt(condition) / PAGE_SIZE;
     }
 
     private List<PostCommentResponse> getCommentResponses(Post post) {
