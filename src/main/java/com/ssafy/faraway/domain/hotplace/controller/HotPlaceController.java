@@ -98,7 +98,7 @@ public class HotPlaceController {
     @PutMapping("/{hotPlaceId}")
     public Long updateHotPlace(@PathVariable Long hotPlaceId,
                                @Valid @RequestPart(value = "request") UpdateHotPlaceRequest request,
-                               @RequestPart(value = "files") List<MultipartFile> files) throws IOException {
+                               @RequestPart(value = "files", required = false) List<MultipartFile> files) throws IOException {
         List<UploadFile> uploadFiles = new ArrayList<>();
 
         if (files != null && !files.isEmpty()) {
@@ -119,7 +119,7 @@ public class HotPlaceController {
     }
 
     @DeleteMapping("/{hotPlaceId}")
-    public Long updateHotPlace(@PathVariable Long hotPlaceId) {
+    public Long deleteHotPlace(@PathVariable Long hotPlaceId) {
         return hotPlaceService.delete(hotPlaceId);
     }
 
