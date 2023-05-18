@@ -1,5 +1,7 @@
 package com.ssafy.faraway.domain.post.service.impl;
 
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.post.controller.dto.req.SavePostCommentRequest;
 import com.ssafy.faraway.domain.post.entity.Post;
@@ -29,14 +31,16 @@ public class PostCommentServiceImpl implements PostCommentService {
 
     @Override
     public Long update(Long commentId, UpdatePostCommentDto dto) {
-        PostComment postComment = postCommentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
+        PostComment postComment = postCommentRepository.findById(commentId)
+                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
         postComment.update(dto.getContent());
         return commentId;
     }
 
     @Override
     public Long delete(Long commentId) {
-        PostComment postComment = postCommentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
+        PostComment postComment = postCommentRepository.findById(commentId)
+                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
         postCommentRepository.delete(postComment);
         return commentId;
     }
