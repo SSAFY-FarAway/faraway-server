@@ -4,8 +4,8 @@ import com.ssafy.faraway.common.FileStore;
 import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceCommentResponse;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceImageResponse;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse;
-import com.ssafy.faraway.domain.hotplace.controller.dto.res.ListHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService;
@@ -25,12 +25,12 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
 
     @Transactional
     @Override
-    public HotPlaceResponse searchById(Long hotPlaceId) {
+    public DetailHotPlaceResponse searchById(Long hotPlaceId) {
         HotPlace hotPlace = hotPlaceQueryRepository.searchById(hotPlaceId);
         List<HotPlaceCommentResponse> commentResponses = getCommentResponses(hotPlace);
         List<HotPlaceImageResponse> imageResponses = getImageResponses(hotPlace);
         hotPlace.updateHit();
-        return HotPlaceResponse.builder()
+        return DetailHotPlaceResponse.builder()
                 .id(hotPlace.getId())
                 .memberId(hotPlace.getMember().getId())
                 .loginId(hotPlace.getMember().getLoginId())
@@ -72,7 +72,7 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
     }
 
     @Override
-    public List<ListHotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
+    public List<HotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
         return hotPlaceQueryRepository.searchByCondition(condition, pageable);
     }
 }

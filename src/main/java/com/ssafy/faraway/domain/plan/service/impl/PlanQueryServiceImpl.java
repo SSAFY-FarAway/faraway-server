@@ -54,6 +54,11 @@ public class PlanQueryServiceImpl implements PlanQueryService {
                 .build();
     }
 
+    @Override
+    public int getPageTotalCnt(PlanSearchCondition condition) {
+        return planQueryRepository.getPageTotalCnt(condition);
+    }
+
     private List<AttractionResponse> rearrangeResponses(Plan plan) {
         List<Integer> ids = getIds(plan);
         List<AttractionResponse> list = attractionQueryRepository.searchAllByIds(ids);

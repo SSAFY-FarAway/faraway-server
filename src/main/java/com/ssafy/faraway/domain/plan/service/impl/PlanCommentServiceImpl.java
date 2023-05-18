@@ -1,5 +1,7 @@
 package com.ssafy.faraway.domain.plan.service.impl;
 
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanCommentRequest;
 import com.ssafy.faraway.domain.plan.entity.Plan;
@@ -29,8 +31,17 @@ public class PlanCommentServiceImpl implements PlanCommentService {
 
     @Override
     public Long update(Long commentId, UpdatePlanCommentRequest request) {
-        PlanComment planComment = planCommentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
+        PlanComment planComment = planCommentRepository.findById(commentId)
+                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
         planComment.update(request.getContent());
+        return commentId;
+    }
+
+    @Override
+    public Long delete(Long commentId) {
+        PlanComment planComment = planCommentRepository.findById(commentId)
+                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
+        planCommentRepository.delete(planComment);
         return commentId;
     }
 }

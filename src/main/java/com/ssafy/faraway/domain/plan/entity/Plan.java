@@ -17,7 +17,7 @@ public class Plan extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "plan_id")
     private Long id;
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 120)
     private String title;
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;

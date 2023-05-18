@@ -12,4 +12,5 @@ import java.util.List;
 public interface PlanQueryService {
     List<PlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable);
     DetailPlanResponse searchById(Long planId);
+    int getPageTotalCnt(PlanSearchCondition condition);
 }

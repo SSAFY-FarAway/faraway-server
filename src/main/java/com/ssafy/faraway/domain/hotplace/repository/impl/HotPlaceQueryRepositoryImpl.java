@@ -5,7 +5,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository;
 import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
-import com.ssafy.faraway.domain.hotplace.controller.dto.res.ListHotPlaceResponse;
+import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -36,7 +36,7 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
     }
 
     @Override
-    public List<ListHotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
+    public List<HotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
         List<Long> ids = getIds(condition, pageable);
 
         if (CollectionUtils.isEmpty(ids)) {
@@ -44,7 +44,7 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
         }
 
         return queryFactory
-                .select(Projections.fields(ListHotPlaceResponse.class,
+                .select(Projections.fields(HotPlaceResponse.class,
                         hotPlace.id,
                         hotPlace.member.id.as("memberId"),
                         hotPlace.member.loginId,

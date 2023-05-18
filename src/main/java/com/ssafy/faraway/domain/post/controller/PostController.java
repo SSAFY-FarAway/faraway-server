@@ -11,8 +11,8 @@ import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
 import com.ssafy.faraway.domain.post.controller.dto.req.SavePostCommentRequest;
 import com.ssafy.faraway.domain.post.controller.dto.req.SavePostRequest;
 import com.ssafy.faraway.domain.post.controller.dto.req.UpdatePostRequest;
-import com.ssafy.faraway.domain.post.controller.dto.res.ListPostResponse;
 import com.ssafy.faraway.domain.post.controller.dto.res.PostResponse;
+import com.ssafy.faraway.domain.post.controller.dto.res.DetailPostResponse;
 import com.ssafy.faraway.domain.post.service.PostCommentService;
 import com.ssafy.faraway.domain.post.service.PostQueryService;
 import com.ssafy.faraway.domain.post.service.PostService;
@@ -68,8 +68,8 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public PostResponse searchPost(@PathVariable Long postId) {
-        PostResponse response = postQueryService.searchById(postId);
+    public DetailPostResponse searchPost(@PathVariable Long postId) {
+        DetailPostResponse response = postQueryService.searchById(postId);
         if (response == null) {
             throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
         }
@@ -94,7 +94,7 @@ public class PostController {
     }
 
     @GetMapping
-    public ResultPage<List<ListPostResponse>> searchPosts(
+    public ResultPage<List<PostResponse>> searchPosts(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
             @RequestParam Long categoryId,
@@ -106,7 +106,7 @@ public class PostController {
                 .categoryId(categoryId)
                 .build();
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);
-        List<ListPostResponse> responses = postQueryService.searchByCondition(condition, pageRequest);
+        List<PostResponse> responses = postQueryService.searchByCondition(condition, pageRequest);
         return new ResultPage<>(responses, pageNumber, PAGE_SIZE, postQueryService.getPageTotalCnt(condition));
     }
 
