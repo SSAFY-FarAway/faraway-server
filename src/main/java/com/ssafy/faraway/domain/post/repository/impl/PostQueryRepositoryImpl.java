@@ -1,10 +1,11 @@
-package com.ssafy.faraway.domain.post.repository;
+package com.ssafy.faraway.domain.post.repository.impl;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
-import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
+import com.ssafy.faraway.domain.post.repository.PostQueryRepository;
+import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
+import com.ssafy.faraway.domain.post.controller.dto.res.ListPostResponse;
 import com.ssafy.faraway.domain.post.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -38,18 +39,7 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
 
     @Override
     public List<ListPostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable) {
-        List<Long> ids = queryFactory
-                .select(post.id)
-                .from(post)
-                .where(
-                        isTitle(condition.getTitle()),
-                        isContent(condition.getContent()),
-                        isCategory(condition.getCategoryId())
-                )
-                .orderBy(post.createdDate.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch();
+        List<Long> ids = getIds(condition, pageable);
 
         if (CollectionUtils.isEmpty(ids)) {
             return new ArrayList<>();
@@ -70,6 +60,35 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
                 .join(post.category, category)
                 .where(post.id.in(ids))
                 .orderBy(post.createdDate.desc())
+                .fetch();
+    }
+
+    @Override
+    public int getPageTotalCnt(PostSearchCondition condition) {
+        return queryFactory
+                .select(post.count())
+                .from(post)
+                .join(post.member, member)
+                .join(post.category, category)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent()),
+                        isCategory(condition.getCategoryId())
+                ).fetchFirst().intValue();
+    }
+
+    private List<Long> getIds(PostSearchCondition condition, Pageable pageable) {
+        return queryFactory
+                .select(post.id)
+                .from(post)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent()),
+                        isCategory(condition.getCategoryId())
+                )
+                .orderBy(post.createdDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
     }
 

@@ -1,18 +1,23 @@
 package com.ssafy.faraway.domain.post.controller;
 
 import com.ssafy.faraway.common.FileStore;
+import com.ssafy.faraway.common.domain.ResultPage;
 import com.ssafy.faraway.common.domain.UploadFile;
+import com.ssafy.faraway.common.exception.entity.PostNotFoundException;
 import com.ssafy.faraway.common.util.FileExtFilter;
-import com.ssafy.faraway.domain.post.dto.req.UpdatePostCommentRequest;
-import com.ssafy.faraway.domain.post.dto.req.PostSearchCondition;
-import com.ssafy.faraway.domain.post.dto.req.SavePostCommentRequest;
-import com.ssafy.faraway.domain.post.dto.req.SavePostRequest;
-import com.ssafy.faraway.domain.post.dto.req.UpdatePostRequest;
-import com.ssafy.faraway.domain.post.dto.res.ListPostResponse;
-import com.ssafy.faraway.domain.post.dto.res.PostResponse;
+import com.ssafy.faraway.domain.post.controller.dto.req.UpdatePostCommentRequest;
+import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
+import com.ssafy.faraway.domain.post.controller.dto.req.SavePostCommentRequest;
+import com.ssafy.faraway.domain.post.controller.dto.req.SavePostRequest;
+import com.ssafy.faraway.domain.post.controller.dto.req.UpdatePostRequest;
+import com.ssafy.faraway.domain.post.controller.dto.res.ListPostResponse;
+import com.ssafy.faraway.domain.post.controller.dto.res.PostResponse;
 import com.ssafy.faraway.domain.post.service.PostCommentService;
 import com.ssafy.faraway.domain.post.service.PostQueryService;
 import com.ssafy.faraway.domain.post.service.PostService;
+import com.ssafy.faraway.domain.post.service.dto.SavePostDto;
+import com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto;
+import com.ssafy.faraway.domain.post.service.dto.UpdatePostDto;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +31,8 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
 
 @RestController
 @Slf4j
@@ -41,7 +48,7 @@ public class PostController {
     private final FileExtFilter fileExtFilter;
 
     @PostMapping
-    public Long savePost(@Valid @RequestPart(name = "request") SavePostRequest savePostRequest,
+    public Long savePost(@Valid @RequestPart(name = "request") SavePostRequest request,
                          @RequestPart(name = "files", required = false) List<MultipartFile> files) throws IOException {
         // TODO: 최영환 2023-05-10 회원 구현되면 변경해야함
         Long memberId = 1L;
@@ -52,12 +59,22 @@ public class PostController {
             uploadFiles = fileStore.storeFiles(files);
         }
 
-        return postService.save(savePostRequest, memberId, uploadFiles);
+        SavePostDto dto = SavePostDto.builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .categoryId(request.getCategoryId())
+                .build();
+
+        return postService.save(dto, memberId, uploadFiles);
     }
 
     @GetMapping("/{postId}")
     public PostResponse searchPost(@PathVariable Long postId) {
-        return postQueryService.searchById(postId);
+        PostResponse response = postQueryService.searchById(postId);
+        if (response == null) {
+            throw new PostNotFoundException();
+        }
+        return response;
     }
 
     @PutMapping("/{postId}")
@@ -68,7 +85,13 @@ public class PostController {
             fileExtFilter.badFileFilter(files);
             uploadFiles = fileStore.storeFiles(files);
         }
-        return postService.update(postId, request, uploadFiles);
+
+        UpdatePostDto dto = UpdatePostDto.builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .build();
+
+        return postService.update(postId, dto, uploadFiles);
     }
 
     @GetMapping
@@ -83,9 +106,9 @@ public class PostController {
                 .content(content)
                 .categoryId(categoryId)
                 .build();
-        PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);
         List<ListPostResponse> responses = postQueryService.searchByCondition(condition, pageRequest);
-        return new ResultPage<>(responses, pageNumber, 10);
+        return new ResultPage<>(responses, pageNumber, PAGE_SIZE, postQueryService.getPageTotalCnt(condition));
     }
 
     @DeleteMapping("/{postId}")
@@ -94,27 +117,24 @@ public class PostController {
     }
 
     @PostMapping("/{postId}/comment")
-    public Long savePostComment(@PathVariable Long postId, @Valid @RequestBody SavePostCommentRequest request) {
+    public Long savePostComment(@PathVariable Long postId,
+                                @Valid @RequestBody SavePostCommentRequest request) {
         // TODO: 최영환 2023-05-11 회원 구현되면 변경해야함
         Long memberId = 1L;
         return postCommentService.save(postId, memberId, request);
     }
 
     @PutMapping("/comment/{commentId}")
-    public Long updatePostComment(@PathVariable Long commentId, @Valid @RequestBody UpdatePostCommentRequest request) {
-        return postCommentService.update(commentId, request);
+    public Long updatePostComment(@PathVariable Long commentId,
+                                  @Valid @RequestBody UpdatePostCommentRequest request) {
+        UpdatePostCommentDto dto = UpdatePostCommentDto.builder()
+                .content(request.getContent())
+                .build();
+        return postCommentService.update(commentId, dto);
     }
 
     @DeleteMapping("/comment/{commentId}")
     public Long deletePostComment(@PathVariable Long commentId) {
         return postCommentService.delete(commentId);
-    }
-
-    @Data
-    @AllArgsConstructor
-    static class ResultPage<T> {
-        private T data;
-        private int pageNumber;
-        private int pageSize;
     }
 }

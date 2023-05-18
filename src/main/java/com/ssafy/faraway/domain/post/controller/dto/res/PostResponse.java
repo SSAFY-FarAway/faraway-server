@@ -1,6 +1,5 @@
-package com.ssafy.faraway.domain.post.dto.res;
+package com.ssafy.faraway.domain.post.controller.dto.res;
 
-import com.ssafy.faraway.domain.post.entity.Attachment;
 import lombok.Builder;
 import lombok.Data;
 

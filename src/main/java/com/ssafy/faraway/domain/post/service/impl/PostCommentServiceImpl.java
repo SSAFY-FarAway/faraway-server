@@ -1,12 +1,12 @@
 package com.ssafy.faraway.domain.post.service.impl;
 
 import com.ssafy.faraway.domain.member.entity.Member;
-import com.ssafy.faraway.domain.post.dto.req.UpdatePostCommentRequest;
-import com.ssafy.faraway.domain.post.dto.req.SavePostCommentRequest;
+import com.ssafy.faraway.domain.post.controller.dto.req.SavePostCommentRequest;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.entity.PostComment;
 import com.ssafy.faraway.domain.post.repository.PostCommentRepository;
 import com.ssafy.faraway.domain.post.service.PostCommentService;
+import com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +28,9 @@ public class PostCommentServiceImpl implements PostCommentService {
     }
 
     @Override
-    public Long update(Long commentId, UpdatePostCommentRequest request) {
+    public Long update(Long commentId, UpdatePostCommentDto dto) {
         PostComment postComment = postCommentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
-        postComment.update(request.getContent());
+        postComment.update(dto.getContent());
         return commentId;
     }
 
