@@ -10,7 +10,7 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 public interface PostQueryService {
-    DetailPostResponse searchById(Long postId);
+    DetailPostResponse searchById(Long postId, Long loginId);
 
     List<PostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable);
     int getPageTotalCnt(PostSearchCondition condition);

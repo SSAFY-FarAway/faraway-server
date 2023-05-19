@@ -25,9 +25,11 @@ public class PostQueryServiceImpl implements PostQueryService {
 
     @Transactional
     @Override
-    public DetailPostResponse searchById(Long postId) {
+    public DetailPostResponse searchById(Long postId, Long loginId) {
         Post post = postQueryRepository.searchById(postId);
-        post.updateHit();
+        if (!post.getMember().getId().equals(loginId)) {
+            post.increaseHit();
+        }
         List<PostCommentResponse> commentResponses = getCommentResponses(post);
         List<AttachmentResponse> attachmentResponses = getAttachmentResponses(post);
         return DetailPostResponse.builder()
