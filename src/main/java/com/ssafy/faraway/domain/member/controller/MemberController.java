@@ -61,6 +61,7 @@ public class MemberController {
         }
     }
 
+    //회원정보 얻기(토큰 기반)
     @GetMapping("/info/{memberId}")
     public ResponseEntity<Map<String, Object>> getInfo(
             @PathVariable("memberId") @ApiParam(value = "인증할 회원의 아이디.", required = true) Long memberId,
@@ -77,7 +78,6 @@ public class MemberController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
     }
-
 
 
     // 회원 상세조회
@@ -122,7 +122,7 @@ public class MemberController {
     }
 
 
-    // 회원 가입x
+    // 회원 가입
     @PostMapping("/sign-up")
     public ResponseEntity<?> save(@RequestBody @Valid final SaveMemberRequest saveMemberRequest) {
         try {
