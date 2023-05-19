@@ -39,9 +39,11 @@ public class Member extends BaseEntity {
     private Role role;
     @Column(nullable = false)
     private int certified;
+    @Column(nullable = true, length = 1000)
+    private String token;
 
     @Builder
-    public Member(Long id, String loginId, String loginPwd, Name name, String birth, String email, Address address, String salt, int mileage, Role role, int certified) {
+    public Member(Long id, String loginId, String loginPwd, Name name, String birth, String email, Address address, String salt, int mileage, Role role, int certified, String token) {
         this.id = id;
         this.loginId = loginId;
         this.loginPwd = loginPwd;
@@ -53,6 +55,7 @@ public class Member extends BaseEntity {
         this.mileage = mileage;
         this.role = role;
         this.certified = certified;
+        this.token = token;
     }
 
     // 비즈니스 로직
@@ -82,4 +85,13 @@ public class Member extends BaseEntity {
     public void resetLoginPwd(){
         this.loginPwd = Encrypt.encrypt("00000000", this.salt);
     }
+
+    public void saveRefreshToken(String refreshToken){
+        this.token = refreshToken;
+    }
+
+    public void deleteRefreshToken(){
+        this.token = null;
+    }
+
 }

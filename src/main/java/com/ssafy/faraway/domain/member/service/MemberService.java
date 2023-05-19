@@ -13,4 +13,7 @@ public interface MemberService {
     Long updateMember(UpdateMemberRequest request);
     Long resetLoginPwd(ResetLoginPwdRequest request);
     Long deleteMember(DeleteMemberRequest request);
+    Long saveRefreshToken(Long id, String refreshToken);
+    Long deleteRefreshToken(Long id);
+
 }

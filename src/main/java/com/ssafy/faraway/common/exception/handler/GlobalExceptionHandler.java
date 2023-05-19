@@ -46,6 +46,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleException(final Exception e) {
         log.error("handleException: {}", e.getMessage());
         log.error(Arrays.toString(e.getStackTrace()));
+        e.printStackTrace();
         return ResponseEntity
                 .status(ErrorCode.INTERNAL_SERVER_ERROR.getStatus().value())
                 .body(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR));
