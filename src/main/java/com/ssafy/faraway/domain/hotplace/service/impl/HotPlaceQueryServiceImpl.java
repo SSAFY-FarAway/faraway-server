@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
+
 @Service
 @RequiredArgsConstructor
 public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
@@ -48,7 +50,7 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
 
     @Override
     public int getPageTotalCnt(HotPlaceSearchCondition condition) {
-        return hotPlaceQueryRepository.getPageTotalCnt(condition);
+        return ((hotPlaceQueryRepository.getPageTotalCnt(condition) - 1) / PAGE_SIZE) + 1;
     }
 
     private List<HotPlaceImageResponse> getImageResponses(HotPlace hotPlace) {

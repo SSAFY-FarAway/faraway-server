@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -56,7 +58,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
 
     @Override
     public int getPageTotalCnt(PlanSearchCondition condition) {
-        return planQueryRepository.getPageTotalCnt(condition);
+        return ((planQueryRepository.getPageTotalCnt(condition) - 1) / PAGE_SIZE) + 1;
     }
 
     private List<AttractionResponse> rearrangeResponses(Plan plan) {
