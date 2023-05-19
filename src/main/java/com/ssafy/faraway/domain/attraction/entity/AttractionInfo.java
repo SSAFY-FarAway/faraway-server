@@ -28,10 +28,10 @@ public class AttractionInfo {
     @Column(name = "first_image2", length = 200)
     private String firstImage2;
     private int readCount;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "sido_code")
     private Sido sido;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "gugun_code")
     private Gugun gugun;
     private double latitude;
