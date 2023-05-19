@@ -1,6 +1,6 @@
 package com.ssafy.faraway.domain.plan.controller.dto.res;
 
-import com.ssafy.faraway.domain.attraction.dto.res.AttractionResponse;
+import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;

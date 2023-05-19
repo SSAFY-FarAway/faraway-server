@@ -1,10 +1,11 @@
-package com.ssafy.faraway.domain.plan.repository;
+package com.ssafy.faraway.domain.plan.repository.impl;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse;
 import com.ssafy.faraway.domain.plan.entity.Plan;
+import com.ssafy.faraway.domain.plan.repository.PlanQueryRepository;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -47,6 +48,28 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
                 .fetch();
     }
 
+    @Override
+    public Plan searchById(Long planId) {
+        return queryFactory
+                .select(plan)
+                .from(plan)
+                .join(plan.member, member).fetchJoin()
+                .where(plan.id.eq(planId))
+                .fetchOne();
+    }
+
+    @Override
+    public int getPageTotalCnt(PlanSearchCondition condition) {
+        return queryFactory
+                .select(plan.count())
+                .from(plan)
+                .join(plan.member, member).fetchJoin()
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                ).fetchFirst().intValue();
+    }
+
     private List<Long> getIds(PlanSearchCondition condition, Pageable pageable) {
         return queryFactory
                 .select(plan.id)
@@ -59,16 +82,6 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
-    }
-
-    @Override
-    public Plan searchById(Long planId) {
-        return queryFactory
-                .select(plan)
-                .from(plan)
-                .join(plan.member, member).fetchJoin()
-                .where(plan.id.eq(planId))
-                .fetchOne();
     }
 
     private BooleanExpression isTitle(String title) {

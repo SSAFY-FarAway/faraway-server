@@ -5,7 +5,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.faraway.domain.post.repository.PostQueryRepository;
 import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
-import com.ssafy.faraway.domain.post.controller.dto.res.ListPostResponse;
+import com.ssafy.faraway.domain.post.controller.dto.res.PostResponse;
 import com.ssafy.faraway.domain.post.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -38,7 +38,7 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
     }
 
     @Override
-    public List<ListPostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable) {
+    public List<PostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable) {
         List<Long> ids = getIds(condition, pageable);
 
         if (CollectionUtils.isEmpty(ids)) {
@@ -46,7 +46,7 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
         }
 
         return queryFactory
-                .select(Projections.fields(ListPostResponse.class,
+                .select(Projections.fields(PostResponse.class,
                         post.id,
                         post.member.id.as("memberId"),
                         post.member.loginId,

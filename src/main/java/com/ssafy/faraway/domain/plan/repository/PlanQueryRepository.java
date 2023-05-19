@@ -9,5 +9,8 @@ import java.util.List;
 
 public interface PlanQueryRepository {
     List<PlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable);
+
     Plan searchById(Long planId);
+
+    int getPageTotalCnt(PlanSearchCondition condition);
 }

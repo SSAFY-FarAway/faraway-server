@@ -8,4 +8,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface PlanCommentService {
     Long save(Long planId, Long memberId, SavePlanCommentDto dto);
     Long update(Long commentId, UpdatePlanCommentRequest request);
+    Long delete(Long commentId);
 }

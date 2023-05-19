@@ -1,7 +1,7 @@
 package com.ssafy.faraway.domain.plan.service.impl;
 
 import com.ssafy.faraway.common.util.ShortestPath;
-import com.ssafy.faraway.domain.attraction.dto.res.AttractionResponse;
+import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository;
 import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse;
@@ -19,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
 
 @Service
 @RequiredArgsConstructor
@@ -54,9 +56,14 @@ public class PlanQueryServiceImpl implements PlanQueryService {
                 .build();
     }
 
+    @Override
+    public int getPageTotalCnt(PlanSearchCondition condition) {
+        return ((planQueryRepository.getPageTotalCnt(condition) - 1) / PAGE_SIZE) + 1;
+    }
+
     private List<AttractionResponse> rearrangeResponses(Plan plan) {
         List<Integer> ids = getIds(plan);
-        List<AttractionResponse> list = attractionQueryRepository.searchAllByIds(ids);
+        List<AttractionResponse> list = attractionQueryRepository.SearchByIds(ids);
         List<AttractionResponse> attractionResponses = new ArrayList<>();
         for (int id: ids) {
             for (AttractionResponse response : list) {

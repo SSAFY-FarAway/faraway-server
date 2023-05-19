@@ -8,4 +8,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface PlanService {
     Long save(SavePlanDto dto, Long memberId);
     Long update(UpdatePlanRequest request, Long planId);
+    Long delete(Long planId);
 }

@@ -13,6 +13,7 @@ import java.util.List;
 public class Sido {
     @Id
     private Integer sidoCode;
+    @Column(length = 30)
     private String sidoName;
 
     @Builder
