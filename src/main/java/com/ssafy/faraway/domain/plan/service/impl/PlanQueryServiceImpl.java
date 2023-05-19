@@ -56,7 +56,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
 
     private List<AttractionResponse> rearrangeResponses(Plan plan) {
         List<Integer> ids = getIds(plan);
-        List<AttractionResponse> list = attractionQueryRepository.searchAllByIds(ids);
+        List<AttractionResponse> list = attractionQueryRepository.SearchByIds(ids);
         List<AttractionResponse> attractionResponses = new ArrayList<>();
         for (int id: ids) {
             for (AttractionResponse response : list) {

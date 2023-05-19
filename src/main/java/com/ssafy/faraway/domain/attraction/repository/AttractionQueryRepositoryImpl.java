@@ -3,32 +3,36 @@ package com.ssafy.faraway.domain.attraction.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.ssafy.faraway.domain.attraction.entity.QSido;
 import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
 import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import static com.ssafy.faraway.domain.attraction.entity.QAttractionInfo.attractionInfo;
 import static com.ssafy.faraway.domain.attraction.entity.QGugun.gugun;
+import static com.ssafy.faraway.domain.attraction.entity.QSido.sido;
 import static org.springframework.util.StringUtils.hasText;
 
 @Repository
 @RequiredArgsConstructor
-public class AttractionQueryRepositoryImpl implements AttractionQueryRepository{
+public class AttractionQueryRepositoryImpl implements AttractionQueryRepository {
     private final JPAQueryFactory queryFactory;
-    /*
-    return queryFactory
-                .select(post)
-                .from(post)
-                .join(post.member, member).fetchJoin()
-                .join(post.category, category).fetchJoin()
-                .where(post.id.eq(postId))
-                .fetchOne();
-     */
+
     @Override
-    public List<AttractionResponse> searchAll() {
+    public List<AttractionResponse> searchByCondition(AttractionSearchCondition condition, Pageable pageable) {
+        List<Integer> ids = getIds(condition, pageable);
+
+        if (CollectionUtils.isEmpty(ids)) {
+            return new ArrayList<>();
+        }
+
         return queryFactory
                 .select(Projections.fields(AttractionResponse.class,
                         attractionInfo.contentId,
@@ -39,34 +43,15 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository{
                         attractionInfo.tel,
                         attractionInfo.firstImage,
                         attractionInfo.latitude,
-                        attractionInfo.longitude))
+                        attractionInfo.longitude
+                ))
                 .from(attractionInfo)
+                .where(attractionInfo.contentId.in(ids))
                 .fetch();
     }
 
     @Override
-    public List<AttractionResponse> searchByCondition(AttractionSearchCondition condition) {
-        return queryFactory
-                .select(Projections.fields(AttractionResponse.class,
-                        attractionInfo.contentId,
-                        attractionInfo.title,
-                        attractionInfo.addr1,
-                        attractionInfo.addr2,
-                        attractionInfo.zipcode,
-                        attractionInfo.tel,
-                        attractionInfo.firstImage,
-                        attractionInfo.latitude,
-                        attractionInfo.longitude))
-                .from(attractionInfo)
-                .where(isSidoCode(condition.getSidoCode()),
-                        isGugunCode(condition.getGugunCode()),
-                        isContentTypeId(condition.getContentTypeId())
-                )
-                .fetch();
-    }
-
-    @Override
-    public List<AttractionResponse> searchAllByIds(List<Integer> ids) {
+    public List<AttractionResponse> SearchByIds(List<Integer> ids) {
         return queryFactory
                 .select(Projections.fields(AttractionResponse.class,
                         attractionInfo.contentId,
@@ -90,16 +75,39 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository{
                         gugun.gugunCode,
                         gugun.gugunName))
                 .from(gugun)
+                .join(gugun.sido, sido)
                 .where(gugun.sido.sidoCode.eq(sidoCode))
                 .fetch();
     }
 
+    @Override
+    public int getPageTotalCnt(AttractionSearchCondition condition) {
+        return queryFactory
+                .select(attractionInfo.count())
+                .from(attractionInfo)
+                .where(
+                        isSidoCode(condition.getSidoCode()),
+                        isGugunCode(condition.getGugunCode()),
+                        isContentTypeId(condition.getContentTypeId())
+                ).fetchFirst().intValue();
+    }
 
-    private boolean hasCondition(Integer condition){
-        if(condition == null){
-            return false;
-        }
-        return true;
+    private List<Integer> getIds(AttractionSearchCondition condition, Pageable pageable) {
+        return queryFactory
+                .select(attractionInfo.contentId)
+                .from(attractionInfo)
+                .where(
+                        isSidoCode(condition.getSidoCode()),
+                        isGugunCode(condition.getGugunCode()),
+                        isContentTypeId(condition.getContentTypeId())
+                )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+    }
+
+    private boolean hasCondition(Integer condition) {
+        return condition != null;
     }
 
     private BooleanExpression isSidoCode(Integer sidoCode) {

@@ -12,14 +12,15 @@ import java.util.List;
 @ToString
 public class Gugun {
     @Id
-    private int gugunCode;
+    private Integer gugunCode;
+    @Column(length = 30)
     private String gugunName;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sido_code")
     private Sido sido;
 
     @Builder
-    public Gugun(int gugunCode, String gugunName, Sido sido) {
+    public Gugun(Integer gugunCode, String gugunName, Sido sido) {
         this.gugunCode = gugunCode;
         this.gugunName = gugunName;
         this.sido = sido;
