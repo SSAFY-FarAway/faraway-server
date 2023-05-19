@@ -58,7 +58,7 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         List<Attachment> attachments = getAttachments(postId, uploadFiles);
-        post.update(dto.getTitle(), dto.getContent(), attachments);
+        post.update(dto.getTitle(), dto.getContent(), attachments, dto.getDeleteAttachmentIds());
         return postId;
     }
 

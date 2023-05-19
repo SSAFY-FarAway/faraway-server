@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 public class UpdatePostRequest {
@@ -11,4 +12,5 @@ public class UpdatePostRequest {
     private String title;
     @NotBlank
     private String content;
+    private List<Long> deleteAttachmentIds;
 }
