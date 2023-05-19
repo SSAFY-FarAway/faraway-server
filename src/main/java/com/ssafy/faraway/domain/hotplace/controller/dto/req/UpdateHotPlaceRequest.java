@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.hotplace.controller.dto.req;
 import lombok.Data;
 
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Data
 public class UpdateHotPlaceRequest {
@@ -21,4 +22,5 @@ public class UpdateHotPlaceRequest {
     @NotNull
     @DecimalMax("5")
     private int rating;
+    private List<Long> deleteImageIds;
 }

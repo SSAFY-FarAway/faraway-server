@@ -10,7 +10,7 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 public interface HotPlaceQueryService {
-    DetailHotPlaceResponse searchById(Long hotPlaceId);
+    DetailHotPlaceResponse searchById(Long hotPlaceId, Long loginId);
 
     List<HotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable);
     int getPageTotalCnt(HotPlaceSearchCondition condition);

@@ -27,11 +27,13 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
 
     @Transactional
     @Override
-    public DetailHotPlaceResponse searchById(Long hotPlaceId) {
+    public DetailHotPlaceResponse searchById(Long hotPlaceId, Long loginId) {
         HotPlace hotPlace = hotPlaceQueryRepository.searchById(hotPlaceId);
         List<HotPlaceCommentResponse> commentResponses = getCommentResponses(hotPlace);
         List<HotPlaceImageResponse> imageResponses = getImageResponses(hotPlace);
-        hotPlace.updateHit();
+        if (!hotPlace.getMember().getId().equals(loginId)) {
+            hotPlace.increaseHit();
+        }
         return DetailHotPlaceResponse.builder()
                 .id(hotPlace.getId())
                 .memberId(hotPlace.getMember().getId())
@@ -39,6 +41,7 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
                 .title(hotPlace.getTitle())
                 .content(hotPlace.getContent())
                 .hit(hotPlace.getHit())
+                .zipcode(hotPlace.getAddress().getZipcode())
                 .mainAddress(hotPlace.getAddress().getMainAddress())
                 .subAddress(hotPlace.getAddress().getSubAddress())
                 .rating(hotPlace.getRating())
