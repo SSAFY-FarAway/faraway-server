@@ -51,7 +51,7 @@ public class PostQueryServiceImpl implements PostQueryService {
 
     @Override
     public int getPageTotalCnt(PostSearchCondition condition) {
-        return postQueryRepository.getPageTotalCnt(condition) / PAGE_SIZE;
+        return ((postQueryRepository.getPageTotalCnt(condition) - 1) / PAGE_SIZE) + 1;
     }
 
     private List<PostCommentResponse> getCommentResponses(Post post) {
