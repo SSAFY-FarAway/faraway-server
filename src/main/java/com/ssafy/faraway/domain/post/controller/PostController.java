@@ -47,8 +47,8 @@ public class PostController {
     private final FileExtFilter fileExtFilter;
 
     @PostMapping
-    public Long savePost(@Valid @RequestPart(name = "request") SavePostRequest request,
-                         @RequestPart(name = "files", required = false) List<MultipartFile> files) throws IOException {
+    public Long savePost(@Valid @RequestPart SavePostRequest request,
+                         @RequestPart(required = false) List<MultipartFile> files) throws IOException {
         // TODO: 최영환 2023-05-10 회원 구현되면 변경해야함
         Long memberId = 1L;
         List<UploadFile> uploadFiles = new ArrayList<>();
@@ -69,7 +69,9 @@ public class PostController {
 
     @GetMapping("/{postId}")
     public DetailPostResponse searchPost(@PathVariable Long postId) {
-        DetailPostResponse response = postQueryService.searchById(postId);
+        // TODO: 2023-05-19 로그인 처리 후 수정해야함. 조회수 증가 처리용(본인의 글 조회 시 조회수 증가 X)
+        Long loginId = 1L;
+        DetailPostResponse response = postQueryService.searchById(postId, loginId);
         if (response == null) {
             throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
         }
@@ -77,17 +79,17 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public Long updatePost(@PathVariable Long postId, @RequestPart(name = "request") UpdatePostRequest request,
-                           @RequestPart(name = "files", required = false) List<MultipartFile> files) throws IOException {
+    public Long updatePost(@PathVariable Long postId, @RequestPart UpdatePostRequest request,
+                           @RequestPart(required = false) List<MultipartFile> files) throws IOException {
         List<UploadFile> uploadFiles = new ArrayList<>();
         if (files != null && !files.isEmpty()) {
             fileExtFilter.badFileFilter(files);
             uploadFiles = fileStore.storeFiles(files);
         }
-
         UpdatePostDto dto = UpdatePostDto.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
+                .deleteAttachmentIds(request.getDeleteAttachmentIds())
                 .build();
 
         return postService.update(postId, dto, uploadFiles);

@@ -48,14 +48,23 @@ public class Post extends BaseEntity {
         this.category = category;
     }
 
-    public void update(String title, String content, List<Attachment> attachments) {
+    public void update(String title, String content, List<Attachment> attachments, List<Long> deleteAttachmentIds) {
         this.title = title;
         this.content = content;
-        this.attachments.clear();
+        updateAttachments(attachments, deleteAttachmentIds);
+    }
+
+    private void updateAttachments(List<Attachment> attachments, List<Long> deleteAttachmentIds) {
+        if (this.attachments == null) {
+            this.attachments = new ArrayList<>();
+        }
+        for (Long id : deleteAttachmentIds) {
+            this.attachments.removeIf(attachment -> attachment.getId().equals(id));
+        }
         this.attachments.addAll(attachments);
     }
 
-    public void updateHit() {
+    public void increaseHit() {
         this.hit++;
     }
 }
