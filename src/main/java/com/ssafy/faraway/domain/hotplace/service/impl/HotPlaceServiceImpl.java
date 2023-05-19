@@ -34,7 +34,6 @@ public class HotPlaceServiceImpl implements HotPlaceService {
                 .subAddress(dto.getSubAddress())
                 .build();
 
-
         HotPlace saveHotPlace = HotPlace.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
@@ -60,7 +59,7 @@ public class HotPlaceServiceImpl implements HotPlaceService {
                 .subAddress(dto.getSubAddress())
                 .build();
         List<HotPlaceImage> hotPlaceImages = getImageList(hotPlaceId, uploadFiles);
-        hotplace.update(dto.getTitle(), dto.getContent(), address, dto.getRating(), hotPlaceImages);
+        hotplace.update(dto.getTitle(), dto.getContent(), address, dto.getRating(), hotPlaceImages, dto.getDeleteImageIds());
         return hotPlaceId;
     }
 

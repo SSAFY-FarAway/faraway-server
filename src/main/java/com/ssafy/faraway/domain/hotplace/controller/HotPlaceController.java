@@ -45,8 +45,8 @@ public class HotPlaceController {
     private final FileExtFilter fileExtFilter;
 
     @PostMapping
-    public Long saveHotPlace(@Valid @RequestPart(value = "request") SaveHotPlaceRequest request,
-                             @RequestPart(value = "files", required = false) List<MultipartFile> files) throws IOException {
+    public Long saveHotPlace(@Valid @RequestPart SaveHotPlaceRequest request,
+                             @RequestPart(required = false) List<MultipartFile> files) throws IOException {
         // TODO: 2023-05-11 로그인 기능 구현 시 수정해야함
         Long memberId = 1L;
         List<UploadFile> uploadFiles = new ArrayList<>();
@@ -85,7 +85,9 @@ public class HotPlaceController {
 
     @GetMapping("/{hotPlaceId}")
     public DetailHotPlaceResponse searchHotPlace(@PathVariable Long hotPlaceId) {
-        DetailHotPlaceResponse response = hotPlaceQueryService.searchById(hotPlaceId);
+        // TODO: 2023-05-19 로그인 기능 구현 시 수정해야함
+        Long loginId = 1L;
+        DetailHotPlaceResponse response = hotPlaceQueryService.searchById(hotPlaceId, loginId);
         if (response == null) {
             throw new CustomException(ErrorCode.HOT_PLACE_NOT_FOUND);
         }
@@ -94,8 +96,8 @@ public class HotPlaceController {
 
     @PutMapping("/{hotPlaceId}")
     public Long updateHotPlace(@PathVariable Long hotPlaceId,
-                               @Valid @RequestPart(value = "request") UpdateHotPlaceRequest request,
-                               @RequestPart(value = "files") List<MultipartFile> files) throws IOException {
+                               @Valid @RequestPart UpdateHotPlaceRequest request,
+                               @RequestPart(required = false) List<MultipartFile> files) throws IOException {
         List<UploadFile> uploadFiles = new ArrayList<>();
 
         if (files != null && !files.isEmpty()) {
@@ -110,13 +112,14 @@ public class HotPlaceController {
                 .mainAddress(request.getMainAddress())
                 .subAddress(request.getSubAddress())
                 .rating(request.getRating())
+                .deleteImageIds(request.getDeleteImageIds())
                 .build();
 
         return hotPlaceService.update(hotPlaceId, dto, uploadFiles);
     }
 
     @DeleteMapping("/{hotPlaceId}")
-    public Long updateHotPlace(@PathVariable Long hotPlaceId) {
+    public Long deleteHotPlace(@PathVariable Long hotPlaceId) {
         return hotPlaceService.delete(hotPlaceId);
     }
 

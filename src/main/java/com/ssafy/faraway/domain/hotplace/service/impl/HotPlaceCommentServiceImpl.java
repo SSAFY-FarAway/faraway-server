@@ -1,5 +1,7 @@
 package com.ssafy.faraway.domain.hotplace.service.impl;
 
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceCommentRepository;
@@ -29,14 +31,16 @@ public class HotPlaceCommentServiceImpl implements HotPlaceCommentService {
 
     @Override
     public Long update(Long commentId, UpdateHotPlaceCommentDto dto) {
-        HotPlaceComment hotPlaceComment = hotPlaceCommentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
+        HotPlaceComment hotPlaceComment = hotPlaceCommentRepository.findById(commentId)
+                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
         hotPlaceComment.update(dto.getContent());
         return commentId;
     }
 
     @Override
     public Long delete(Long commentId) {
-        HotPlaceComment hotPlaceComment = hotPlaceCommentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
+        HotPlaceComment hotPlaceComment = hotPlaceCommentRepository.findById(commentId)
+                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
         hotPlaceCommentRepository.delete(hotPlaceComment);
         return commentId;
     }

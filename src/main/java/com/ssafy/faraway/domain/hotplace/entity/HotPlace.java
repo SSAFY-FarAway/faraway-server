@@ -5,6 +5,7 @@ import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -47,16 +48,25 @@ public class HotPlace extends BaseEntity {
         this.hotPlaceImages = hotPlaceImages;
     }
 
-    public void update(String title, String content, Address address, int rating, List<HotPlaceImage> hotPlaceImages) {
+    public void update(String title, String content, Address address, int rating, List<HotPlaceImage> hotPlaceImages, List<Long> deleteImageId) {
         this.title = title;
         this.content = content;
         this.address = address;
         this.rating = rating;
-        this.hotPlaceImages.clear();
+        updateHotPlaceImages(hotPlaceImages, deleteImageId);
+    }
+
+    private void updateHotPlaceImages(List<HotPlaceImage> hotPlaceImages, List<Long> deleteImageIds) {
+        if (this.hotPlaceImages == null) {
+            this.hotPlaceImages = new ArrayList<>();
+        }
+        for (Long id : deleteImageIds) {
+            this.hotPlaceImages.removeIf(image -> image.getId().equals(id));
+        }
         this.hotPlaceImages.addAll(hotPlaceImages);
     }
 
-    public void updateHit() {
+    public void increaseHit() {
         this.hit++;
     }
 }
