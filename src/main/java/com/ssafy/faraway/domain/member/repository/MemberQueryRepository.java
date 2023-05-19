@@ -11,11 +11,16 @@ import java.util.List;
 
 public interface MemberQueryRepository {
     LoginMemberResponse login(LoginEncMember dto);
+    LoginMemberResponse login(Long memberId);
     Member searchById(Long memberId);
     List<ListMemberResponse> searchAll(Pageable pageable);
     Long SearchIdByLoginId(String loginId);
-    String SearchSaltById(Long id);
+    String SearchSaltById(Long memberId);
     String SearchLoginIdByEmailAndBirth(FindLoginIdRequest request);
-    String SearchLoginPwdById(Long id);
+    String SearchLoginPwdById(Long memberId);
+    String searchRefreshToken(Long memberId);
+
+
+
 
 }

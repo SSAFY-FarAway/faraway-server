@@ -99,6 +99,22 @@ public class MemberServiceImpl implements MemberService{
         return request.getId();
     }
 
+    @Override
+    public Long saveRefreshToken(Long id, String refreshToken) {
+        Member findMember = memberRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
+        findMember.saveRefreshToken(refreshToken);
+        return findMember.getId();
+    }
+
+    @Override
+    public Long deleteRefreshToken(Long id) {
+        Member findMember = memberRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
+        findMember.deleteRefreshToken();
+        return findMember.getId();
+    }
+
     // 암호화한 비밀번호를 가진 DTO create
     private SaveEncMember createSaveMemberDto(SaveMemberRequest request){
         // encrypt password

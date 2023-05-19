@@ -17,4 +17,7 @@ public interface MemberQueryService {
     LoginMemberResponse login(LoginMemberRequest request);
     String searchLoginId(FindLoginIdRequest request);
     boolean checkLoginPwd(CheckLoginPwdRequest request);
+    String searchRefreshToken(Long memberId);
+    LoginMemberResponse searchLoginMemberById(Long memberId);
+
 }

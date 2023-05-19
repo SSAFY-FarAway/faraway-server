@@ -30,7 +30,7 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository{
                 .where(member.id.eq(memberId))
                 .fetchOne();
     }
-
+    @Override
     public LoginMemberResponse login(LoginEncMember dto) {
         return queryFactory
                 .select(Projections.fields(LoginMemberResponse.class,
@@ -79,7 +79,7 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository{
                 .fetch();
     }
 
-
+    @Override
     public Long SearchIdByLoginId(String loginId) {
         return queryFactory
                 .select(member.id)
@@ -89,11 +89,11 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository{
     }
 
     @Override
-    public String SearchSaltById(Long id) {
+    public String SearchSaltById(Long memberId) {
         return queryFactory
                 .select(member.salt)
                 .from(member)
-                .where(member.id.eq(id))
+                .where(member.id.eq(memberId))
                 .fetchOne();
     }
 
@@ -108,11 +108,38 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository{
     }
 
     @Override
-    public String SearchLoginPwdById(Long id) {
+    public String SearchLoginPwdById(Long memberId) {
         return queryFactory
                 .select(member.loginPwd)
                 .from(member)
-                .where(member.id.eq(id))
+                .where(member.id.eq(memberId))
                 .fetchOne();
     }
+
+    @Override
+    public String searchRefreshToken(Long memberId) {
+        return queryFactory
+                .select(member.token)
+                .from(member)
+                .where(member.id.eq(memberId))
+                .fetchOne();
+    }
+
+    @Override
+    public LoginMemberResponse login(Long memberId) {
+        return queryFactory
+                .select(Projections.fields(LoginMemberResponse.class,
+                        member.id,
+                        member.loginId,
+                        member.name.lastName,
+                        member.name.firstName,
+                        member.mileage,
+                        member.role
+                ))
+                .from(member)
+                .where(member.id.eq(memberId))
+                .fetchOne();
+    }
+
+
 }

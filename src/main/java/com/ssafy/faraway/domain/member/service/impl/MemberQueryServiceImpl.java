@@ -83,5 +83,15 @@ public class MemberQueryServiceImpl implements MemberQueryService {
         return true;
     }
 
+    @Override
+    public String searchRefreshToken(Long memberId) {
+        return memberQueryRepository.searchRefreshToken(memberId);
+    }
+
+    @Override
+    public LoginMemberResponse searchLoginMemberById(Long memberId) {
+        return memberQueryRepository.login(memberId);
+    }
+
 
 }
