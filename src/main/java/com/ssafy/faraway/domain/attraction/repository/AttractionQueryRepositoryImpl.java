@@ -3,10 +3,9 @@ package com.ssafy.faraway.domain.attraction.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.attraction.entity.QSido;
-import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
 import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse;
+import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -15,10 +14,10 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ssafy.faraway.domain.attraction.entity.QAttractionDesc.attractionDesc;
 import static com.ssafy.faraway.domain.attraction.entity.QAttractionInfo.attractionInfo;
 import static com.ssafy.faraway.domain.attraction.entity.QGugun.gugun;
 import static com.ssafy.faraway.domain.attraction.entity.QSido.sido;
-import static org.springframework.util.StringUtils.hasText;
 
 @Repository
 @RequiredArgsConstructor
@@ -43,9 +42,11 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
                         attractionInfo.tel,
                         attractionInfo.firstImage,
                         attractionInfo.latitude,
-                        attractionInfo.longitude
+                        attractionInfo.longitude,
+                        attractionDesc.overview
                 ))
                 .from(attractionInfo)
+                .join(attractionInfo.attractionDesc, attractionDesc)
                 .where(attractionInfo.contentId.in(ids))
                 .fetch();
     }
@@ -96,6 +97,7 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
         return queryFactory
                 .select(attractionInfo.contentId)
                 .from(attractionInfo)
+                .join(attractionInfo.attractionDesc, attractionDesc)
                 .where(
                         isSidoCode(condition.getSidoCode()),
                         isGugunCode(condition.getGugunCode()),

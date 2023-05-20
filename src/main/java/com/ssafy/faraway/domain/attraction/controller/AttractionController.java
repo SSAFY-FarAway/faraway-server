@@ -50,8 +50,9 @@ public class AttractionController {
                 .gugunCode(gugunCode)
                 .contentTypeId(contentTypeId)
                 .build();
-        PageRequest pageRequest = PageRequest.of(pageNumber-1, ATTRACTION_SIZE);
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, ATTRACTION_SIZE);
         List<AttractionResponse> responses = attractionQueryService.searchByCondition(condition, pageRequest);
+        log.debug("responses size: {}",responses.size());
         return new ResultPage<>(responses, pageNumber, ATTRACTION_SIZE, attractionQueryService.getPageTotalCnt(condition));
     }
 
