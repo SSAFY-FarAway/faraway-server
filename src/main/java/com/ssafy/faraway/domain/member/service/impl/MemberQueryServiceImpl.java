@@ -50,9 +50,11 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     @Override
     public LoginMemberResponse login(LoginMemberDto dto) {
         Long id = memberQueryRepository.SearchIdByLoginId(dto.getLoginId());
+        if(id == null){
+            return null;
+        }
         String salt = memberQueryRepository.SearchSaltById(id);
         String encLoginPwd = Encrypt.encrypt(dto.getLoginPwd(), salt);
-        System.out.println(salt);
 
         LoginEncMember loginEncMemberDto = LoginEncMember.builder()
                 .loginId(dto.getLoginId())
