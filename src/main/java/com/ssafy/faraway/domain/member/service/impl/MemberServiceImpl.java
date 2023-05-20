@@ -1,9 +1,7 @@
 package com.ssafy.faraway.domain.member.service.impl;
 
 import com.ssafy.faraway.common.util.Encrypt;
-import com.ssafy.faraway.domain.member.dto.req.*;
-import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
-import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
+import com.ssafy.faraway.domain.member.controller.dto.req.*;
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.member.entity.Name;
@@ -11,14 +9,10 @@ import com.ssafy.faraway.domain.member.entity.Role;
 import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.repository.MemberRepository;
 import com.ssafy.faraway.domain.member.service.MemberService;
+import com.ssafy.faraway.domain.member.repository.dto.SaveEncMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 

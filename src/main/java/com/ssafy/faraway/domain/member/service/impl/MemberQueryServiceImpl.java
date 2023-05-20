@@ -1,25 +1,20 @@
 package com.ssafy.faraway.domain.member.service.impl;
 
 import com.ssafy.faraway.common.util.Encrypt;
-import com.ssafy.faraway.domain.member.dto.req.*;
-import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
-import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
-import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
-import com.ssafy.faraway.domain.member.entity.Address;
+import com.ssafy.faraway.domain.member.controller.dto.req.CheckLoginPwdRequest;
+import com.ssafy.faraway.domain.member.controller.dto.req.FindLoginIdRequest;
+import com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse;
+import com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse;
+import com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse;
 import com.ssafy.faraway.domain.member.entity.Member;
-import com.ssafy.faraway.domain.member.entity.Name;
-import com.ssafy.faraway.domain.member.entity.Role;
 import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.service.MemberQueryService;
+import com.ssafy.faraway.domain.member.repository.dto.LoginEncMember;
+import com.ssafy.faraway.domain.member.service.dto.LoginMemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -53,18 +48,17 @@ public class MemberQueryServiceImpl implements MemberQueryService {
         return memberQueryRepository.searchAll(pageable);
     }
     @Override
-    public LoginMemberResponse login(LoginMemberRequest request) {
-        Long id = memberQueryRepository.SearchIdByLoginId(request.getLoginId());
+    public LoginMemberResponse login(LoginMemberDto dto) {
+        Long id = memberQueryRepository.SearchIdByLoginId(dto.getLoginId());
         String salt = memberQueryRepository.SearchSaltById(id);
-        String encLoginPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
+        String encLoginPwd = Encrypt.encrypt(dto.getLoginPwd(), salt);
         System.out.println(salt);
 
-
-        LoginEncMember dto = LoginEncMember.builder()
-                .loginId(request.getLoginId())
+        LoginEncMember loginEncMemberDto = LoginEncMember.builder()
+                .loginId(dto.getLoginId())
                 .loginPwd(encLoginPwd)
                 .build();
-        return memberQueryRepository.login(dto);
+        return memberQueryRepository.login(loginEncMemberDto);
     }
 
     @Override

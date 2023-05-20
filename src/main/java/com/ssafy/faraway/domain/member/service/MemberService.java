@@ -1,8 +1,6 @@
 package com.ssafy.faraway.domain.member.service;
 
-import com.ssafy.faraway.domain.member.dto.req.*;
-import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
-import org.hibernate.sql.Update;
+import com.ssafy.faraway.domain.member.controller.dto.req.*;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional

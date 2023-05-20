@@ -4,7 +4,7 @@ import com.ssafy.faraway.common.domain.BaseEntity;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.util.Encrypt;
-import com.ssafy.faraway.domain.member.dto.req.UpdateMemberRequest;
+import com.ssafy.faraway.domain.member.controller.dto.req.UpdateMemberRequest;
 import lombok.*;
 
 import javax.persistence.*;

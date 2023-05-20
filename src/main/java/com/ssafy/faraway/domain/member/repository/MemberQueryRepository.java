@@ -1,9 +1,9 @@
 package com.ssafy.faraway.domain.member.repository;
 
-import com.ssafy.faraway.domain.member.dto.req.FindLoginIdRequest;
-import com.ssafy.faraway.domain.member.dto.req.LoginEncMember;
-import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
-import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
+import com.ssafy.faraway.domain.member.controller.dto.req.FindLoginIdRequest;
+import com.ssafy.faraway.domain.member.repository.dto.LoginEncMember;
+import com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse;
+import com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.entity.Member;
 import org.springframework.data.domain.Pageable;
 

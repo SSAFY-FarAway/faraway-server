@@ -1,12 +1,15 @@
 package com.ssafy.faraway.domain.member.controller;
 
-import com.ssafy.faraway.domain.member.dto.req.*;
-import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
-import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
-import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
+import com.ssafy.faraway.domain.member.controller.dto.req.*;
+import com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse;
+import com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse;
+import com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse;
 import com.ssafy.faraway.domain.member.service.JwtService;
 import com.ssafy.faraway.domain.member.service.MemberQueryService;
 import com.ssafy.faraway.domain.member.service.MemberService;
+import com.ssafy.faraway.domain.member.service.dto.LoginMemberDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
@@ -19,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -38,26 +40,26 @@ public class MemberController {
 
     // 로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid LoginMemberRequest request) {
+    public Map<String, Object> login(@RequestBody @Valid LoginMemberRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
-        try {
-            LoginMemberResponse response = memberQueryService.login(request);
-            if(response != null){
-                String accessToken = jwtService.createAccessToken("memberId",response.getId());
-                String refreshToken = jwtService.createRefreshToken("memberId",response.getId());
-                memberService.saveRefreshToken(response.getId(), refreshToken);
-//                logger.debug("로그인 accessToken 정보 : {}", accessToken);
-//                logger.debug("로그인 refreshToken 정보 : {}", refreshToken);
-//                session.setAttribute("loginMember", response);
-                resultMap.put("access-token", accessToken);
-                resultMap.put("refresh-token", refreshToken);
-                return new ResponseEntity<>(resultMap, HttpStatus.OK);
-            }else{
-                return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        // dto 변환
+        LoginMemberDto dto = LoginMemberDto.builder()
+                .loginId(request.getLoginId())
+                .loginPwd(request.getLoginPwd())
+                .build();
+        // 응답
+        LoginMemberResponse response = memberQueryService.login(dto);
+
+        if(response != null){
+            String accessToken = jwtService.createAccessToken("memberId",response.getId());
+            String refreshToken = jwtService.createRefreshToken("memberId",response.getId());
+            memberService.saveRefreshToken(response.getId(), refreshToken);
+            resultMap.put("access-token", accessToken);
+            resultMap.put("refresh-token", refreshToken);
+            return resultMap;
+        }else{
+            // 유효하지 않은 아이디, 비밀번호
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }
     }
 
@@ -68,7 +70,6 @@ public class MemberController {
             HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
 
-//        HttpStatus status = HttpStatus.UNAUTHORIZED;
         if (jwtService.checkToken(request.getHeader("access-token"))) {
 //				로그인 사용자 정보.
             LoginMemberResponse response = memberQueryService.searchLoginMemberById(memberId);
@@ -146,6 +147,7 @@ public class MemberController {
         return new ResponseEntity<>("로그아웃 성공.", HttpStatus.OK);
     }
 
+    // 비밀번호 변경
     @PutMapping("/password")
     public ResponseEntity<?> updateLoginPwd(@RequestBody @Valid UpdateLoginPwdRequest request) {
         if(memberService.updateLoginPwd(request) == -1){
@@ -155,9 +157,8 @@ public class MemberController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/")
+    @PutMapping
     public ResponseEntity<?> update(@RequestBody @Valid UpdateMemberRequest request) {
-
         try {
             memberService.updateMember(request);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -195,7 +196,7 @@ public class MemberController {
     }
 
     //회원탈퇴
-    @DeleteMapping("/")
+    @DeleteMapping
     public ResponseEntity<?> delete(@RequestBody @Valid final DeleteMemberRequest request){
         try {
             if(memberService.deleteMember(request) == -1L){

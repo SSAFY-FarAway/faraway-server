@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.member.dto.req;
+package com.ssafy.faraway.domain.member.controller.dto.req;
 
 import lombok.Builder;
 import lombok.Data;
