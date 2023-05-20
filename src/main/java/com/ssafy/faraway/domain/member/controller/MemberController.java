@@ -65,27 +65,30 @@ public class MemberController {
 
     //회원정보 얻기(토큰 기반)
     @GetMapping("/info/{memberId}")
-    public ResponseEntity<Map<String, Object>> getInfo(
+    public Map<String, Object> getInfo(
             @PathVariable("memberId") @ApiParam(value = "인증할 회원의 아이디.", required = true) Long memberId,
             HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
 
         if (jwtService.checkToken(request.getHeader("access-token"))) {
-//				로그인 사용자 정보.
+//			로그인 사용자 정보.
             LoginMemberResponse response = memberQueryService.searchLoginMemberById(memberId);
             resultMap.put("loginMember", response);
         } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            // token이 유효하지 않음
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }
-        return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+        return resultMap;
     }
 
-
     // 회원 상세조회
-    @GetMapping("/{memberId}")
+    @GetMapping("mypage/{memberId}")
     public MemberResponse searchMember(@PathVariable Long memberId){
         MemberResponse response = memberQueryService.searchById(memberId);
         log.debug("response {}",response);
+        if(response == null){
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
+        }
         return response;
     }
 

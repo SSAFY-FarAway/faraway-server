@@ -21,6 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/find",
                         "/member/",
                         "/member/check/**",
+                        "/member/info/**",
                         "/member/login",
                         "/member/login-pwd",
                         "/member/login-id",
