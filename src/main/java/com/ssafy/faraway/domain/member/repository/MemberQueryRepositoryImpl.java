@@ -2,11 +2,11 @@ package com.ssafy.faraway.domain.member.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.member.controller.dto.req.FindLoginIdRequest;
 import com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.member.repository.dto.LoginEncMember;
 import com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse;
+import com.ssafy.faraway.domain.member.service.dto.FindLoginIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -98,12 +98,12 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository{
     }
 
     @Override
-    public String SearchLoginIdByEmailAndBirth(FindLoginIdRequest request) {
+    public String SearchLoginIdByEmailAndBirth(FindLoginIdDto dto) {
         return queryFactory
                 .select(member.loginId)
                 .from(member)
-                .where(member.birth.eq(request.getBirth())
-                        .and(member.email.eq(request.getEmail())))
+                .where(member.birth.eq(dto.getBirth())
+                        .and(member.email.eq(dto.getEmail())))
                 .fetchOne();
     }
 

@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -200,44 +203,48 @@ public class MemberController {
     }
 
     // 아이디 찾기
-    @PostMapping("/login-id")
-    public ResponseEntity<?> searchLoginId(@RequestBody @Valid final FindLoginIdRequest request){
-        try {
-            String loginId = memberQueryService.searchLoginId(request);
-            return new ResponseEntity<>(loginId, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("정확한 정보를 입력해주세요",HttpStatus.BAD_REQUEST);
+    @GetMapping("/login-id")
+    public String searchLoginId(@RequestParam("birth") @NotEmpty(message = "birth's size must not be 6") @Size(min=6, max=6) String birth,
+                                           @RequestParam("email")  @NotEmpty(message = "email must not be empty") @Email String email){
+
+        FindLoginIdDto dto = FindLoginIdDto.builder()
+                .birth(birth)
+                .email(email)
+                .build();
+        String loginId = memberQueryService.searchLoginId(dto);
+        if(loginId == null){
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }
+        return loginId;
     }
 
     //비밀번호 초기화
     @PostMapping("/login-pwd")
-    public ResponseEntity<?> resetLoginPwd(@RequestBody @Valid final ResetLoginPwdRequest request){
-        try {
-            if(memberService.resetLoginPwd(request) == -1L){
-                return new ResponseEntity<>("정확한 정보를 입력해주세요",HttpStatus.BAD_REQUEST);
-            }else{
-                return new ResponseEntity<>("00000000", HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("정확한 정보를 입력해주세요",HttpStatus.BAD_REQUEST);
+    public String resetLoginPwd(@RequestBody @Valid final ResetLoginPwdRequest request){
+        ResetLoginPwdDto dto = ResetLoginPwdDto.builder()
+                .loginId(request.getLoginId())
+                .email(request.getEmail())
+                .birth(request.getBirth())
+                .build();
+        if(memberService.resetLoginPwd(dto) == -1L){
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
+        }else{
+            return "00000000"; // 비밀번호 초기화
         }
+
     }
 
     //회원탈퇴
     @DeleteMapping
-    public ResponseEntity<?> delete(@RequestBody @Valid final DeleteMemberRequest request){
-        try {
-            if(memberService.deleteMember(request) == -1L){
-                return new ResponseEntity<>("비밀번호가 틀렸습니다.",HttpStatus.BAD_REQUEST);
-            }else{
-                return new ResponseEntity<>("회원탈퇴가 정상 처리 되었습니다", HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public String delete(@RequestBody @Valid final DeleteMemberRequest request){
+        DeleteMemberDto dto = DeleteMemberDto.builder()
+                .id(request.getId())
+                .loginPwd(request.getLoginPwd())
+                .build();
+        if(memberService.deleteMember(dto) == -1L){
+            throw new CustomException(ErrorCode.PASSWORD_UNAUTHORIZED_ERROR);
+        }else{
+            return "회원탈퇴가 정상 처리 되었습니다";
         }
     }
 

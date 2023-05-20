@@ -10,9 +10,7 @@ import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.repository.MemberRepository;
 import com.ssafy.faraway.domain.member.service.MemberService;
 import com.ssafy.faraway.domain.member.repository.dto.SaveEncMember;
-import com.ssafy.faraway.domain.member.service.dto.SaveMemberDto;
-import com.ssafy.faraway.domain.member.service.dto.UpdateLoginPwdDto;
-import com.ssafy.faraway.domain.member.service.dto.UpdateMemberDto;
+import com.ssafy.faraway.domain.member.service.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -67,14 +65,14 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Long resetLoginPwd(ResetLoginPwdRequest request) {
-        Member findMember = memberRepository.findByLoginId(request.getLoginId())
+    public Long resetLoginPwd(ResetLoginPwdDto dto) {
+        Member findMember = memberRepository.findByLoginId(dto.getLoginId())
                 .orElseThrow(NoSuchElementException::new);
-        if(!request.getBirth().equals(findMember.getBirth())){
+        if(!dto.getBirth().equals(findMember.getBirth())){
             return -1L;
-        }else if(!request.getLoginId().equals(findMember.getLoginId())){
+        }else if(!dto.getLoginId().equals(findMember.getLoginId())){
             return -1L;
-        }else if(!request.getEmail().equals(findMember.getEmail())){
+        }else if(!dto.getEmail().equals(findMember.getEmail())){
             return -1L;
         }
         findMember.resetLoginPwd();
@@ -82,16 +80,16 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Long deleteMember(DeleteMemberRequest request) {
-        Member findMember = memberRepository.findById(request.getId())
+    public Long deleteMember(DeleteMemberDto dto) {
+        Member findMember = memberRepository.findById(dto.getId())
                 .orElseThrow(NoSuchElementException::new);
         String salt = findMember.getSalt();
-        String inputPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
+        String inputPwd = Encrypt.encrypt(dto.getLoginPwd(), salt);
         if(!inputPwd.equals(findMember.getLoginPwd())){
             return -1L;
         }
-        memberRepository.deleteById(request.getId());
-        return request.getId();
+        memberRepository.deleteById(dto.getId());
+        return dto.getId();
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.ssafy.faraway.domain.member.service.impl;
 
 import com.ssafy.faraway.common.util.Encrypt;
-import com.ssafy.faraway.domain.member.controller.dto.req.CheckLoginPwdRequest;
-import com.ssafy.faraway.domain.member.controller.dto.req.FindLoginIdRequest;
 import com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse;
@@ -11,6 +9,7 @@ import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.service.MemberQueryService;
 import com.ssafy.faraway.domain.member.repository.dto.LoginEncMember;
 import com.ssafy.faraway.domain.member.service.dto.CheckLoginPwdDto;
+import com.ssafy.faraway.domain.member.service.dto.FindLoginIdDto;
 import com.ssafy.faraway.domain.member.service.dto.LoginMemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -65,8 +64,8 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     }
 
     @Override
-    public String searchLoginId(FindLoginIdRequest request) {
-        return memberQueryRepository.SearchLoginIdByEmailAndBirth(request);
+    public String searchLoginId(FindLoginIdDto dto) {
+        return memberQueryRepository.SearchLoginIdByEmailAndBirth(dto);
     }
 
     @Override
