@@ -9,8 +9,7 @@ import com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse;
 import com.ssafy.faraway.domain.member.service.JwtService;
 import com.ssafy.faraway.domain.member.service.MemberQueryService;
 import com.ssafy.faraway.domain.member.service.MemberService;
-import com.ssafy.faraway.domain.member.service.dto.CheckLoginPwdDto;
-import com.ssafy.faraway.domain.member.service.dto.LoginMemberDto;
+import com.ssafy.faraway.domain.member.service.dto.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
@@ -114,10 +113,9 @@ public class MemberController {
                 .build();
 
         if(memberQueryService.checkLoginPwd(dto)){
-
             return "비밀번호가 맞습니다";
         }else{
-            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
+            throw new CustomException(ErrorCode.PASSWORD_UNAUTHORIZED_ERROR);
         }
     }
 
@@ -134,50 +132,71 @@ public class MemberController {
         return new MemberController.ResultPage<>(responses,pageNumber,10);
     }
 
-
     // 회원 가입
     @PostMapping("/sign-up")
-    public ResponseEntity<?> save(@RequestBody @Valid final SaveMemberRequest saveMemberRequest) {
+    public Long save(@RequestBody @Valid final SaveMemberRequest request) {
         try {
-            Long id = memberService.saveMember(saveMemberRequest);
-            return new ResponseEntity<>(id, HttpStatus.OK);
+            SaveMemberDto dto = SaveMemberDto.builder()
+                    .loginId(request.getLoginId())
+                    .loginPwd(request.getLoginPwd())
+                    .lastName(request.getLastName())
+                    .firstName(request.getFirstName())
+                    .birth(request.getBirth())
+                    .email(request.getEmail())
+                    .zipcode(request.getZipcode())
+                    .mainAddress(request.getMainAddress())
+                    .subAddress(request.getSubAddress())
+                    .build();
+            Long id = memberService.saveMember(dto);
+            return id;
         } catch (Exception e) {
+            // INSERT 도중 에러
             e.printStackTrace();
-            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+            throw new CustomException(ErrorCode.BAD_REQUEST);
         }
     }
 
     //로그아웃
     @GetMapping("/logout/{memberId}")
-    public ResponseEntity<?> logout(@PathVariable("memberId") Long memberId) {
-        Map<String, Object> resultMap = new HashMap<>();
+    public String logout(@PathVariable("memberId") Long memberId) {
         String token = memberQueryService.searchRefreshToken(memberId);
         if(token == null){
-            return new ResponseEntity<>("로그인 정보가 없습니다.", HttpStatus.UNAUTHORIZED);
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }
         memberService.deleteRefreshToken(memberId);
-        return new ResponseEntity<>("로그아웃 성공.", HttpStatus.OK);
+        return "로그아웃 성공.";
     }
 
     // 비밀번호 변경
     @PutMapping("/password")
-    public ResponseEntity<?> updateLoginPwd(@RequestBody @Valid UpdateLoginPwdRequest request) {
-        if(memberService.updateLoginPwd(request) == -1){
-//                throw new CustomException(ErrorCode.BAD_REQUEST);
-            return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+    public String updateLoginPwd(@RequestBody @Valid UpdateLoginPwdRequest request) {
+        UpdateLoginPwdDto dto = UpdateLoginPwdDto.builder()
+                .id(request.getId())
+                .currentLoginPwd(request.getCurrentLoginPwd())
+                .newLoginPwd(request.getNewLoginPwd())
+                .build();
 
-    @PutMapping
-    public ResponseEntity<?> update(@RequestBody @Valid UpdateMemberRequest request) {
-        try {
-            memberService.updateMember(request);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("변경 실패",HttpStatus.BAD_REQUEST);
+        if(memberService.updateLoginPwd(dto) == -1){
+                //비밀번호가 일치하지 않음
+                throw new CustomException(ErrorCode.PASSWORD_UNAUTHORIZED_ERROR);
         }
+        return "비밀번호가 성공적으로 변경 되었습니다.";
+    }
+    
+    // 회원정보 수정
+    @PutMapping
+    public Long update(@RequestBody @Valid UpdateMemberRequest request) {
+        UpdateMemberDto dto = UpdateMemberDto.builder()
+                .id(request.getId())
+                .lastName(request.getLastName())
+                .firstName(request.getFirstName())
+                .birth(request.getBirth())
+                .email(request.getEmail())
+                .zipcode(request.getZipcode())
+                .mainAddress(request.getMainAddress())
+                .subAddress(request.getSubAddress())
+                .build();
+        return memberService.updateMember(dto);
     }
 
     // 아이디 찾기

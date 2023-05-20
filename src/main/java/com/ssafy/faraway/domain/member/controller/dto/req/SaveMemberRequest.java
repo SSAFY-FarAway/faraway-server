@@ -32,34 +32,4 @@ public class SaveMemberRequest {
     private String mainAddress;
     @NotEmpty(message = "subAddress must not be empty")
     private String subAddress;
-    private String salt;
-
-//    @Builder
-//    public SaveMemberRequest(String loginId, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress, String salt) {
-//        this.loginId = loginId;
-//        this.loginPwd = loginPwd;
-//        this.lastName = lastName;
-//        this.firstName = firstName;
-//        this.birth = birth;
-//        this.email = email;
-//        this.zipcode = zipcode;
-//        this.mainAddress = mainAddress;
-//        this.subAddress = subAddress;
-//        this.salt = salt;
-//    }
-
-//    public SaveMemberRequest toDto(SaveMemberRequest memberSaveRequestDto, String encodedPwd, String salt) {
-//        return SaveMemberRequest.builder()
-//                .loginId(memberSaveRequestDto.getLoginId())
-//                .loginPwd(encodedPwd)
-//                .lastName(memberSaveRequestDto.getLastName())
-//                .firstName(memberSaveRequestDto.getFirstName())
-//                .birth(memberSaveRequestDto.getBirth())
-//                .email(memberSaveRequestDto.getEmail())
-//                .zipcode(memberSaveRequestDto.getZipcode())
-//                .mainAddress(memberSaveRequestDto.getMainAddress())
-//                .subAddress(memberSaveRequestDto.getSubAddress())
-//                .salt(salt)
-//                .build();
-//    }
 }

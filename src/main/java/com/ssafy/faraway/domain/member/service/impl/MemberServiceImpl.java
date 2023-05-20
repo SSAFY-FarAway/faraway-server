@@ -10,6 +10,9 @@ import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.repository.MemberRepository;
 import com.ssafy.faraway.domain.member.service.MemberService;
 import com.ssafy.faraway.domain.member.repository.dto.SaveEncMember;
+import com.ssafy.faraway.domain.member.service.dto.SaveMemberDto;
+import com.ssafy.faraway.domain.member.service.dto.UpdateLoginPwdDto;
+import com.ssafy.faraway.domain.member.service.dto.UpdateMemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +22,12 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
-    private final MemberQueryRepository memberQueryRepository;
     private final MemberRepository memberRepository;
 
     @Override
-    public Long saveMember(SaveMemberRequest request) {
-        SaveEncMember dto = createSaveMemberDto(request);
-        Member member = createMember(dto);
-//        System.out.println(member);
+    public Long saveMember(SaveMemberDto dto) {
+        SaveEncMember EncDto = createSaveMemberDto(dto);
+        Member member = createMember(EncDto);
         Member saveMember = memberRepository.save(member);
         return saveMember.getId();
     }
@@ -39,29 +40,29 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Long updateLoginPwd(UpdateLoginPwdRequest request) {
-        Member findMember = memberRepository.findById(request.getId())
+    public Long updateLoginPwd(UpdateLoginPwdDto dto) {
+        Member findMember = memberRepository.findById(dto.getId())
                 .orElseThrow(NoSuchElementException::new);
         // 기존 암호화된 비밀번호
         String oldPwd = findMember.getLoginPwd();
         // salt
         String salt = findMember.getSalt();
         //유저가 입력한 기존 암호화된 비밀번호
-        String inputPwd = Encrypt.encrypt(request.getCurrentLoginPwd(),salt);
+        String inputPwd = Encrypt.encrypt(dto.getCurrentLoginPwd(),salt);
         // 비교
         if(!oldPwd.equals(inputPwd)){
             return -1L;
         }
-        String newPwd = Encrypt.encrypt(request.getNewLoginPwd(), salt);
+        String newPwd = Encrypt.encrypt(dto.getNewLoginPwd(), salt);
         findMember.changeLoginPwd(inputPwd, newPwd);
         return findMember.getId();
     }
 
     @Override
-    public Long updateMember(UpdateMemberRequest request) {
-        Member findMember = memberRepository.findById(request.getId())
+    public Long updateMember(UpdateMemberDto dto) {
+        Member findMember = memberRepository.findById(dto.getId())
                 .orElseThrow(NoSuchElementException::new);
-        findMember.changeMember(request);
+        findMember.changeMember(dto);
         return findMember.getId();
     }
 
@@ -110,29 +111,29 @@ public class MemberServiceImpl implements MemberService{
     }
 
     // 암호화한 비밀번호를 가진 DTO create
-    private SaveEncMember createSaveMemberDto(SaveMemberRequest request){
+    private SaveEncMember createSaveMemberDto(SaveMemberDto dto){
         // encrypt password
         String salt = Encrypt.createSalt();
-        String encodedLoginPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
+        String encodedLoginPwd = Encrypt.encrypt(dto.getLoginPwd(), salt);
 
         // make Name, Address class
         Name memberName = Name.builder()
-                .lastName(request.getLastName())
-                .firstName(request.getFirstName())
+                .lastName(dto.getLastName())
+                .firstName(dto.getFirstName())
                 .build();
 
         Address memberAddress = Address.builder()
-                .zipcode(request.getZipcode())
-                .mainAddress(request.getMainAddress())
-                .subAddress(request.getSubAddress())
+                .zipcode(dto.getZipcode())
+                .mainAddress(dto.getMainAddress())
+                .subAddress(dto.getSubAddress())
                 .build();
 
         return SaveEncMember.builder()
-                .loginId(request.getLoginId())
+                .loginId(dto.getLoginId())
                 .loginPwd(encodedLoginPwd)
                 .name(memberName)
-                .birth(request.getBirth())
-                .email(request.getEmail())
+                .birth(dto.getBirth())
+                .email(dto.getEmail())
                 .address(memberAddress)
                 .salt(salt)
                 .build();

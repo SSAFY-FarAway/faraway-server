@@ -5,6 +5,7 @@ import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.util.Encrypt;
 import com.ssafy.faraway.domain.member.controller.dto.req.UpdateMemberRequest;
+import com.ssafy.faraway.domain.member.service.dto.UpdateMemberDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -61,24 +62,24 @@ public class Member extends BaseEntity {
     // 비즈니스 로직
     public void changeLoginPwd(String currentLoginPw, String newLoginPw){
         if (!this.loginPwd.equals(currentLoginPw)) {
-            throw new CustomException(ErrorCode.BAD_REQUEST);
+            throw new CustomException(ErrorCode.BAD_REQUEST_SAME_PWD_TWICE);
         }
         this.loginPwd = newLoginPw;
     }
 
-    public void changeMember(UpdateMemberRequest request){
+    public void changeMember(UpdateMemberDto dto){
         Name updateName = Name.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
                 .build();
         Address updateAddress = Address.builder()
-                .mainAddress(request.getMainAddress())
-                .subAddress(request.getSubAddress())
-                .zipcode(request.getZipcode())
+                .mainAddress(dto.getMainAddress())
+                .subAddress(dto.getSubAddress())
+                .zipcode(dto.getZipcode())
                 .build();
         this.name = updateName;
-        this.birth = request.getBirth();
-        this.email = request.getEmail();
+        this.birth = dto.getBirth();
+        this.email = dto.getEmail();
         this.address = updateAddress;
     }
 
