@@ -6,6 +6,7 @@ import com.ssafy.faraway.domain.member.controller.dto.req.LoginMemberRequest;
 import com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse;
 import com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse;
+import com.ssafy.faraway.domain.member.service.dto.CheckLoginPwdDto;
 import com.ssafy.faraway.domain.member.service.dto.LoginMemberDto;
 import org.springframework.data.domain.Pageable;
 
@@ -16,7 +17,7 @@ public interface MemberQueryService {
     List<ListMemberResponse> searchAll(Pageable pageable);
     LoginMemberResponse login(LoginMemberDto dto);
     String searchLoginId(FindLoginIdRequest request);
-    boolean checkLoginPwd(CheckLoginPwdRequest request);
+    boolean checkLoginPwd(CheckLoginPwdDto dto);
     String searchRefreshToken(Long memberId);
     LoginMemberResponse searchLoginMemberById(Long memberId);
 

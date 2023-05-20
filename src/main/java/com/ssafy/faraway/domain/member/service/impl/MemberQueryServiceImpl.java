@@ -10,6 +10,7 @@ import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.service.MemberQueryService;
 import com.ssafy.faraway.domain.member.repository.dto.LoginEncMember;
+import com.ssafy.faraway.domain.member.service.dto.CheckLoginPwdDto;
 import com.ssafy.faraway.domain.member.service.dto.LoginMemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -69,10 +70,13 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     }
 
     @Override
-    public boolean checkLoginPwd(CheckLoginPwdRequest request) {
-        String loginPwd = memberQueryRepository.SearchLoginPwdById(request.getId());
-        String salt = memberQueryRepository.SearchSaltById(request.getId());
-        String inputPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
+    public boolean checkLoginPwd(CheckLoginPwdDto dto) {
+        String loginPwd = memberQueryRepository.SearchLoginPwdById(dto.getId());
+        if(loginPwd == null){
+            return false;
+        }
+        String salt = memberQueryRepository.SearchSaltById(dto.getId());
+        String inputPwd = Encrypt.encrypt(dto.getLoginPwd(), salt);
         if(!loginPwd.equals(inputPwd)){
             return false;
         }

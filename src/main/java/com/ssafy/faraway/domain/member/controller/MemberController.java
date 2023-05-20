@@ -9,6 +9,7 @@ import com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse;
 import com.ssafy.faraway.domain.member.service.JwtService;
 import com.ssafy.faraway.domain.member.service.MemberQueryService;
 import com.ssafy.faraway.domain.member.service.MemberService;
+import com.ssafy.faraway.domain.member.service.dto.CheckLoginPwdDto;
 import com.ssafy.faraway.domain.member.service.dto.LoginMemberDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -94,21 +95,29 @@ public class MemberController {
 
     // 아이디 중복 검사
     @GetMapping("/check/{loginId}") //countByLoginId
-    public ResponseEntity<?> checkLoginId(@PathVariable("loginId") String loginId) {
+    public int checkLoginId(@PathVariable("loginId") String loginId) {
         int cnt = 0;
         if(memberService.checkLoginId(loginId)){
             cnt = 1;
+        }else{
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }
-        return new ResponseEntity<>(cnt + "", HttpStatus.OK);
+        return cnt;
     }
 
-    // 입력한 비밀번호가 맞는지 확인
+    // 유저가 입력한 비밀번호가 맞는지 확인
     @PostMapping("/check")
-    public ResponseEntity<?> checkLoginPwd(@RequestBody @Valid final CheckLoginPwdRequest request) {
-        if(memberQueryService.checkLoginPwd(request)){
-            return new ResponseEntity<>("비밀번호가 맞습니다", HttpStatus.OK);
+    public String checkLoginPwd(@RequestBody @Valid final CheckLoginPwdRequest request) {
+        CheckLoginPwdDto dto = CheckLoginPwdDto.builder()
+                .id(request.getId())
+                .loginPwd(request.getLoginPwd())
+                .build();
+
+        if(memberQueryService.checkLoginPwd(dto)){
+
+            return "비밀번호가 맞습니다";
         }else{
-            return new ResponseEntity<>("비밀번호가 틀립니다", HttpStatus.BAD_REQUEST);
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }
     }
 
