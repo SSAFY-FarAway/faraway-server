@@ -53,6 +53,7 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
                         post.category.categoryName,
                         post.title,
                         post.hit,
+                        post.likes.size().as("likeCnt"),
                         post.createdDate
                 ))
                 .from(post)
