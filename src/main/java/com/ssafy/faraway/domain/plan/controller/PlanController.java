@@ -1,7 +1,10 @@
 package com.ssafy.faraway.domain.plan.controller;
 
 import com.ssafy.faraway.common.domain.ResultPage;
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.util.SizeConstants;
+import com.ssafy.faraway.domain.member.service.JwtService;
 import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanCommentRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanCommentRequest;
@@ -36,17 +39,17 @@ public class PlanController {
     private final PlanService planService;
     private final PlanQueryService planQueryService;
     private final PlanCommentService planCommentService;
+    private final JwtService jwtService;
 
     @PostMapping
     public Long savePlan(@Valid @RequestBody final SavePlanRequest request) {
-        // TODO: 최영환 2023-05-15 로그인 기능 처리 후 변경해야함
-        Long memberId = 1L;
+        Long loginId = jwtService.getMemberId();
         SavePlanDto dto = SavePlanDto.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
                 .travelPlan(request.getTravelPlan())
                 .build();
-        return planService.save(dto, memberId);
+        return planService.save(dto, loginId);
     }
 
     @GetMapping
@@ -67,7 +70,12 @@ public class PlanController {
 
     @GetMapping("/{planId}")
     public DetailPlanResponse searchPlan(@PathVariable Long planId) {
-        return planQueryService.searchById(planId);
+        Long loginId = jwtService.getMemberId();
+        DetailPlanResponse response = planQueryService.searchById(planId, loginId);
+        if (response == null) {
+            throw new CustomException(ErrorCode.PLAN_NOT_FOUND);
+        }
+        return response;
     }
 
     @PutMapping("/{planId}")
@@ -84,12 +92,11 @@ public class PlanController {
     @PostMapping("/{planId}/comment")
     public Long savePlanComment(@PathVariable Long planId,
                                 @Valid @RequestBody final SavePlanCommentRequest request) {
-        // TODO: 최영환 2023-05-15 로그인 기능 처리 후 변경해야함
-        Long memberId = 1L;
+        Long loginId = jwtService.getMemberId();
         SavePlanCommentDto dto = SavePlanCommentDto.builder()
                 .content(request.getContent())
                 .build();
-        return planCommentService.save(planId, memberId, dto);
+        return planCommentService.save(planId, loginId, dto);
     }
 
     @PutMapping("/comment/{commentId}")

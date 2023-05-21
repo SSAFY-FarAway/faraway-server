@@ -36,9 +36,11 @@ public class PlanQueryServiceImpl implements PlanQueryService {
 
     @Transactional
     @Override
-    public DetailPlanResponse searchById(Long planId) {
+    public DetailPlanResponse searchById(Long planId, Long loginId) {
         Plan plan = planQueryRepository.searchById(planId);
-        plan.updateHit();
+        if (!plan.getMember().getId().equals(loginId)) {
+            plan.updateHit();
+        }
         List<PlanCommentResponse> commentResponses = getCommentResponses(plan);
         List<AttractionResponse> attractionResponses = rearrangeResponses(plan);
         int[] shortestPath = getShortestPath(attractionResponses);
