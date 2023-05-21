@@ -104,4 +104,9 @@ public class PlanController {
                                   @Valid @RequestBody final UpdatePlanCommentRequest request) {
         return planCommentService.update(commentId, request);
     }
+
+    @DeleteMapping("/comment/{commentId}")
+    public Long deletePlanComment(@PathVariable Long commentId) {
+        return planCommentService.delete(commentId);
+    }
 }
