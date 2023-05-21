@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.hotplace.service.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -24,5 +25,8 @@ public class UpdateHotPlaceDto {
         this.subAddress = subAddress;
         this.rating = rating;
         this.deleteImageIds = deleteImageIds;
+        if (this.deleteImageIds == null || this.deleteImageIds.isEmpty()) {
+            this.deleteImageIds = new ArrayList<>();
+        }
     }
 }

@@ -17,6 +17,7 @@ import com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceCommentDto;
 import com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceDto;
 import com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceCommentDto;
 import com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceDto;
+import com.ssafy.faraway.domain.member.service.JwtService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,12 +44,12 @@ public class HotPlaceController {
     private final HotPlaceCommentService hotPlaceCommentService;
     private final FileStore fileStore;
     private final FileExtFilter fileExtFilter;
+    private final JwtService jwtService;
 
     @PostMapping
     public Long saveHotPlace(@Valid @RequestPart SaveHotPlaceRequest request,
                              @RequestPart(required = false) List<MultipartFile> files) throws IOException {
-        // TODO: 2023-05-11 로그인 기능 구현 시 수정해야함
-        Long memberId = 1L;
+        Long loginId = jwtService.getMemberId();
         List<UploadFile> uploadFiles = new ArrayList<>();
 
         if (files != null && !files.isEmpty()) {
@@ -65,7 +66,7 @@ public class HotPlaceController {
                 .rating(request.getRating())
                 .build();
 
-        return hotPlaceService.save(memberId, dto, uploadFiles);
+        return hotPlaceService.save(loginId, dto, uploadFiles);
     }
 
     @GetMapping
@@ -85,8 +86,7 @@ public class HotPlaceController {
 
     @GetMapping("/{hotPlaceId}")
     public DetailHotPlaceResponse searchHotPlace(@PathVariable Long hotPlaceId) {
-        // TODO: 2023-05-19 로그인 기능 구현 시 수정해야함
-        Long loginId = 1L;
+        Long loginId = jwtService.getMemberId();
         DetailHotPlaceResponse response = hotPlaceQueryService.searchById(hotPlaceId, loginId);
         if (response == null) {
             throw new CustomException(ErrorCode.HOT_PLACE_NOT_FOUND);
@@ -126,11 +126,10 @@ public class HotPlaceController {
     @PostMapping("/{hotPlaceId}/comment")
     public Long saveHotPlaceComment(@PathVariable Long hotPlaceId,
                                     @Valid @RequestBody SaveHotPlaceCommentRequest request) {
-        // TODO: 2023-05-11 로그인 구현 시 수정
-        Long memberId = 1L;
+        Long loginId = jwtService.getMemberId();
         SaveHotPlaceCommentDto dto = SaveHotPlaceCommentDto.builder()
                 .content(request.getContent()).build();
-        return hotPlaceCommentService.save(hotPlaceId, memberId, dto);
+        return hotPlaceCommentService.save(hotPlaceId, loginId, dto);
     }
 
     @PutMapping("/comment/{commentId}")
