@@ -63,7 +63,7 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
         return queryFactory
                 .select(plan.count())
                 .from(plan)
-                .join(plan.member, member).fetchJoin()
+                .join(plan.member, member)
                 .where(
                         isTitle(condition.getTitle()),
                         isContent(condition.getContent())
