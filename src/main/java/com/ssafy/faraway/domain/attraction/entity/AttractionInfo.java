@@ -7,9 +7,9 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
 public class AttractionInfo {
     @Id
+    @Column(name = "content_id")
     private int contentId;
     @Column(nullable = false)
     private int contentTypeId;
@@ -34,12 +34,14 @@ public class AttractionInfo {
     @ManyToOne
     @JoinColumn(name = "gugun_code")
     private Gugun gugun;
+    @OneToOne(mappedBy = "attractionInfo")
+    private AttractionDesc attractionDesc;
     private double latitude;
     private double longitude;
     private String mLevel;
 
     @Builder
-    public AttractionInfo(int contentId, int contentTypeId, String title, String addr1, String addr2, String zipcode, String tel, String firstImage, String firstImage2, int readCount, Sido sido, Gugun gugun, double latitude, double longitude, String mLevel) {
+    public AttractionInfo(int contentId, int contentTypeId, String title, String addr1, String addr2, String zipcode, String tel, String firstImage, String firstImage2, int readCount, Sido sido, Gugun gugun, AttractionDesc attractionDesc, double latitude, double longitude, String mLevel) {
         this.contentId = contentId;
         this.contentTypeId = contentTypeId;
         this.title = title;
@@ -52,6 +54,7 @@ public class AttractionInfo {
         this.readCount = readCount;
         this.sido = sido;
         this.gugun = gugun;
+        this.attractionDesc = attractionDesc;
         this.latitude = latitude;
         this.longitude = longitude;
         this.mLevel = mLevel;

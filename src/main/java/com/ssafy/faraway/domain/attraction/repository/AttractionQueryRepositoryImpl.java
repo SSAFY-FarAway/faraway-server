@@ -3,18 +3,19 @@ package com.ssafy.faraway.domain.attraction.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.attraction.entity.QSido;
-import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
 import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse;
+import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ssafy.faraway.domain.attraction.entity.QAttractionDesc.attractionDesc;
 import static com.ssafy.faraway.domain.attraction.entity.QAttractionInfo.attractionInfo;
 import static com.ssafy.faraway.domain.attraction.entity.QGugun.gugun;
 import static com.ssafy.faraway.domain.attraction.entity.QSido.sido;
@@ -43,9 +44,11 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
                         attractionInfo.tel,
                         attractionInfo.firstImage,
                         attractionInfo.latitude,
-                        attractionInfo.longitude
+                        attractionInfo.longitude,
+                        attractionDesc.overview
                 ))
                 .from(attractionInfo)
+                .join(attractionInfo.attractionDesc, attractionDesc)
                 .where(attractionInfo.contentId.in(ids))
                 .fetch();
     }
@@ -96,10 +99,13 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
         return queryFactory
                 .select(attractionInfo.contentId)
                 .from(attractionInfo)
+                .join(attractionInfo.attractionDesc, attractionDesc)
                 .where(
                         isSidoCode(condition.getSidoCode()),
                         isGugunCode(condition.getGugunCode()),
-                        isContentTypeId(condition.getContentTypeId())
+                        isContentTypeId(condition.getContentTypeId()),
+                        isTitle(condition.getTitle()),
+                        isAddress(condition.getAddress())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -118,7 +124,15 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
         return hasCondition(gugunCode) ? attractionInfo.gugun.gugunCode.eq(gugunCode) : null;
     }
 
-    private BooleanExpression isContentTypeId(Integer ContentTypeId) {
-        return hasCondition(ContentTypeId) ? attractionInfo.contentTypeId.eq(ContentTypeId) : null;
+    private BooleanExpression isContentTypeId(Integer contentTypeId) {
+        return hasCondition(contentTypeId) ? attractionInfo.contentTypeId.eq(contentTypeId) : null;
+    }
+
+    private BooleanExpression isTitle(String title) {
+        return hasText(title) ? attractionInfo.title.like("%" + title + "%") : null;
+    }
+
+    private BooleanExpression isAddress(String address) {
+        return hasText(address) ? attractionInfo.addr1.like("%" + address + "%") : null;
     }
 }
