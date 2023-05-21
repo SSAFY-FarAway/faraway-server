@@ -250,7 +250,7 @@ public class MemberController {
 
     //Access Token 재발급 -> access token 만료 시 재발급
     @PostMapping("/refresh")
-    public ResponseEntity<?> refreshToken(@RequestBody LoginMemberResponse response, HttpServletRequest request) {
+    public Map<String, Object> refreshToken(@RequestBody LoginMemberResponse response, HttpServletRequest request) {
         log.debug("error 발생 시점 체크");
         Map<String, Object> resultMap = new HashMap<>();
 //        HttpStatus status = HttpStatus.ACCEPTED;
@@ -262,9 +262,9 @@ public class MemberController {
                 resultMap.put("access-token", accessToken);
             }
         } else {
-            return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.UNAUTHORIZED);
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }
-        return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+        return resultMap;
     }
 
 

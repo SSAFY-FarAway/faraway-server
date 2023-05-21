@@ -16,27 +16,33 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/",
-                        "/login",
-                        "/sign-up",
-                        "/find",
-                        "/member/",
-                        "/member/check/**",
-                        "/member/info/**",
-                        "/member/login",
-                        "/member/login-pwd",
-                        "/member/login-id",
-                        "/member/sign-up",
-                        "/search_place",
-                        "/attraction/**",
-                        "/plan-list",
-                        "/hotplace-list",
-                        "/post-list",
+//                        "/member",
+                        "/member/check/**", // 아이디 중복 검사
+                        "/member/check", // 비밀번호 확인
+                        "/member/login", // 로그인
+                        "/member/login-pwd", // 비밀번호 초기화
+                        "/member/login-id", // 아이디 찾기
+                        "/member/sign-up", // 회원가입
+//                       -----Member------
+                        "/attraction/**", // 시도,구군
+                        "/attraction", // searchAttractions
+//                       -----Attraction------
+                        "/hot-place/**", // 조회, 상세조회 , update, delete도 포함됨!! url 수정 필요
+//                       -----Hotplace------
+                        "/plan/**", // 조회, 상세조회 , update, delete도 포함됨
+//                       -----Plan------
+                        "/post/**", // 조회, 상세조회 , update, delete도 포함됨
+//                       -----Post------
+//                        "/search_place",
+//                        "/plan-list",
+//                        "/hotplace-list",
+//                        "/post-list",
                         "/swagger-ui/**",
                         "/swagger-resources/**",
                         "/resources/static/**",
-                        "/v2/api-docs",
-                        "/plan-view/**",
-                        "/plan/**"
+                        "/v2/api-docs"
+//                        "/plan-view/**",
+//                        "/plan/**"
                 );
     }
 }
