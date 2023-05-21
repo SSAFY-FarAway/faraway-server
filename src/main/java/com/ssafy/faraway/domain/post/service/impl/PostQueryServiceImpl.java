@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.post.service.impl;
 
+import com.ssafy.faraway.domain.post.repository.PostLikeQueryRepository;
 import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
 import com.ssafy.faraway.domain.post.controller.dto.res.AttachmentResponse;
 import com.ssafy.faraway.domain.post.controller.dto.res.PostResponse;
@@ -22,6 +23,7 @@ import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
 @RequiredArgsConstructor
 public class PostQueryServiceImpl implements PostQueryService {
     private final PostQueryRepository postQueryRepository;
+    private final PostLikeQueryRepository postLikeQueryRepository;
 
     @Transactional
     @Override
@@ -40,6 +42,8 @@ public class PostQueryServiceImpl implements PostQueryService {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .hit(post.getHit())
+                .likeCnt(post.getLikes().size())
+                .likeId(postLikeQueryRepository.searchIdByCondition(loginId, postId))
                 .postCommentResponses(commentResponses)
                 .attachmentResponses(attachmentResponses)
                 .createdDate(post.getCreatedDate())

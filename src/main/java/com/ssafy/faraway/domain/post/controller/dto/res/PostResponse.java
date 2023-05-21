@@ -15,16 +15,18 @@ public class PostResponse {
     private String categoryName;
     private String title;
     private int hit;
+    private int likeCnt;
     private LocalDateTime createdDate;
 
     @Builder
-    public PostResponse(Long id, Long memberId, String loginId, String categoryName, String title, int hit, LocalDateTime createdDate) {
+    public PostResponse(Long id, Long memberId, String loginId, String categoryName, String title, int hit, int likeCnt, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
         this.categoryName = categoryName;
         this.title = title;
         this.hit = hit;
+        this.likeCnt = likeCnt;
         this.createdDate = createdDate;
     }
 }

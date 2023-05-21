@@ -7,17 +7,16 @@ import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.util.FileExtFilter;
 import com.ssafy.faraway.domain.member.service.JwtService;
-import com.ssafy.faraway.domain.post.controller.dto.req.UpdatePostCommentRequest;
+import com.ssafy.faraway.domain.post.controller.dto.req.*;
 import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
-import com.ssafy.faraway.domain.post.controller.dto.req.SavePostCommentRequest;
-import com.ssafy.faraway.domain.post.controller.dto.req.SavePostRequest;
-import com.ssafy.faraway.domain.post.controller.dto.req.UpdatePostRequest;
 import com.ssafy.faraway.domain.post.controller.dto.res.PostResponse;
 import com.ssafy.faraway.domain.post.controller.dto.res.DetailPostResponse;
 import com.ssafy.faraway.domain.post.service.PostCommentService;
+import com.ssafy.faraway.domain.post.service.PostLikeService;
 import com.ssafy.faraway.domain.post.service.PostQueryService;
 import com.ssafy.faraway.domain.post.service.PostService;
 import com.ssafy.faraway.domain.post.service.dto.SavePostDto;
+import com.ssafy.faraway.domain.post.service.dto.SavePostLikeDto;
 import com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto;
 import com.ssafy.faraway.domain.post.service.dto.UpdatePostDto;
 import io.swagger.annotations.Api;
@@ -44,6 +43,7 @@ public class PostController {
     private final PostService postService;
     private final PostQueryService postQueryService;
     private final PostCommentService postCommentService;
+    private final PostLikeService postLikeService;
     private final FileStore fileStore;
     private final FileExtFilter fileExtFilter;
     private final JwtService jwtService;
@@ -136,5 +136,19 @@ public class PostController {
     @DeleteMapping("/comment/{commentId}")
     public Long deletePostComment(@PathVariable Long commentId) {
         return postCommentService.delete(commentId);
+    }
+
+    @PostMapping("/like")
+    public Long savePostLike(@Valid @RequestBody SavePostLikeRequest request) {
+        SavePostLikeDto dto = SavePostLikeDto.builder()
+                .postId(request.getPostId())
+                .memberId(request.getMemberId())
+                .build();
+        return postLikeService.save(dto);
+    }
+
+    @DeleteMapping("/like/{likeId}")
+    public Long deletePostLike(@PathVariable Long likeId) {
+        return postLikeService.delete(likeId);
     }
 }

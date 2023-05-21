@@ -28,24 +28,26 @@ public class Post extends BaseEntity {
     private List<PostComment> postComments;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attachment> attachments;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostLike> likes;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private Category category;
-
     @Builder
-    public Post(Long id, String title, String content, int hit, List<PostComment> postComments, List<Attachment> attachments, Member member, Category category) {
+    public Post(Long id, String title, String content, int hit, List<PostComment> postComments, List<Attachment> attachments, List<PostLike> likes, Category category, Member member) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.hit = hit;
         this.postComments = postComments;
         this.attachments = attachments;
-        this.member = member;
+        this.likes = likes;
         this.category = category;
+        this.member = member;
     }
 
     public void update(String title, String content, List<Attachment> attachments, List<Long> deleteAttachmentIds) {

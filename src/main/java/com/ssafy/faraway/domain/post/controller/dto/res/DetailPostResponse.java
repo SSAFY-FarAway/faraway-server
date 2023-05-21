@@ -15,12 +15,14 @@ public class DetailPostResponse {
     private String title;
     private String content;
     private int hit;
+    private int likeCnt;
+    private Long likeId;
     private LocalDateTime createdDate;
     private List<PostCommentResponse> postCommentResponses;
     private List<AttachmentResponse> attachmentResponses;
 
     @Builder
-    public DetailPostResponse(Long id, Long memberId, String loginId, String categoryName, String title, String content, int hit, LocalDateTime createdDate, List<PostCommentResponse> postCommentResponses, List<AttachmentResponse> attachmentResponses) {
+    public DetailPostResponse(Long id, Long memberId, String loginId, String categoryName, String title, String content, int hit, int likeCnt, Long likeId, LocalDateTime createdDate, List<PostCommentResponse> postCommentResponses, List<AttachmentResponse> attachmentResponses) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
@@ -28,6 +30,8 @@ public class DetailPostResponse {
         this.title = title;
         this.content = content;
         this.hit = hit;
+        this.likeCnt = likeCnt;
+        this.likeId = likeId;
         this.createdDate = createdDate;
         this.postCommentResponses = postCommentResponses;
         this.attachmentResponses = attachmentResponses;
