@@ -75,6 +75,7 @@ public class MemberController {
 
         if (jwtService.checkToken(request.getHeader("access-token"))) {
 //			로그인 사용자 정보.
+//            jwtService.getUserId();
             LoginMemberResponse response = memberQueryService.searchLoginMemberById(memberId);
             resultMap.put("loginMember", response);
         } else {
@@ -89,6 +90,7 @@ public class MemberController {
     public MemberResponse searchMember(@PathVariable Long memberId){
         MemberResponse response = memberQueryService.searchById(memberId);
         log.debug("response {}",response);
+        System.out.println("@@@@@@@@memberID : " + jwtService.getMembeId());
         if(response == null){
             throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }
