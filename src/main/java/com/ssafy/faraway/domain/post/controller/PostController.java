@@ -146,4 +146,9 @@ public class PostController {
                 .build();
         return postLikeService.save(dto);
     }
+
+    @DeleteMapping("/like/{likeId}")
+    public Long deletePostLike(@PathVariable Long likeId) {
+        return postLikeService.delete(likeId);
+    }
 }

@@ -1,5 +1,7 @@
 package com.ssafy.faraway.domain.post.service.impl;
 
+import com.ssafy.faraway.common.exception.entity.CustomException;
+import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.entity.PostLike;
@@ -20,5 +22,13 @@ public class PostLikeServiceImpl implements PostLikeService {
                 .post(Post.builder().id(dto.getPostId()).build())
                 .build();
         return postLikeRepository.save(like).getId();
+    }
+
+    @Override
+    public Long delete(Long likeId) {
+        PostLike like = postLikeRepository.findById(likeId)
+                .orElseThrow(() -> new CustomException(ErrorCode.BAD_REQUEST));
+        postLikeRepository.delete(like);
+        return likeId;
     }
 }
