@@ -1,18 +1,17 @@
 package com.ssafy.faraway.domain.member.service;
 
-import com.ssafy.faraway.domain.member.dto.req.*;
-import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
-import org.hibernate.sql.Update;
+import com.ssafy.faraway.domain.member.controller.dto.req.*;
+import com.ssafy.faraway.domain.member.service.dto.*;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface MemberService {
-    Long saveMember(SaveMemberRequest dto);
+    Long saveMember(SaveMemberDto dto);
     boolean checkLoginId(String loginId);
-    Long updateLoginPwd(UpdateLoginPwdRequest request);
-    Long updateMember(UpdateMemberRequest request);
-    Long resetLoginPwd(ResetLoginPwdRequest request);
-    Long deleteMember(DeleteMemberRequest request);
+    Long updateLoginPwd(UpdateLoginPwdDto dto);
+    Long updateMember(UpdateMemberDto dto);
+    Long resetLoginPwd(ResetLoginPwdDto dto);
+    Long deleteMember(DeleteMemberDto dto);
     Long saveRefreshToken(Long id, String refreshToken);
     Long deleteRefreshToken(Long id);
 

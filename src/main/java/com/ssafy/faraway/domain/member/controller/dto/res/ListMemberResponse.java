@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.member.dto.res;
+package com.ssafy.faraway.domain.member.controller.dto.res;
 
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Name;
