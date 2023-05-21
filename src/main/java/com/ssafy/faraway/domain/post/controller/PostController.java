@@ -6,6 +6,7 @@ import com.ssafy.faraway.common.domain.UploadFile;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.util.FileExtFilter;
+import com.ssafy.faraway.domain.member.service.JwtService;
 import com.ssafy.faraway.domain.post.controller.dto.req.UpdatePostCommentRequest;
 import com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition;
 import com.ssafy.faraway.domain.post.controller.dto.req.SavePostCommentRequest;
@@ -45,12 +46,12 @@ public class PostController {
     private final PostCommentService postCommentService;
     private final FileStore fileStore;
     private final FileExtFilter fileExtFilter;
+    private final JwtService jwtService;
 
     @PostMapping
     public Long savePost(@Valid @RequestPart SavePostRequest request,
                          @RequestPart(required = false) List<MultipartFile> files) throws IOException {
-        // TODO: 최영환 2023-05-10 회원 구현되면 변경해야함
-        Long memberId = 1L;
+        Long memberId = jwtService.getMemberId();
         List<UploadFile> uploadFiles = new ArrayList<>();
 
         if (files != null && !files.isEmpty()) {
@@ -69,9 +70,8 @@ public class PostController {
 
     @GetMapping("/{postId}")
     public DetailPostResponse searchPost(@PathVariable Long postId) {
-        // TODO: 2023-05-19 로그인 처리 후 수정해야함. 조회수 증가 처리용(본인의 글 조회 시 조회수 증가 X)
-        Long loginId = 1L;
-        DetailPostResponse response = postQueryService.searchById(postId, loginId);
+        Long memberId = jwtService.getMemberId();
+        DetailPostResponse response = postQueryService.searchById(postId, memberId);
         if (response == null) {
             throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
         }
@@ -120,8 +120,7 @@ public class PostController {
     @PostMapping("/{postId}/comment")
     public Long savePostComment(@PathVariable Long postId,
                                 @Valid @RequestBody SavePostCommentRequest request) {
-        // TODO: 최영환 2023-05-11 회원 구현되면 변경해야함
-        Long memberId = 1L;
+        Long memberId = jwtService.getMemberId();
         return postCommentService.save(postId, memberId, request);
     }
 
