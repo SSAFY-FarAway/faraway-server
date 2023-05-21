@@ -17,8 +17,6 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,7 +88,7 @@ public class MemberController {
     public MemberResponse searchMember(@PathVariable Long memberId){
         MemberResponse response = memberQueryService.searchById(memberId);
         log.debug("response {}",response);
-        System.out.println("@@@@@@@@memberID : " + jwtService.getMembeId());
+        System.out.println("@@@@@@@@memberID : " + jwtService.getMemberId());
         if(response == null){
             throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }

@@ -115,8 +115,8 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public Integer getMembeId() {
-        return (Integer) this.get("user").get("memberId");
+    public Long getMemberId() {
+        return ((Integer) this.get("user").get("memberId")).longValue();
     }
 
     @Override
