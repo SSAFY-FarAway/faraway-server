@@ -16,9 +16,10 @@ public class AttractionResponse {
     private String firstImage;
     private double latitude;
     private double longitude;
+    private String overview;
 
     @Builder
-    public AttractionResponse(int contentId, String title, String addr1, String addr2, String zipcode, String tel, String firstImage, double latitude, double longitude) {
+    public AttractionResponse(int contentId, String title, String addr1, String addr2, String zipcode, String tel, String firstImage, double latitude, double longitude, String overview) {
         this.contentId = contentId;
         this.title = title;
         this.addr1 = addr1;
@@ -28,5 +29,6 @@ public class AttractionResponse {
         this.firstImage = firstImage;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.overview = overview;
     }
 }

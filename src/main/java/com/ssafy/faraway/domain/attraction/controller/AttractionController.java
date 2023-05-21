@@ -44,14 +44,20 @@ public class AttractionController {
             @RequestParam(required = false, defaultValue = "") Integer sidoCode,
             @RequestParam(required = false, defaultValue = "") Integer gugunCode,
             @RequestParam(required = false, defaultValue = "") Integer contentTypeId,
-            @RequestParam(required = false, defaultValue = "1") Integer pageNumber) {
+            @RequestParam(required = false, defaultValue = "1") Integer pageNumber,
+            @RequestParam(required = false, defaultValue = "") String title,
+            @RequestParam(required = false, defaultValue = "") String address) {
         AttractionSearchCondition condition = AttractionSearchCondition.builder()
                 .sidoCode(sidoCode)
                 .gugunCode(gugunCode)
                 .contentTypeId(contentTypeId)
+                .title(title)
+                .address(address)
                 .build();
-        PageRequest pageRequest = PageRequest.of(pageNumber-1, ATTRACTION_SIZE);
+        log.debug("condition: {}", condition);
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, ATTRACTION_SIZE);
         List<AttractionResponse> responses = attractionQueryService.searchByCondition(condition, pageRequest);
+        log.debug("responses size: {}", responses.size());
         return new ResultPage<>(responses, pageNumber, ATTRACTION_SIZE, attractionQueryService.getPageTotalCnt(condition));
     }
 

@@ -14,6 +14,11 @@ public enum ErrorCode {
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
 
     /*
+     * 400 BAD_REQUEST: 잘못된 요청
+     */
+    BAD_REQUEST_SAME_PWD_TWICE(HttpStatus.BAD_REQUEST, "같은 비밀번호를 입력 했습니다."),
+
+    /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
      */
     POSTS_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 글입니다."),
@@ -52,6 +57,11 @@ public enum ErrorCode {
      * 401 UNAUTHORIZED_ERROR : 계정권한이 유효하지 않습니다.
      */
     UNAUTHORIZED_ERROR(HttpStatus.UNAUTHORIZED, "계정권한이 유효하지 않습니다."),
+
+    /*
+     * 401 UNAUTHORIZED_ERROR : 계정권한이 유효하지 않습니다.
+     */
+    PASSWORD_UNAUTHORIZED_ERROR(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다."),
 
     ;
 
