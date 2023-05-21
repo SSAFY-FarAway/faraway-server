@@ -42,17 +42,6 @@ public class PostServiceImpl implements PostService {
         return saveId;
     }
 
-    private List<Attachment> getAttachments(Long postId, List<UploadFile> uploadFiles) {
-        if (uploadFiles.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return uploadFiles.stream()
-                .map(uploadFile -> Attachment.builder()
-                        .post(Post.builder().id(postId).build())
-                        .uploadFile(uploadFile).build()
-                ).collect(Collectors.toList());
-    }
-
     @Override
     public Long update(Long postId, UpdatePostDto dto, List<UploadFile> uploadFiles) {
         Post post = postRepository.findById(postId)
@@ -68,5 +57,16 @@ public class PostServiceImpl implements PostService {
                 .orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         postRepository.delete(post);
         return postId;
+    }
+
+    private List<Attachment> getAttachments(Long postId, List<UploadFile> uploadFiles) {
+        if (uploadFiles.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return uploadFiles.stream()
+                .map(uploadFile -> Attachment.builder()
+                        .post(Post.builder().id(postId).build())
+                        .uploadFile(uploadFile).build()
+                ).collect(Collectors.toList());
     }
 }
