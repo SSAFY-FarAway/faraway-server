@@ -1,10 +1,10 @@
 package com.ssafy.faraway.domain.member.repository;
 
-import com.ssafy.faraway.domain.member.dto.req.FindLoginIdRequest;
-import com.ssafy.faraway.domain.member.dto.req.LoginEncMember;
-import com.ssafy.faraway.domain.member.dto.res.ListMemberResponse;
-import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
+import com.ssafy.faraway.domain.member.repository.dto.LoginEncMember;
+import com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse;
+import com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse;
 import com.ssafy.faraway.domain.member.entity.Member;
+import com.ssafy.faraway.domain.member.service.dto.FindLoginIdDto;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface MemberQueryRepository {
     List<ListMemberResponse> searchAll(Pageable pageable);
     Long SearchIdByLoginId(String loginId);
     String SearchSaltById(Long memberId);
-    String SearchLoginIdByEmailAndBirth(FindLoginIdRequest request);
+    String SearchLoginIdByEmailAndBirth(FindLoginIdDto dto);
     String SearchLoginPwdById(Long memberId);
     String searchRefreshToken(Long memberId);
 

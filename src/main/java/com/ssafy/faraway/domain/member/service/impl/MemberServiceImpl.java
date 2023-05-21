@@ -1,9 +1,7 @@
 package com.ssafy.faraway.domain.member.service.impl;
 
 import com.ssafy.faraway.common.util.Encrypt;
-import com.ssafy.faraway.domain.member.dto.req.*;
-import com.ssafy.faraway.domain.member.dto.res.MemberResponse;
-import com.ssafy.faraway.domain.member.dto.res.LoginMemberResponse;
+import com.ssafy.faraway.domain.member.controller.dto.req.*;
 import com.ssafy.faraway.domain.member.entity.Address;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.member.entity.Name;
@@ -11,28 +9,23 @@ import com.ssafy.faraway.domain.member.entity.Role;
 import com.ssafy.faraway.domain.member.repository.MemberQueryRepository;
 import com.ssafy.faraway.domain.member.repository.MemberRepository;
 import com.ssafy.faraway.domain.member.service.MemberService;
+import com.ssafy.faraway.domain.member.repository.dto.SaveEncMember;
+import com.ssafy.faraway.domain.member.service.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
-    private final MemberQueryRepository memberQueryRepository;
     private final MemberRepository memberRepository;
 
     @Override
-    public Long saveMember(SaveMemberRequest request) {
-        SaveEncMember dto = createSaveMemberDto(request);
-        Member member = createMember(dto);
-//        System.out.println(member);
+    public Long saveMember(SaveMemberDto dto) {
+        SaveEncMember EncDto = createSaveMemberDto(dto);
+        Member member = createMember(EncDto);
         Member saveMember = memberRepository.save(member);
         return saveMember.getId();
     }
@@ -45,41 +38,41 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Long updateLoginPwd(UpdateLoginPwdRequest request) {
-        Member findMember = memberRepository.findById(request.getId())
+    public Long updateLoginPwd(UpdateLoginPwdDto dto) {
+        Member findMember = memberRepository.findById(dto.getId())
                 .orElseThrow(NoSuchElementException::new);
         // 기존 암호화된 비밀번호
         String oldPwd = findMember.getLoginPwd();
         // salt
         String salt = findMember.getSalt();
         //유저가 입력한 기존 암호화된 비밀번호
-        String inputPwd = Encrypt.encrypt(request.getCurrentLoginPwd(),salt);
+        String inputPwd = Encrypt.encrypt(dto.getCurrentLoginPwd(),salt);
         // 비교
         if(!oldPwd.equals(inputPwd)){
             return -1L;
         }
-        String newPwd = Encrypt.encrypt(request.getNewLoginPwd(), salt);
+        String newPwd = Encrypt.encrypt(dto.getNewLoginPwd(), salt);
         findMember.changeLoginPwd(inputPwd, newPwd);
         return findMember.getId();
     }
 
     @Override
-    public Long updateMember(UpdateMemberRequest request) {
-        Member findMember = memberRepository.findById(request.getId())
+    public Long updateMember(UpdateMemberDto dto) {
+        Member findMember = memberRepository.findById(dto.getId())
                 .orElseThrow(NoSuchElementException::new);
-        findMember.changeMember(request);
+        findMember.changeMember(dto);
         return findMember.getId();
     }
 
     @Override
-    public Long resetLoginPwd(ResetLoginPwdRequest request) {
-        Member findMember = memberRepository.findByLoginId(request.getLoginId())
+    public Long resetLoginPwd(ResetLoginPwdDto dto) {
+        Member findMember = memberRepository.findByLoginId(dto.getLoginId())
                 .orElseThrow(NoSuchElementException::new);
-        if(!request.getBirth().equals(findMember.getBirth())){
+        if(!dto.getBirth().equals(findMember.getBirth())){
             return -1L;
-        }else if(!request.getLoginId().equals(findMember.getLoginId())){
+        }else if(!dto.getLoginId().equals(findMember.getLoginId())){
             return -1L;
-        }else if(!request.getEmail().equals(findMember.getEmail())){
+        }else if(!dto.getEmail().equals(findMember.getEmail())){
             return -1L;
         }
         findMember.resetLoginPwd();
@@ -87,16 +80,16 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Long deleteMember(DeleteMemberRequest request) {
-        Member findMember = memberRepository.findById(request.getId())
+    public Long deleteMember(DeleteMemberDto dto) {
+        Member findMember = memberRepository.findById(dto.getId())
                 .orElseThrow(NoSuchElementException::new);
         String salt = findMember.getSalt();
-        String inputPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
+        String inputPwd = Encrypt.encrypt(dto.getLoginPwd(), salt);
         if(!inputPwd.equals(findMember.getLoginPwd())){
             return -1L;
         }
-        memberRepository.deleteById(request.getId());
-        return request.getId();
+        memberRepository.deleteById(dto.getId());
+        return dto.getId();
     }
 
     @Override
@@ -116,29 +109,29 @@ public class MemberServiceImpl implements MemberService{
     }
 
     // 암호화한 비밀번호를 가진 DTO create
-    private SaveEncMember createSaveMemberDto(SaveMemberRequest request){
+    private SaveEncMember createSaveMemberDto(SaveMemberDto dto){
         // encrypt password
         String salt = Encrypt.createSalt();
-        String encodedLoginPwd = Encrypt.encrypt(request.getLoginPwd(), salt);
+        String encodedLoginPwd = Encrypt.encrypt(dto.getLoginPwd(), salt);
 
         // make Name, Address class
         Name memberName = Name.builder()
-                .lastName(request.getLastName())
-                .firstName(request.getFirstName())
+                .lastName(dto.getLastName())
+                .firstName(dto.getFirstName())
                 .build();
 
         Address memberAddress = Address.builder()
-                .zipcode(request.getZipcode())
-                .mainAddress(request.getMainAddress())
-                .subAddress(request.getSubAddress())
+                .zipcode(dto.getZipcode())
+                .mainAddress(dto.getMainAddress())
+                .subAddress(dto.getSubAddress())
                 .build();
 
         return SaveEncMember.builder()
-                .loginId(request.getLoginId())
+                .loginId(dto.getLoginId())
                 .loginPwd(encodedLoginPwd)
                 .name(memberName)
-                .birth(request.getBirth())
-                .email(request.getEmail())
+                .birth(dto.getBirth())
+                .email(dto.getEmail())
                 .address(memberAddress)
                 .salt(salt)
                 .build();
