@@ -14,17 +14,19 @@ public class HotPlaceResponse {
     private String loginId;
     private String title;
     private int hit;
+    private int likeCnt;
     private String mainAddress;
     private int rating;
     private LocalDateTime createdDate;
 
     @Builder
-    public HotPlaceResponse(Long id, Long memberId, String loginId, String title, int hit, String mainAddress, int rating, LocalDateTime createdDate) {
+    public HotPlaceResponse(Long id, Long memberId, String loginId, String title, int hit, int likeCnt, String mainAddress, int rating, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
         this.title = title;
         this.hit = hit;
+        this.likeCnt = likeCnt;
         this.mainAddress = mainAddress;
         this.rating = rating;
         this.createdDate = createdDate;

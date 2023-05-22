@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.hotplace.service.impl;
 
 import com.ssafy.faraway.common.FileStore;
+import com.ssafy.faraway.domain.hotplace.repository.HotPlaceLikeQueryRepository;
 import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceCommentResponse;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceImageResponse;
@@ -23,6 +24,7 @@ import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
 @RequiredArgsConstructor
 public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
     private final HotPlaceQueryRepository hotPlaceQueryRepository;
+    private final HotPlaceLikeQueryRepository hotPlaceLikeQueryRepository;
     private final FileStore fileStore;
 
     @Transactional
@@ -41,6 +43,8 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
                 .title(hotPlace.getTitle())
                 .content(hotPlace.getContent())
                 .hit(hotPlace.getHit())
+                .likeCnt(hotPlace.getLikes().size())
+                .likeId(hotPlaceLikeQueryRepository.searchLikeId(loginId, hotPlaceId))
                 .zipcode(hotPlace.getAddress().getZipcode())
                 .mainAddress(hotPlace.getAddress().getMainAddress())
                 .subAddress(hotPlace.getAddress().getSubAddress())
@@ -57,7 +61,7 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
     }
 
     private List<HotPlaceImageResponse> getImageResponses(HotPlace hotPlace) {
-        return hotPlace.getHotPlaceImages().stream().map(hotPlaceImage -> HotPlaceImageResponse.builder()
+        return hotPlace.getImages().stream().map(hotPlaceImage -> HotPlaceImageResponse.builder()
                 .id(hotPlaceImage.getId())
                 .uploadFileName(fileStore.getFullPath(hotPlaceImage.getUploadFile().getUploadFileName()))
                 .storeFileName(fileStore.getFullPath(hotPlaceImage.getUploadFile().getStoreFileName()))
@@ -66,7 +70,7 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
     }
 
     private List<HotPlaceCommentResponse> getCommentResponses(HotPlace hotPlace) {
-        return hotPlace.getHotPlaceComments().stream().map(hotPlaceComment -> HotPlaceCommentResponse.builder()
+        return hotPlace.getComments().stream().map(hotPlaceComment -> HotPlaceCommentResponse.builder()
                 .id(hotPlaceComment.getId())
                 .hotPlaceId(hotPlaceComment.getHotPlace().getId())
                 .loginId(hotPlaceComment.getMember().getLoginId())

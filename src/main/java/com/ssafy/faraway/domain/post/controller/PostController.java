@@ -137,11 +137,11 @@ public class PostController {
         return postCommentService.delete(commentId);
     }
 
-    @PostMapping("/like")
-    public Long savePostLike(@Valid @RequestBody SavePostLikeRequest request) {
+    @PostMapping("/{postId}/like")
+    public Long savePostLike(@PathVariable Long postId) {
         SavePostLikeDto dto = SavePostLikeDto.builder()
-                .postId(request.getPostId())
-                .memberId(request.getMemberId())
+                .postId(postId)
+                .memberId(jwtService.getMemberId())
                 .build();
         return postLikeService.save(dto);
     }

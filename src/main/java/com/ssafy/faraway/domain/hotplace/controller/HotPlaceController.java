@@ -9,14 +9,13 @@ import com.ssafy.faraway.common.util.FileExtFilter;
 import com.ssafy.faraway.domain.hotplace.controller.dto.req.*;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse;
+import com.ssafy.faraway.domain.hotplace.repository.HotPlaceLikeRepository;
 import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
+import com.ssafy.faraway.domain.hotplace.service.HotPlaceLikeService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceService;
-import com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceCommentDto;
-import com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceDto;
-import com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceCommentDto;
-import com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceDto;
+import com.ssafy.faraway.domain.hotplace.service.dto.*;
 import com.ssafy.faraway.domain.member.service.JwtService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +40,7 @@ public class HotPlaceController {
     private final HotPlaceService hotPlaceService;
     private final HotPlaceQueryService hotPlaceQueryService;
     private final HotPlaceCommentService hotPlaceCommentService;
+    private final HotPlaceLikeService hotPlaceLikeService;
     private final FileStore fileStore;
     private final FileExtFilter fileExtFilter;
     private final JwtService jwtService;
@@ -142,5 +142,19 @@ public class HotPlaceController {
     @DeleteMapping("/comment/{commentId}")
     public Long deleteHotPlaceComment(@PathVariable Long commentId) {
         return hotPlaceCommentService.delete(commentId);
+    }
+
+    @PostMapping("/{hotPlaceId}/like")
+    public Long saveHotPlaceLike(@PathVariable Long hotPlaceId) {
+        SaveHotPlaceLikeDto dto = SaveHotPlaceLikeDto.builder()
+                .hotPlaceId(hotPlaceId)
+                .memberId(jwtService.getMemberId())
+                .build();
+        return hotPlaceLikeService.save(dto);
+    }
+
+    @DeleteMapping("/like/{likeId}")
+    public Long deleteHotPlaceLike(@PathVariable Long likeId) {
+        return hotPlaceLikeService.delete(likeId);
     }
 }
