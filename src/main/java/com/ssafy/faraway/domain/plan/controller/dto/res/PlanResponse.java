@@ -14,15 +14,17 @@ public class PlanResponse {
     private String loginId;
     private String title;
     private int hit;
+    private int likeCnt;
     private LocalDateTime createdDate;
 
     @Builder
-    public PlanResponse(Long id, Long memberId, String loginId, String title, int hit, LocalDateTime createdDate) {
+    public PlanResponse(Long id, Long memberId, String loginId, String title, int hit, int likeCnt, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
         this.title = title;
         this.hit = hit;
+        this.likeCnt = likeCnt;
         this.createdDate = createdDate;
     }
 }

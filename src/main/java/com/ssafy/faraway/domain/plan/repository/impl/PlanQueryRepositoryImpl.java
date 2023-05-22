@@ -39,6 +39,7 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
                         plan.member.loginId,
                         plan.title,
                         plan.hit,
+                        plan.likes.size().as("likeCnt"),
                         plan.createdDate
                 ))
                 .from(plan)

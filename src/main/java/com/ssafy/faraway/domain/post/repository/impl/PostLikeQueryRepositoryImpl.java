@@ -16,7 +16,7 @@ public class PostLikeQueryRepositoryImpl implements PostLikeQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Long searchIdByCondition(Long memberId, Long postId) {
+    public Long searchLikeId(Long memberId, Long postId) {
         return queryFactory
                 .select(postLike.id)
                 .from(postLike)

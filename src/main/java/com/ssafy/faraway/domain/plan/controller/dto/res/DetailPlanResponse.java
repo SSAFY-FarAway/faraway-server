@@ -17,18 +17,22 @@ public class DetailPlanResponse {
     private String title;
     private String content;
     private int hit;
+    private int likeCnt;
+    private Long likeId;
     private List<AttractionResponse> attractionResponses;
     private List<AttractionResponse> shortestPath = new ArrayList<>();
     private List<PlanCommentResponse> commentResponses;
 
     @Builder
-    public DetailPlanResponse(Long id, Long memberId, String loginId, String title, String content, int hit, List<AttractionResponse> attractionResponses, int[] shortestPath, List<PlanCommentResponse> commentResponses) {
+    public DetailPlanResponse(Long id, Long memberId, String loginId, String title, String content, int hit, int likeCnt, Long likeId, List<AttractionResponse> attractionResponses, int[] shortestPath, List<PlanCommentResponse> commentResponses) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
         this.title = title;
         this.content = content;
         this.hit = hit;
+        this.likeCnt = likeCnt;
+        this.likeId = likeId;
         this.attractionResponses = attractionResponses;
         for (int index : shortestPath) {
             this.shortestPath.add(attractionResponses.get(index));

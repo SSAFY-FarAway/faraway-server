@@ -5,20 +5,15 @@ import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.util.SizeConstants;
 import com.ssafy.faraway.domain.member.service.JwtService;
-import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanCommentRequest;
-import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanRequest;
-import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanCommentRequest;
-import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanRequest;
+import com.ssafy.faraway.domain.plan.controller.dto.req.*;
 import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
 import com.ssafy.faraway.domain.plan.service.PlanCommentService;
+import com.ssafy.faraway.domain.plan.service.PlanLikeService;
 import com.ssafy.faraway.domain.plan.service.PlanQueryService;
 import com.ssafy.faraway.domain.plan.service.PlanService;
-import com.ssafy.faraway.domain.plan.service.dto.SavePlanCommentDto;
-import com.ssafy.faraway.domain.plan.service.dto.SavePlanDto;
-import com.ssafy.faraway.domain.plan.service.dto.UpdatePlanCommentDto;
-import com.ssafy.faraway.domain.plan.service.dto.UpdatePlanDto;
+import com.ssafy.faraway.domain.plan.service.dto.*;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,6 +35,7 @@ public class PlanController {
     private final PlanService planService;
     private final PlanQueryService planQueryService;
     private final PlanCommentService planCommentService;
+    private final PlanLikeService planLikeService;
     private final JwtService jwtService;
 
     @PostMapping
@@ -117,5 +113,19 @@ public class PlanController {
     @DeleteMapping("/comment/{commentId}")
     public Long deletePlanComment(@PathVariable Long commentId) {
         return planCommentService.delete(commentId);
+    }
+
+    @PostMapping("/like")
+    public Long savePlanLike(@Valid @RequestBody SavePlanLikeRequest request) {
+        SavePlanLikeDto dto = SavePlanLikeDto.builder()
+                .planId(request.getPlanId())
+                .memberId(request.getMemberId())
+                .build();
+        return planLikeService.save(dto);
+    }
+
+    @DeleteMapping("/like/{likeId}")
+    public Long deleteLike(@PathVariable Long likeId) {
+        return planLikeService.delete(likeId);
     }
 }
