@@ -31,12 +31,14 @@ public class HotPlace extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
     @OneToMany(mappedBy = "hotPlace", cascade = CascadeType.ALL)
-    private List<HotPlaceComment> hotPlaceComments;
+    private List<HotPlaceComment> comments;
     @OneToMany(mappedBy = "hotPlace", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<HotPlaceImage> hotPlaceImages;
+    private List<HotPlaceImage> images;
+    @OneToMany(mappedBy = "hotPlace", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HotPlaceLike> likes;
 
     @Builder
-    public HotPlace(Long id, String title, String content, int hit, Address address, int rating, Member member, List<HotPlaceComment> hotPlaceComments, List<HotPlaceImage> hotPlaceImages) {
+    public HotPlace(Long id, String title, String content, int hit, Address address, int rating, Member member, List<HotPlaceComment> comments, List<HotPlaceImage> images, List<HotPlaceLike> likes) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -44,8 +46,9 @@ public class HotPlace extends BaseEntity {
         this.address = address;
         this.rating = rating;
         this.member = member;
-        this.hotPlaceComments = hotPlaceComments;
-        this.hotPlaceImages = hotPlaceImages;
+        this.comments = comments;
+        this.images = images;
+        this.likes = likes;
     }
 
     public void update(String title, String content, Address address, int rating, List<HotPlaceImage> hotPlaceImages, List<Long> deleteImageId) {
@@ -57,13 +60,13 @@ public class HotPlace extends BaseEntity {
     }
 
     private void updateHotPlaceImages(List<HotPlaceImage> hotPlaceImages, List<Long> deleteImageIds) {
-        if (this.hotPlaceImages == null) {
-            this.hotPlaceImages = new ArrayList<>();
+        if (this.images == null) {
+            this.images = new ArrayList<>();
         }
         for (Long id : deleteImageIds) {
-            this.hotPlaceImages.removeIf(image -> image.getId().equals(id));
+            this.images.removeIf(image -> image.getId().equals(id));
         }
-        this.hotPlaceImages.addAll(hotPlaceImages);
+        this.images.addAll(hotPlaceImages);
     }
 
     public void increaseHit() {

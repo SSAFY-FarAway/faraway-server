@@ -50,6 +50,7 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
                         hotPlace.member.loginId,
                         hotPlace.title,
                         hotPlace.hit,
+                        hotPlace.likes.size().as("likeCnt"),
                         hotPlace.address.mainAddress,
                         hotPlace.rating,
                         hotPlace.createdDate
