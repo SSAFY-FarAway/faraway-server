@@ -115,11 +115,11 @@ public class PlanController {
         return planCommentService.delete(commentId);
     }
 
-    @PostMapping("/like")
-    public Long savePlanLike(@Valid @RequestBody SavePlanLikeRequest request) {
+    @PostMapping("/{planId}/like")
+    public Long savePlanLike(@PathVariable Long planId) {
         SavePlanLikeDto dto = SavePlanLikeDto.builder()
-                .planId(request.getPlanId())
-                .memberId(request.getMemberId())
+                .planId(planId)
+                .memberId(jwtService.getMemberId())
                 .build();
         return planLikeService.save(dto);
     }
