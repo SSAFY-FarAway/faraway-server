@@ -19,7 +19,7 @@ public class FileExtFilter {
         for (MultipartFile file : multipartFiles) {
             String originalFilename = file.getOriginalFilename();
             if (originalFilename != null) {
-                String ext = extractExtension(originalFilename);
+                String ext = extractExtension(originalFilename).toLowerCase();
                 for (String s : IMG_EXTENSION) {
                     if (s.equals(ext)) {
                         isValid = true;
@@ -38,7 +38,7 @@ public class FileExtFilter {
         for (MultipartFile file : multipartFiles) {
             String originalFilename = file.getOriginalFilename();
             if (originalFilename != null) {
-                String ext = extractExtension(originalFilename);
+                String ext = extractExtension(originalFilename).toLowerCase();
                 for (String s : BAD_EXTENSION) {
                     if (ext.equals(s)) {
                         isValid = false;
