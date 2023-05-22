@@ -24,18 +24,19 @@ public class WebConfig implements WebMvcConfigurer {
                         "/member/check/**", // 아이디 중복 검사
                         "/member/check", // 비밀번호 확인
                         "/member/login", // 로그인
+                        "/member/info/**",
                         "/member/login-pwd", // 비밀번호 초기화
                         "/member/login-id", // 아이디 찾기
                         "/member/sign-up", // 회원가입
 //                       -----Member------
-                        "/attraction/**", // 시도,구군
-                        "/attraction", // searchAttractions
+//                        "/attraction/**", // 시도,구군
+//                        "/attraction", // searchAttractions
 //                       -----Attraction------
-                        "/hot-place/**", // 조회, 상세조회 , update, delete도 포함됨!! url 수정 필요
+//                        "/hot-place/**", // 조회, 상세조회 , update, delete도 포함됨!! url 수정 필요
 //                       -----Hotplace------
-                        "/plan/**", // 조회, 상세조회 , update, delete도 포함됨
+//                        "/plan/**", // 조회, 상세조회 , update, delete도 포함됨
 //                       -----Plan------
-                        "/post/**", // 조회, 상세조회 , update, delete도 포함됨
+//                        "/post/**", // 조회, 상세조회 , update, delete도 포함됨
 //                       -----Post------
 //                        "/search_place",
 //                        "/plan-list",
