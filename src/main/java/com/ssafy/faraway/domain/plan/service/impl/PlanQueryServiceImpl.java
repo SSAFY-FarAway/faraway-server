@@ -39,7 +39,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
     public DetailPlanResponse searchById(Long planId, Long loginId) {
         Plan plan = planQueryRepository.searchById(planId);
         if (!plan.getMember().getId().equals(loginId)) {
-            plan.updateHit();
+            plan.increaseHit();
         }
         List<PlanCommentResponse> commentResponses = getCommentResponses(plan);
         List<AttractionResponse> attractionResponses = rearrangeResponses(plan);

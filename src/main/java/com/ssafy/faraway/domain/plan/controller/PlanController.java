@@ -17,6 +17,8 @@ import com.ssafy.faraway.domain.plan.service.PlanQueryService;
 import com.ssafy.faraway.domain.plan.service.PlanService;
 import com.ssafy.faraway.domain.plan.service.dto.SavePlanCommentDto;
 import com.ssafy.faraway.domain.plan.service.dto.SavePlanDto;
+import com.ssafy.faraway.domain.plan.service.dto.UpdatePlanCommentDto;
+import com.ssafy.faraway.domain.plan.service.dto.UpdatePlanDto;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -80,7 +82,12 @@ public class PlanController {
     @PutMapping("/{planId}")
     public Long updatePlan(@PathVariable Long planId,
                            @Valid @RequestBody final UpdatePlanRequest request) {
-        return planService.update(request, planId);
+        UpdatePlanDto dto = UpdatePlanDto.builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .travelPlan(request.getTravelPlan())
+                .build();
+        return planService.update(dto, planId);
     }
 
     @DeleteMapping("/{planId}")
@@ -101,7 +108,10 @@ public class PlanController {
     @PutMapping("/comment/{commentId}")
     public Long updatePlanComment(@PathVariable Long commentId,
                                   @Valid @RequestBody final UpdatePlanCommentRequest request) {
-        return planCommentService.update(commentId, request);
+        UpdatePlanCommentDto dto = UpdatePlanCommentDto.builder()
+                .content(request.getContent())
+                .build();
+        return planCommentService.update(commentId, dto);
     }
 
     @DeleteMapping("/comment/{commentId}")

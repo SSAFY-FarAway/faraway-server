@@ -26,14 +26,16 @@ public class Plan extends BaseEntity {
     private int hit;
     @Column(nullable = false)
     private String travelPlan;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlanComment> planComments;
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlanLike> likes;
 
     @Builder
-    public Plan(Long id, String title, String content, int hit, String travelPlan, Member member, List<PlanComment> planComments) {
+    public Plan(Long id, String title, String content, int hit, String travelPlan, Member member, List<PlanComment> planComments, List<PlanLike> likes) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -41,6 +43,7 @@ public class Plan extends BaseEntity {
         this.travelPlan = travelPlan;
         this.member = member;
         this.planComments = planComments;
+        this.likes = likes;
     }
 
     public void update(String title, String content, String travelPlan) {
@@ -49,7 +52,7 @@ public class Plan extends BaseEntity {
         this.travelPlan = travelPlan;
     }
 
-    public void updateHit() {
+    public void increaseHit() {
         this.hit++;
     }
 }
