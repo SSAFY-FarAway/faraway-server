@@ -26,6 +26,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        String requestURI = request.getRequestURI();
+        String requestMethod = request.getMethod();
+        // member 제외 모든 GET 요청 허용
+        if (!requestURI.contains("member") && requestMethod.equals("GET")) {
+            return true;
+        }
+
         final String token = request.getHeader(HEADER_AUTH);
 
         if (token != null && jwtService.checkToken(token)) {
