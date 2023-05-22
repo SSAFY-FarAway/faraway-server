@@ -37,7 +37,6 @@ import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/post")
-@CrossOrigin(originPatterns = "*")
 @Api(tags = "post")
 public class PostController {
     private final PostService postService;

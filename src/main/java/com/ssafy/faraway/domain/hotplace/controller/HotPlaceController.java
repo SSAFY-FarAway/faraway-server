@@ -35,7 +35,6 @@ import static com.ssafy.faraway.common.util.SizeConstants.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/hot-place")
-@CrossOrigin(originPatterns = "*")
 @Slf4j
 @Api(tags = "hotPlace")
 public class HotPlaceController {

@@ -33,7 +33,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 @Api(tags="member")
-@CrossOrigin(originPatterns="*")
 public class MemberController {
     private final MemberService memberService;
     private final MemberQueryService memberQueryService;

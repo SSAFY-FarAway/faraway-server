@@ -33,7 +33,6 @@ import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
 @RestController
 @RequestMapping("/plan")
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = "*")
 @Api(tags = "plan")
 public class PlanController {
     private final PlanService planService;

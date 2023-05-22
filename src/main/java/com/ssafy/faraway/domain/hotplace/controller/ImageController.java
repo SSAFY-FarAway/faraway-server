@@ -21,7 +21,6 @@ import java.nio.file.Paths;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/image")
-@CrossOrigin(originPatterns = "*")
 public class ImageController {
     private final HotPlaceImageRepository hotPlaceImageRepository;
 

@@ -19,7 +19,6 @@ import java.util.NoSuchElementException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/attachment")
-@CrossOrigin(originPatterns = "*")
 public class AttachmentController {
     private final AttachmentRepository attachmentRepository;
 

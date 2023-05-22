@@ -23,7 +23,6 @@ import static com.ssafy.faraway.common.util.SizeConstants.ATTRACTION_SIZE;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/attraction")
-@CrossOrigin(originPatterns = "*")
 @Api(tags = "attraction")
 public class AttractionController {
     private final AttractionService attractionService;
