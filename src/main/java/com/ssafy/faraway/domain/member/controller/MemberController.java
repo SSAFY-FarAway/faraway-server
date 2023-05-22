@@ -249,15 +249,15 @@ public class MemberController {
 
     //Access Token 재발급 -> access token 만료 시 재발급
     @PostMapping("/refresh")
-    public Map<String, Object> refreshToken(@RequestBody LoginMemberResponse response, HttpServletRequest request) {
+    public Map<String, Object> refreshToken(@RequestBody Long memberId, HttpServletRequest request) {
         log.debug("error 발생 시점 체크");
         Map<String, Object> resultMap = new HashMap<>();
 //        HttpStatus status = HttpStatus.ACCEPTED;
         String token = request.getHeader("refresh-token");
 //        logger.debug("token : {}, memberDto : {}", token, memberDto);
         if (jwtService.checkToken(token)) {
-            if (token.equals(memberQueryService.searchRefreshToken(response.getId()))) {
-                String accessToken = jwtService.createAccessToken("memberId",response.getId());
+            if (token.equals(memberQueryService.searchRefreshToken(memberId))) {
+                String accessToken = jwtService.createAccessToken("memberId",memberId);
                 resultMap.put("access-token", accessToken);
             }
         } else {
