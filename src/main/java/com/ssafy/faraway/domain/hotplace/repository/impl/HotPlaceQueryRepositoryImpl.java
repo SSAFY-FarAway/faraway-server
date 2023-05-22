@@ -3,10 +3,10 @@ package com.ssafy.faraway.domain.hotplace.repository.impl;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository;
-import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
+import com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository;
+import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -17,7 +17,6 @@ import java.util.List;
 
 import static com.ssafy.faraway.domain.hotplace.entity.QHotPlace.hotPlace;
 import static com.ssafy.faraway.domain.member.entity.QMember.member;
-import static com.ssafy.faraway.domain.post.entity.QPost.post;
 import static org.springframework.util.StringUtils.hasText;
 
 @Repository
@@ -89,10 +88,10 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
     }
 
     private BooleanExpression isTitle(String title) {
-        return hasText(title) ? post.title.like("%" + title + "%") : null;
+        return hasText(title) ? hotPlace.title.like("%" + title + "%") : null;
     }
 
     private BooleanExpression isContent(String content) {
-        return hasText(content) ? post.content.like("%" + content + "%") : null;
+        return hasText(content) ? hotPlace.content.like("%" + content + "%") : null;
     }
 }

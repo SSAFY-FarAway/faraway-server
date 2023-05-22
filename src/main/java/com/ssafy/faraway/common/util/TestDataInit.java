@@ -22,7 +22,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Random;
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class TestDataInit {
     private final MemberRepository memberRepository;
@@ -77,12 +77,17 @@ public class TestDataInit {
                 .categoryName("Free")
                 .build();
         categoryRepository.save(free);
+
+        Category qna = Category.builder()
+                .categoryName("QnA")
+                .build();
+        categoryRepository.save(qna);
     }
 
     private void initNotice(Long memberId, Long categoryId) {
         ArrayList<Post> posts = new ArrayList<>();
         ArrayList<PostComment> postComments = new ArrayList<>();
-        for (int i = 1; i <= 50; i++) {
+        for (int i = 1; i <= 200; i++) {
             String title = String.format("Notice Test Title %d", i);
             String content = String.format("Notice Test Content %d", i);
             Post post = Post.builder()
@@ -113,8 +118,8 @@ public class TestDataInit {
         ArrayList<Post> posts = new ArrayList<>();
         ArrayList<PostComment> postComments = new ArrayList<>();
         for (int i = 1; i <= 50; i++) {
-            String title = String.format("Notice Test Title %d", i);
-            String content = String.format("Notice Test Content %d", i);
+            String title = String.format("Free Test Title %d", i);
+            String content = String.format("Free Test Content %d", i);
             Post post = Post.builder()
                     .title(title)
                     .content(content)
@@ -142,7 +147,7 @@ public class TestDataInit {
     private void initHotPlace(Long memberId) {
         ArrayList<HotPlace> hotPlaces = new ArrayList<>();
         ArrayList<HotPlaceComment> hotPlaceComments = new ArrayList<>();
-        for (int i = 1; i <= 50; i++) {
+        for (int i = 1; i <= 200; i++) {
             String title = String.format("HotPlace Test Title %d", i);
             String content = String.format("HotPlace Test Content %d", i);
             Random random = new Random();
