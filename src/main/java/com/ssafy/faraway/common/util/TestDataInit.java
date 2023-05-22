@@ -34,12 +34,12 @@ public class TestDataInit {
 
     @PostConstruct
     public void init() {
-        Long memberId = createMember();
+//        Long memberId = createMember();
         createCategory();
 
-        initNotice(memberId, 1L);
-        initPost(memberId, 2L);
-        initHotPlace(memberId);
+//        initNotice(memberId, 1L);
+//        initPost(memberId, 2L);
+//        initHotPlace(memberId);
     }
 
     private Long createMember() {
@@ -77,6 +77,11 @@ public class TestDataInit {
                 .categoryName("Free")
                 .build();
         categoryRepository.save(free);
+
+        Category qna = Category.builder()
+                .categoryName("QnA")
+                .build();
+        categoryRepository.save(qna);
     }
 
     private void initNotice(Long memberId, Long categoryId) {

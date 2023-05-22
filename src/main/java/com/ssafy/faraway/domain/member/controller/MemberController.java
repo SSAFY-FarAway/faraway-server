@@ -83,7 +83,7 @@ public class MemberController {
     }
 
     // 회원 상세조회
-    @GetMapping("mypage/{memberId}")
+    @GetMapping("/mypage/{memberId}")
     public MemberResponse searchMember(@PathVariable Long memberId){
         MemberResponse response = memberQueryService.searchById(memberId);
         log.debug("response {}",response);
@@ -248,8 +248,9 @@ public class MemberController {
     }
 
     //Access Token 재발급 -> access token 만료 시 재발급
+    // RequestParm을 쓰기 때문에 body에 붙여서 보내면 안됨.
     @PostMapping("/refresh")
-    public Map<String, Object> refreshToken(@RequestBody Long memberId, HttpServletRequest request) {
+    public Map<String, Object> refreshToken(@RequestParam("memberId") Long memberId, HttpServletRequest request) {
         log.debug("error 발생 시점 체크");
         Map<String, Object> resultMap = new HashMap<>();
 //        HttpStatus status = HttpStatus.ACCEPTED;
@@ -259,6 +260,7 @@ public class MemberController {
             if (token.equals(memberQueryService.searchRefreshToken(memberId))) {
                 String accessToken = jwtService.createAccessToken("memberId",memberId);
                 resultMap.put("access-token", accessToken);
+                System.out.println(accessToken);
             }
         } else {
             throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
