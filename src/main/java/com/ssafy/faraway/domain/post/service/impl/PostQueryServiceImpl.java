@@ -43,7 +43,7 @@ public class PostQueryServiceImpl implements PostQueryService {
                 .content(post.getContent())
                 .hit(post.getHit())
                 .likeCnt(post.getLikes().size())
-                .likeId(postLikeQueryRepository.searchIdByCondition(loginId, postId))
+                .likeId(postLikeQueryRepository.searchLikeId(loginId, postId))
                 .postCommentResponses(commentResponses)
                 .attachmentResponses(attachmentResponses)
                 .createdDate(post.getCreatedDate())

@@ -3,16 +3,14 @@ package com.ssafy.faraway.domain.plan.service.impl;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.member.entity.Member;
-import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanCommentRequest;
 import com.ssafy.faraway.domain.plan.entity.Plan;
 import com.ssafy.faraway.domain.plan.entity.PlanComment;
 import com.ssafy.faraway.domain.plan.repository.PlanCommentRepository;
 import com.ssafy.faraway.domain.plan.service.PlanCommentService;
 import com.ssafy.faraway.domain.plan.service.dto.SavePlanCommentDto;
+import com.ssafy.faraway.domain.plan.service.dto.UpdatePlanCommentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -30,10 +28,10 @@ public class PlanCommentServiceImpl implements PlanCommentService {
     }
 
     @Override
-    public Long update(Long commentId, UpdatePlanCommentRequest request) {
+    public Long update(Long commentId, UpdatePlanCommentDto dto) {
         PlanComment planComment = planCommentRepository.findById(commentId)
                 .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
-        planComment.update(request.getContent());
+        planComment.update(dto.getContent());
         return commentId;
     }
 

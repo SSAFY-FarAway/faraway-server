@@ -7,6 +7,7 @@ import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.PlanCommentResponse;
 import com.ssafy.faraway.domain.plan.entity.Plan;
+import com.ssafy.faraway.domain.plan.repository.PlanLikeQueryRepository;
 import com.ssafy.faraway.domain.plan.repository.PlanQueryRepository;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
 import com.ssafy.faraway.domain.plan.service.PlanQueryService;
@@ -27,6 +28,7 @@ import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
 @Slf4j
 public class PlanQueryServiceImpl implements PlanQueryService {
     private final PlanQueryRepository planQueryRepository;
+    private final PlanLikeQueryRepository planLikeQueryRepository;
     private final AttractionQueryRepository attractionQueryRepository;
 
     @Override
@@ -39,7 +41,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
     public DetailPlanResponse searchById(Long planId, Long loginId) {
         Plan plan = planQueryRepository.searchById(planId);
         if (!plan.getMember().getId().equals(loginId)) {
-            plan.updateHit();
+            plan.increaseHit();
         }
         List<PlanCommentResponse> commentResponses = getCommentResponses(plan);
         List<AttractionResponse> attractionResponses = rearrangeResponses(plan);
@@ -53,6 +55,8 @@ public class PlanQueryServiceImpl implements PlanQueryService {
                 .content(plan.getContent())
                 .hit(plan.getHit())
                 .attractionResponses(attractionResponses)
+                .likeCnt(plan.getLikes().size())
+                .likeId(planLikeQueryRepository.searchLikeId(planId, loginId))
                 .shortestPath(shortestPath)
                 .commentResponses(commentResponses)
                 .build();

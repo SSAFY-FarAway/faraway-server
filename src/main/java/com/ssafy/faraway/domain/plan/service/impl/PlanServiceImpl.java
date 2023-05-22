@@ -3,11 +3,11 @@ package com.ssafy.faraway.domain.plan.service.impl;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.member.entity.Member;
-import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanRequest;
 import com.ssafy.faraway.domain.plan.entity.Plan;
 import com.ssafy.faraway.domain.plan.repository.PlanRepository;
 import com.ssafy.faraway.domain.plan.service.PlanService;
 import com.ssafy.faraway.domain.plan.service.dto.SavePlanDto;
+import com.ssafy.faraway.domain.plan.service.dto.UpdatePlanDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +28,10 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public Long update(UpdatePlanRequest request, Long planId) {
+    public Long update(UpdatePlanDto dto, Long planId) {
         Plan plan = planRepository.findById(planId)
                 .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
-        plan.update(request.getTitle(), request.getTitle(), request.getTravelPlan());
+        plan.update(dto.getTitle(), dto.getTitle(), dto.getTravelPlan());
         return planId;
     }
 
