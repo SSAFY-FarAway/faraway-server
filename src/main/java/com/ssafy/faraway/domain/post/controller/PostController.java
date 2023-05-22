@@ -15,10 +15,7 @@ import com.ssafy.faraway.domain.post.service.PostCommentService;
 import com.ssafy.faraway.domain.post.service.PostLikeService;
 import com.ssafy.faraway.domain.post.service.PostQueryService;
 import com.ssafy.faraway.domain.post.service.PostService;
-import com.ssafy.faraway.domain.post.service.dto.SavePostDto;
-import com.ssafy.faraway.domain.post.service.dto.SavePostLikeDto;
-import com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto;
-import com.ssafy.faraway.domain.post.service.dto.UpdatePostDto;
+import com.ssafy.faraway.domain.post.service.dto.*;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,23 +74,6 @@ public class PostController {
         return response;
     }
 
-    @PutMapping("/{postId}")
-    public Long updatePost(@PathVariable Long postId, @RequestPart UpdatePostRequest request,
-                           @RequestPart(required = false) List<MultipartFile> files) throws IOException {
-        List<UploadFile> uploadFiles = new ArrayList<>();
-        if (files != null && !files.isEmpty()) {
-            fileExtFilter.badFileFilter(files);
-            uploadFiles = fileStore.storeFiles(files);
-        }
-        UpdatePostDto dto = UpdatePostDto.builder()
-                .title(request.getTitle())
-                .content(request.getContent())
-                .deleteAttachmentIds(request.getDeleteAttachmentIds())
-                .build();
-
-        return postService.update(postId, dto, uploadFiles);
-    }
-
     @GetMapping
     public ResultPage<List<PostResponse>> searchPosts(
             @RequestParam(defaultValue = "") String title,
@@ -111,6 +91,23 @@ public class PostController {
         return new ResultPage<>(responses, pageNumber, PAGE_SIZE, postQueryService.getPageTotalCnt(condition));
     }
 
+    @PutMapping("/{postId}")
+    public Long updatePost(@PathVariable Long postId, @RequestPart UpdatePostRequest request,
+                           @RequestPart(required = false) List<MultipartFile> files) throws IOException {
+        List<UploadFile> uploadFiles = new ArrayList<>();
+        if (files != null && !files.isEmpty()) {
+            fileExtFilter.badFileFilter(files);
+            uploadFiles = fileStore.storeFiles(files);
+        }
+        UpdatePostDto dto = UpdatePostDto.builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .deleteAttachmentIds(request.getDeleteAttachmentIds())
+                .build();
+
+        return postService.update(postId, dto, uploadFiles);
+    }
+
     @DeleteMapping("/{postId}")
     public Long deletePost(@PathVariable Long postId) {
         return postService.delete(postId);
@@ -120,7 +117,10 @@ public class PostController {
     public Long savePostComment(@PathVariable Long postId,
                                 @Valid @RequestBody SavePostCommentRequest request) {
         Long memberId = jwtService.getMemberId();
-        return postCommentService.save(postId, memberId, request);
+        SavePostCommentDto dto = SavePostCommentDto.builder()
+                .content(request.getContent())
+                .build();
+        return postCommentService.save(postId, memberId, dto);
     }
 
     @PutMapping("/comment/{commentId}")

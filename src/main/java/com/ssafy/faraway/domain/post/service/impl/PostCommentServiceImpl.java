@@ -3,16 +3,14 @@ package com.ssafy.faraway.domain.post.service.impl;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.domain.member.entity.Member;
-import com.ssafy.faraway.domain.post.controller.dto.req.SavePostCommentRequest;
 import com.ssafy.faraway.domain.post.entity.Post;
 import com.ssafy.faraway.domain.post.entity.PostComment;
 import com.ssafy.faraway.domain.post.repository.PostCommentRepository;
 import com.ssafy.faraway.domain.post.service.PostCommentService;
+import com.ssafy.faraway.domain.post.service.dto.SavePostCommentDto;
 import com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +18,9 @@ public class PostCommentServiceImpl implements PostCommentService {
     private final PostCommentRepository postCommentRepository;
 
     @Override
-    public Long save(Long postId, Long memberId, SavePostCommentRequest request) {
+    public Long save(Long postId, Long memberId, SavePostCommentDto dto) {
         PostComment postComment = PostComment.builder()
-                .content(request.getContent())
+                .content(dto.getContent())
                 .member(Member.builder().id(memberId).build())
                 .post(Post.builder().id(postId).build())
                 .build();
