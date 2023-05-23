@@ -77,19 +77,19 @@ public class MemberController {
             resultMap.put("loginMember", response);
         } else {
             // token이 유효하지 않음
-            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
+            throw new CustomException(ErrorCode.AT_UNAUTHORIZED_ERROR);
         }
         return resultMap;
     }
 
     // 회원 상세조회
-    @GetMapping("mypage/{memberId}")
-    public MemberResponse searchMember(@PathVariable Long memberId){
-        MemberResponse response = memberQueryService.searchById(memberId);
+    @GetMapping("/mypage")
+    public MemberResponse searchMember(){
+        MemberResponse response = memberQueryService.searchById(jwtService.getMemberId());
         log.debug("response {}",response);
-        System.out.println("@@@@@@@@memberID : " + jwtService.getMemberId());
+//        System.out.println("@@@@@@@@memberID : " + jwtService.getMemberId());
         if(response == null){
-            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
+            throw new CustomException(ErrorCode.LOGIN_UNAUTHORIZED_ERROR);
         }
         return response;
     }
@@ -101,7 +101,7 @@ public class MemberController {
         if(memberService.checkLoginId(loginId)){
             cnt = 1;
         }else{
-            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
+            throw new CustomException(ErrorCode.LOGIN_ID_CONFLICT_ERROR);
         }
         return cnt;
     }
@@ -163,7 +163,7 @@ public class MemberController {
     public String logout(@PathVariable("memberId") Long memberId) {
         String token = memberQueryService.searchRefreshToken(memberId);
         if(token == null){
-            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
+            throw new CustomException(ErrorCode.RT_UNAUTHORIZED_ERROR);
         }
         memberService.deleteRefreshToken(memberId);
         return "로그아웃 성공.";
@@ -226,6 +226,7 @@ public class MemberController {
                 .birth(request.getBirth())
                 .build();
         if(memberService.resetLoginPwd(dto) == -1L){
+            // 이메일, 생일, 로그인아이디중 안맞는것이 존재함
             throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
         }else{
             return "00000000"; // 비밀번호 초기화
@@ -248,20 +249,24 @@ public class MemberController {
     }
 
     //Access Token 재발급 -> access token 만료 시 재발급
+    // RequestParm을 쓰기 때문에 body에 붙여서 보내면 안됨.
     @PostMapping("/refresh")
-    public Map<String, Object> refreshToken(@RequestBody Long memberId, HttpServletRequest request) {
+    public Map<String, Object> refreshToken(@RequestParam("memberId") String memberId, HttpServletRequest request) {
         log.debug("error 발생 시점 체크");
         Map<String, Object> resultMap = new HashMap<>();
 //        HttpStatus status = HttpStatus.ACCEPTED;
         String token = request.getHeader("refresh-token");
+        long id = Long.parseLong(memberId);
+//        jwtService.getMemberId();
 //        logger.debug("token : {}, memberDto : {}", token, memberDto);
         if (jwtService.checkToken(token)) {
-            if (token.equals(memberQueryService.searchRefreshToken(memberId))) {
-                String accessToken = jwtService.createAccessToken("memberId",memberId);
+            if (token.equals(memberQueryService.searchRefreshToken(id))) {
+                String accessToken = jwtService.createAccessToken("memberId",id);
                 resultMap.put("access-token", accessToken);
+                System.out.println(accessToken);
             }
         } else {
-            throw new CustomException(ErrorCode.UNAUTHORIZED_ERROR);
+            throw new CustomException(ErrorCode.RT_UNAUTHORIZED_ERROR);
         }
         return resultMap;
     }

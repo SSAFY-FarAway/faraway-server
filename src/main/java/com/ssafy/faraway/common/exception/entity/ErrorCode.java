@@ -63,6 +63,26 @@ public enum ErrorCode {
      */
     PASSWORD_UNAUTHORIZED_ERROR(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다."),
 
+    /*
+     * 401 UNAUTHORIZED_ERROR : 계정권한이 유효하지 않습니다.
+     */
+    AT_UNAUTHORIZED_ERROR(HttpStatus.UNAUTHORIZED, "access-token이 유효하지 않습니다."),
+
+    /*
+     * 401 UNAUTHORIZED_ERROR : 계정권한이 유효하지 않습니다.
+     */
+    RT_UNAUTHORIZED_ERROR(HttpStatus.UNAUTHORIZED, "refresh-token이 유효하지 않습니다."),
+
+    /*
+     * 401 UNAUTHORIZED_ERROR : 계정권한이 유효하지 않습니다.
+     */
+    LOGIN_UNAUTHORIZED_ERROR(HttpStatus.UNAUTHORIZED, "로그인정보가 유효하지 않습니다."),
+
+    /*
+     * 409 CONFLICT_ERROR : 중복된 아이디입니다.
+     */
+    LOGIN_ID_CONFLICT_ERROR(HttpStatus.CONFLICT, "중복된 아이디입니다.")
+
     ;
 
     private final HttpStatus status;

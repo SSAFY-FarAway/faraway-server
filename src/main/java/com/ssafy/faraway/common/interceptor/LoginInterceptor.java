@@ -13,6 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 
 @Slf4j
 @Component
@@ -28,13 +29,34 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String requestURI = request.getRequestURI();
         String requestMethod = request.getMethod();
+        System.out.println(requestMethod);
+        System.out.println(requestURI);
+        System.out.println("@@@@헤더 리스트 출력");
+        Enumeration headerNames = request.getHeaderNames();
+        while(headerNames.hasMoreElements()) {
+            String name = (String) headerNames.nextElement();
+            String value = request.getHeader(name);
+            System.out.println(name + " : " + value);
+        }
+
+        if(requestMethod.equals("OPTIONS")){
+            return true;
+        }
+
+        System.out.println("@@@@헤더 리스트 출력");
         // member 제외 모든 GET 요청 허용
         if (!requestURI.contains("member") && requestMethod.equals("GET")) {
             return true;
         }
+        if(!requestURI.contains("member") && requestMethod.equals("OPTIONS")){
+            String optionsMethod = request.getHeader("Access-Control-Request-Method");
+            if(optionsMethod.equals("GET")){
+                return true;
+            }
+        }
 
         final String token = request.getHeader(HEADER_AUTH);
-
+        System.out.println(token);
         if (token != null && jwtService.checkToken(token)) {
             logger.info("토큰 사용 가능 : {}", token);
             return true;
