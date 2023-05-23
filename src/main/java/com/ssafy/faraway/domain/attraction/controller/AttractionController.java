@@ -1,20 +1,22 @@
 package com.ssafy.faraway.domain.attraction.controller;
 
 import com.ssafy.faraway.common.domain.ResultPage;
-import com.ssafy.faraway.common.util.SizeConstants;
 import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
 import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse;
 import com.ssafy.faraway.domain.attraction.entity.Sido;
+import com.ssafy.faraway.domain.attraction.service.AttractionLikeService;
 import com.ssafy.faraway.domain.attraction.service.AttractionQueryService;
 import com.ssafy.faraway.domain.attraction.service.AttractionService;
+import com.ssafy.faraway.domain.attraction.service.dto.SaveAttractionLikeDto;
+import com.ssafy.faraway.domain.member.service.JwtService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.ssafy.faraway.common.util.SizeConstants.ATTRACTION_SIZE;
@@ -27,6 +29,8 @@ import static com.ssafy.faraway.common.util.SizeConstants.ATTRACTION_SIZE;
 public class AttractionController {
     private final AttractionService attractionService;
     private final AttractionQueryService attractionQueryService;
+    private final AttractionLikeService attractionLikeService;
+    private final JwtService jwtService;
 
     @GetMapping("/sido")
     public List<Sido> findSidos() {
@@ -53,11 +57,25 @@ public class AttractionController {
                 .title(title)
                 .address(address)
                 .build();
+        Long memberId = jwtService.getMemberId();
         log.debug("condition: {}", condition);
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, ATTRACTION_SIZE);
-        List<AttractionResponse> responses = attractionQueryService.searchByCondition(condition, pageRequest);
+        List<AttractionResponse> responses = attractionQueryService.searchByCondition(condition, memberId, pageRequest);
         log.debug("responses size: {}", responses.size());
         return new ResultPage<>(responses, pageNumber, ATTRACTION_SIZE, attractionQueryService.getPageTotalCnt(condition));
     }
 
+    @PostMapping("/{contentId}/like")
+    public Long saveAttractionLike(@PathVariable Integer contentId) {
+        SaveAttractionLikeDto dto = SaveAttractionLikeDto.builder()
+                .contentId(contentId)
+                .memberId(jwtService.getMemberId())
+                .build();
+        return attractionLikeService.save(dto);
+    }
+
+    @DeleteMapping("/like/{likeId}")
+    public Long deleteAttractionLike(@PathVariable Long likeId) {
+        return attractionLikeService.delete(likeId);
+    }
 }

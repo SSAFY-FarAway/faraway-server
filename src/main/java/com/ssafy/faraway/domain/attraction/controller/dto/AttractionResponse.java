@@ -17,9 +17,11 @@ public class AttractionResponse {
     private double latitude;
     private double longitude;
     private String overview;
+    private int likeCnt;
+    private Long likeId;
 
     @Builder
-    public AttractionResponse(int contentId, String title, String addr1, String addr2, String zipcode, String tel, String firstImage, double latitude, double longitude, String overview) {
+    public AttractionResponse(int contentId, String title, String addr1, String addr2, String zipcode, String tel, String firstImage, double latitude, double longitude, String overview, int likeCnt, Long likeId) {
         this.contentId = contentId;
         this.title = title;
         this.addr1 = addr1;
@@ -30,5 +32,7 @@ public class AttractionResponse {
         this.latitude = latitude;
         this.longitude = longitude;
         this.overview = overview;
+        this.likeCnt = likeCnt;
+        this.likeId = likeId;
     }
 }
