@@ -38,6 +38,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             String value = request.getHeader(name);
             System.out.println(name + " : " + value);
         }
+
+        if(requestMethod.equals("OPTIONS")){
+            return true;
+        }
+
         System.out.println("@@@@헤더 리스트 출력");
         // member 제외 모든 GET 요청 허용
         if (!requestURI.contains("member") && requestMethod.equals("GET")) {
@@ -49,7 +54,6 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return true;
             }
         }
-
 
         final String token = request.getHeader(HEADER_AUTH);
         System.out.println(token);
