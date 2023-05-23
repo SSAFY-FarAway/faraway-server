@@ -26,7 +26,7 @@ public class JwtServiceImpl implements JwtService {
     //	SALT는 토큰 유효성 확인 시 사용하기 때문에 외부에 노출되지 않게 주의해야 한다.
     private static final String SALT = "farawaySecret";
 
-    private static final int ACCESS_TOKEN_EXPIRE_MINUTES = 1; // 분단위 60
+    private static final int ACCESS_TOKEN_EXPIRE_MINUTES = 10; // 분단위 60
     private static final int REFRESH_TOKEN_EXPIRE_MINUTES = 2; // 주단위
     @Override
     public <T> String createAccessToken(String key, T data) {

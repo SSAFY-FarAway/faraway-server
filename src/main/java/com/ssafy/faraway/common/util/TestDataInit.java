@@ -34,12 +34,12 @@ public class TestDataInit {
 
     @PostConstruct
     public void init() {
-//        Long memberId = createMember();
+        Long memberId = createMember();
         createCategory();
 
-//        initNotice(memberId, 1L);
-//        initPost(memberId, 2L);
-//        initHotPlace(memberId);
+        initNotice(memberId, 1L);
+        initPost(memberId, 2L);
+        initHotPlace(memberId);
     }
 
     private Long createMember() {

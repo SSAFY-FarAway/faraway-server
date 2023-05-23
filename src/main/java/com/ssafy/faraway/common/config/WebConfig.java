@@ -29,6 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/member/login-id", // 아이디 찾기
                         "/member/sign-up", // 회원가입
                         "/member/refresh",
+                        "/member/logout/**",
 //                       -----Member------
 //                        "/attraction/**", // 시도,구군
 //                        "/attraction", // searchAttractions
