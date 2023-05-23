@@ -100,10 +100,12 @@ public class MemberController {
         int cnt = 0;
         if(memberService.checkLoginId(loginId)){
             cnt = 1;
+        }
+        if(cnt == 0){
+            return cnt;
         }else{
             throw new CustomException(ErrorCode.LOGIN_ID_CONFLICT_ERROR);
         }
-        return cnt;
     }
 
     // 유저가 입력한 비밀번호가 맞는지 확인
