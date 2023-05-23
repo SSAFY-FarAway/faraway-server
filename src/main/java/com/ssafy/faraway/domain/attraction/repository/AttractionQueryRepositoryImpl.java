@@ -112,20 +112,25 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
                 .fetch();
     }
 
-    private boolean hasCondition(Integer condition) {
-        return condition != null;
-    }
-
     private BooleanExpression isSidoCode(Integer sidoCode) {
-        return hasCondition(sidoCode) ? attractionInfo.sido.sidoCode.eq(sidoCode) : null;
+        if (sidoCode == null) {
+            return null;
+        }
+        return attractionInfo.sido.sidoCode.eq(sidoCode);
     }
 
     private BooleanExpression isGugunCode(Integer gugunCode) {
-        return hasCondition(gugunCode) ? attractionInfo.gugun.gugunCode.eq(gugunCode) : null;
+        if (gugunCode == null) {
+            return null;
+        }
+        return attractionInfo.gugun.gugunCode.eq(gugunCode);
     }
 
     private BooleanExpression isContentTypeId(Integer contentTypeId) {
-        return hasCondition(contentTypeId) ? attractionInfo.contentTypeId.eq(contentTypeId) : null;
+        if (contentTypeId == null) {
+            return null;
+        }
+        return attractionInfo.contentTypeId.eq(contentTypeId);
     }
 
     private BooleanExpression isTitle(String title) {

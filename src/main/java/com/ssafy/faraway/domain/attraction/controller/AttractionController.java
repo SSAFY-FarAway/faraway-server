@@ -40,9 +40,9 @@ public class AttractionController {
 
     @GetMapping
     public ResultPage<List<AttractionResponse>> searchAttractions(
-            @RequestParam(required = false, defaultValue = "") Integer sidoCode,
-            @RequestParam(required = false, defaultValue = "") Integer gugunCode,
-            @RequestParam(required = false, defaultValue = "") Integer contentTypeId,
+            @RequestParam(required = false) Integer sidoCode,
+            @RequestParam(required = false) Integer gugunCode,
+            @RequestParam(required = false) Integer contentTypeId,
             @RequestParam(required = false, defaultValue = "1") Integer pageNumber,
             @RequestParam(required = false, defaultValue = "") String title,
             @RequestParam(required = false, defaultValue = "") String address) {
