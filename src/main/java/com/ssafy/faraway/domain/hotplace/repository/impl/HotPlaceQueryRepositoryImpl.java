@@ -1,9 +1,7 @@
 package com.ssafy.faraway.domain.hotplace.repository.impl;
 
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository;
 import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
@@ -35,27 +33,28 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
     }
 
     @Override
-    public List<HotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
+    public List<HotPlace> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
         List<Long> ids = getIds(condition, pageable);
 
         if (CollectionUtils.isEmpty(ids)) {
             return new ArrayList<>();
         }
 
-        return queryFactory
-                .select(Projections.fields(HotPlaceResponse.class,
-                        hotPlace.id,
-                        hotPlace.member.id.as("memberId"),
-                        hotPlace.member.loginId,
-                        hotPlace.title,
-                        hotPlace.hit,
-                        hotPlace.likes.size().as("likeCnt"),
-                        hotPlace.address.mainAddress,
-                        hotPlace.rating,
-                        hotPlace.createdDate
-                ))
+//        return queryFactory
+//                .select(Projections.fields(HotPlaceResponse.class,
+//                        hotPlace.id,
+//                        hotPlace.member.id.as("memberId"),
+//                        hotPlace.member.loginId,
+//                        hotPlace.title,
+//                        hotPlace.hit,
+//                        hotPlace.likes.size().as("likeCnt"),
+//                        hotPlace.address.mainAddress,
+//                        hotPlace.rating,
+//                        hotPlace.createdDate
+//                ))
+        return queryFactory.select(hotPlace)
                 .from(hotPlace)
-                .join(hotPlace.member, member)
+                .join(hotPlace.member, member).fetchJoin()
                 .where(hotPlace.id.in(ids))
                 .orderBy(hotPlace.createdDate.desc())
                 .fetch();

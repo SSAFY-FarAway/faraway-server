@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,6 +83,23 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
 
     @Override
     public List<HotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
-        return hotPlaceQueryRepository.searchByCondition(condition, pageable);
+        List<HotPlace> hotPlaces = hotPlaceQueryRepository.searchByCondition(condition, pageable);
+        List<HotPlaceResponse> responses = new ArrayList<>();
+        for (HotPlace hotPlace : hotPlaces) {
+            responses.add(HotPlaceResponse.builder()
+                    .id(hotPlace.getId())
+                    .memberId(hotPlace.getMember().getId())
+                    .loginId(hotPlace.getMember().getLoginId())
+                    .title(hotPlace.getTitle())
+                    .hit(hotPlace.getHit())
+                    .likeCnt(hotPlace.getLikes().size())
+                    .mainAddress(hotPlace.getAddress().getMainAddress())
+                    .rating(hotPlace.getRating())
+                    .thumbnailId(hotPlace.getImages().get(0).getId())
+                    .createdDate(hotPlace.getCreatedDate())
+                    .build());
+        }
+        return responses;
+//        return hotPlaceQueryRepository.searchByCondition(condition, pageable);
     }
 }
