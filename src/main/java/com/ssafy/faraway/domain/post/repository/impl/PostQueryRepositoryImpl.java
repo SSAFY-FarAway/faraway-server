@@ -39,7 +39,18 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
 
     @Override
     public List<PostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable) {
-        List<Long> ids = getIds(condition, pageable);
+        List<Long> ids = queryFactory
+                .select(post.id)
+                .from(post)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent()),
+                        isCategory(condition.getCategoryId())
+                )
+                .orderBy(post.createdDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
 
         if (CollectionUtils.isEmpty(ids)) {
             return new ArrayList<>();
@@ -65,6 +76,82 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
     }
 
     @Override
+    public List<PostResponse> searchByHit(PostSearchCondition condition, Pageable pageable) {
+        List<Long> ids = queryFactory
+                .select(post.id)
+                .from(post)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent()),
+                        isCategory(condition.getCategoryId())
+                )
+                .orderBy(post.hit.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        if (CollectionUtils.isEmpty(ids)) {
+            return new ArrayList<>();
+        }
+
+        return queryFactory
+                .select(Projections.fields(PostResponse.class,
+                        post.id,
+                        post.member.id.as("memberId"),
+                        post.member.loginId,
+                        post.category.categoryName,
+                        post.title,
+                        post.hit,
+                        post.likes.size().as("likeCnt"),
+                        post.createdDate
+                ))
+                .from(post)
+                .join(post.member, member)
+                .join(post.category, category)
+                .where(post.id.in(ids))
+                .orderBy(post.hit.desc())
+                .fetch();
+    }
+
+    @Override
+    public List<PostResponse> searchByLikeCnt(PostSearchCondition condition, Pageable pageable) {
+        List<Long> ids = queryFactory
+                .select(post.id)
+                .from(post)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent()),
+                        isCategory(condition.getCategoryId())
+                )
+                .orderBy(post.likes.size().desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        if (CollectionUtils.isEmpty(ids)) {
+            return new ArrayList<>();
+        }
+
+        return queryFactory
+                .select(Projections.fields(PostResponse.class,
+                        post.id,
+                        post.member.id.as("memberId"),
+                        post.member.loginId,
+                        post.category.categoryName,
+                        post.title,
+                        post.hit,
+                        post.likes.size().as("likeCnt"),
+                        post.createdDate
+                ))
+                .from(post)
+                .join(post.member, member)
+                .join(post.category, category)
+                .where(post.id.in(ids))
+                .orderBy(post.likes.size().desc())
+                .fetch();
+    }
+
+    @Override
     public int getPageTotalCnt(PostSearchCondition condition) {
         return queryFactory
                 .select(post.count())
@@ -76,21 +163,6 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
                         isContent(condition.getContent()),
                         isCategory(condition.getCategoryId())
                 ).fetchFirst().intValue();
-    }
-
-    private List<Long> getIds(PostSearchCondition condition, Pageable pageable) {
-        return queryFactory
-                .select(post.id)
-                .from(post)
-                .where(
-                        isTitle(condition.getTitle()),
-                        isContent(condition.getContent()),
-                        isCategory(condition.getCategoryId())
-                )
-                .orderBy(post.createdDate.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch();
     }
 
     private BooleanExpression isTitle(String title) {
