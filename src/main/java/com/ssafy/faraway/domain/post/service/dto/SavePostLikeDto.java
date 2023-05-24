@@ -2,8 +2,10 @@ package com.ssafy.faraway.domain.post.service.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class SavePostLikeDto {
     private Long postId;
     private Long memberId;

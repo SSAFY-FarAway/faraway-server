@@ -27,9 +27,9 @@ public class PostQueryServiceImpl implements PostQueryService {
 
     @Transactional
     @Override
-    public DetailPostResponse searchById(Long postId, Long loginId) {
+    public DetailPostResponse searchById(Long postId, Long memberId) {
         Post post = postQueryRepository.searchById(postId);
-        if (!post.getMember().getId().equals(loginId)) {
+        if (!post.getMember().getId().equals(memberId)) {
             post.increaseHit();
         }
         List<PostCommentResponse> commentResponses = getCommentResponses(post);
@@ -43,7 +43,7 @@ public class PostQueryServiceImpl implements PostQueryService {
                 .content(post.getContent())
                 .hit(post.getHit())
                 .likeCnt(post.getLikes().size())
-                .likeId(postLikeQueryRepository.searchLikeId(loginId, postId))
+                .likeId(postLikeQueryRepository.searchLikeId(memberId, postId))
                 .postCommentResponses(commentResponses)
                 .attachmentResponses(attachmentResponses)
                 .createdDate(post.getCreatedDate())

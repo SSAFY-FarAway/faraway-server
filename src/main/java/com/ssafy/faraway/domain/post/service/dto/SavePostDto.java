@@ -3,10 +3,12 @@ package com.ssafy.faraway.domain.post.service.dto;
 import com.ssafy.faraway.common.domain.UploadFile;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class SavePostDto {
     private String title;
     private String content;
