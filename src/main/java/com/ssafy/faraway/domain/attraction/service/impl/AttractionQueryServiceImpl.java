@@ -8,6 +8,7 @@ import com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse;
 import com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository;
 import com.ssafy.faraway.domain.attraction.service.AttractionQueryService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import static com.ssafy.faraway.common.util.SizeConstants.ATTRACTION_SIZE;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AttractionQueryServiceImpl implements AttractionQueryService {
     private final AttractionQueryRepository attractionQueryRepository;
     private final AttractionLikeQueryRepository attractionLikeQueryRepository;

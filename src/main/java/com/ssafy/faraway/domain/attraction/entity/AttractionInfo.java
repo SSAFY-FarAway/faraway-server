@@ -30,10 +30,10 @@ public class AttractionInfo {
     private String firstImage2;
     @Column(name = "readcount")
     private int readCount;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sido_code")
     private Sido sido;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gugun_code")
     private Gugun gugun;
     @OneToOne(mappedBy = "attractionInfo")

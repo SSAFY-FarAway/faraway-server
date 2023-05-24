@@ -9,6 +9,7 @@ import com.ssafy.faraway.domain.attraction.entity.AttractionInfo;
 import com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository;
 import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -25,6 +26,7 @@ import static org.springframework.util.StringUtils.hasText;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class AttractionQueryRepositoryImpl implements AttractionQueryRepository {
     private final JPAQueryFactory queryFactory;
 
@@ -34,6 +36,10 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
 
         if (CollectionUtils.isEmpty(ids)) {
             return new ArrayList<>();
+        }
+
+        for (Integer id : ids) {
+            log.debug("id: {}", id);
         }
 
         return queryFactory
