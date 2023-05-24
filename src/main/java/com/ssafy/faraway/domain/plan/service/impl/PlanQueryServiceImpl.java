@@ -31,11 +31,6 @@ public class PlanQueryServiceImpl implements PlanQueryService {
     private final PlanLikeQueryRepository planLikeQueryRepository;
     private final AttractionQueryRepository attractionQueryRepository;
 
-    @Override
-    public List<PlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable) {
-        return planQueryRepository.searchByCondition(condition, pageable);
-    }
-
     @Transactional
     @Override
     public DetailPlanResponse searchById(Long planId, Long memberId) {
@@ -60,6 +55,19 @@ public class PlanQueryServiceImpl implements PlanQueryService {
                 .shortestPath(shortestPath)
                 .commentResponses(commentResponses)
                 .build();
+    }
+
+    @Override
+    public List<PlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable) {
+        List<PlanResponse> responses;
+        if (condition.getOrderType() == 1) {
+            responses = planQueryRepository.searchByCondition(condition, pageable);
+        } else if (condition.getOrderType() == 2) {
+            responses = planQueryRepository.searchByHit(condition, pageable);
+        } else {
+            responses = planQueryRepository.searchByLikes(condition, pageable);
+        }
+        return responses;
     }
 
     @Override

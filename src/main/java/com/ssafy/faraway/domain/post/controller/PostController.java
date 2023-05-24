@@ -69,12 +69,16 @@ public class PostController {
     public ResultPage<List<PostResponse>> searchPosts(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
+            @RequestParam(defaultValue = "0") Long memberId,
+            @RequestParam(defaultValue = "1") Integer orderType,
             @RequestParam Long categoryId,
             @RequestParam(defaultValue = "1") Integer pageNumber) {
         PostSearchCondition condition = PostSearchCondition.builder()
                 .title(title)
                 .content(content)
                 .categoryId(categoryId)
+                .memberId(memberId)
+                .orderType(orderType)
                 .build();
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);
         List<PostResponse> responses = postQueryService.searchByCondition(condition, pageRequest);

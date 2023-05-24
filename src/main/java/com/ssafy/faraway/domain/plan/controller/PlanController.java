@@ -52,10 +52,14 @@ public class PlanController {
     public ResultPage<List<PlanResponse>> searchPlans(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
+            @RequestParam(defaultValue = "0") Long memberId,
+            @RequestParam(defaultValue = "1") Integer orderType,
             @RequestParam(defaultValue = "1") Integer pageNumber) {
         PlanSearchCondition condition = PlanSearchCondition.builder()
                 .title(title)
                 .content(content)
+                .memberId(memberId)
+                .orderType(orderType)
                 .build();
 
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);
