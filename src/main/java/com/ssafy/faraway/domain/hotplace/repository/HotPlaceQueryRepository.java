@@ -11,5 +11,9 @@ public interface HotPlaceQueryRepository {
 
     List<HotPlace> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable);
 
+    List<HotPlace> searchByHit(HotPlaceSearchCondition condition, Pageable pageable);
+
+    List<HotPlace> searchByLikeCnt(HotPlaceSearchCondition condition, Pageable pageable);
+
     int getPageTotalCnt(HotPlaceSearchCondition condition);
 }
