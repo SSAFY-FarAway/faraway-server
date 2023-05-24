@@ -89,7 +89,8 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
                 .where(
                         isSidoCode(condition.getSidoCode()),
                         isGugunCode(condition.getGugunCode()),
-                        isContentTypeId(condition.getContentTypeId())
+                        isContentTypeId(condition.getContentTypeId()),
+                        isTitle(condition.getTitle())
                 ).fetchFirst().intValue();
     }
 
@@ -102,8 +103,7 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
                         isSidoCode(condition.getSidoCode()),
                         isGugunCode(condition.getGugunCode()),
                         isContentTypeId(condition.getContentTypeId()),
-                        isTitle(condition.getTitle()),
-                        isAddress(condition.getAddress())
+                        isTitle(condition.getTitle())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -133,9 +133,5 @@ public class AttractionQueryRepositoryImpl implements AttractionQueryRepository 
 
     private BooleanExpression isTitle(String title) {
         return hasText(title) ? attractionInfo.title.like("%" + title + "%") : null;
-    }
-
-    private BooleanExpression isAddress(String address) {
-        return hasText(address) ? attractionInfo.addr1.like("%" + address + "%") : null;
     }
 }
