@@ -52,7 +52,15 @@ public class PostQueryServiceImpl implements PostQueryService {
 
     @Override
     public List<PostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable) {
-        return postQueryRepository.searchByCondition(condition, pageable);
+        List<PostResponse> responses;
+        if (condition.getOrderType() == 1) {
+            responses = postQueryRepository.searchByCondition(condition, pageable);
+        } else if (condition.getOrderType() == 2) {
+            responses = postQueryRepository.searchByHit(condition, pageable);
+        } else {
+            responses = postQueryRepository.searchByLikeCnt(condition, pageable);
+        }
+         return responses;
     }
 
     @Override

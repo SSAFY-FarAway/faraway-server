@@ -8,11 +8,15 @@ public class PostSearchCondition {
     private String title;
     private String content;
     private Long categoryId;
+    private Long memberId;
+    private Long orderType;
 
     @Builder
-    public PostSearchCondition(String title, String content, Long categoryId) {
+    public PostSearchCondition(String title, String content, Long categoryId, Long memberId, Long orderType) {
         this.title = title;
         this.content = content;
         this.categoryId = categoryId;
+        this.memberId = memberId;
+        this.orderType = orderType;
     }
 }

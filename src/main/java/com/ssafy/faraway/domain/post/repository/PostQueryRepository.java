@@ -11,5 +11,10 @@ public interface PostQueryRepository {
     Post searchById(Long postId);
 
     List<PostResponse> searchByCondition(PostSearchCondition condition, Pageable pageable);
+
+    List<PostResponse> searchByHit(PostSearchCondition condition, Pageable pageable);
+
+    List<PostResponse> searchByLikeCnt(PostSearchCondition condition, Pageable pageable);
+
     int getPageTotalCnt(PostSearchCondition condition);
 }
