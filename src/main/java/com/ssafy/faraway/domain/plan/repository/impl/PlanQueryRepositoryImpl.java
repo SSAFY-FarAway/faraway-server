@@ -25,8 +25,28 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
+    public Plan searchById(Long planId) {
+        return queryFactory
+                .select(plan)
+                .from(plan)
+                .join(plan.member, member).fetchJoin()
+                .where(plan.id.eq(planId))
+                .fetchOne();
+    }
+
+    @Override
     public List<PlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable) {
-        List<Long> ids = getIds(condition, pageable);
+        List<Long> ids = queryFactory
+                .select(plan.id)
+                .from(plan)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                )
+                .orderBy(plan.createdDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
 
         if (CollectionUtils.isEmpty(ids)) {
             return new ArrayList<>();
@@ -50,13 +70,73 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
     }
 
     @Override
-    public Plan searchById(Long planId) {
-        return queryFactory
-                .select(plan)
+    public List<PlanResponse> searchByHit(PlanSearchCondition condition, Pageable pageable) {
+        List<Long> ids = queryFactory
+                .select(plan.id)
                 .from(plan)
-                .join(plan.member, member).fetchJoin()
-                .where(plan.id.eq(planId))
-                .fetchOne();
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                )
+                .orderBy(plan.hit.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        if (CollectionUtils.isEmpty(ids)) {
+            return new ArrayList<>();
+        }
+
+        return queryFactory
+                .select(Projections.fields(PlanResponse.class,
+                        plan.id,
+                        plan.member.id.as("memberId"),
+                        plan.member.loginId,
+                        plan.title,
+                        plan.hit,
+                        plan.likes.size().as("likeCnt"),
+                        plan.createdDate
+                ))
+                .from(plan)
+                .join(plan.member, member)
+                .where(plan.id.in(ids))
+                .orderBy(plan.hit.desc())
+                .fetch();
+    }
+
+    @Override
+    public List<PlanResponse> searchByLikes(PlanSearchCondition condition, Pageable pageable) {
+        List<Long> ids = queryFactory
+                .select(plan.id)
+                .from(plan)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                )
+                .orderBy(plan.likes.size().desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        if (CollectionUtils.isEmpty(ids)) {
+            return new ArrayList<>();
+        }
+
+        return queryFactory
+                .select(Projections.fields(PlanResponse.class,
+                        plan.id,
+                        plan.member.id.as("memberId"),
+                        plan.member.loginId,
+                        plan.title,
+                        plan.hit,
+                        plan.likes.size().as("likeCnt"),
+                        plan.createdDate
+                ))
+                .from(plan)
+                .join(plan.member, member)
+                .where(plan.id.in(ids))
+                .orderBy(plan.likes.size().desc())
+                .fetch();
     }
 
     @Override
@@ -69,20 +149,6 @@ public class PlanQueryRepositoryImpl implements PlanQueryRepository {
                         isTitle(condition.getTitle()),
                         isContent(condition.getContent())
                 ).fetchFirst().intValue();
-    }
-
-    private List<Long> getIds(PlanSearchCondition condition, Pageable pageable) {
-        return queryFactory
-                .select(plan.id)
-                .from(plan)
-                .where(
-                        isTitle(condition.getTitle()),
-                        isContent(condition.getContent())
-                )
-                .orderBy(plan.createdDate.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch();
     }
 
     private BooleanExpression isTitle(String title) {
