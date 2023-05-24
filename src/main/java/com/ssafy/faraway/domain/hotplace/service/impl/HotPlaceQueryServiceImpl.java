@@ -69,6 +69,7 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
                     .content(hotPlace.getContent())
                     .hit(hotPlace.getHit())
                     .likeCnt(hotPlace.getLikes().size())
+                    .commentCnt(hotPlace.getComments().size())
                     .likeId(hotPlaceLikeQueryRepository.searchLikeId(condition.getMemberId(), hotPlace.getId()))
                     .mainAddress(hotPlace.getAddress().getMainAddress())
                     .rating(hotPlace.getRating())
