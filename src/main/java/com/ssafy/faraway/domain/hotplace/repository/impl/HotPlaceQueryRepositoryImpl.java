@@ -34,7 +34,17 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
 
     @Override
     public List<HotPlace> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
-        List<Long> ids = getIds(condition, pageable);
+        List<Long> ids = queryFactory
+                .select(hotPlace.id)
+                .from(hotPlace)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                )
+                .orderBy(hotPlace.createdDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
 
         if (CollectionUtils.isEmpty(ids)) {
             return new ArrayList<>();
@@ -49,6 +59,58 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
     }
 
     @Override
+    public List<HotPlace> searchByHit(HotPlaceSearchCondition condition, Pageable pageable) {
+        List<Long> ids = queryFactory
+                .select(hotPlace.id)
+                .from(hotPlace)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                )
+                .orderBy(hotPlace.hit.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        if (CollectionUtils.isEmpty(ids)) {
+            return new ArrayList<>();
+        }
+
+        return queryFactory.select(hotPlace)
+                .from(hotPlace)
+                .join(hotPlace.member, member).fetchJoin()
+                .where(hotPlace.id.in(ids))
+                .orderBy(hotPlace.hit.desc())
+                .fetch();
+    }
+
+    @Override
+    public List<HotPlace> searchByLikeCnt(HotPlaceSearchCondition condition, Pageable pageable) {
+        List<Long> ids = queryFactory
+                .select(hotPlace.id)
+                .from(hotPlace)
+                .where(
+                        isTitle(condition.getTitle()),
+                        isContent(condition.getContent())
+                )
+                .orderBy(hotPlace.likes.size().desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        if (CollectionUtils.isEmpty(ids)) {
+            return new ArrayList<>();
+        }
+
+        return queryFactory.select(hotPlace)
+                .from(hotPlace)
+                .join(hotPlace.member, member).fetchJoin()
+                .where(hotPlace.id.in(ids))
+                .orderBy(hotPlace.likes.size().desc())
+                .fetch();
+    }
+
+    @Override
     public int getPageTotalCnt(HotPlaceSearchCondition condition) {
         return queryFactory
                 .select(hotPlace.count())
@@ -58,20 +120,6 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
                         isTitle(condition.getTitle()),
                         isContent(condition.getContent())
                 ).fetchFirst().intValue();
-    }
-
-    private List<Long> getIds(HotPlaceSearchCondition condition, Pageable pageable) {
-        return queryFactory
-                .select(hotPlace.id)
-                .from(hotPlace)
-                .where(
-                        isTitle(condition.getTitle()),
-                        isContent(condition.getContent())
-                )
-                .orderBy(hotPlace.createdDate.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch();
     }
 
     private BooleanExpression isTitle(String title) {

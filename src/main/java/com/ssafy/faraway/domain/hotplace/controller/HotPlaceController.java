@@ -76,13 +76,15 @@ public class HotPlaceController {
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
             @RequestParam(defaultValue = "0") Long memberId,
+            @RequestParam(defaultValue = "1") Integer orderType,
             @RequestParam(defaultValue = "1") Integer pageNumber) {
         HotPlaceSearchCondition condition = HotPlaceSearchCondition.builder()
                 .title(title)
                 .content(content)
                 .memberId(memberId)
+                .orderType(orderType)
                 .build();
-        PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);
         List<HotPlaceResponse> responses = hotPlaceQueryService.searchByCondition(condition, pageRequest);
         return new ResultPage<>(responses, pageNumber, PAGE_SIZE, hotPlaceQueryService.getPageTotalCnt(condition));
     }

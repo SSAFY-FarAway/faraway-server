@@ -58,7 +58,14 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
 
     @Override
     public List<HotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
-        List<HotPlace> hotPlaces = hotPlaceQueryRepository.searchByCondition(condition, pageable);
+        List<HotPlace> hotPlaces;
+        if (condition.getOrderType() == 1) {
+            hotPlaces = hotPlaceQueryRepository.searchByCondition(condition, pageable);
+        } else if (condition.getOrderType() == 2) {
+            hotPlaces = hotPlaceQueryRepository.searchByHit(condition, pageable);
+        } else {
+            hotPlaces = hotPlaceQueryRepository.searchByLikeCnt(condition, pageable);
+        }
         List<HotPlaceResponse> responses = new ArrayList<>();
         for (HotPlace hotPlace : hotPlaces) {
             responses.add(HotPlaceResponse.builder()
@@ -69,6 +76,7 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
                     .content(hotPlace.getContent())
                     .hit(hotPlace.getHit())
                     .likeCnt(hotPlace.getLikes().size())
+                    .commentCnt(hotPlace.getComments().size())
                     .likeId(hotPlaceLikeQueryRepository.searchLikeId(condition.getMemberId(), hotPlace.getId()))
                     .mainAddress(hotPlace.getAddress().getMainAddress())
                     .rating(hotPlace.getRating())
