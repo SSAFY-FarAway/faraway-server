@@ -11,6 +11,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface PlanQueryService {
     List<PlanResponse> searchByCondition(PlanSearchCondition condition, Pageable pageable);
-    DetailPlanResponse searchById(Long planId, Long loginId);
+    DetailPlanResponse searchById(Long planId, Long memberId);
     int getPageTotalCnt(PlanSearchCondition condition);
 }
