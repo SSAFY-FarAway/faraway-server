@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.PersistenceException;
 import java.util.Arrays;
 
 @RestControllerAdvice
@@ -18,7 +19,7 @@ public class GlobalExceptionHandler {
     /*
      * Developer Custom Exception
      */
-    @ExceptionHandler({CustomException.class, MethodArgumentNotValidException.class})
+    @ExceptionHandler({CustomException.class, MethodArgumentNotValidException.class, PersistenceException.class})
     protected ResponseEntity<ErrorResponse> handleCustomException(final CustomException e) {
         log.error("handleCustomException: {}", e.getErrorCode());
         log.error(Arrays.toString(e.getStackTrace()));
