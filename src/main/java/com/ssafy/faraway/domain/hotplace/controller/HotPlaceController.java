@@ -6,10 +6,12 @@ import com.ssafy.faraway.common.domain.UploadFile;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
 import com.ssafy.faraway.common.util.FileExtFilter;
-import com.ssafy.faraway.domain.hotplace.controller.dto.req.*;
+import com.ssafy.faraway.domain.hotplace.controller.dto.req.SaveHotPlaceCommentRequest;
+import com.ssafy.faraway.domain.hotplace.controller.dto.req.SaveHotPlaceRequest;
+import com.ssafy.faraway.domain.hotplace.controller.dto.req.UpdateHotPlaceCommentRequest;
+import com.ssafy.faraway.domain.hotplace.controller.dto.req.UpdateHotPlaceRequest;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse;
 import com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse;
-import com.ssafy.faraway.domain.hotplace.repository.HotPlaceLikeRepository;
 import com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceLikeService;
@@ -29,7 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ssafy.faraway.common.util.SizeConstants.*;
+import static com.ssafy.faraway.common.util.SizeConstants.PAGE_SIZE;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,7 +50,6 @@ public class HotPlaceController {
     @PostMapping
     public Long saveHotPlace(@Valid @RequestPart SaveHotPlaceRequest request,
                              @RequestPart(required = false) List<MultipartFile> files) throws IOException {
-        Long loginId = jwtService.getMemberId();
         List<UploadFile> uploadFiles = new ArrayList<>();
 
         if (files != null && !files.isEmpty()) {
@@ -57,23 +58,24 @@ public class HotPlaceController {
         }
 
         SaveHotPlaceDto dto = SaveHotPlaceDto.builder()
+                .memberId(jwtService.getMemberId())
                 .title(request.getTitle())
                 .content(request.getContent())
                 .zipcode(request.getZipcode())
                 .mainAddress(request.getMainAddress())
                 .subAddress(request.getSubAddress())
                 .rating(request.getRating())
+                .uploadFiles(uploadFiles)
                 .build();
 
-        return hotPlaceService.save(loginId, dto, uploadFiles);
+        return hotPlaceService.save(dto);
     }
 
     @GetMapping
     public ResultPage<List<HotPlaceResponse>> searchHotPlace(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
-            @RequestParam(defaultValue = "1") Integer pageNumber
-    ) {
+            @RequestParam(defaultValue = "1") Integer pageNumber) {
         HotPlaceSearchCondition condition = HotPlaceSearchCondition.builder()
                 .title(title)
                 .content(content)
@@ -85,8 +87,7 @@ public class HotPlaceController {
 
     @GetMapping("/{hotPlaceId}")
     public DetailHotPlaceResponse searchHotPlace(@PathVariable Long hotPlaceId) {
-        Long loginId = jwtService.getMemberId();
-        DetailHotPlaceResponse response = hotPlaceQueryService.searchById(hotPlaceId, loginId);
+        DetailHotPlaceResponse response = hotPlaceQueryService.searchById(hotPlaceId, jwtService.getMemberId());
         if (response == null) {
             throw new CustomException(ErrorCode.HOT_PLACE_NOT_FOUND);
         }
@@ -105,6 +106,7 @@ public class HotPlaceController {
         }
 
         UpdateHotPlaceDto dto = UpdateHotPlaceDto.builder()
+                .hotPlaceId(hotPlaceId)
                 .title(request.getTitle())
                 .content(request.getContent())
                 .zipcode(request.getZipcode())
@@ -112,9 +114,10 @@ public class HotPlaceController {
                 .subAddress(request.getSubAddress())
                 .rating(request.getRating())
                 .deleteImageIds(request.getDeleteImageIds())
+                .uploadFiles(uploadFiles)
                 .build();
 
-        return hotPlaceService.update(hotPlaceId, dto, uploadFiles);
+        return hotPlaceService.update(dto);
     }
 
     @DeleteMapping("/{hotPlaceId}")
@@ -125,18 +128,22 @@ public class HotPlaceController {
     @PostMapping("/{hotPlaceId}/comment")
     public Long saveHotPlaceComment(@PathVariable Long hotPlaceId,
                                     @Valid @RequestBody SaveHotPlaceCommentRequest request) {
-        Long loginId = jwtService.getMemberId();
         SaveHotPlaceCommentDto dto = SaveHotPlaceCommentDto.builder()
-                .content(request.getContent()).build();
-        return hotPlaceCommentService.save(hotPlaceId, loginId, dto);
+                .hotPlaceId(hotPlaceId)
+                .memberId(jwtService.getMemberId())
+                .content(request.getContent())
+                .build();
+        return hotPlaceCommentService.save(dto);
     }
 
     @PutMapping("/comment/{commentId}")
     public Long updateHotPlaceComment(@PathVariable Long commentId,
                                       @Valid @RequestBody UpdateHotPlaceCommentRequest request) {
         UpdateHotPlaceCommentDto dto = UpdateHotPlaceCommentDto.builder()
-                .content(request.getContent()).build();
-        return hotPlaceCommentService.update(commentId, dto);
+                .commentId(commentId)
+                .content(request.getContent())
+                .build();
+        return hotPlaceCommentService.update(dto);
     }
 
     @DeleteMapping("/comment/{commentId}")

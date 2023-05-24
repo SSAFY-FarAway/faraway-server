@@ -27,7 +27,7 @@ public class HotPlaceServiceImpl implements HotPlaceService {
     private final HotPlaceImageRepository hotPlaceImageRepository;
 
     @Override
-    public Long save(Long memberId, SaveHotPlaceDto dto, List<UploadFile> uploadFiles) throws IOException {
+    public Long save(SaveHotPlaceDto dto) throws IOException {
         Address address = Address.builder()
                 .zipcode(dto.getZipcode())
                 .mainAddress(dto.getMainAddress())
@@ -39,28 +39,28 @@ public class HotPlaceServiceImpl implements HotPlaceService {
                 .content(dto.getContent())
                 .address(address)
                 .rating(dto.getRating())
-                .member(Member.builder().id(memberId).build())
+                .member(Member.builder().id(dto.getMemberId()).build())
                 .build();
 
         Long saveId = hotPlaceRepository.save(saveHotPlace).getId();
-        List<HotPlaceImage> hotPlaceImages = getImageList(saveId, uploadFiles);
+        List<HotPlaceImage> hotPlaceImages = getImageList(saveId, dto.getUploadFiles());
         hotPlaceImageRepository.saveAll(hotPlaceImages);
 
         return saveId;
     }
 
     @Override
-    public Long update(Long hotPlaceId, UpdateHotPlaceDto dto, List<UploadFile> uploadFiles) {
-        HotPlace hotplace = hotPlaceRepository.findById(hotPlaceId)
+    public Long update(UpdateHotPlaceDto dto) {
+        HotPlace hotplace = hotPlaceRepository.findById(dto.getHotPlaceId())
                 .orElseThrow(() -> new CustomException(ErrorCode.HOT_PLACE_NOT_FOUND));
         Address address = Address.builder()
                 .zipcode(dto.getZipcode())
                 .mainAddress(dto.getMainAddress())
                 .subAddress(dto.getSubAddress())
                 .build();
-        List<HotPlaceImage> hotPlaceImages = getImageList(hotPlaceId, uploadFiles);
+        List<HotPlaceImage> hotPlaceImages = getImageList(dto.getHotPlaceId(), dto.getUploadFiles());
         hotplace.update(dto.getTitle(), dto.getContent(), address, dto.getRating(), hotPlaceImages, dto.getDeleteImageIds());
-        return hotPlaceId;
+        return hotplace.getId();
     }
 
     @Override
