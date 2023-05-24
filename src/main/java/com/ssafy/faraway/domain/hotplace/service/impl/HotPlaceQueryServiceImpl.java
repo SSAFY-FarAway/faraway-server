@@ -95,7 +95,7 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
                     .likeCnt(hotPlace.getLikes().size())
                     .mainAddress(hotPlace.getAddress().getMainAddress())
                     .rating(hotPlace.getRating())
-                    .thumbnailId(hotPlace.getImages().get(0).getId())
+                    .thumbnailId(hotPlace.getImages().size() > 0 ? hotPlace.getImages().get(0).getId() : 0L)
                     .createdDate(hotPlace.getCreatedDate())
                     .build());
         }
