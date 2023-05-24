@@ -9,10 +9,10 @@ public class PostSearchCondition {
     private String content;
     private Long categoryId;
     private Long memberId;
-    private Long orderType;
+    private Integer orderType;
 
     @Builder
-    public PostSearchCondition(String title, String content, Long categoryId, Long memberId, Long orderType) {
+    public PostSearchCondition(String title, String content, Long categoryId, Long memberId, Integer orderType) {
         this.title = title;
         this.content = content;
         this.categoryId = categoryId;
