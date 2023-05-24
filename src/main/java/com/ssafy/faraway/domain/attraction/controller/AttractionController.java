@@ -1,10 +1,10 @@
 package com.ssafy.faraway.domain.attraction.controller;
 
 import com.ssafy.faraway.common.domain.ResultPage;
-import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
 import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse;
 import com.ssafy.faraway.domain.attraction.entity.Sido;
+import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition;
 import com.ssafy.faraway.domain.attraction.service.AttractionLikeService;
 import com.ssafy.faraway.domain.attraction.service.AttractionQueryService;
 import com.ssafy.faraway.domain.attraction.service.AttractionService;
@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 import static com.ssafy.faraway.common.util.SizeConstants.ATTRACTION_SIZE;

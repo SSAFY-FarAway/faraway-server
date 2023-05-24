@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface PlanService {
-    Long save(SavePlanDto dto, Long memberId);
-    Long update(UpdatePlanDto dto, Long planId);
+    Long save(SavePlanDto dto);
+    Long update(UpdatePlanDto dto);
     Long delete(Long planId);
 }

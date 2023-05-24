@@ -3,9 +3,11 @@ package com.ssafy.faraway.domain.plan.controller;
 import com.ssafy.faraway.common.domain.ResultPage;
 import com.ssafy.faraway.common.exception.entity.CustomException;
 import com.ssafy.faraway.common.exception.entity.ErrorCode;
-import com.ssafy.faraway.common.util.SizeConstants;
 import com.ssafy.faraway.domain.member.service.JwtService;
-import com.ssafy.faraway.domain.plan.controller.dto.req.*;
+import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanCommentRequest;
+import com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanRequest;
+import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanCommentRequest;
+import com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanRequest;
 import com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse;
 import com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse;
 import com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition;
@@ -15,10 +17,7 @@ import com.ssafy.faraway.domain.plan.service.PlanQueryService;
 import com.ssafy.faraway.domain.plan.service.PlanService;
 import com.ssafy.faraway.domain.plan.service.dto.*;
 import io.swagger.annotations.Api;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,21 +39,20 @@ public class PlanController {
 
     @PostMapping
     public Long savePlan(@Valid @RequestBody final SavePlanRequest request) {
-        Long loginId = jwtService.getMemberId();
         SavePlanDto dto = SavePlanDto.builder()
+                .memberId(jwtService.getMemberId())
                 .title(request.getTitle())
                 .content(request.getContent())
                 .travelPlan(request.getTravelPlan())
                 .build();
-        return planService.save(dto, loginId);
+        return planService.save(dto);
     }
 
     @GetMapping
     public ResultPage<List<PlanResponse>> searchPlans(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
-            @RequestParam(defaultValue = "1") Integer pageNumber
-    ) {
+            @RequestParam(defaultValue = "1") Integer pageNumber) {
         PlanSearchCondition condition = PlanSearchCondition.builder()
                 .title(title)
                 .content(content)
@@ -67,8 +65,7 @@ public class PlanController {
 
     @GetMapping("/{planId}")
     public DetailPlanResponse searchPlan(@PathVariable Long planId) {
-        Long loginId = jwtService.getMemberId();
-        DetailPlanResponse response = planQueryService.searchById(planId, loginId);
+        DetailPlanResponse response = planQueryService.searchById(planId, jwtService.getMemberId());
         if (response == null) {
             throw new CustomException(ErrorCode.PLAN_NOT_FOUND);
         }
@@ -79,11 +76,12 @@ public class PlanController {
     public Long updatePlan(@PathVariable Long planId,
                            @Valid @RequestBody final UpdatePlanRequest request) {
         UpdatePlanDto dto = UpdatePlanDto.builder()
+                .planId(planId)
                 .title(request.getTitle())
                 .content(request.getContent())
                 .travelPlan(request.getTravelPlan())
                 .build();
-        return planService.update(dto, planId);
+        return planService.update(dto);
     }
 
     @DeleteMapping("/{planId}")
@@ -94,20 +92,22 @@ public class PlanController {
     @PostMapping("/{planId}/comment")
     public Long savePlanComment(@PathVariable Long planId,
                                 @Valid @RequestBody final SavePlanCommentRequest request) {
-        Long loginId = jwtService.getMemberId();
         SavePlanCommentDto dto = SavePlanCommentDto.builder()
+                .planId(planId)
+                .memberId(jwtService.getMemberId())
                 .content(request.getContent())
                 .build();
-        return planCommentService.save(planId, loginId, dto);
+        return planCommentService.save(dto);
     }
 
     @PutMapping("/comment/{commentId}")
     public Long updatePlanComment(@PathVariable Long commentId,
                                   @Valid @RequestBody final UpdatePlanCommentRequest request) {
         UpdatePlanCommentDto dto = UpdatePlanCommentDto.builder()
+                .commentId(commentId)
                 .content(request.getContent())
                 .build();
-        return planCommentService.update(commentId, dto);
+        return planCommentService.update(dto);
     }
 
     @DeleteMapping("/comment/{commentId}")

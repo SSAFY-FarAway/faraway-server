@@ -7,10 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class SavePlanCommentDto {
+    private Long planId;
+    private Long memberId;
     private String content;
 
     @Builder
-    public SavePlanCommentDto(String content) {
+    public SavePlanCommentDto(Long planId, Long memberId, String content) {
+        this.planId = planId;
+        this.memberId = memberId;
         this.content = content;
     }
 }

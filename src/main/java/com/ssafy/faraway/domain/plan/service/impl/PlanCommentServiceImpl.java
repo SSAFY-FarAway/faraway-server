@@ -18,21 +18,21 @@ public class PlanCommentServiceImpl implements PlanCommentService {
     private final PlanCommentRepository planCommentRepository;
 
     @Override
-    public Long save(Long planId, Long memberId, SavePlanCommentDto dto) {
+    public Long save(SavePlanCommentDto dto) {
         PlanComment planComment = PlanComment.builder()
                 .content(dto.getContent())
-                .member(Member.builder().id(memberId).build())
-                .plan(Plan.builder().id(planId).build())
+                .member(Member.builder().id(dto.getMemberId()).build())
+                .plan(Plan.builder().id(dto.getPlanId()).build())
                 .build();
         return planCommentRepository.save(planComment).getId();
     }
 
     @Override
-    public Long update(Long commentId, UpdatePlanCommentDto dto) {
-        PlanComment planComment = planCommentRepository.findById(commentId)
+    public Long update(UpdatePlanCommentDto dto) {
+        PlanComment planComment = planCommentRepository.findById(dto.getCommentId())
                 .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
         planComment.update(dto.getContent());
-        return commentId;
+        return planComment.getId();
     }
 
     @Override

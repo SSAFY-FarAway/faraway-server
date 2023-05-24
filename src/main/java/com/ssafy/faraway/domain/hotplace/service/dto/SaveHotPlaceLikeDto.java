@@ -2,8 +2,10 @@ package com.ssafy.faraway.domain.hotplace.service.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class SaveHotPlaceLikeDto {
     private Long hotPlaceId;
     private Long memberId;

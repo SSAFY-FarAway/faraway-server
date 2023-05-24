@@ -47,7 +47,6 @@ public class PostController {
     @PostMapping
     public Long savePost(@Valid @RequestPart SavePostRequest request,
                          @RequestPart(required = false) List<MultipartFile> files) throws IOException {
-        Long memberId = jwtService.getMemberId();
         List<UploadFile> uploadFiles = new ArrayList<>();
 
         if (files != null && !files.isEmpty()) {
@@ -58,20 +57,12 @@ public class PostController {
         SavePostDto dto = SavePostDto.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
+                .memberId(jwtService.getMemberId())
                 .categoryId(request.getCategoryId())
+                .uploadFiles(uploadFiles)
                 .build();
 
-        return postService.save(dto, memberId, uploadFiles);
-    }
-
-    @GetMapping("/{postId}")
-    public DetailPostResponse searchPost(@PathVariable Long postId) {
-        Long memberId = jwtService.getMemberId();
-        DetailPostResponse response = postQueryService.searchById(postId, memberId);
-        if (response == null) {
-            throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
-        }
-        return response;
+        return postService.save(dto);
     }
 
     @GetMapping
@@ -79,8 +70,7 @@ public class PostController {
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
             @RequestParam Long categoryId,
-            @RequestParam(defaultValue = "1") Integer pageNumber
-    ) {
+            @RequestParam(defaultValue = "1") Integer pageNumber) {
         PostSearchCondition condition = PostSearchCondition.builder()
                 .title(title)
                 .content(content)
@@ -91,6 +81,16 @@ public class PostController {
         return new ResultPage<>(responses, pageNumber, PAGE_SIZE, postQueryService.getPageTotalCnt(condition));
     }
 
+    @GetMapping("/{postId}")
+    public DetailPostResponse searchPost(@PathVariable Long postId) {
+        DetailPostResponse response = postQueryService.searchById(postId, jwtService.getMemberId());
+
+        if (response == null) {
+            throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
+        }
+        return response;
+    }
+
     @PutMapping("/{postId}")
     public Long updatePost(@PathVariable Long postId, @RequestPart UpdatePostRequest request,
                            @RequestPart(required = false) List<MultipartFile> files) throws IOException {
@@ -99,13 +99,16 @@ public class PostController {
             fileExtFilter.badFileFilter(files);
             uploadFiles = fileStore.storeFiles(files);
         }
+
         UpdatePostDto dto = UpdatePostDto.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
+                .postId(postId)
                 .deleteAttachmentIds(request.getDeleteAttachmentIds())
+                .uploadFiles(uploadFiles)
                 .build();
 
-        return postService.update(postId, dto, uploadFiles);
+        return postService.update(dto);
     }
 
     @DeleteMapping("/{postId}")
@@ -116,20 +119,22 @@ public class PostController {
     @PostMapping("/{postId}/comment")
     public Long savePostComment(@PathVariable Long postId,
                                 @Valid @RequestBody SavePostCommentRequest request) {
-        Long memberId = jwtService.getMemberId();
         SavePostCommentDto dto = SavePostCommentDto.builder()
+                .postId(postId)
+                .memberId(jwtService.getMemberId())
                 .content(request.getContent())
                 .build();
-        return postCommentService.save(postId, memberId, dto);
+        return postCommentService.save(dto);
     }
 
     @PutMapping("/comment/{commentId}")
     public Long updatePostComment(@PathVariable Long commentId,
                                   @Valid @RequestBody UpdatePostCommentRequest request) {
         UpdatePostCommentDto dto = UpdatePostCommentDto.builder()
+                .commentId(commentId)
                 .content(request.getContent())
                 .build();
-        return postCommentService.update(commentId, dto);
+        return postCommentService.update(dto);
     }
 
     @DeleteMapping("/comment/{commentId}")

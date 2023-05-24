@@ -28,27 +28,27 @@ public class PostServiceImpl implements PostService {
     private final AttachmentRepository attachmentRepository;
 
     @Override
-    public Long save(SavePostDto dto, Long memberId, List<UploadFile> uploadFiles) {
+    public Long save(SavePostDto dto) {
         Post post = Post.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .category(Category.builder().id(dto.getCategoryId()).build())
-                .member(Member.builder().id(memberId).build())
+                .member(Member.builder().id(dto.getMemberId()).build())
                 .build();
         Long saveId = postRepository.save(post).getId();
 
-        List<Attachment> attachments = getAttachments(saveId, uploadFiles);
+        List<Attachment> attachments = getAttachments(saveId, dto.getUploadFiles());
         attachmentRepository.saveAll(attachments);
         return saveId;
     }
 
     @Override
-    public Long update(Long postId, UpdatePostDto dto, List<UploadFile> uploadFiles) {
-        Post post = postRepository.findById(postId)
+    public Long update(UpdatePostDto dto) {
+        Post post = postRepository.findById(dto.getPostId())
                 .orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
-        List<Attachment> attachments = getAttachments(postId, uploadFiles);
+        List<Attachment> attachments = getAttachments(dto.getPostId(), dto.getUploadFiles());
         post.update(dto.getTitle(), dto.getContent(), attachments, dto.getDeleteAttachmentIds());
-        return postId;
+        return post.getId();
     }
 
     @Override
@@ -67,6 +67,7 @@ public class PostServiceImpl implements PostService {
                 .map(uploadFile -> Attachment.builder()
                         .post(Post.builder().id(postId).build())
                         .uploadFile(uploadFile).build()
-                ).collect(Collectors.toList());
+                )
+                .collect(Collectors.toList());
     }
 }

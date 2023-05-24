@@ -38,9 +38,9 @@ public class PlanQueryServiceImpl implements PlanQueryService {
 
     @Transactional
     @Override
-    public DetailPlanResponse searchById(Long planId, Long loginId) {
+    public DetailPlanResponse searchById(Long planId, Long memberId) {
         Plan plan = planQueryRepository.searchById(planId);
-        if (!plan.getMember().getId().equals(loginId)) {
+        if (!plan.getMember().getId().equals(memberId)) {
             plan.increaseHit();
         }
         List<PlanCommentResponse> commentResponses = getCommentResponses(plan);
@@ -56,7 +56,7 @@ public class PlanQueryServiceImpl implements PlanQueryService {
                 .hit(plan.getHit())
                 .attractionResponses(attractionResponses)
                 .likeCnt(plan.getLikes().size())
-                .likeId(planLikeQueryRepository.searchLikeId(planId, loginId))
+                .likeId(planLikeQueryRepository.searchLikeId(planId, memberId))
                 .shortestPath(shortestPath)
                 .commentResponses(commentResponses)
                 .build();

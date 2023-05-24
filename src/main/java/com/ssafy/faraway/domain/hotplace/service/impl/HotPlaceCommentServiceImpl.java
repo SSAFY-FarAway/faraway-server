@@ -12,29 +12,27 @@ import com.ssafy.faraway.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
-
 @Service
 @RequiredArgsConstructor
 public class HotPlaceCommentServiceImpl implements HotPlaceCommentService {
     private final HotPlaceCommentRepository hotPlaceCommentRepository;
 
     @Override
-    public Long save(Long hotPlaceId, Long memberId, SaveHotPlaceCommentDto dto) {
+    public Long save(SaveHotPlaceCommentDto dto) {
         HotPlaceComment hotPlaceComment = HotPlaceComment.builder()
                 .content(dto.getContent())
-                .member(Member.builder().id(memberId).build())
-                .hotPlace(HotPlace.builder().id(hotPlaceId).build())
+                .member(Member.builder().id(dto.getMemberId()).build())
+                .hotPlace(HotPlace.builder().id(dto.getHotPlaceId()).build())
                 .build();
         return hotPlaceCommentRepository.save(hotPlaceComment).getId();
     }
 
     @Override
-    public Long update(Long commentId, UpdateHotPlaceCommentDto dto) {
-        HotPlaceComment hotPlaceComment = hotPlaceCommentRepository.findById(commentId)
+    public Long update(UpdateHotPlaceCommentDto dto) {
+        HotPlaceComment hotPlaceComment = hotPlaceCommentRepository.findById(dto.getCommentId())
                 .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
         hotPlaceComment.update(dto.getContent());
-        return commentId;
+        return hotPlaceComment.getId();
     }
 
     @Override

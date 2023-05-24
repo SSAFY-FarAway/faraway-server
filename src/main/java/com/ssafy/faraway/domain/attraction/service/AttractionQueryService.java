@@ -4,9 +4,11 @@ import com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondit
 import com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse;
 import com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional(readOnly = true)
 public interface AttractionQueryService {
     List<AttractionResponse> searchByCondition(AttractionSearchCondition condition, Long memberId, Pageable pageable);
 

@@ -17,22 +17,22 @@ public class PlanServiceImpl implements PlanService {
     private final PlanRepository planRepository;
 
     @Override
-    public Long save(SavePlanDto dto, Long memberId) {
+    public Long save(SavePlanDto dto) {
         Plan plan = Plan.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .travelPlan(dto.getTravelPlan())
-                .member(Member.builder().id(memberId).build())
+                .member(Member.builder().id(dto.getMemberId()).build())
                 .build();
         return planRepository.save(plan).getId();
     }
 
     @Override
-    public Long update(UpdatePlanDto dto, Long planId) {
-        Plan plan = planRepository.findById(planId)
+    public Long update(UpdatePlanDto dto) {
+        Plan plan = planRepository.findById(dto.getPlanId())
                 .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
         plan.update(dto.getTitle(), dto.getTitle(), dto.getTravelPlan());
-        return planId;
+        return plan.getId();
     }
 
     @Override

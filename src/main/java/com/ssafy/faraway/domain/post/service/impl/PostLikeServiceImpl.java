@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PostLikeServiceImpl implements PostLikeService {
     private final PostLikeRepository postLikeRepository;
+
     @Override
     public Long save(SavePostLikeDto dto) {
         PostLike like = PostLike.builder()
