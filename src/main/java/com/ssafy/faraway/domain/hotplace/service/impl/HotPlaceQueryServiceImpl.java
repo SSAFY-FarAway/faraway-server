@@ -57,6 +57,29 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
     }
 
     @Override
+    public List<HotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
+        List<HotPlace> hotPlaces = hotPlaceQueryRepository.searchByCondition(condition, pageable);
+        List<HotPlaceResponse> responses = new ArrayList<>();
+        for (HotPlace hotPlace : hotPlaces) {
+            responses.add(HotPlaceResponse.builder()
+                    .id(hotPlace.getId())
+                    .memberId(hotPlace.getMember().getId())
+                    .loginId(hotPlace.getMember().getLoginId())
+                    .title(hotPlace.getTitle())
+                    .content(hotPlace.getContent())
+                    .hit(hotPlace.getHit())
+                    .likeCnt(hotPlace.getLikes().size())
+                    .likeId(hotPlaceLikeQueryRepository.searchLikeId(condition.getMemberId(), hotPlace.getId()))
+                    .mainAddress(hotPlace.getAddress().getMainAddress())
+                    .rating(hotPlace.getRating())
+                    .thumbnailId(hotPlace.getImages().size() > 0 ? hotPlace.getImages().get(0).getId() : 0L)
+                    .createdDate(hotPlace.getCreatedDate())
+                    .build());
+        }
+        return responses;
+    }
+
+    @Override
     public int getPageTotalCnt(HotPlaceSearchCondition condition) {
         return ((hotPlaceQueryRepository.getPageTotalCnt(condition) - 1) / PAGE_SIZE) + 1;
     }
@@ -79,27 +102,5 @@ public class HotPlaceQueryServiceImpl implements HotPlaceQueryService {
                 .content(hotPlaceComment.getContent())
                 .createdDate(hotPlaceComment.getCreatedDate())
                 .build()).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<HotPlaceResponse> searchByCondition(HotPlaceSearchCondition condition, Pageable pageable) {
-        List<HotPlace> hotPlaces = hotPlaceQueryRepository.searchByCondition(condition, pageable);
-        List<HotPlaceResponse> responses = new ArrayList<>();
-        for (HotPlace hotPlace : hotPlaces) {
-            responses.add(HotPlaceResponse.builder()
-                    .id(hotPlace.getId())
-                    .memberId(hotPlace.getMember().getId())
-                    .loginId(hotPlace.getMember().getLoginId())
-                    .title(hotPlace.getTitle())
-                    .hit(hotPlace.getHit())
-                    .likeCnt(hotPlace.getLikes().size())
-                    .mainAddress(hotPlace.getAddress().getMainAddress())
-                    .rating(hotPlace.getRating())
-                    .thumbnailId(hotPlace.getImages().size() > 0 ? hotPlace.getImages().get(0).getId() : 0L)
-                    .createdDate(hotPlace.getCreatedDate())
-                    .build());
-        }
-        return responses;
-//        return hotPlaceQueryRepository.searchByCondition(condition, pageable);
     }
 }

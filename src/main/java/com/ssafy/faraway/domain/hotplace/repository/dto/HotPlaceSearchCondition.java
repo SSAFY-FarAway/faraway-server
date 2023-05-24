@@ -7,10 +7,12 @@ import lombok.Data;
 public class HotPlaceSearchCondition {
     private String title;
     private String content;
+    private Long memberId;
 
     @Builder
-    public HotPlaceSearchCondition(String title, String content) {
+    public HotPlaceSearchCondition(String title, String content, Long memberId) {
         this.title = title;
         this.content = content;
+        this.memberId = memberId;
     }
 }

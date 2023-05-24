@@ -75,10 +75,12 @@ public class HotPlaceController {
     public ResultPage<List<HotPlaceResponse>> searchHotPlace(
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String content,
+            @RequestParam(defaultValue = "0") Long memberId,
             @RequestParam(defaultValue = "1") Integer pageNumber) {
         HotPlaceSearchCondition condition = HotPlaceSearchCondition.builder()
                 .title(title)
                 .content(content)
+                .memberId(memberId)
                 .build();
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, 10);
         List<HotPlaceResponse> responses = hotPlaceQueryService.searchByCondition(condition, pageRequest);

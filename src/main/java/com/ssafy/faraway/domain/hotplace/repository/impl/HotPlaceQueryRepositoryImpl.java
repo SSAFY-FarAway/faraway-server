@@ -40,18 +40,6 @@ public class HotPlaceQueryRepositoryImpl implements HotPlaceQueryRepository {
             return new ArrayList<>();
         }
 
-//        return queryFactory
-//                .select(Projections.fields(HotPlaceResponse.class,
-//                        hotPlace.id,
-//                        hotPlace.member.id.as("memberId"),
-//                        hotPlace.member.loginId,
-//                        hotPlace.title,
-//                        hotPlace.hit,
-//                        hotPlace.likes.size().as("likeCnt"),
-//                        hotPlace.address.mainAddress,
-//                        hotPlace.rating,
-//                        hotPlace.createdDate
-//                ))
         return queryFactory.select(hotPlace)
                 .from(hotPlace)
                 .join(hotPlace.member, member).fetchJoin()
