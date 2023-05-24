@@ -46,7 +46,7 @@ public class HotPlace extends BaseEntity {
         this.rating = rating;
         this.member = member;
         this.comments = comments;
-        this.images = images;
+        this.images = images == null ? new ArrayList<>() : images;
         this.likes = likes;
     }
 
