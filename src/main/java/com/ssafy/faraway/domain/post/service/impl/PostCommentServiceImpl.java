@@ -18,21 +18,21 @@ public class PostCommentServiceImpl implements PostCommentService {
     private final PostCommentRepository postCommentRepository;
 
     @Override
-    public Long save(Long postId, Long memberId, SavePostCommentDto dto) {
+    public Long save(SavePostCommentDto dto) {
         PostComment postComment = PostComment.builder()
                 .content(dto.getContent())
-                .member(Member.builder().id(memberId).build())
-                .post(Post.builder().id(postId).build())
+                .member(Member.builder().id(dto.getMemberId()).build())
+                .post(Post.builder().id(dto.getPostId()).build())
                 .build();
         return postCommentRepository.save(postComment).getId();
     }
 
     @Override
-    public Long update(Long commentId, UpdatePostCommentDto dto) {
-        PostComment postComment = postCommentRepository.findById(commentId)
+    public Long update(UpdatePostCommentDto dto) {
+        PostComment postComment = postCommentRepository.findById(dto.getCommentId())
                 .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
         postComment.update(dto.getContent());
-        return commentId;
+        return postComment.getId();
     }
 
     @Override

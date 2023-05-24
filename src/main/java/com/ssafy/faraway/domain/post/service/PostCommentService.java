@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface PostCommentService {
-    Long save(Long postId, Long memberId, SavePostCommentDto dto);
+    Long save(SavePostCommentDto dto);
 
-    Long update(Long commentId, UpdatePostCommentDto dto);
+    Long update(UpdatePostCommentDto dto);
 
     Long delete(Long commentId);
 }

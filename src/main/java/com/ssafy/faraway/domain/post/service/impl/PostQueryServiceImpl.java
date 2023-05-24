@@ -72,10 +72,12 @@ public class PostQueryServiceImpl implements PostQueryService {
     }
 
     private List<AttachmentResponse> getAttachmentResponses(Post post) {
-        return post.getAttachments().stream().map(attachment -> AttachmentResponse.builder()
-                .id(attachment.getId())
-                .fileName(attachment.getUploadFile().getUploadFileName())
-                .createdDate(attachment.getCreatedDate()).build()
-        ).collect(Collectors.toList());
+        return post.getAttachments().stream()
+                .map(attachment -> AttachmentResponse.builder()
+                        .id(attachment.getId())
+                        .fileName(attachment.getUploadFile().getUploadFileName())
+                        .createdDate(attachment.getCreatedDate()).build()
+                )
+                .collect(Collectors.toList());
     }
 }
