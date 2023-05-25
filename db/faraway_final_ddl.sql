@@ -14,11 +14,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema faraway
 -- -----------------------------------------------------
--- CREATE SCHEMA IF NOT EXISTS `faraway` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
--- USE `faraway` ;
-
-CREATE SCHEMA IF NOT EXISTS `faraway_test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `faraway_test` ;
+CREATE SCHEMA IF NOT EXISTS `faraway` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `faraway` ;
 
 -- -----------------------------------------------------
 -- Table `faraway`.`member`
@@ -47,7 +44,6 @@ CREATE TABLE IF NOT EXISTS `faraway`.`member` (
   UNIQUE INDEX `UK_mbmcqelty0fbrvxp1q58dn57t` (`email` ASC) VISIBLE,
   UNIQUE INDEX `UK_enfm5patwjqulw8k4wwuo6f60` (`login_id` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -65,7 +61,6 @@ CREATE TABLE IF NOT EXISTS `faraway`.`category` (
   PRIMARY KEY (`category_id`),
   UNIQUE INDEX `UK_lroeo5fvfdeg4hpicn4lw7x9b` (`category_name` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -94,7 +89,6 @@ CREATE TABLE IF NOT EXISTS `faraway`.`post` (
     FOREIGN KEY (`category_id`)
     REFERENCES `faraway`.`category` (`category_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 151
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -277,7 +271,6 @@ CREATE TABLE IF NOT EXISTS `faraway`.`hot_place` (
     FOREIGN KEY (`member_id`)
     REFERENCES `faraway`.`member` (`member_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 101
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -304,7 +297,6 @@ CREATE TABLE IF NOT EXISTS `faraway`.`hot_place_comment` (
     FOREIGN KEY (`member_id`)
     REFERENCES `faraway`.`member` (`member_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 501
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -453,7 +445,6 @@ CREATE TABLE IF NOT EXISTS `faraway`.`post_comment` (
     FOREIGN KEY (`post_id`)
     REFERENCES `faraway`.`post` (`post_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 751
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
