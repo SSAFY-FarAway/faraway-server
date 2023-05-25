@@ -250,7 +250,7 @@ public class MemberController {
     }
 
     //회원탈퇴
-    @DeleteMapping
+    @PostMapping
     public String delete(@RequestBody @Valid final DeleteMemberRequest request){
         DeleteMemberDto dto = DeleteMemberDto.builder()
                 .id(request.getId())
