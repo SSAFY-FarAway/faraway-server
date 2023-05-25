@@ -46,9 +46,10 @@ public class AttractionController {
             @RequestParam(required = false) Integer sidoCode,
             @RequestParam(required = false) Integer gugunCode,
             @RequestParam(required = false) Integer contentTypeId,
-            @RequestParam(required = false, defaultValue = "1") Integer pageNumber,
-            @RequestParam(required = false, defaultValue = "") String title,
-            @RequestParam(required = false, defaultValue = "") String address) {
+            @RequestParam(defaultValue = "0") Long memberId,
+            @RequestParam(defaultValue = "1") Integer pageNumber,
+            @RequestParam(defaultValue = "") String title,
+            @RequestParam(defaultValue = "") String address) {
         AttractionSearchCondition condition = AttractionSearchCondition.builder()
                 .sidoCode(sidoCode)
                 .gugunCode(gugunCode)
@@ -56,7 +57,6 @@ public class AttractionController {
                 .title(title)
                 .address(address)
                 .build();
-        Long memberId = jwtService.getMemberId();
         log.debug("condition: {}", condition);
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, ATTRACTION_SIZE);
         List<AttractionResponse> responses = attractionQueryService.searchByCondition(condition, memberId, pageRequest);
