@@ -38,6 +38,12 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public boolean checkEmail(String email) {
+        Optional<Member> findMember = memberRepository.findByEmail(email);
+        // 아이디가 있으면 true , 없으면 false
+        return findMember.isPresent();
+    }
+    @Override
     public Long updateLoginPwd(UpdateLoginPwdDto dto) {
         Member findMember = memberRepository.findById(dto.getId())
                 .orElseThrow(NoSuchElementException::new);

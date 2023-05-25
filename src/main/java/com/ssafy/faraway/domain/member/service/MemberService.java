@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface MemberService {
     Long saveMember(SaveMemberDto dto);
     boolean checkLoginId(String loginId);
+    boolean checkEmail(String email);
     Long updateLoginPwd(UpdateLoginPwdDto dto);
     Long updateMember(UpdateMemberDto dto);
     Long resetLoginPwd(ResetLoginPwdDto dto);

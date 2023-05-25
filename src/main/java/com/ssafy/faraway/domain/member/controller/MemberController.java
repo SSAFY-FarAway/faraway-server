@@ -95,7 +95,7 @@ public class MemberController {
     }
 
     // 아이디 중복 검사
-    @GetMapping("/check/{loginId}") //countByLoginId
+    @GetMapping("/check/login-id/{loginId}") //countByLoginId
     public int checkLoginId(@PathVariable("loginId") String loginId) {
         int cnt = 0;
         if(memberService.checkLoginId(loginId)){
@@ -108,8 +108,21 @@ public class MemberController {
         }
     }
 
+    @GetMapping("/check/email/{email}") //countByEmail
+    public int checkEmail(@PathVariable("email") String email) {
+        int cnt = 0;
+        if(memberService.checkEmail(email)){
+            cnt = 1;
+        }
+        if(cnt == 0){
+            return cnt;
+        }else{
+            throw new CustomException(ErrorCode.EMAIL_CONFLICT_ERROR);
+        }
+    }
+
     // 유저가 입력한 비밀번호가 맞는지 확인
-    @PostMapping("/check")
+    @PostMapping("/check/password")
     public String checkLoginPwd(@RequestBody @Valid final CheckLoginPwdRequest request) {
         CheckLoginPwdDto dto = CheckLoginPwdDto.builder()
                 .id(request.getId())

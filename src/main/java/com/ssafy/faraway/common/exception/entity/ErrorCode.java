@@ -81,8 +81,12 @@ public enum ErrorCode {
     /*
      * 409 CONFLICT_ERROR : 중복된 아이디입니다.
      */
-    LOGIN_ID_CONFLICT_ERROR(HttpStatus.CONFLICT, "중복된 아이디입니다.")
+    LOGIN_ID_CONFLICT_ERROR(HttpStatus.CONFLICT, "중복된 아이디입니다."),
 
+    /*
+     * 409 CONFLICT_ERROR : 중복된 이메일입니다.
+     */
+    EMAIL_CONFLICT_ERROR(HttpStatus.CONFLICT, "중복된 이메일입니다.")
     ;
 
     private final HttpStatus status;
