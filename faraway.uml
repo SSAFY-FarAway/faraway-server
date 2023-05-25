@@ -1,0 +1,1954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/SSAFY/workspace/faraway-server/src/main/java/com/ssafy/faraway</OriginalElement>
+  <nodes>
+    <node x="18744.75" y="2683.0">com.ssafy.faraway.domain.post.entity.PostLike</node>
+    <node x="20623.75" y="2768.0">com.ssafy.faraway.domain.plan.service.PlanCommentService</node>
+    <node x="5857.933730811386" y="2768.0">com.ssafy.faraway.domain.hotplace.service.HotPlaceService</node>
+    <node x="14408.802494517531" y="2782.0">com.ssafy.faraway.domain.attraction.service.AttractionLikeService</node>
+    <node x="14968.0" y="5993.0">com.ssafy.faraway.domain.attraction.service.dto.SaveAttractionLikeDto.SaveAttractionLikeDtoBuilder</node>
+    <node x="14396.25" y="3936.0">com.ssafy.faraway.domain.post.service.impl.PostQueryServiceImpl</node>
+    <node x="1099.25" y="3866.0">com.ssafy.faraway.domain.member.service.impl.MemberServiceImpl</node>
+    <node x="21331.5" y="2811.5">com.ssafy.faraway.domain.plan.repository.PlanLikeRepository</node>
+    <node x="20267.916666666664" y="559.0">com.ssafy.faraway.common.domain.BaseEntity</node>
+    <node x="18077.0" y="5574.0">com.ssafy.faraway.domain.member.controller.dto.req.ResetLoginPwdRequest</node>
+    <node x="4633.0" y="5574.0">com.ssafy.faraway.domain.post.controller.dto.res.PostResponse</node>
+    <node x="20959.0" y="5574.0">com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanCommentRequest</node>
+    <node x="26485.509936951734" y="1226.0">com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse</node>
+    <node x="22259.5" y="2768.0">com.ssafy.faraway.domain.plan.service.PlanQueryService</node>
+    <node x="27558.79536732455" y="988.0">com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse</node>
+    <node x="6821.5" y="3978.0">com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceCommentServiceImpl</node>
+    <node x="2780.9337308113863" y="3950.0">com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceServiceImpl</node>
+    <node x="22962.0" y="5574.0">com.ssafy.faraway.common.config.SwaggerConfig</node>
+    <node x="28057.3957648026" y="3866.0">com.ssafy.faraway.domain.plan.service.impl.PlanQueryServiceImpl</node>
+    <node x="945.375" y="2768.0">com.ssafy.faraway.domain.member.repository.MemberRepository</node>
+    <node x="100.0" y="3922.0">com.ssafy.faraway.domain.member.service.impl.MemberQueryServiceImpl</node>
+    <node x="12429.0" y="6021.0">com.ssafy.faraway.domain.plan.service.dto.UpdatePlanCommentDto.UpdatePlanCommentDtoBuilder</node>
+    <node x="9710.962033991214" y="2711.0">com.ssafy.faraway.common.util.FileExtFilter</node>
+    <node x="15628.375" y="2711.0">com.ssafy.faraway.domain.post.entity.Category</node>
+    <node x="18795.75" y="3922.0">com.ssafy.faraway.domain.post.entity.PostLike.PostLikeBuilder</node>
+    <node x="5544.933730811386" y="2768.0">com.ssafy.faraway.domain.post.service.PostCommentService</node>
+    <node x="2726.4620339912144" y="2811.5">com.ssafy.faraway.domain.post.repository.PostLikeRepository</node>
+    <node x="1117.0" y="7043.0">com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse.AttractionResponseBuilder</node>
+    <node x="25740.634936951734" y="4573.0">com.ssafy.faraway.domain.plan.entity.Plan.PlanBuilder</node>
+    <node x="25389.0" y="503.0">com.ssafy.faraway.domain.member.entity.Address</node>
+    <node x="25650.0" y="531.0">com.ssafy.faraway.domain.member.entity.Name</node>
+    <node x="18386.25" y="2641.0">com.ssafy.faraway.domain.post.entity.PostComment</node>
+    <node x="10997.0" y="5574.0">com.ssafy.faraway.domain.hotplace.controller.dto.req.UpdateHotPlaceRequest</node>
+    <node x="-302.0" y="3894.0">com.ssafy.faraway.domain.member.repository.MemberQueryRepositoryImpl</node>
+    <node x="27211.8957648026" y="3880.0">com.ssafy.faraway.domain.attraction.repository.impl.AttractionQueryRepositoryImpl</node>
+    <node x="6419.895764802601" y="2796.0">com.ssafy.faraway.domain.hotplace.repository.HotPlaceLikeQueryRepository</node>
+    <node x="12653.125" y="3964.0">com.ssafy.faraway.common.interceptor.LoginInterceptor</node>
+    <node x="24944.509936951734" y="3894.0">com.ssafy.faraway.domain.plan.entity.PlanComment.PlanCommentBuilder</node>
+    <node x="6020.5" y="6245.0">com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition.AttractionSearchConditionBuilder</node>
+    <node x="2761.0" y="7588.0">com.ssafy.faraway.domain.post.controller.dto.res.DetailPostResponse.DetailPostResponseBuilder</node>
+    <node x="530.375" y="2712.0">com.ssafy.faraway.domain.member.service.MemberQueryService</node>
+    <node x="25941.509936951734" y="1450.0">com.ssafy.faraway.domain.attraction.entity.Gugun.GugunBuilder</node>
+    <node x="21892.0" y="5574.0">com.ssafy.faraway.common.config.QueryDslConfig</node>
+    <node x="23495.8957648026" y="4713.0">com.ssafy.faraway.domain.hotplace.entity.HotPlaceLike</node>
+    <node x="4956.933730811386" y="2333.0">com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceDto</node>
+    <node x="10254.0" y="5574.0">com.ssafy.faraway.domain.member.service.dto.UpdateLoginPwdDto</node>
+    <node x="16205.375" y="2740.0">com.ssafy.faraway.domain.post.repository.PostQueryRepository</node>
+    <node x="8366.5" y="6161.0">com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition.PlanSearchConditionBuilder</node>
+    <node x="12859.5" y="5574.0">com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceLikeDto</node>
+    <node x="4222.933730811386" y="3866.0">com.ssafy.faraway.domain.post.service.dto.UpdatePostDto.UpdatePostDtoBuilder</node>
+    <node x="26896.509936951734" y="2754.0">com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository</node>
+    <node x="13024.6457648026" y="2683.0">com.ssafy.faraway.domain.post.entity.Attachment</node>
+    <node x="6938.5" y="6189.0">com.ssafy.faraway.domain.plan.service.dto.UpdatePlanDto.UpdatePlanDtoBuilder</node>
+    <node x="6718.895764802601" y="2782.0">com.ssafy.faraway.domain.post.service.PostLikeService</node>
+    <node x="10236.84327028507" y="3782.0">com.ssafy.faraway.domain.post.controller.PostController</node>
+    <node x="14279.0" y="6021.0">com.ssafy.faraway.domain.plan.service.dto.SavePlanLikeDto.SavePlanLikeDtoBuilder</node>
+    <node x="24283.509936951734" y="3894.0">com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment.HotPlaceCommentBuilder</node>
+    <node x="20429.75" y="3754.0">com.ssafy.faraway.domain.plan.entity.Plan</node>
+    <node x="11154.125" y="3922.0">com.ssafy.faraway.domain.post.entity.Attachment.AttachmentBuilder</node>
+    <node x="29078.125" y="2740.0">com.ssafy.faraway.domain.plan.repository.PlanQueryRepository</node>
+    <node x="13212.0" y="6021.0">com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse.GugunResponseBuilder</node>
+    <node x="22211.0" y="5574.0">com.ssafy.faraway.common.util.Encrypt</node>
+    <node x="18355.0" y="5574.0">com.ssafy.faraway.domain.post.controller.dto.req.SavePostRequest</node>
+    <node x="25428.759936951734" y="2571.0">com.ssafy.faraway.domain.member.repository.dto.SaveEncMember.SaveEncMemberBuilder</node>
+    <node x="5783.933730811386" y="3922.0">com.ssafy.faraway.domain.hotplace.repository.impl.HotPlaceQueryRepositoryImpl</node>
+    <node x="20099.75" y="2768.0">com.ssafy.faraway.domain.plan.service.PlanService</node>
+    <node x="26226.509936951734" y="1478.0">com.ssafy.faraway.domain.member.entity.Name.NameBuilder</node>
+    <node x="25258.509936951734" y="3978.0">com.ssafy.faraway.domain.attraction.repository.impl.AttractionLikeQueryRepositoryImpl</node>
+    <node x="11625.7707648026" y="2811.5">com.ssafy.faraway.domain.hotplace.repository.HotPlaceLikeRepository</node>
+    <node x="19884.75" y="2796.0">com.ssafy.faraway.domain.attraction.service.AttractionService</node>
+    <node x="5580.5" y="6441.0">com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse.PlanResponseBuilder</node>
+    <node x="27887.509936951734" y="2431.0">com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse.MemberResponseBuilder</node>
+    <node x="1270.375" y="2684.0">com.ssafy.faraway.domain.member.service.MemberService</node>
+    <node x="18609.0" y="5574.0">com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanRequest</node>
+    <node x="3796.4337308113863" y="3866.0">com.ssafy.faraway.domain.post.service.dto.SavePostDto.SavePostDtoBuilder</node>
+    <node x="8501.962033991214" y="2726.0">com.ssafy.faraway.domain.member.service.JwtService</node>
+    <node x="8655.84327028507" y="1478.0">com.ssafy.faraway.common.domain.UploadFile</node>
+    <node x="19935.0" y="5574.0">com.ssafy.faraway.domain.hotplace.controller.dto.req.UpdateHotPlaceCommentRequest</node>
+    <node x="7484.8957648026" y="2811.5">com.ssafy.faraway.domain.hotplace.repository.HotPlaceCommentRepository</node>
+    <node x="14999.0" y="5574.0">com.ssafy.faraway.domain.attraction.service.dto.SaveAttractionLikeDto</node>
+    <node x="19006.75" y="2768.0">com.ssafy.faraway.domain.attraction.service.AttractionQueryService</node>
+    <node x="17422.0" y="5574.0">com.ssafy.faraway.domain.post.controller.dto.req.UpdatePostRequest</node>
+    <node x="8356.0" y="5574.0">com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition</node>
+    <node x="1690.125" y="5826.0">com.ssafy.faraway.domain.plan.controller.dto.res.PlanCommentResponse</node>
+    <node x="17580.75" y="3908.0">com.ssafy.faraway.domain.post.repository.impl.PostQueryRepositoryImpl</node>
+    <node x="11878.7707648026" y="2811.5">com.ssafy.faraway.domain.post.repository.PostRepository</node>
+    <node x="23178.0" y="5574.0">com.ssafy.faraway.domain.post.repository.CategoryRepository</node>
+    <node x="688.625" y="4643.0">com.ssafy.faraway.domain.member.controller.MemberController.ResultPage</node>
+    <node x="13769.25" y="3894.0">com.ssafy.faraway.domain.attraction.controller.AttractionController</node>
+    <node x="19117.0" y="5574.0">com.ssafy.faraway.domain.member.controller.dto.req.CheckLoginPwdRequest</node>
+    <node x="16091.2707648026" y="3712.0">com.ssafy.faraway.domain.post.entity.Post</node>
+    <node x="4955.933730811386" y="3754.0">com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceDto.UpdateHotPlaceDtoBuilder</node>
+    <node x="12457.5" y="5574.0">com.ssafy.faraway.domain.plan.service.dto.UpdatePlanCommentDto</node>
+    <node x="13165.125" y="3992.0">com.ssafy.faraway.domain.attraction.service.impl.AttractionLikeServiceImpl</node>
+    <node x="19401.0" y="5574.0">com.ssafy.faraway.domain.member.controller.dto.req.DeleteMemberRequest</node>
+    <node x="28651.5207648026" y="1058.0">com.ssafy.faraway.domain.attraction.entity.AttractionInfo</node>
+    <node x="2030.875" y="3978.0">com.ssafy.faraway.domain.post.service.impl.PostCommentServiceImpl</node>
+    <node x="24936.759936951734" y="2796.0">com.ssafy.faraway.domain.attraction.repository.AttractionLikeQueryRepository</node>
+    <node x="22780.5" y="2811.5">com.ssafy.faraway.domain.plan.repository.PlanRepository</node>
+    <node x="3750.0" y="5574.0">com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse</node>
+    <node x="557.125" y="3768.0">com.ssafy.faraway.domain.member.controller.MemberController</node>
+    <node x="-96.125" y="2684.0">com.ssafy.faraway.domain.member.repository.MemberQueryRepository</node>
+    <node x="13931.0" y="6021.0">com.ssafy.faraway.domain.post.service.dto.SavePostLikeDto.SavePostLikeDtoBuilder</node>
+    <node x="13320.6457648026" y="2811.5">com.ssafy.faraway.domain.attraction.repository.AttractionLikeRepository</node>
+    <node x="2379.0" y="6707.0">com.ssafy.faraway.domain.post.controller.dto.res.PostCommentResponse.PostCommentResponseBuilder</node>
+    <node x="19761.3957648026" y="3684.0">com.ssafy.faraway.domain.hotplace.entity.HotPlace</node>
+    <node x="11079.75" y="-282.0">com.ssafy.faraway.common.exception.entity.ErrorCode</node>
+    <node x="17778.0" y="5574.0">com.ssafy.faraway.domain.member.controller.dto.req.UpdateLoginPwdRequest</node>
+    <node x="9850.5" y="5574.0">com.ssafy.faraway.domain.plan.service.dto.SavePlanCommentDto</node>
+    <node x="14653.5" y="5574.0">com.ssafy.faraway.domain.attraction.controller.dto.SidoResponse</node>
+    <node x="9457.0" y="6105.0">com.ssafy.faraway.domain.post.service.dto.SavePostCommentDto.SavePostCommentDtoBuilder</node>
+    <node x="7305.5" y="6189.0">com.ssafy.faraway.domain.plan.service.dto.SavePlanDto.SavePlanDtoBuilder</node>
+    <node x="20923.75" y="3922.0">com.ssafy.faraway.domain.hotplace.entity.Address.AddressBuilder</node>
+    <node x="3352.9337308113863" y="3782.0">com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceDto.SaveHotPlaceDtoBuilder</node>
+    <node x="18105.75" y="3978.0">com.ssafy.faraway.domain.post.repository.impl.PostLikeQueryRepositoryImpl</node>
+    <node x="22485.0" y="5574.0">com.ssafy.faraway.common.util.SizeConstants</node>
+    <node x="168.99999999999994" y="6357.0">com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse</node>
+    <node x="13579.0" y="6021.0">com.ssafy.faraway.domain.member.service.dto.LoginMemberDto.LoginMemberDtoBuilder</node>
+    <node x="21588.0" y="5574.0">com.ssafy.faraway.domain.plan.controller.dto.req.SavePlanCommentRequest</node>
+    <node x="3769.4337308113863" y="2501.0">com.ssafy.faraway.domain.post.service.dto.SavePostDto</node>
+    <node x="13247.0" y="5574.0">com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse</node>
+    <node x="8193.2707648026" y="4713.0">com.ssafy.faraway.domain.plan.entity.PlanLike</node>
+    <node x="-64.50000000000006" y="5574.0">com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceCommentResponse</node>
+    <node x="13956.0" y="5574.0">com.ssafy.faraway.domain.post.service.dto.SavePostLikeDto</node>
+    <node x="644.0" y="6931.0">com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceImageResponse.HotPlaceImageResponseBuilder</node>
+    <node x="13581.8957648026" y="2811.5">com.ssafy.faraway.domain.post.repository.AttachmentRepository</node>
+    <node x="26829.8957648026" y="3922.0">com.ssafy.faraway.domain.attraction.entity.AttractionLike.AttractionLikeBuilder</node>
+    <node x="10221.0" y="6077.0">com.ssafy.faraway.domain.member.service.dto.UpdateLoginPwdDto.UpdateLoginPwdDtoBuilder</node>
+    <node x="29506.510827850863" y="531.0">com.ssafy.faraway.domain.attraction.entity.Sido.SidoBuilder</node>
+    <node x="1913.0" y="7211.0">com.ssafy.faraway.domain.plan.controller.dto.res.PlanCommentResponse.PlanCommentResponseBuilder</node>
+    <node x="21840.5" y="1114.0">com.ssafy.faraway.domain.member.entity.Member</node>
+    <node x="4190.0" y="5574.0">com.ssafy.faraway.domain.member.service.dto.SaveMemberDto</node>
+    <node x="12833.0" y="6021.0">com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceLikeDto.SaveHotPlaceLikeDtoBuilder</node>
+    <node x="21282.0" y="5574.0">com.ssafy.faraway.domain.post.controller.dto.req.SavePostCommentRequest</node>
+    <node x="7342.05249451753" y="3922.0">com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceQueryServiceImpl</node>
+    <node x="16944.0" y="5574.0">com.ssafy.faraway.common.exception.dto.ErrorResponse</node>
+    <node x="26165.04536732455" y="503.0">com.ssafy.faraway.domain.attraction.entity.Gugun</node>
+    <node x="3346.4337308113863" y="2375.0">com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceDto</node>
+    <node x="2321.3957648026008" y="2811.5">com.ssafy.faraway.domain.hotplace.repository.HotPlaceImageRepository</node>
+    <node x="16112.5" y="5574.0">com.ssafy.faraway.domain.member.repository.dto.LoginEncMember</node>
+    <node x="15728.0" y="5993.0">com.ssafy.faraway.domain.member.service.dto.DeleteMemberDto.DeleteMemberDtoBuilder</node>
+    <node x="29762.510827850863" y="447.0">com.ssafy.faraway.domain.attraction.entity.AttractionDesc</node>
+    <node x="11102.25" y="587.0">com.ssafy.faraway.common.exception.entity.CustomException</node>
+    <node x="7916.0" y="5574.0">com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition</node>
+    <node x="9382.962033991214" y="2711.0">com.ssafy.faraway.common.domain.UploadFile.UploadFileBuilder</node>
+    <node x="6475.0" y="5574.0">com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition</node>
+    <node x="20294.0" y="5574.0">com.ssafy.faraway.domain.hotplace.controller.dto.req.SaveHotPlaceCommentRequest</node>
+    <node x="2056.7670641447185" y="2811.5">com.ssafy.faraway.domain.post.repository.PostCommentRepository</node>
+    <node x="2595.0" y="5574.0">com.ssafy.faraway.domain.post.controller.dto.res.PostCommentResponse</node>
+    <node x="14921.25" y="3964.0">com.ssafy.faraway.domain.post.controller.AttachmentController</node>
+    <node x="9840.0" y="6105.0">com.ssafy.faraway.domain.plan.service.dto.SavePlanCommentDto.SavePlanCommentDtoBuilder</node>
+    <node x="18479.75" y="3894.0">com.ssafy.faraway.domain.post.entity.PostComment.PostCommentBuilder</node>
+    <node x="16087.0" y="5993.0">com.ssafy.faraway.domain.member.repository.dto.LoginEncMember.LoginEncMemberBuilder</node>
+    <node x="5127.5" y="6497.0">com.ssafy.faraway.domain.member.service.dto.UpdateMemberDto.UpdateMemberDtoBuilder</node>
+    <node x="7293.0" y="5574.0">com.ssafy.faraway.domain.plan.service.dto.SavePlanDto</node>
+    <node x="3752.0" y="6945.0">com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse.HotPlaceResponseBuilder</node>
+    <node x="29913.259936951734" y="2291.0">com.ssafy.faraway.domain.attraction.entity.AttractionInfo.AttractionInfoBuilder</node>
+    <node x="10644.0" y="5574.0">com.ssafy.faraway.domain.member.service.dto.ResetLoginPwdDto</node>
+    <node x="11371.7707648026" y="2768.0">com.ssafy.faraway.domain.post.service.PostService</node>
+    <node x="7926.5" y="6161.0">com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition.HotPlaceSearchConditionBuilder</node>
+    <node x="408.75" y="5658.0">com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceImageResponse</node>
+    <node x="29295.7707648026" y="1058.0">com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse</node>
+    <node x="15387.5" y="5574.0">com.ssafy.faraway.domain.member.service.dto.CheckLoginPwdDto</node>
+    <node x="20528.1457648026" y="4517.0">com.ssafy.faraway.domain.hotplace.entity.HotPlace.HotPlaceBuilder</node>
+    <node x="9043.0" y="6105.0">com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceCommentDto.SaveHotPlaceCommentDtoBuilder</node>
+    <node x="26525.509936951734" y="2599.0">com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse.LoginMemberResponseBuilder</node>
+    <node x="23651.509936951734" y="3950.0">com.ssafy.faraway.domain.attraction.service.impl.AttractionQueryServiceImpl</node>
+    <node x="18555.3957648026" y="4545.0">com.ssafy.faraway.domain.post.entity.Post.PostBuilder</node>
+    <node x="2822.0" y="6329.0">com.ssafy.faraway.domain.post.controller.dto.res.DetailPostResponse</node>
+    <node x="10473.84327028507" y="2782.0">com.ssafy.faraway.domain.hotplace.service.HotPlaceLikeService</node>
+    <node x="22965.5" y="2641.0">com.ssafy.faraway.domain.plan.entity.PlanComment</node>
+    <node x="14304.0" y="5574.0">com.ssafy.faraway.domain.plan.service.dto.SavePlanLikeDto</node>
+    <node x="21546.5" y="2641.0">com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment</node>
+    <node x="15861.375" y="2683.0">com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage</node>
+    <node x="29832.25" y="3978.0">com.ssafy.faraway.domain.plan.repository.impl.PlanLikeQueryRepositoryImpl</node>
+    <node x="1599.875" y="3964.0">com.ssafy.faraway.domain.hotplace.controller.ImageController</node>
+    <node x="29651.259936951734" y="2796.0">com.ssafy.faraway.domain.plan.repository.PlanLikeQueryRepository</node>
+    <node x="12023.0" y="6021.0">com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto.UpdatePostCommentDtoBuilder</node>
+    <node x="8133.962033991214" y="2711.0">com.ssafy.faraway.common.FileStore</node>
+    <node x="7644.0" y="5574.0">com.ssafy.faraway.domain.member.controller.dto.req.SaveMemberRequest</node>
+    <node x="3097.375" y="2811.5">com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository</node>
+    <node x="20634.0" y="5574.0">com.ssafy.faraway.domain.post.controller.dto.req.UpdatePostCommentRequest</node>
+    <node x="1283.125" y="5574.0">com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse</node>
+    <node x="27127.79536732455" y="545.0">com.ssafy.faraway.domain.member.entity.Role</node>
+    <node x="23303.5" y="2431.0">com.ssafy.faraway.domain.member.entity.Member.MemberBuilder</node>
+    <node x="22173.1457648026" y="3978.0">com.ssafy.faraway.domain.plan.service.impl.PlanServiceImpl</node>
+    <node x="9055.0" y="5574.0">com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceCommentDto</node>
+    <node x="8766.0" y="5574.0">com.ssafy.faraway.domain.member.controller.dto.req.UpdateMemberRequest</node>
+    <node x="22882.759936951734" y="3978.0">com.ssafy.faraway.domain.plan.service.impl.PlanCommentServiceImpl</node>
+    <node x="15362.0" y="5993.0">com.ssafy.faraway.domain.member.service.dto.CheckLoginPwdDto.CheckLoginPwdDtoBuilder</node>
+    <node x="5550.0" y="5574.0">com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse</node>
+    <node x="19639.75" y="2782.0">com.ssafy.faraway.domain.plan.service.PlanLikeService</node>
+    <node x="1468.0" y="6861.0">com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse</node>
+    <node x="29890.259936951734" y="1394.0">com.ssafy.faraway.domain.attraction.entity.AttractionDesc.AttractionDescBuilder</node>
+    <node x="12305.125" y="3922.0">com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage.HotPlaceImageBuilder</node>
+    <node x="-302.0" y="6875.0">com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceCommentResponse.HotPlaceCommentResponseBuilder</node>
+    <node x="25369.259936951734" y="1198.0">com.ssafy.faraway.domain.member.repository.dto.SaveEncMember</node>
+    <node x="6505.0" y="6245.0">com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition.PostSearchConditionBuilder</node>
+    <node x="11317.0" y="5574.0">com.ssafy.faraway.domain.hotplace.controller.dto.req.SaveHotPlaceRequest</node>
+    <node x="19671.0" y="5574.0">com.ssafy.faraway.domain.member.controller.dto.req.LoginMemberRequest</node>
+    <node x="24635.509936951734" y="4006.0">com.ssafy.faraway.domain.attraction.service.impl.AttractionServiceImpl</node>
+    <node x="11482.125" y="3992.0">com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceLikeServiceImpl</node>
+    <node x="23496.8957648026" y="5244.0">com.ssafy.faraway.domain.hotplace.entity.HotPlaceLike.HotPlaceLikeBuilder</node>
+    <node x="29311.25" y="3922.0">com.ssafy.faraway.domain.plan.repository.impl.PlanQueryRepositoryImpl</node>
+    <node x="21218.75" y="3992.0">com.ssafy.faraway.domain.plan.service.impl.PlanLikeServiceImpl</node>
+    <node x="28307.125" y="2613.0">com.ssafy.faraway.common.util.ShortestPath</node>
+    <node x="11617.5" y="5574.0">com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceCommentDto</node>
+    <node x="16586.34327028507" y="4783.0">com.ssafy.faraway.common.config.WebConfig</node>
+    <node x="94.99999999999989" y="7896.0">com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse.DetailHotPlaceResponseBuilder</node>
+    <node x="22713.0" y="5574.0">com.ssafy.faraway.FarawayApplication</node>
+    <node x="4225.5" y="6581.0">com.ssafy.faraway.domain.member.service.dto.SaveMemberDto.SaveMemberDtoBuilder</node>
+    <node x="5093.0" y="5574.0">com.ssafy.faraway.domain.member.service.dto.UpdateMemberDto</node>
+    <node x="8182.770764802601" y="5244.0">com.ssafy.faraway.domain.plan.entity.PlanLike.PlanLikeBuilder</node>
+    <node x="11589.0" y="6021.0">com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceCommentDto.UpdateHotPlaceCommentDtoBuilder</node>
+    <node x="6926.0" y="5574.0">com.ssafy.faraway.domain.plan.service.dto.UpdatePlanDto</node>
+    <node x="10647.0" y="6077.0">com.ssafy.faraway.domain.member.service.dto.ResetLoginPwdDto.ResetLoginPwdDtoBuilder</node>
+    <node x="9158.7707648026" y="3782.0">com.ssafy.faraway.domain.hotplace.controller.HotPlaceController</node>
+    <node x="4659.0" y="6525.0">com.ssafy.faraway.domain.post.controller.dto.res.PostResponse.PostResponseBuilder</node>
+    <node x="18863.0" y="5574.0">com.ssafy.faraway.domain.plan.controller.dto.req.UpdatePlanRequest</node>
+    <node x="3089.25" y="5686.0">com.ssafy.faraway.domain.post.controller.dto.res.AttachmentResponse</node>
+    <node x="28699.125" y="2487.0">com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse.ListMemberResponseBuilder</node>
+    <node x="16440.0" y="5993.0">com.ssafy.faraway.domain.member.service.dto.FindLoginIdDto.FindLoginIdDtoBuilder</node>
+    <node x="16730.375" y="2796.0">com.ssafy.faraway.domain.post.repository.PostLikeQueryRepository</node>
+    <node x="27490.509936951734" y="2683.0">com.ssafy.faraway.domain.attraction.entity.AttractionLike</node>
+    <node x="1409.0" y="8064.0">com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse.DetailPlanResponseBuilder</node>
+    <node x="6965.895764802601" y="2740.0">com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository</node>
+    <node x="25242.759936951734" y="2811.5">com.ssafy.faraway.domain.attraction.repository.SidoRepository</node>
+    <node x="7779.8957648026" y="2768.0">com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService</node>
+    <node x="13604.5" y="5574.0">com.ssafy.faraway.domain.member.service.dto.LoginMemberDto</node>
+    <node x="20362.75" y="2683.0">com.ssafy.faraway.domain.hotplace.entity.Address</node>
+    <node x="8801.962033991214" y="2768.0">com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService</node>
+    <node x="24135.7707648026" y="1450.0">com.ssafy.faraway.domain.member.entity.Address.AddressBuilder</node>
+    <node x="16453.0" y="5574.0">com.ssafy.faraway.domain.member.service.dto.FindLoginIdDto</node>
+    <node x="27488.67036732455" y="-58.0">com.ssafy.faraway.domain.attraction.entity.Sido</node>
+    <node x="15332.25" y="3950.0">com.ssafy.faraway.domain.post.entity.Category.CategoryBuilder</node>
+    <node x="4206.433730811386" y="2501.0">com.ssafy.faraway.domain.post.service.dto.UpdatePostDto</node>
+    <node x="23582.5" y="2811.5">com.ssafy.faraway.domain.plan.repository.PlanCommentRepository</node>
+    <node x="11864.125" y="3936.0">com.ssafy.faraway.domain.post.service.impl.PostServiceImpl</node>
+    <node x="12064.7707648026" y="2768.0">com.ssafy.faraway.domain.post.service.PostQueryService</node>
+    <node x="16753.0" y="5965.0">com.ssafy.faraway.common.exception.handler.GlobalExceptionHandler</node>
+    <node x="9467.5" y="5574.0">com.ssafy.faraway.domain.post.service.dto.SavePostCommentDto</node>
+    <node x="15753.5" y="5574.0">com.ssafy.faraway.domain.member.service.dto.DeleteMemberDto</node>
+    <node x="14625.0" y="6021.0">com.ssafy.faraway.domain.attraction.controller.dto.SidoResponse.SidoResponseBuilder</node>
+    <node x="3297.0" y="6791.0">com.ssafy.faraway.domain.post.controller.dto.res.AttachmentResponse.AttachmentResponseBuilder</node>
+    <node x="6017.0" y="5574.0">com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition</node>
+    <node x="12051.5" y="5574.0">com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto</node>
+    <node x="5381.933730811386" y="3978.0">com.ssafy.faraway.domain.hotplace.repository.impl.HotPlaceLikeQueryRepositoryImpl</node>
+    <node x="2454.9337308113863" y="3992.0">com.ssafy.faraway.domain.post.service.impl.PostLikeServiceImpl</node>
+    <node x="12589.7707648026" y="2571.0">com.ssafy.faraway.common.domain.ResultPage</node>
+    <node x="16980.75" y="3824.0">com.ssafy.faraway.domain.plan.controller.PlanController</node>
+    <node x="4645.933730811386" y="3880.0">com.ssafy.faraway.domain.member.service.impl.JwtServiceImpl</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanQueryServiceImpl" target="com.ssafy.faraway.common.util.ShortestPath" relationship="CREATE">
+      <point x="0.0" y="-198.5" />
+      <point x="28307.8957648026" y="3652.0" />
+      <point x="28493.125" y="3652.0" />
+      <point x="0.0" y="212.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="0.0" y="-86.5" />
+      <point x="22299.1457648026" y="3622.0" />
+      <point x="22249.0" y="3622.0" />
+      <point x="22249.0" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.dto.SavePostLikeDto.SavePostLikeDtoBuilder" target="com.ssafy.faraway.domain.post.service.dto.SavePostLikeDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlace" target="com.ssafy.faraway.domain.hotplace.entity.HotPlaceLike" relationship="TO_MANY">
+      <point x="112.75" y="380.5" />
+      <point x="20099.6457648026" y="4466.0" />
+      <point x="22901.3957648026" y="4466.0" />
+      <point x="22901.3957648026" y="4496.0" />
+      <point x="23570.3957648026" y="4496.0" />
+      <point x="-74.5" y="-142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.repository.impl.AttractionQueryRepositoryImpl" target="com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository" relationship="REALIZATION">
+      <point x="0.0" y="-184.5" />
+      <point x="27498.8957648026" y="3652.0" />
+      <point x="27327.009936951734" y="3652.0" />
+      <point x="143.5" y="71.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.impl.JwtServiceImpl" target="com.ssafy.faraway.domain.member.service.JwtService" relationship="REALIZATION">
+      <point x="72.5" y="-184.5" />
+      <point x="4863.433730811386" y="3522.0" />
+      <point x="8571.962033991214" y="3522.0" />
+      <point x="-70.0" y="99.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.HotPlaceController" target="com.ssafy.faraway.domain.hotplace.service.HotPlaceLikeService" relationship="TO_ONE">
+      <point x="-158.25" y="-282.5" />
+      <point x="9317.0207648026" y="3662.0" />
+      <point x="9084.3957648026" y="3662.0" />
+      <point x="9084.3957648026" y="3412.0" />
+      <point x="10537.59327028507" y="3412.0" />
+      <point x="-63.75" y="43.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse" target="com.ssafy.faraway.domain.member.entity.Role" relationship="TO_ONE">
+      <point x="0.0" y="-366.5" />
+      <point x="26701.009936951734" y="926.0" />
+      <point x="27214.79536732455" y="926.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.dto.SaveMemberDto.SaveMemberDtoBuilder" target="com.ssafy.faraway.domain.member.service.dto.SaveMemberDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-310.5" />
+      <point x="0.0" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.PostLike" target="com.ssafy.faraway.domain.post.entity.Post" relationship="TO_ONE">
+      <point x="-60.5" y="142.5" />
+      <point x="18805.25" y="3402.0" />
+      <point x="16641.05249451753" y="3402.0" />
+      <point x="16641.05249451753" y="3662.0" />
+      <point x="16408.5207648026" y="3662.0" />
+      <point x="105.75" y="-352.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostServiceImpl" target="com.ssafy.faraway.domain.post.repository.PostRepository" relationship="TO_ONE">
+      <point x="140.33333333333394" y="-128.5" />
+      <point x="12214.958333333334" y="3662.0" />
+      <point x="12108.094161184197" y="3662.0" />
+      <point x="12108.094161184197" y="3502.0" />
+      <point x="11961.7707648026" y="3502.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostQueryServiceImpl" target="com.ssafy.faraway.domain.post.repository.PostQueryRepository" relationship="TO_ONE">
+      <point x="126.25" y="-128.5" />
+      <point x="14775.0" y="3652.0" />
+      <point x="15001.2707648026" y="3652.0" />
+      <point x="15001.2707648026" y="3642.0" />
+      <point x="16331.625" y="3642.0" />
+      <point x="-126.25" y="85.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceLike" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="74.5" y="-142.5" />
+      <point x="23719.3957648026" y="4496.0" />
+      <point x="25905.134936951734" y="4496.0" />
+      <point x="25905.134936951734" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanQueryServiceImpl" target="com.ssafy.faraway.domain.plan.repository.PlanQueryRepository" relationship="TO_ONE">
+      <point x="167.0" y="-198.5" />
+      <point x="28474.8957648026" y="3662.0" />
+      <point x="29034.510827850863" y="3662.0" />
+      <point x="29034.510827850863" y="3652.0" />
+      <point x="29203.375" y="3652.0" />
+      <point x="-125.25" y="85.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.service.impl.AttractionQueryServiceImpl" target="com.ssafy.faraway.domain.attraction.service.AttractionQueryService" relationship="REALIZATION">
+      <point x="-153.0" y="-114.5" />
+      <point x="23804.509936951734" y="3582.0" />
+      <point x="19465.75" y="3582.0" />
+      <point x="153.0" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.repository.impl.AttractionLikeQueryRepositoryImpl" target="com.ssafy.faraway.domain.attraction.repository.AttractionLikeQueryRepository" relationship="REALIZATION">
+      <point x="0.0" y="-86.5" />
+      <point x="25452.509936951734" y="3632.0" />
+      <point x="25151.259936951734" y="3632.0" />
+      <point x="71.5" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.entity.Member" target="com.ssafy.faraway.domain.member.entity.Address" relationship="TO_ONE">
+      <point x="132.66666666666788" y="-478.5" />
+      <point x="22172.166666666668" y="956.0" />
+      <point x="25484.510827850863" y="956.0" />
+      <point x="25484.510827850863" y="866.0" />
+      <point x="25449.25" y="866.0" />
+      <point x="-60.25" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.PlanComment" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="-79.5" y="-184.5" />
+      <point x="23045.0" y="2259.0" />
+      <point x="20904.837033991214" y="2259.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceDto.SaveHotPlaceDtoBuilder" target="com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-282.5" />
+      <point x="0.0" y="450.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Category.CategoryBuilder" target="com.ssafy.faraway.domain.post.entity.Category" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="15477.25" y="3622.0" />
+      <point x="15681.625" y="3622.0" />
+      <point x="-53.25" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.dto.FindLoginIdDto.FindLoginIdDtoBuilder" target="com.ssafy.faraway.domain.member.service.dto.FindLoginIdDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlace" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="-112.75" y="-380.5" />
+      <point x="19874.1457648026" y="3622.0" />
+      <point x="19629.25" y="3622.0" />
+      <point x="19629.25" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.Plan" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="-104.5" y="-310.5" />
+      <point x="20534.25" y="3622.0" />
+      <point x="20352.25" y="3622.0" />
+      <point x="20352.25" y="2249.0" />
+      <point x="21211.6457648026" y="2249.0" />
+      <point x="21211.6457648026" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanQueryServiceImpl" target="com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository" relationship="TO_ONE">
+      <point x="167.0" y="-198.5" />
+      <point x="28474.8957648026" y="3662.0" />
+      <point x="29034.510827850863" y="3662.0" />
+      <point x="29034.510827850863" y="3532.0" />
+      <point x="27040.009936951734" y="3532.0" />
+      <point x="-143.5" y="71.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto.UpdatePostCommentDtoBuilder" target="com.ssafy.faraway.domain.post.service.dto.UpdatePostCommentDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.Gugun.GugunBuilder" target="com.ssafy.faraway.domain.attraction.entity.Gugun" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="26074.009936951734" y="906.0" />
+      <point x="26222.29536732455" y="906.0" />
+      <point x="-57.25" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.HotPlaceController" target="com.ssafy.faraway.common.domain.ResultPage" relationship="CREATE">
+      <point x="158.25" y="-282.5" />
+      <point x="9633.5207648026" y="3652.0" />
+      <point x="10575.875" y="3652.0" />
+      <point x="10575.875" y="3582.0" />
+      <point x="12695.7707648026" y="3582.0" />
+      <point x="0.0" y="254.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceDto" target="com.ssafy.faraway.common.domain.UploadFile" relationship="TO_MANY">
+      <point x="0.0" y="-450.5" />
+      <point x="3547.9337308113863" y="2269.0" />
+      <point x="5158.933730811386" y="2269.0" />
+      <point x="5158.933730811386" y="2239.0" />
+      <point x="8692.84327028507" y="2239.0" />
+      <point x="-74.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.entity.Name.NameBuilder" target="com.ssafy.faraway.domain.member.entity.Name" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="26346.009936951734" y="896.0" />
+      <point x="25788.0" y="896.0" />
+      <point x="46.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionLike" target="com.ssafy.faraway.domain.attraction.entity.AttractionInfo" relationship="TO_ONE">
+      <point x="83.5" y="-142.5" />
+      <point x="27741.009936951734" y="2269.0" />
+      <point x="27768.375" y="2269.0" />
+      <point x="27768.375" y="2259.0" />
+      <point x="28745.0207648026" y="2259.0" />
+      <point x="-93.5" y="534.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceLikeServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="0.0" y="-72.5" />
+      <point x="11663.125" y="3572.0" />
+      <point x="11615.2707648026" y="3572.0" />
+      <point x="11615.2707648026" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Post" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="-105.75" y="-352.5" />
+      <point x="16197.0207648026" y="3612.0" />
+      <point x="15617.875" y="3612.0" />
+      <point x="15617.875" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.dto.SavePlanLikeDto.SavePlanLikeDtoBuilder" target="com.ssafy.faraway.domain.plan.service.dto.SavePlanLikeDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.dto.DeleteMemberDto.DeleteMemberDtoBuilder" target="com.ssafy.faraway.domain.member.service.dto.DeleteMemberDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.dto.SavePlanDto.SavePlanDtoBuilder" target="com.ssafy.faraway.domain.plan.service.dto.SavePlanDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-170.5" />
+      <point x="0.0" y="282.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.repository.dto.SaveEncMember" target="com.ssafy.faraway.domain.member.entity.Address" relationship="TO_ONE">
+      <point x="0.0" y="-394.5" />
+      <point x="25584.759936951734" y="946.0" />
+      <point x="25258.385827850863" y="946.0" />
+      <point x="25258.385827850863" y="876.0" />
+      <point x="25449.25" y="876.0" />
+      <point x="-60.25" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostQueryServiceImpl" target="com.ssafy.faraway.domain.post.service.PostQueryService" relationship="REALIZATION">
+      <point x="-126.25" y="-128.5" />
+      <point x="14522.5" y="3472.0" />
+      <point x="12443.5207648026" y="3472.0" />
+      <point x="126.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceServiceImpl" target="com.ssafy.faraway.domain.hotplace.repository.HotPlaceImageRepository" relationship="TO_ONE">
+      <point x="0.0" y="-114.5" />
+      <point x="3005.9337308113863" y="3662.0" />
+      <point x="2966.875" y="3662.0" />
+      <point x="2966.875" y="3412.0" />
+      <point x="2444.8957648026008" y="3412.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.entity.Address.AddressBuilder" target="com.ssafy.faraway.domain.member.entity.Address" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="24273.2707648026" y="886.0" />
+      <point x="25569.75" y="886.0" />
+      <point x="60.25" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage" target="com.ssafy.faraway.domain.hotplace.entity.HotPlace" relationship="TO_ONE">
+      <point x="81.0" y="142.5" />
+      <point x="16104.375" y="3382.0" />
+      <point x="20127.80249451753" y="3382.0" />
+      <point x="20127.80249451753" y="3662.0" />
+      <point x="20099.6457648026" y="3662.0" />
+      <point x="112.75" y="-380.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.dto.res.AttachmentResponse.AttachmentResponseBuilder" target="com.ssafy.faraway.domain.post.controller.dto.res.AttachmentResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="3501.0" y="6304.0" />
+      <point x="3368.25" y="6304.0" />
+      <point x="93.0" y="240.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Post.PostBuilder" target="com.ssafy.faraway.domain.post.entity.Post" relationship="INNER_CLASS">
+      <point x="0.0" y="-310.5" />
+      <point x="18733.3957648026" y="4486.0" />
+      <point x="16302.7707648026" y="4486.0" />
+      <point x="0.0" y="352.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostLikeServiceImpl" target="com.ssafy.faraway.domain.post.repository.PostLikeRepository" relationship="TO_ONE">
+      <point x="0.0" y="-72.5" />
+      <point x="2607.9337308113863" y="3432.0" />
+      <point x="2824.9620339912144" y="3432.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.dto.UpdateMemberDto.UpdateMemberDtoBuilder" target="com.ssafy.faraway.domain.member.service.dto.UpdateMemberDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-282.5" />
+      <point x="0.0" y="436.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.AttachmentController" target="com.ssafy.faraway.domain.post.repository.AttachmentRepository" relationship="TO_ONE">
+      <point x="0.0" y="-100.5" />
+      <point x="15116.75" y="3452.0" />
+      <point x="13691.8957648026" y="3452.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.dto.UpdatePostDto.UpdatePostDtoBuilder" target="com.ssafy.faraway.domain.post.service.dto.UpdatePostDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-198.5" />
+      <point x="0.0" y="324.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.Plan" target="com.ssafy.faraway.domain.plan.entity.PlanComment" relationship="TO_MANY">
+      <point x="104.5" y="-310.5" />
+      <point x="20743.25" y="3662.0" />
+      <point x="20925.25" y="3662.0" />
+      <point x="20925.25" y="3652.0" />
+      <point x="23045.0" y="3652.0" />
+      <point x="-79.5" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionDesc.AttractionDescBuilder" target="com.ssafy.faraway.domain.attraction.entity.AttractionDesc" relationship="INNER_CLASS">
+      <point x="0.0" y="-198.5" />
+      <point x="30074.259936951734" y="966.0" />
+      <point x="30062.510827850863" y="966.0" />
+      <point x="100.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.PostController" target="com.ssafy.faraway.domain.post.service.PostCommentService" relationship="TO_ONE">
+      <point x="-155.75" y="-282.5" />
+      <point x="10392.59327028507" y="3662.0" />
+      <point x="10264.462033991214" y="3662.0" />
+      <point x="10264.462033991214" y="3422.0" />
+      <point x="5764.683730811386" y="3422.0" />
+      <point x="73.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.entity.Member" target="com.ssafy.faraway.domain.member.entity.Role" relationship="TO_ONE">
+      <point x="132.66666666666788" y="-478.5" />
+      <point x="22172.166666666668" y="956.0" />
+      <point x="25484.510827850863" y="956.0" />
+      <point x="25484.510827850863" y="916.0" />
+      <point x="27214.79536732455" y="916.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceCommentServiceImpl" target="com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService" relationship="REALIZATION">
+      <point x="144.0" y="-86.5" />
+      <point x="7181.5" y="3502.0" />
+      <point x="7860.1457648026" y="3502.0" />
+      <point x="-80.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.PlanController" target="com.ssafy.faraway.domain.member.service.JwtService" relationship="TO_ONE">
+      <point x="145.0" y="-240.5" />
+      <point x="17415.75" y="3662.0" />
+      <point x="17276.0" y="3662.0" />
+      <point x="17276.0" y="3432.0" />
+      <point x="11223.2707648026" y="3432.0" />
+      <point x="11223.2707648026" y="3402.0" />
+      <point x="8711.962033991214" y="3402.0" />
+      <point x="70.0" y="99.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.entity.Member" target="com.ssafy.faraway.domain.member.entity.Name" relationship="TO_ONE">
+      <point x="132.66666666666788" y="-478.5" />
+      <point x="22172.166666666668" y="956.0" />
+      <point x="25484.510827850863" y="956.0" />
+      <point x="25484.510827850863" y="906.0" />
+      <point x="25696.0" y="906.0" />
+      <point x="-46.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionInfo.AttractionInfoBuilder" target="com.ssafy.faraway.domain.attraction.entity.AttractionInfo" relationship="INNER_CLASS">
+      <point x="0.0" y="-534.5" />
+      <point x="30100.759936951734" y="2259.0" />
+      <point x="28932.0207648026" y="2259.0" />
+      <point x="93.5" y="534.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.dto.res.PostCommentResponse.PostCommentResponseBuilder" target="com.ssafy.faraway.domain.post.controller.dto.res.PostCommentResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-226.5" />
+      <point x="2590.5" y="6304.0" />
+      <point x="2707.5" y="6304.0" />
+      <point x="-112.5" y="352.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Category" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="0.0" y="-114.5" />
+      <point x="15734.875" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanLikeServiceImpl" target="com.ssafy.faraway.domain.plan.repository.PlanLikeRepository" relationship="TO_ONE">
+      <point x="100.66666666666788" y="-72.5" />
+      <point x="21470.416666666668" y="3622.0" />
+      <point x="21429.0" y="3622.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostServiceImpl" target="com.ssafy.faraway.domain.post.repository.AttachmentRepository" relationship="TO_ONE">
+      <point x="140.33333333333394" y="-128.5" />
+      <point x="12214.958333333334" y="3662.0" />
+      <point x="12108.094161184197" y="3662.0" />
+      <point x="12108.094161184197" y="3612.0" />
+      <point x="13691.8957648026" y="3612.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.dto.SavePlanCommentDto.SavePlanCommentDtoBuilder" target="com.ssafy.faraway.domain.plan.service.dto.SavePlanCommentDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="0.0" y="240.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceLike.HotPlaceLikeBuilder" target="com.ssafy.faraway.domain.hotplace.entity.HotPlaceLike" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="0.0" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.repository.impl.PlanLikeQueryRepositoryImpl" target="com.ssafy.faraway.domain.plan.repository.PlanLikeQueryRepository" relationship="REALIZATION">
+      <point x="0.0" y="-86.5" />
+      <point x="30008.25" y="3662.0" />
+      <point x="29832.759936951734" y="3662.0" />
+      <point x="60.5" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceCommentDto.SaveHotPlaceCommentDtoBuilder" target="com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceCommentDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="0.0" y="240.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.PostController" target="com.ssafy.faraway.domain.member.service.JwtService" relationship="TO_ONE">
+      <point x="-155.75" y="-282.5" />
+      <point x="10392.59327028507" y="3662.0" />
+      <point x="10264.462033991214" y="3662.0" />
+      <point x="10264.462033991214" y="3562.0" />
+      <point x="11223.2707648026" y="3562.0" />
+      <point x="11223.2707648026" y="3402.0" />
+      <point x="8711.962033991214" y="3402.0" />
+      <point x="70.0" y="99.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.PostComment.PostCommentBuilder" target="com.ssafy.faraway.domain.post.entity.PostComment" relationship="INNER_CLASS">
+      <point x="0.0" y="-170.5" />
+      <point x="80.5" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostLikeServiceImpl" target="com.ssafy.faraway.domain.post.service.PostLikeService" relationship="REALIZATION">
+      <point x="102.0" y="-72.5" />
+      <point x="2709.9337308113863" y="3472.0" />
+      <point x="6775.645764802601" y="3472.0" />
+      <point x="-56.75" y="43.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanCommentServiceImpl" target="com.ssafy.faraway.domain.plan.repository.PlanCommentRepository" relationship="TO_ONE">
+      <point x="124.0" y="-86.5" />
+      <point x="23192.759936951734" y="3662.0" />
+      <point x="23701.5" y="3662.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.repository.impl.HotPlaceQueryRepositoryImpl" target="com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository" relationship="REALIZATION">
+      <point x="0.0" y="-142.5" />
+      <point x="6033.433730811386" y="3482.0" />
+      <point x="7090.645764802601" y="3482.0" />
+      <point x="-124.75" y="85.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment.HotPlaceCommentBuilder" target="com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment" relationship="INNER_CLASS">
+      <point x="0.0" y="-170.5" />
+      <point x="24449.009936951734" y="3572.0" />
+      <point x="21830.0" y="3572.0" />
+      <point x="94.5" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.HotPlaceController" target="com.ssafy.faraway.domain.hotplace.service.HotPlaceService" relationship="TO_ONE">
+      <point x="-158.25" y="-282.5" />
+      <point x="9317.0207648026" y="3662.0" />
+      <point x="9084.3957648026" y="3662.0" />
+      <point x="9084.3957648026" y="3412.0" />
+      <point x="6053.683730811386" y="3412.0" />
+      <point x="65.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment" target="com.ssafy.faraway.domain.hotplace.entity.HotPlace" relationship="TO_ONE">
+      <point x="-94.5" y="184.5" />
+      <point x="21641.0" y="3382.0" />
+      <point x="20127.80249451753" y="3382.0" />
+      <point x="20127.80249451753" y="3662.0" />
+      <point x="20099.6457648026" y="3662.0" />
+      <point x="112.75" y="-380.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.repository.dto.LoginEncMember.LoginEncMemberBuilder" target="com.ssafy.faraway.domain.member.repository.dto.LoginEncMember" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse.DetailHotPlaceResponseBuilder" target="com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse" relationship="INNER_CLASS">
+      <point x="5.6843418860808015E-14" y="-478.5" />
+      <point x="0.0" y="744.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse.MemberResponseBuilder" target="com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-394.5" />
+      <point x="28056.009936951734" y="2219.0" />
+      <point x="27754.29536732455" y="2219.0" />
+      <point x="0.0" y="604.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionInfo" target="com.ssafy.faraway.domain.attraction.entity.AttractionLike" relationship="TO_MANY">
+      <point x="-93.5" y="534.5" />
+      <point x="28745.0207648026" y="2259.0" />
+      <point x="27768.375" y="2259.0" />
+      <point x="27768.375" y="2269.0" />
+      <point x="27741.009936951734" y="2269.0" />
+      <point x="83.5" y="-142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.dto.SavePostDto.SavePostDtoBuilder" target="com.ssafy.faraway.domain.post.service.dto.SavePostDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-198.5" />
+      <point x="0.0" y="324.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceQueryServiceImpl" target="com.ssafy.faraway.domain.hotplace.repository.HotPlaceQueryRepository" relationship="TO_ONE">
+      <point x="-140.25" y="-142.5" />
+      <point x="7482.30249451753" y="3662.0" />
+      <point x="7549.0" y="3662.0" />
+      <point x="7549.0" y="3442.0" />
+      <point x="7340.145764802601" y="3442.0" />
+      <point x="124.75" y="85.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage.HotPlaceImageBuilder" target="com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="12469.125" y="3632.0" />
+      <point x="15942.375" y="3632.0" />
+      <point x="-81.0" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.common.interceptor.LoginInterceptor" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="123.0" y="-100.5" />
+      <point x="13022.125" y="3592.0" />
+      <point x="13009.1457648026" y="3592.0" />
+      <point x="13009.1457648026" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionInfo" target="com.ssafy.faraway.domain.attraction.entity.Gugun" relationship="TO_ONE">
+      <point x="0.0" y="-534.5" />
+      <point x="28838.5207648026" y="966.0" />
+      <point x="29177.1457648026" y="966.0" />
+      <point x="29177.1457648026" y="886.0" />
+      <point x="26336.79536732455" y="886.0" />
+      <point x="57.25" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.Plan" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="104.5" y="-310.5" />
+      <point x="20743.25" y="3662.0" />
+      <point x="20925.25" y="3662.0" />
+      <point x="20925.25" y="2259.0" />
+      <point x="20904.837033991214" y="2259.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.impl.MemberServiceImpl" target="com.ssafy.faraway.domain.member.service.MemberService" relationship="REALIZATION">
+      <point x="103.75" y="-198.5" />
+      <point x="1410.5" y="3532.0" />
+      <point x="1515.625" y="3532.0" />
+      <point x="81.75" y="141.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.dto.UpdateLoginPwdDto.UpdateLoginPwdDtoBuilder" target="com.ssafy.faraway.domain.member.service.dto.UpdateLoginPwdDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="0.0" y="226.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.MemberController" target="com.ssafy.faraway.domain.member.service.MemberQueryService" relationship="TO_ONE">
+      <point x="118.0" y="-296.5" />
+      <point x="911.125" y="3662.0" />
+      <point x="946.5" y="3662.0" />
+      <point x="946.5" y="3522.0" />
+      <point x="826.625" y="3522.0" />
+      <point x="98.75" y="113.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionInfo" target="com.ssafy.faraway.domain.attraction.entity.AttractionDesc" relationship="TO_ONE">
+      <point x="0.0" y="-534.5" />
+      <point x="28838.5207648026" y="966.0" />
+      <point x="29177.1457648026" y="966.0" />
+      <point x="29177.1457648026" y="886.0" />
+      <point x="29862.510827850863" y="886.0" />
+      <point x="-100.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionDesc" target="com.ssafy.faraway.domain.attraction.entity.AttractionInfo" relationship="TO_ONE">
+      <point x="-100.0" y="198.5" />
+      <point x="29862.510827850863" y="886.0" />
+      <point x="29177.1457648026" y="886.0" />
+      <point x="29177.1457648026" y="966.0" />
+      <point x="28838.5207648026" y="966.0" />
+      <point x="0.0" y="-534.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.MemberController" target="com.ssafy.faraway.domain.member.service.JwtService" relationship="TO_ONE">
+      <point x="118.0" y="-296.5" />
+      <point x="911.125" y="3662.0" />
+      <point x="946.5" y="3662.0" />
+      <point x="946.5" y="3542.0" />
+      <point x="11223.2707648026" y="3542.0" />
+      <point x="11223.2707648026" y="3402.0" />
+      <point x="8711.962033991214" y="3402.0" />
+      <point x="70.0" y="99.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.MemberController" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-118.0" y="-296.5" />
+      <point x="675.125" y="3652.0" />
+      <point x="519.875" y="3652.0" />
+      <point x="519.875" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanCommentServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="0.0" y="-86.5" />
+      <point x="23068.759936951734" y="3642.0" />
+      <point x="22955.0" y="3642.0" />
+      <point x="22955.0" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.PlanController" target="com.ssafy.faraway.domain.plan.service.PlanLikeService" relationship="TO_ONE">
+      <point x="145.0" y="-240.5" />
+      <point x="17415.75" y="3662.0" />
+      <point x="17276.0" y="3662.0" />
+      <point x="17276.0" y="3632.0" />
+      <point x="19696.0" y="3632.0" />
+      <point x="-56.25" y="43.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.HotPlaceController" target="com.ssafy.faraway.common.util.FileExtFilter" relationship="TO_ONE">
+      <point x="-158.25" y="-282.5" />
+      <point x="9317.0207648026" y="3662.0" />
+      <point x="9084.3957648026" y="3662.0" />
+      <point x="9084.3957648026" y="3532.0" />
+      <point x="9852.462033991214" y="3532.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition.PostSearchConditionBuilder" target="com.ssafy.faraway.domain.post.repository.dto.PostSearchCondition" relationship="INNER_CLASS">
+      <point x="0.0" y="-198.5" />
+      <point x="0.0" y="310.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceLikeServiceImpl" target="com.ssafy.faraway.domain.hotplace.service.HotPlaceLikeService" relationship="REALIZATION">
+      <point x="-120.66666666666606" y="-72.5" />
+      <point x="11542.458333333334" y="3532.0" />
+      <point x="10665.09327028507" y="3532.0" />
+      <point x="63.75" y="43.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.common.interceptor.LoginInterceptor" target="com.ssafy.faraway.domain.member.service.JwtService" relationship="TO_ONE">
+      <point x="-123.0" y="-100.5" />
+      <point x="12776.125" y="3492.0" />
+      <point x="11223.2707648026" y="3492.0" />
+      <point x="11223.2707648026" y="3402.0" />
+      <point x="8711.962033991214" y="3402.0" />
+      <point x="70.0" y="99.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.impl.MemberQueryServiceImpl" target="com.ssafy.faraway.domain.member.service.MemberQueryService" relationship="REALIZATION">
+      <point x="98.75" y="-142.5" />
+      <point x="396.25" y="3662.0" />
+      <point x="629.125" y="3662.0" />
+      <point x="-98.75" y="113.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.ImageController" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-102.75" y="-100.5" />
+      <point x="1702.625" y="3532.0" />
+      <point x="1755.6837308113863" y="3532.0" />
+      <point x="1755.6837308113863" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostServiceImpl" target="com.ssafy.faraway.domain.post.service.PostService" relationship="REALIZATION">
+      <point x="-140.33333333333394" y="-128.5" />
+      <point x="11934.291666666666" y="3522.0" />
+      <point x="11546.5207648026" y="3522.0" />
+      <point x="58.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.PlanLike" target="com.ssafy.faraway.domain.plan.entity.Plan" relationship="TO_ONE">
+      <point x="59.5" y="-142.5" />
+      <point x="8371.7707648026" y="4496.0" />
+      <point x="9361.0207648026" y="4496.0" />
+      <point x="9361.0207648026" y="4476.0" />
+      <point x="20534.25" y="4476.0" />
+      <point x="-104.5" y="310.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.PlanComment" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="79.5" y="-184.5" />
+      <point x="23204.0" y="2249.0" />
+      <point x="23161.135827850863" y="2249.0" />
+      <point x="23161.135827850863" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.PostController" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="155.75" y="-282.5" />
+      <point x="10704.09327028507" y="3662.0" />
+      <point x="10903.625" y="3662.0" />
+      <point x="10903.625" y="3572.0" />
+      <point x="11361.2707648026" y="3572.0" />
+      <point x="11361.2707648026" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.HotPlaceController" target="com.ssafy.faraway.domain.member.service.JwtService" relationship="TO_ONE">
+      <point x="-158.25" y="-282.5" />
+      <point x="9317.0207648026" y="3662.0" />
+      <point x="9084.3957648026" y="3662.0" />
+      <point x="9084.3957648026" y="3552.0" />
+      <point x="11223.2707648026" y="3552.0" />
+      <point x="11223.2707648026" y="3402.0" />
+      <point x="8711.962033991214" y="3402.0" />
+      <point x="70.0" y="99.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Attachment.AttachmentBuilder" target="com.ssafy.faraway.domain.post.entity.Attachment" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="11308.125" y="3602.0" />
+      <point x="13093.6457648026" y="3602.0" />
+      <point x="-69.0" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse.HotPlaceResponseBuilder" target="com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-422.5" />
+      <point x="0.0" y="660.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.dto.UpdatePostDto" target="com.ssafy.faraway.common.domain.UploadFile" relationship="TO_MANY">
+      <point x="0.0" y="-324.5" />
+      <point x="4424.433730811386" y="2269.0" />
+      <point x="5158.933730811386" y="2269.0" />
+      <point x="5158.933730811386" y="2239.0" />
+      <point x="8692.84327028507" y="2239.0" />
+      <point x="-74.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage" target="com.ssafy.faraway.common.domain.UploadFile" relationship="TO_ONE">
+      <point x="-81.0" y="-142.5" />
+      <point x="15942.375" y="2269.0" />
+      <point x="5158.933730811386" y="2269.0" />
+      <point x="5158.933730811386" y="2239.0" />
+      <point x="8692.84327028507" y="2239.0" />
+      <point x="-74.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.Address.AddressBuilder" target="com.ssafy.faraway.domain.hotplace.entity.Address" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="21061.25" y="3622.0" />
+      <point x="20543.5" y="3622.0" />
+      <point x="60.25" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="-94.5" y="-184.5" />
+      <point x="21641.0" y="2259.0" />
+      <point x="20904.837033991214" y="2259.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Post" target="com.ssafy.faraway.domain.post.entity.PostLike" relationship="TO_MANY">
+      <point x="105.75" y="-352.5" />
+      <point x="16408.5207648026" y="3662.0" />
+      <point x="16641.05249451753" y="3662.0" />
+      <point x="16641.05249451753" y="3402.0" />
+      <point x="18805.25" y="3402.0" />
+      <point x="-60.5" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.Sido.SidoBuilder" target="com.ssafy.faraway.domain.attraction.entity.Sido" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="29624.510827850863" y="416.0" />
+      <point x="27629.67036732455" y="416.0" />
+      <point x="47.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Attachment" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="69.0" y="-142.5" />
+      <point x="13231.6457648026" y="2249.0" />
+      <point x="13135.71827028507" y="2249.0" />
+      <point x="13135.71827028507" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionLike.AttractionLikeBuilder" target="com.ssafy.faraway.domain.attraction.entity.AttractionLike" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="27010.8957648026" y="3662.0" />
+      <point x="27657.509936951734" y="3662.0" />
+      <point x="0.0" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.HotPlaceController" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="158.25" y="-282.5" />
+      <point x="9633.5207648026" y="3652.0" />
+      <point x="10575.875" y="3652.0" />
+      <point x="10575.875" y="3472.0" />
+      <point x="10004.462033991214" y="3472.0" />
+      <point x="10004.462033991214" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse" target="com.ssafy.faraway.domain.member.entity.Role" relationship="TO_ONE">
+      <point x="0.0" y="-534.5" />
+      <point x="29494.2707648026" y="926.0" />
+      <point x="27214.79536732455" y="926.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.PlanLike" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="59.5" y="-142.5" />
+      <point x="8371.7707648026" y="4496.0" />
+      <point x="9361.0207648026" y="4496.0" />
+      <point x="9361.0207648026" y="4476.0" />
+      <point x="6293.433730811386" y="4476.0" />
+      <point x="6293.433730811386" y="2259.0" />
+      <point x="20904.837033991214" y="2259.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlace.HotPlaceBuilder" target="com.ssafy.faraway.domain.hotplace.entity.HotPlace" relationship="INNER_CLASS">
+      <point x="0.0" y="-338.5" />
+      <point x="20719.1457648026" y="4496.0" />
+      <point x="19874.1457648026" y="4496.0" />
+      <point x="-112.75" y="380.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.repository.impl.HotPlaceLikeQueryRepositoryImpl" target="com.ssafy.faraway.domain.hotplace.repository.HotPlaceLikeQueryRepository" relationship="REALIZATION">
+      <point x="0.0" y="-86.5" />
+      <point x="5572.933730811386" y="3462.0" />
+      <point x="6489.645764802601" y="3462.0" />
+      <point x="-69.75" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceServiceImpl" target="com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository" relationship="TO_ONE">
+      <point x="0.0" y="-114.5" />
+      <point x="3005.9337308113863" y="3662.0" />
+      <point x="2966.875" y="3662.0" />
+      <point x="2966.875" y="3432.0" />
+      <point x="3197.875" y="3432.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.Gugun" target="com.ssafy.faraway.domain.attraction.entity.Sido" relationship="TO_ONE">
+      <point x="0.0" y="-142.5" />
+      <point x="26279.54536732455" y="426.0" />
+      <point x="27131.17036732455" y="426.0" />
+      <point x="27131.17036732455" y="416.0" />
+      <point x="27535.67036732455" y="416.0" />
+      <point x="-47.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlace" target="com.ssafy.faraway.domain.hotplace.entity.Address" relationship="TO_ONE">
+      <point x="112.75" y="-380.5" />
+      <point x="20099.6457648026" y="3662.0" />
+      <point x="20127.80249451753" y="3662.0" />
+      <point x="20127.80249451753" y="3382.0" />
+      <point x="20423.0" y="3382.0" />
+      <point x="-60.25" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.service.impl.AttractionLikeServiceImpl" target="com.ssafy.faraway.domain.attraction.repository.AttractionLikeRepository" relationship="TO_ONE">
+      <point x="0.0" y="-72.5" />
+      <point x="13352.125" y="3602.0" />
+      <point x="13440.1457648026" y="3602.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.impl.MemberServiceImpl" target="com.ssafy.faraway.domain.member.repository.MemberRepository" relationship="TO_ONE">
+      <point x="-103.75" y="-198.5" />
+      <point x="1203.0" y="3532.0" />
+      <point x="1097.875" y="3532.0" />
+      <point x="0.0" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Post" target="com.ssafy.faraway.domain.post.entity.PostComment" relationship="TO_MANY">
+      <point x="105.75" y="-352.5" />
+      <point x="16408.5207648026" y="3662.0" />
+      <point x="16641.05249451753" y="3662.0" />
+      <point x="16641.05249451753" y="3402.0" />
+      <point x="18466.75" y="3402.0" />
+      <point x="-80.5" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse" target="com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceImageResponse" relationship="TO_MANY">
+      <point x="5.6843418860808015E-14" y="-744.5" />
+      <point x="396.5" y="6332.0" />
+      <point x="518.0" y="6332.0" />
+      <point x="-109.25" y="282.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionLike" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="83.5" y="-142.5" />
+      <point x="27741.009936951734" y="2269.0" />
+      <point x="27768.375" y="2269.0" />
+      <point x="27768.375" y="2229.0" />
+      <point x="20904.837033991214" y="2229.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.PostComment" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="-80.5" y="-184.5" />
+      <point x="18466.75" y="2249.0" />
+      <point x="18542.25" y="2249.0" />
+      <point x="18542.25" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanLikeServiceImpl" target="com.ssafy.faraway.domain.plan.service.PlanLikeService" relationship="REALIZATION">
+      <point x="-100.66666666666788" y="-72.5" />
+      <point x="21269.083333333332" y="3612.0" />
+      <point x="19808.5" y="3612.0" />
+      <point x="56.25" y="43.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Attachment" target="com.ssafy.faraway.domain.post.entity.Post" relationship="TO_ONE">
+      <point x="69.0" y="142.5" />
+      <point x="13231.6457648026" y="3402.0" />
+      <point x="16641.05249451753" y="3402.0" />
+      <point x="16641.05249451753" y="3662.0" />
+      <point x="16408.5207648026" y="3662.0" />
+      <point x="105.75" y="-352.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.dto.SavePostDto" target="com.ssafy.faraway.common.domain.UploadFile" relationship="TO_MANY">
+      <point x="0.0" y="-324.5" />
+      <point x="3977.4337308113863" y="2269.0" />
+      <point x="5158.933730811386" y="2269.0" />
+      <point x="5158.933730811386" y="2239.0" />
+      <point x="8692.84327028507" y="2239.0" />
+      <point x="-74.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.impl.MemberQueryServiceImpl" target="com.ssafy.faraway.domain.member.repository.MemberQueryRepository" relationship="TO_ONE">
+      <point x="-98.75" y="-142.5" />
+      <point x="198.75" y="3662.0" />
+      <point x="190.375" y="3662.0" />
+      <point x="95.5" y="141.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.PostController" target="com.ssafy.faraway.common.FileStore" relationship="TO_ONE">
+      <point x="-155.75" y="-282.5" />
+      <point x="10392.59327028507" y="3662.0" />
+      <point x="10264.462033991214" y="3662.0" />
+      <point x="10264.462033991214" y="3492.0" />
+      <point x="7934.5" y="3492.0" />
+      <point x="7934.5" y="3402.0" />
+      <point x="8307.962033991214" y="3402.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.Plan.PlanBuilder" target="com.ssafy.faraway.domain.plan.entity.Plan" relationship="INNER_CLASS">
+      <point x="0.0" y="-282.5" />
+      <point x="25915.634936951734" y="4486.0" />
+      <point x="20743.25" y="4486.0" />
+      <point x="104.5" y="310.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.dto.res.DetailPostResponse.DetailPostResponseBuilder" target="com.ssafy.faraway.domain.post.controller.dto.res.DetailPostResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-394.5" />
+      <point x="0.0" y="604.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceLikeServiceImpl" target="com.ssafy.faraway.domain.hotplace.repository.HotPlaceLikeRepository" relationship="TO_ONE">
+      <point x="120.66666666666606" y="-72.5" />
+      <point x="11783.791666666666" y="3572.0" />
+      <point x="11741.7707648026" y="3572.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlace" target="com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment" relationship="TO_MANY">
+      <point x="112.75" y="-380.5" />
+      <point x="20099.6457648026" y="3662.0" />
+      <point x="20127.80249451753" y="3662.0" />
+      <point x="20127.80249451753" y="3382.0" />
+      <point x="21641.0" y="3382.0" />
+      <point x="-94.5" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="94.5" y="-184.5" />
+      <point x="21830.0" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.repository.MemberQueryRepositoryImpl" target="com.ssafy.faraway.domain.member.repository.MemberQueryRepository" relationship="REALIZATION">
+      <point x="0.0" y="-170.5" />
+      <point x="-111.0" y="3662.0" />
+      <point x="-0.625" y="3662.0" />
+      <point x="-95.5" y="141.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.service.impl.AttractionServiceImpl" target="com.ssafy.faraway.domain.attraction.service.AttractionService" relationship="REALIZATION">
+      <point x="-72.25" y="-58.5" />
+      <point x="24707.759936951734" y="3562.0" />
+      <point x="20031.0" y="3562.0" />
+      <point x="48.75" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.PostController" target="com.ssafy.faraway.domain.post.service.PostService" relationship="TO_ONE">
+      <point x="-155.75" y="-282.5" />
+      <point x="10392.59327028507" y="3662.0" />
+      <point x="10264.462033991214" y="3662.0" />
+      <point x="10264.462033991214" y="3422.0" />
+      <point x="11430.0207648026" y="3422.0" />
+      <point x="-58.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="81.0" y="-142.5" />
+      <point x="16104.375" y="2249.0" />
+      <point x="16028.375" y="2249.0" />
+      <point x="16028.375" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.dto.CheckLoginPwdDto.CheckLoginPwdDtoBuilder" target="com.ssafy.faraway.domain.member.service.dto.CheckLoginPwdDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.PostController" target="com.ssafy.faraway.common.domain.ResultPage" relationship="CREATE">
+      <point x="155.75" y="-282.5" />
+      <point x="10704.09327028507" y="3662.0" />
+      <point x="10903.625" y="3662.0" />
+      <point x="10903.625" y="3592.0" />
+      <point x="12695.7707648026" y="3592.0" />
+      <point x="0.0" y="254.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.service.dto.SaveAttractionLikeDto.SaveAttractionLikeDtoBuilder" target="com.ssafy.faraway.domain.attraction.service.dto.SaveAttractionLikeDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse" target="com.ssafy.faraway.domain.plan.controller.dto.res.PlanCommentResponse" relationship="TO_MANY">
+      <point x="0.0" y="-576.5" />
+      <point x="1680.5" y="6836.0" />
+      <point x="1802.125" y="6836.0" />
+      <point x="-112.0" y="366.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.common.exception.handler.GlobalExceptionHandler" target="com.ssafy.faraway.common.exception.dto.ErrorResponse" relationship="CREATE">
+      <point x="0.0" y="-86.5" />
+      <point x="0.0" y="170.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.dto.LoginMemberDto.LoginMemberDtoBuilder" target="com.ssafy.faraway.domain.member.service.dto.LoginMemberDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceCommentDto.UpdateHotPlaceCommentDtoBuilder" target="com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceCommentDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceLikeDto.SaveHotPlaceLikeDtoBuilder" target="com.ssafy.faraway.domain.hotplace.service.dto.SaveHotPlaceLikeDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostCommentServiceImpl" target="com.ssafy.faraway.domain.post.service.PostCommentService" relationship="REALIZATION">
+      <point x="125.33333333333348" y="-86.5" />
+      <point x="2344.208333333334" y="3442.0" />
+      <point x="5618.183730811386" y="3442.0" />
+      <point x="-73.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.PostController" target="com.ssafy.faraway.common.util.FileExtFilter" relationship="TO_ONE">
+      <point x="-155.75" y="-282.5" />
+      <point x="10392.59327028507" y="3662.0" />
+      <point x="10264.462033991214" y="3662.0" />
+      <point x="10264.462033991214" y="3482.0" />
+      <point x="9852.462033991214" y="3482.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.common.FileStore" target="com.ssafy.faraway.common.domain.UploadFile" relationship="CREATE">
+      <point x="0.0" y="-114.5" />
+      <point x="8307.962033991214" y="2249.0" />
+      <point x="8766.84327028507" y="2249.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.common.config.WebConfig" target="com.ssafy.faraway.common.interceptor.LoginInterceptor" relationship="TO_ONE">
+      <point x="0.0" y="-72.5" />
+      <point x="16740.84327028507" y="4496.0" />
+      <point x="12899.125" y="4496.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition.HotPlaceSearchConditionBuilder" target="com.ssafy.faraway.domain.hotplace.repository.dto.HotPlaceSearchCondition" relationship="INNER_CLASS">
+      <point x="0.0" y="-170.5" />
+      <point x="0.0" y="268.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.dto.SavePostCommentDto.SavePostCommentDtoBuilder" target="com.ssafy.faraway.domain.post.service.dto.SavePostCommentDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="0.0" y="240.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostQueryServiceImpl" target="com.ssafy.faraway.domain.post.repository.PostLikeQueryRepository" relationship="TO_ONE">
+      <point x="126.25" y="-128.5" />
+      <point x="14775.0" y="3652.0" />
+      <point x="15001.2707648026" y="3652.0" />
+      <point x="15001.2707648026" y="3642.0" />
+      <point x="16791.375" y="3642.0" />
+      <point x="-61.0" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.repository.dto.SaveEncMember.SaveEncMemberBuilder" target="com.ssafy.faraway.domain.member.repository.dto.SaveEncMember" relationship="INNER_CLASS">
+      <point x="0.0" y="-254.5" />
+      <point x="0.0" y="394.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.PlanController" target="com.ssafy.faraway.domain.plan.service.PlanService" relationship="TO_ONE">
+      <point x="145.0" y="-240.5" />
+      <point x="17415.75" y="3662.0" />
+      <point x="17276.0" y="3662.0" />
+      <point x="17276.0" y="3632.0" />
+      <point x="20157.5" y="3632.0" />
+      <point x="-57.75" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanLikeServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="0.0" y="-72.5" />
+      <point x="21369.75" y="3622.0" />
+      <point x="21321.0" y="3622.0" />
+      <point x="21321.0" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.PlanLike" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="-59.5" y="-142.5" />
+      <point x="8252.7707648026" y="4496.0" />
+      <point x="4195.933730811386" y="4496.0" />
+      <point x="4195.933730811386" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.controller.AttractionController" target="com.ssafy.faraway.domain.attraction.service.AttractionLikeService" relationship="TO_ONE">
+      <point x="151.75" y="-170.5" />
+      <point x="14224.5" y="3662.0" />
+      <point x="14837.2707648026" y="3662.0" />
+      <point x="14837.2707648026" y="3392.0" />
+      <point x="14604.552494517531" y="3392.0" />
+      <point x="65.25" y="43.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.impl.JwtServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-72.5" y="-184.5" />
+      <point x="4718.433730811386" y="3432.0" />
+      <point x="4785.683730811386" y="3432.0" />
+      <point x="4785.683730811386" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.PostController" target="com.ssafy.faraway.domain.post.service.PostLikeService" relationship="TO_ONE">
+      <point x="-155.75" y="-282.5" />
+      <point x="10392.59327028507" y="3662.0" />
+      <point x="10264.462033991214" y="3662.0" />
+      <point x="10264.462033991214" y="3422.0" />
+      <point x="6889.145764802601" y="3422.0" />
+      <point x="56.75" y="43.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.PlanController" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-145.0" y="-240.5" />
+      <point x="17125.75" y="3662.0" />
+      <point x="17265.5" y="3662.0" />
+      <point x="17265.5" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.controller.AttractionController" target="com.ssafy.faraway.domain.attraction.service.AttractionQueryService" relationship="TO_ONE">
+      <point x="151.75" y="-170.5" />
+      <point x="14224.5" y="3662.0" />
+      <point x="14837.2707648026" y="3662.0" />
+      <point x="14837.2707648026" y="3392.0" />
+      <point x="19159.75" y="3392.0" />
+      <point x="-153.0" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.PostLike" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="60.5" y="-142.5" />
+      <point x="18926.25" y="2259.0" />
+      <point x="20904.837033991214" y="2259.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceLike" target="com.ssafy.faraway.domain.hotplace.entity.HotPlace" relationship="TO_ONE">
+      <point x="-74.5" y="-142.5" />
+      <point x="23570.3957648026" y="4496.0" />
+      <point x="22901.3957648026" y="4496.0" />
+      <point x="22901.3957648026" y="4466.0" />
+      <point x="20099.6457648026" y="4466.0" />
+      <point x="112.75" y="380.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.service.impl.AttractionLikeServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-124.66666666666606" y="-72.5" />
+      <point x="13227.458333333334" y="3582.0" />
+      <point x="13014.1457648026" y="3582.0" />
+      <point x="13014.1457648026" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.controller.dto.SidoResponse.SidoResponseBuilder" target="com.ssafy.faraway.domain.attraction.controller.dto.SidoResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.dto.res.PostResponse.PostResponseBuilder" target="com.ssafy.faraway.domain.post.controller.dto.res.PostResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-282.5" />
+      <point x="0.0" y="450.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-150.0" y="-114.5" />
+      <point x="2855.9337308113863" y="3422.0" />
+      <point x="3035.9620339912144" y="3422.0" />
+      <point x="3035.9620339912144" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.controller.AttractionController" target="com.ssafy.faraway.domain.member.service.JwtService" relationship="TO_ONE">
+      <point x="151.75" y="-170.5" />
+      <point x="14224.5" y="3662.0" />
+      <point x="14837.2707648026" y="3662.0" />
+      <point x="14837.2707648026" y="3462.0" />
+      <point x="11223.2707648026" y="3462.0" />
+      <point x="11223.2707648026" y="3402.0" />
+      <point x="8711.962033991214" y="3402.0" />
+      <point x="70.0" y="99.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceQueryServiceImpl" target="com.ssafy.faraway.domain.hotplace.repository.HotPlaceLikeQueryRepository" relationship="TO_ONE">
+      <point x="-140.25" y="-142.5" />
+      <point x="7482.30249451753" y="3662.0" />
+      <point x="7549.0" y="3662.0" />
+      <point x="7549.0" y="3442.0" />
+      <point x="6629.145764802601" y="3442.0" />
+      <point x="69.75" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceImageResponse.HotPlaceImageResponseBuilder" target="com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceImageResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-170.5" />
+      <point x="858.0" y="6332.0" />
+      <point x="736.5" y="6332.0" />
+      <point x="109.25" y="282.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceDto.UpdateHotPlaceDtoBuilder" target="com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-310.5" />
+      <point x="0.0" y="492.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.service.impl.AttractionLikeServiceImpl" target="com.ssafy.faraway.domain.attraction.service.AttractionLikeService" relationship="REALIZATION">
+      <point x="124.66666666666606" y="-72.5" />
+      <point x="13476.791666666666" y="3622.0" />
+      <point x="14474.052494517531" y="3622.0" />
+      <point x="-65.25" y="43.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlace" target="com.ssafy.faraway.domain.hotplace.entity.HotPlaceImage" relationship="TO_MANY">
+      <point x="112.75" y="-380.5" />
+      <point x="20099.6457648026" y="3662.0" />
+      <point x="20127.80249451753" y="3662.0" />
+      <point x="20127.80249451753" y="3382.0" />
+      <point x="16104.375" y="3382.0" />
+      <point x="81.0" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostCommentServiceImpl" target="com.ssafy.faraway.domain.post.repository.PostCommentRepository" relationship="TO_ONE">
+      <point x="0.0" y="-86.5" />
+      <point x="2218.875" y="3422.0" />
+      <point x="2176.7670641447185" y="3422.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition.PlanSearchConditionBuilder" target="com.ssafy.faraway.domain.plan.repository.dto.PlanSearchCondition" relationship="INNER_CLASS">
+      <point x="0.0" y="-170.5" />
+      <point x="0.0" y="268.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.dto.res.MemberResponse" target="com.ssafy.faraway.domain.member.entity.Role" relationship="TO_ONE">
+      <point x="0.0" y="-604.5" />
+      <point x="27754.29536732455" y="926.0" />
+      <point x="27214.79536732455" y="926.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse.PlanResponseBuilder" target="com.ssafy.faraway.domain.plan.controller.dto.res.PlanResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-254.5" />
+      <point x="0.0" y="408.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.service.impl.AttractionQueryServiceImpl" target="com.ssafy.faraway.domain.attraction.repository.AttractionLikeQueryRepository" relationship="TO_ONE">
+      <point x="153.0" y="-114.5" />
+      <point x="24110.509936951734" y="3662.0" />
+      <point x="23814.509936951734" y="3662.0" />
+      <point x="23814.509936951734" y="3632.0" />
+      <point x="25008.259936951734" y="3632.0" />
+      <point x="-71.5" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Post" target="com.ssafy.faraway.domain.post.entity.Category" relationship="TO_ONE">
+      <point x="105.75" y="-352.5" />
+      <point x="16408.5207648026" y="3662.0" />
+      <point x="16641.05249451753" y="3662.0" />
+      <point x="16641.05249451753" y="3402.0" />
+      <point x="15788.125" y="3402.0" />
+      <point x="53.25" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse.LoginMemberResponseBuilder" target="com.ssafy.faraway.domain.member.controller.dto.res.LoginMemberResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-226.5" />
+      <point x="0.0" y="366.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.dto.res.DetailPostResponse" target="com.ssafy.faraway.domain.post.controller.dto.res.PostCommentResponse" relationship="TO_MANY">
+      <point x="0.0" y="-604.5" />
+      <point x="3049.5" y="6304.0" />
+      <point x="2932.5" y="6304.0" />
+      <point x="112.5" y="352.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.service.dto.ResetLoginPwdDto.ResetLoginPwdDtoBuilder" target="com.ssafy.faraway.domain.member.service.dto.ResetLoginPwdDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="0.0" y="226.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.PlanComment" target="com.ssafy.faraway.domain.plan.entity.Plan" relationship="TO_ONE">
+      <point x="-79.5" y="184.5" />
+      <point x="23045.0" y="3652.0" />
+      <point x="20925.25" y="3652.0" />
+      <point x="20925.25" y="3662.0" />
+      <point x="20743.25" y="3662.0" />
+      <point x="104.5" y="-310.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceQueryServiceImpl" target="com.ssafy.faraway.common.FileStore" relationship="TO_ONE">
+      <point x="-140.25" y="-142.5" />
+      <point x="7482.30249451753" y="3662.0" />
+      <point x="7549.0" y="3662.0" />
+      <point x="7549.0" y="3512.0" />
+      <point x="7934.5" y="3512.0" />
+      <point x="7934.5" y="3402.0" />
+      <point x="8307.962033991214" y="3402.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.common.util.FileExtFilter" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="0.0" y="-114.5" />
+      <point x="9852.462033991214" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.common.exception.entity.CustomException" target="com.ssafy.faraway.common.exception.entity.ErrorCode" relationship="TO_ONE">
+      <point x="0.0" y="-58.5" />
+      <point x="0.0" y="338.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanServiceImpl" target="com.ssafy.faraway.domain.plan.service.PlanService" relationship="REALIZATION">
+      <point x="-84.0" y="-86.5" />
+      <point x="22215.1457648026" y="3602.0" />
+      <point x="20273.0" y="3602.0" />
+      <point x="57.75" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.MemberController" target="com.ssafy.faraway.domain.member.controller.MemberController.ResultPage" relationship="CREATE">
+      <point x="-118.0" y="296.5" />
+      <point x="675.125" y="4496.0" />
+      <point x="740.875" y="4496.0" />
+      <point x="-52.25" y="-212.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.entity.Member" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-132.66666666666788" y="-478.5" />
+      <point x="21906.833333333332" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse.ListMemberResponseBuilder" target="com.ssafy.faraway.domain.member.controller.dto.res.ListMemberResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-338.5" />
+      <point x="28878.625" y="2269.0" />
+      <point x="29494.2707648026" y="2269.0" />
+      <point x="0.0" y="534.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse.AttractionResponseBuilder" target="com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-394.5" />
+      <point x="1282.5" y="6836.0" />
+      <point x="1379.875" y="6836.0" />
+      <point x="-96.75" y="618.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanServiceImpl" target="com.ssafy.faraway.domain.plan.repository.PlanRepository" relationship="TO_ONE">
+      <point x="84.0" y="-86.5" />
+      <point x="22383.1457648026" y="3642.0" />
+      <point x="22862.5" y="3642.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostLikeServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-102.0" y="-72.5" />
+      <point x="2505.9337308113863" y="3422.0" />
+      <point x="2310.8957648026008" y="3422.0" />
+      <point x="2310.8957648026008" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.repository.dto.SaveEncMember" target="com.ssafy.faraway.domain.member.entity.Name" relationship="TO_ONE">
+      <point x="0.0" y="-394.5" />
+      <point x="25584.759936951734" y="946.0" />
+      <point x="25258.385827850863" y="946.0" />
+      <point x="25258.385827850863" y="896.0" />
+      <point x="25696.0" y="896.0" />
+      <point x="-46.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionInfo" target="com.ssafy.faraway.domain.attraction.entity.Sido" relationship="TO_ONE">
+      <point x="0.0" y="-534.5" />
+      <point x="28838.5207648026" y="966.0" />
+      <point x="29177.1457648026" y="966.0" />
+      <point x="29177.1457648026" y="426.0" />
+      <point x="27131.17036732455" y="426.0" />
+      <point x="27131.17036732455" y="416.0" />
+      <point x="27535.67036732455" y="416.0" />
+      <point x="-47.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.MemberController" target="com.ssafy.faraway.domain.member.service.MemberService" relationship="TO_ONE">
+      <point x="118.0" y="-296.5" />
+      <point x="911.125" y="3662.0" />
+      <point x="946.5" y="3662.0" />
+      <point x="946.5" y="3522.0" />
+      <point x="1352.125" y="3522.0" />
+      <point x="-81.75" y="141.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.repository.impl.PostLikeQueryRepositoryImpl" target="com.ssafy.faraway.domain.post.repository.PostLikeQueryRepository" relationship="REALIZATION">
+      <point x="0.0" y="-86.5" />
+      <point x="18282.75" y="3412.0" />
+      <point x="16913.375" y="3412.0" />
+      <point x="61.0" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanQueryServiceImpl" target="com.ssafy.faraway.domain.plan.repository.PlanLikeQueryRepository" relationship="TO_ONE">
+      <point x="167.0" y="-198.5" />
+      <point x="28474.8957648026" y="3662.0" />
+      <point x="29034.510827850863" y="3662.0" />
+      <point x="29034.510827850863" y="3652.0" />
+      <point x="29711.759936951734" y="3652.0" />
+      <point x="-60.5" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.ImageController" target="com.ssafy.faraway.domain.hotplace.repository.HotPlaceImageRepository" relationship="TO_ONE">
+      <point x="102.75" y="-100.5" />
+      <point x="1908.125" y="3432.0" />
+      <point x="2444.8957648026008" y="3432.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.entity.Member.MemberBuilder" target="com.ssafy.faraway.domain.member.entity.Member" relationship="INNER_CLASS">
+      <point x="0.0" y="-394.5" />
+      <point x="23433.0" y="2239.0" />
+      <point x="22139.0" y="2239.0" />
+      <point x="99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.PostComment" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="80.5" y="-184.5" />
+      <point x="18627.75" y="2259.0" />
+      <point x="20904.837033991214" y="2259.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.entity.AttractionLike" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="-83.5" y="-142.5" />
+      <point x="27574.009936951734" y="2269.0" />
+      <point x="27505.625" y="2269.0" />
+      <point x="27505.625" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.repository.impl.PlanQueryRepositoryImpl" target="com.ssafy.faraway.domain.plan.repository.PlanQueryRepository" relationship="REALIZATION">
+      <point x="0.0" y="-142.5" />
+      <point x="29561.75" y="3642.0" />
+      <point x="29453.875" y="3642.0" />
+      <point x="125.25" y="85.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse.GugunResponseBuilder" target="com.ssafy.faraway.domain.attraction.controller.dto.GugunResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.PostLike.PostLikeBuilder" target="com.ssafy.faraway.domain.post.entity.PostLike" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="60.5" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.dto.res.DetailPostResponse" target="com.ssafy.faraway.domain.post.controller.dto.res.AttachmentResponse" relationship="TO_MANY">
+      <point x="0.0" y="-604.5" />
+      <point x="3049.5" y="6304.0" />
+      <point x="3182.25" y="6304.0" />
+      <point x="-93.0" y="240.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceQueryServiceImpl" target="com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService" relationship="REALIZATION">
+      <point x="140.25" y="-142.5" />
+      <point x="7762.80249451753" y="3532.0" />
+      <point x="8942.212033991214" y="3532.0" />
+      <point x="-140.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.PlanComment.PlanCommentBuilder" target="com.ssafy.faraway.domain.plan.entity.PlanComment" relationship="INNER_CLASS">
+      <point x="0.0" y="-170.5" />
+      <point x="25091.509936951734" y="3552.0" />
+      <point x="23204.0" y="3552.0" />
+      <point x="79.5" y="184.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostCommentServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-125.33333333333348" y="-86.5" />
+      <point x="2093.541666666666" y="3422.0" />
+      <point x="2046.2670641447185" y="3422.0" />
+      <point x="2046.2670641447185" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Post" target="com.ssafy.faraway.domain.post.entity.Attachment" relationship="TO_MANY">
+      <point x="105.75" y="-352.5" />
+      <point x="16408.5207648026" y="3662.0" />
+      <point x="16641.05249451753" y="3662.0" />
+      <point x="16641.05249451753" y="3402.0" />
+      <point x="13231.6457648026" y="3402.0" />
+      <point x="69.0" y="142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.dto.res.PlanCommentResponse.PlanCommentResponseBuilder" target="com.ssafy.faraway.domain.plan.controller.dto.res.PlanCommentResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-226.5" />
+      <point x="2123.5" y="6836.0" />
+      <point x="2026.125" y="6836.0" />
+      <point x="112.0" y="366.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanCommentServiceImpl" target="com.ssafy.faraway.domain.plan.service.PlanCommentService" relationship="REALIZATION">
+      <point x="-124.0" y="-86.5" />
+      <point x="22944.759936951734" y="3592.0" />
+      <point x="20842.0" y="3592.0" />
+      <point x="72.75" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.HotPlaceController" target="com.ssafy.faraway.common.FileStore" relationship="TO_ONE">
+      <point x="-158.25" y="-282.5" />
+      <point x="9317.0207648026" y="3662.0" />
+      <point x="9084.3957648026" y="3662.0" />
+      <point x="9084.3957648026" y="3502.0" />
+      <point x="7934.5" y="3502.0" />
+      <point x="7934.5" y="3402.0" />
+      <point x="8307.962033991214" y="3402.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.Plan" target="com.ssafy.faraway.domain.plan.entity.PlanLike" relationship="TO_MANY">
+      <point x="-104.5" y="310.5" />
+      <point x="20534.25" y="4476.0" />
+      <point x="9361.0207648026" y="4476.0" />
+      <point x="9361.0207648026" y="4496.0" />
+      <point x="8371.7707648026" y="4496.0" />
+      <point x="59.5" y="-142.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceCommentServiceImpl" target="com.ssafy.faraway.domain.hotplace.repository.HotPlaceCommentRepository" relationship="TO_ONE">
+      <point x="0.0" y="-86.5" />
+      <point x="7037.5" y="3492.0" />
+      <point x="7622.3957648026" y="3492.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlace" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="112.75" y="-380.5" />
+      <point x="20099.6457648026" y="3662.0" />
+      <point x="20127.80249451753" y="3662.0" />
+      <point x="20127.80249451753" y="3382.0" />
+      <point x="20341.25" y="3382.0" />
+      <point x="20341.25" y="2259.0" />
+      <point x="20904.837033991214" y="2259.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.PlanController" target="com.ssafy.faraway.domain.plan.service.PlanQueryService" relationship="TO_ONE">
+      <point x="145.0" y="-240.5" />
+      <point x="17415.75" y="3662.0" />
+      <point x="17276.0" y="3662.0" />
+      <point x="17276.0" y="3632.0" />
+      <point x="22384.75" y="3632.0" />
+      <point x="-125.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.impl.PlanQueryServiceImpl" target="com.ssafy.faraway.domain.plan.service.PlanQueryService" relationship="REALIZATION">
+      <point x="-167.0" y="-198.5" />
+      <point x="28140.8957648026" y="3542.0" />
+      <point x="22635.25" y="3542.0" />
+      <point x="125.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse.DetailPlanResponseBuilder" target="com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-366.5" />
+      <point x="0.0" y="576.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceCommentServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="-144.0" y="-86.5" />
+      <point x="6893.5" y="3452.0" />
+      <point x="6348.058730811386" y="3452.0" />
+      <point x="6348.058730811386" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.service.impl.AttractionServiceImpl" target="com.ssafy.faraway.domain.attraction.repository.SidoRepository" relationship="TO_ONE">
+      <point x="72.25" y="-58.5" />
+      <point x="24852.259936951734" y="3642.0" />
+      <point x="25325.759936951734" y="3642.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.HotPlaceController" target="com.ssafy.faraway.domain.hotplace.service.HotPlaceQueryService" relationship="TO_ONE">
+      <point x="-158.25" y="-282.5" />
+      <point x="9317.0207648026" y="3662.0" />
+      <point x="9084.3957648026" y="3662.0" />
+      <point x="9084.3957648026" y="3412.0" />
+      <point x="9222.712033991214" y="3412.0" />
+      <point x="140.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.PlanController" target="com.ssafy.faraway.domain.plan.service.PlanCommentService" relationship="TO_ONE">
+      <point x="145.0" y="-240.5" />
+      <point x="17415.75" y="3662.0" />
+      <point x="17276.0" y="3662.0" />
+      <point x="17276.0" y="3632.0" />
+      <point x="20696.5" y="3632.0" />
+      <point x="-72.75" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.HotPlaceController" target="com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService" relationship="TO_ONE">
+      <point x="-158.25" y="-282.5" />
+      <point x="9317.0207648026" y="3662.0" />
+      <point x="9084.3957648026" y="3662.0" />
+      <point x="9084.3957648026" y="3412.0" />
+      <point x="8020.645764802601" y="3412.0" />
+      <point x="80.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.PostComment" target="com.ssafy.faraway.domain.post.entity.Post" relationship="TO_ONE">
+      <point x="-80.5" y="184.5" />
+      <point x="18466.75" y="3402.0" />
+      <point x="16641.05249451753" y="3402.0" />
+      <point x="16641.05249451753" y="3662.0" />
+      <point x="16408.5207648026" y="3662.0" />
+      <point x="105.75" y="-352.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.controller.MemberController.ResultPage" target="com.ssafy.faraway.domain.member.controller.MemberController" relationship="INNER_CLASS">
+      <point x="52.25" y="-212.5" />
+      <point x="845.375" y="4496.0" />
+      <point x="911.125" y="4496.0" />
+      <point x="118.0" y="296.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.controller.AttractionController" target="com.ssafy.faraway.common.domain.ResultPage" relationship="CREATE">
+      <point x="-151.75" y="-170.5" />
+      <point x="13921.0" y="3482.0" />
+      <point x="12695.7707648026" y="3482.0" />
+      <point x="0.0" y="254.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.PostLike" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="-60.5" y="-142.5" />
+      <point x="18805.25" y="2249.0" />
+      <point x="18860.75" y="2249.0" />
+      <point x="18860.75" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.dto.UpdateHotPlaceDto" target="com.ssafy.faraway.common.domain.UploadFile" relationship="TO_MANY">
+      <point x="0.0" y="-492.5" />
+      <point x="5158.933730811386" y="2239.0" />
+      <point x="8692.84327028507" y="2239.0" />
+      <point x="-74.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.controller.PostController" target="com.ssafy.faraway.domain.post.service.PostQueryService" relationship="TO_ONE">
+      <point x="-155.75" y="-282.5" />
+      <point x="10392.59327028507" y="3662.0" />
+      <point x="10264.462033991214" y="3662.0" />
+      <point x="10264.462033991214" y="3422.0" />
+      <point x="12191.0207648026" y="3422.0" />
+      <point x="-126.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceCommentResponse.HotPlaceCommentResponseBuilder" target="com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceCommentResponse" relationship="INNER_CLASS">
+      <point x="0.0" y="-226.5" />
+      <point x="-76.5" y="6332.0" />
+      <point x="47.74999999999994" y="6332.0" />
+      <point x="-112.25" y="366.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.service.impl.AttractionQueryServiceImpl" target="com.ssafy.faraway.domain.attraction.repository.AttractionQueryRepository" relationship="TO_ONE">
+      <point x="153.0" y="-114.5" />
+      <point x="24110.509936951734" y="3662.0" />
+      <point x="23814.509936951734" y="3662.0" />
+      <point x="23814.509936951734" y="3652.0" />
+      <point x="27040.009936951734" y="3652.0" />
+      <point x="-143.5" y="71.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.entity.HotPlaceLike" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="-74.5" y="-142.5" />
+      <point x="23570.3957648026" y="4496.0" />
+      <point x="22901.3957648026" y="4496.0" />
+      <point x="22901.3957648026" y="4466.0" />
+      <point x="24625.009936951734" y="4466.0" />
+      <point x="24625.009936951734" y="2259.0" />
+      <point x="20904.837033991214" y="2259.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.controller.dto.res.DetailHotPlaceResponse" target="com.ssafy.faraway.domain.hotplace.controller.dto.res.HotPlaceCommentResponse" relationship="TO_MANY">
+      <point x="5.6843418860808015E-14" y="-744.5" />
+      <point x="396.5" y="6332.0" />
+      <point x="272.25" y="6332.0" />
+      <point x="112.25" y="366.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.service.impl.PostServiceImpl" target="com.ssafy.faraway.common.exception.entity.CustomException" relationship="CREATE">
+      <point x="0.0" y="-128.5" />
+      <point x="12074.625" y="3512.0" />
+      <point x="11868.2707648026" y="3512.0" />
+      <point x="11868.2707648026" y="966.0" />
+      <point x="11220.25" y="966.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Post" target="com.ssafy.faraway.domain.member.entity.Member" relationship="TO_ONE">
+      <point x="105.75" y="-352.5" />
+      <point x="16408.5207648026" y="3662.0" />
+      <point x="16641.05249451753" y="3662.0" />
+      <point x="16641.05249451753" y="3402.0" />
+      <point x="16984.875" y="3402.0" />
+      <point x="16984.875" y="2259.0" />
+      <point x="20904.837033991214" y="2259.0" />
+      <point x="20904.837033991214" y="2219.0" />
+      <point x="21940.0" y="2219.0" />
+      <point x="-99.5" y="478.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.hotplace.service.impl.HotPlaceServiceImpl" target="com.ssafy.faraway.domain.hotplace.service.HotPlaceService" relationship="REALIZATION">
+      <point x="150.0" y="-114.5" />
+      <point x="3155.9337308113863" y="3452.0" />
+      <point x="5923.183730811386" y="3452.0" />
+      <point x="-65.25" y="57.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.repository.impl.PostQueryRepositoryImpl" target="com.ssafy.faraway.domain.post.repository.PostQueryRepository" relationship="REALIZATION">
+      <point x="0.0" y="-156.5" />
+      <point x="17833.25" y="3422.0" />
+      <point x="16584.125" y="3422.0" />
+      <point x="126.25" y="85.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.controller.AttractionController" target="com.ssafy.faraway.domain.attraction.service.AttractionService" relationship="TO_ONE">
+      <point x="151.75" y="-170.5" />
+      <point x="14224.5" y="3662.0" />
+      <point x="14837.2707648026" y="3662.0" />
+      <point x="14837.2707648026" y="3392.0" />
+      <point x="19933.5" y="3392.0" />
+      <point x="-48.75" y="29.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.dto.UpdatePlanDto.UpdatePlanDtoBuilder" target="com.ssafy.faraway.domain.plan.service.dto.UpdatePlanDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-170.5" />
+      <point x="0.0" y="282.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition.AttractionSearchConditionBuilder" target="com.ssafy.faraway.domain.attraction.repository.dto.AttractionSearchCondition" relationship="INNER_CLASS">
+      <point x="0.0" y="-198.5" />
+      <point x="0.0" y="310.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.PlanController" target="com.ssafy.faraway.common.domain.ResultPage" relationship="CREATE">
+      <point x="-145.0" y="-240.5" />
+      <point x="17125.75" y="3662.0" />
+      <point x="17265.5" y="3662.0" />
+      <point x="17265.5" y="3442.0" />
+      <point x="12695.7707648026" y="3442.0" />
+      <point x="0.0" y="254.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.post.entity.Attachment" target="com.ssafy.faraway.common.domain.UploadFile" relationship="TO_ONE">
+      <point x="-69.0" y="-142.5" />
+      <point x="13093.6457648026" y="2269.0" />
+      <point x="5158.933730811386" y="2269.0" />
+      <point x="5158.933730811386" y="2239.0" />
+      <point x="8692.84327028507" y="2239.0" />
+      <point x="-74.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.service.dto.UpdatePlanCommentDto.UpdatePlanCommentDtoBuilder" target="com.ssafy.faraway.domain.plan.service.dto.UpdatePlanCommentDto" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="198.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.controller.dto.res.DetailPlanResponse" target="com.ssafy.faraway.domain.attraction.controller.dto.AttractionResponse" relationship="TO_MANY">
+      <point x="0.0" y="-576.5" />
+      <point x="1680.5" y="6836.0" />
+      <point x="1573.375" y="6836.0" />
+      <point x="96.75" y="618.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.member.entity.Member" target="com.ssafy.faraway.common.domain.BaseEntity" relationship="GENERALIZATION">
+      <point x="0.0" y="-478.5" />
+      <point x="22039.5" y="936.0" />
+      <point x="20396.916666666664" y="936.0" />
+      <point x="0.0" y="86.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.common.domain.UploadFile.UploadFileBuilder" target="com.ssafy.faraway.common.domain.UploadFile" relationship="INNER_CLASS">
+      <point x="0.0" y="-114.5" />
+      <point x="9536.962033991214" y="2249.0" />
+      <point x="8840.84327028507" y="2249.0" />
+      <point x="74.0" y="114.5" />
+    </edge>
+    <edge source="com.ssafy.faraway.domain.plan.entity.PlanLike.PlanLikeBuilder" target="com.ssafy.faraway.domain.plan.entity.PlanLike" relationship="INNER_CLASS">
+      <point x="0.0" y="-142.5" />
+      <point x="0.0" y="142.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.1" showDependencies="true" x="7163.5" y="4705.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
