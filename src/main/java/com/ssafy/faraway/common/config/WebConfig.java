@@ -59,7 +59,7 @@ public class WebConfig implements WebMvcConfigurer {
 //                .allowedOrigins("http://localhost:8080")
 //                .allowedMethods("*");
         registry.addMapping("/**") // 모든 경로에 대해 CORS 설정 적용
-                .allowedOrigins("http://localhost:8080") // 허용할 Origin
+                .allowedOrigins("http://3.34.253.86/") // 허용할 Origin
 //                .allowedOrigins("*") // 허용할 Origin
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 허용할 HTTP 메서드
                 .allowedHeaders("*") // 허용할 헤더
