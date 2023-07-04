@@ -3,12 +3,9 @@ package com.ssafy.faraway.common.config;
 import com.ssafy.faraway.common.interceptor.LoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @RequiredArgsConstructor
@@ -59,7 +56,7 @@ public class WebConfig implements WebMvcConfigurer {
 //                .allowedOrigins("http://localhost:8080")
 //                .allowedMethods("*");
         registry.addMapping("/**") // 모든 경로에 대해 CORS 설정 적용
-                .allowedOrigins("http://3.34.253.86/") // 허용할 Origin
+                .allowedOrigins("http://faraway.kro.kr") // 허용할 Origin
 //                .allowedOrigins("*") // 허용할 Origin
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 허용할 HTTP 메서드
                 .allowedHeaders("*") // 허용할 헤더
